@@ -28,7 +28,8 @@ namespace Managers
 
         #endregion
         #region Private Variables
-        private InputData inputData;
+
+        private InputData _inputData;
 
 
         #endregion
@@ -37,7 +38,7 @@ namespace Managers
 
         private void Awake()
         {
-            inputData = GetInputData();
+            _inputData = GetInputData();
         }
 
         private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
@@ -118,20 +119,20 @@ namespace Managers
         private void DuringOnDragging()
         {
             Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value;
-            if (mouseDeltaPos.x > inputData.PlayerInputSpeed)
-                _moveVector.x = inputData.PlayerInputSpeed / 10f * mouseDeltaPos.x;
-            else if (mouseDeltaPos.x < -inputData.PlayerInputSpeed)
-                _moveVector.x = -inputData.PlayerInputSpeed / 10f * -mouseDeltaPos.x;
+            if (mouseDeltaPos.x > _inputData.PlayerInputSpeed)
+                _moveVector.x = _inputData.PlayerInputSpeed / 10f * mouseDeltaPos.x;
+            else if (mouseDeltaPos.x < -_inputData.PlayerInputSpeed)
+                _moveVector.x = -_inputData.PlayerInputSpeed / 10f * -mouseDeltaPos.x;
             else
                 _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f, ref _currentVelocity,
-                    inputData.ClampSpeed);
+                    _inputData.ClampSpeed);
 
             _mousePosition = Input.mousePosition;
 
             InputSignals.Instance.onInputDragged?.Invoke(new InputParams()
             {
                 Values = _moveVector,
-                ClampValues = new Vector2(inputData.ClampSides.x, inputData.ClampSides.y)
+                ClampValues = new Vector2(_inputData.ClampSides.x, _inputData.ClampSides.y)
             });
         }
         private bool IsPointerOverUIElement()
@@ -142,6 +143,8 @@ namespace Managers
             EventSystem.current.RaycastAll(eventData, results);
             return results.Count > 0;
         }
+
+
         #region SubscribedMethods
         private void OnEnableInput()
         {

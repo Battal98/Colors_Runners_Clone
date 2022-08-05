@@ -29,17 +29,17 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - Assembly-CSharp-firstpass
-    - Boxophobic.PolyverseSkies.Runtime
     - Cinemachine
     - Assembly-CSharp
-    - Boxophobic.Utils.Scripts
     - Sirenix.OdinInspector.CompatibilityLayer
+    - Boxophobic.Utils.Scripts
+    - Boxophobic.PolyverseSkies.Runtime
     - Boxophobic.PolyverseSkies.Scripts
+    - Assembly-CSharp-firstpass
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
+    - Sirenix.OdinInspector.Modules.UnityMathematics
     - Boxophobic.Utils.Editor
     - Boxophobic.PolyverseSkies.Editor
-    - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
