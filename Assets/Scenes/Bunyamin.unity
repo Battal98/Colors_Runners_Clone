@@ -2730,6 +2730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4131776039670464953}
   - component: {fileID: 8049947656622611395}
+  - component: {fileID: 3610994949634857732}
   m_Layer: 0
   m_Name: PlayerArmature
   m_TagString: Untagged
@@ -2737,6 +2738,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3610994949634857732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610994949634857731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c8d5b494374b74bbc4b1b40793748c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  State: 0
+  animatorController: {fileID: 8049947656622611395}
 --- !u!4 &3640241829481874124
 Transform:
   m_ObjectHideFlags: 0
@@ -2864,7 +2879,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 4529984710472501891}
   rigidbody: {fileID: 4529984710472501892}
-  movementList: {fileID: 11400000, guid: cad7738aa5db8b04fa75fd34eb46a7b8, type: 2}
 --- !u!114 &4529984710472501891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2877,6 +2891,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa59aaf78d04110b8e4b3ff74075685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerAnimationController: {fileID: 3610994949634857732}
+  _playerMovementController: {fileID: 4529984710472501890}
+  _playerPhysicsController: {fileID: 698445672}
   Data:
     MovementData:
       ForwardSpeed: 5
