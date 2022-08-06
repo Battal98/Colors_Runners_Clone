@@ -113,7 +113,7 @@ namespace Managers
         {
             _levelID++;
             LevelSignals.Instance.onClearActiveLevel?.Invoke();
-            //CoreGameSignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
             //SaveSignals.Instance.onSaveGameData?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
             //SetLevelText();
@@ -121,7 +121,7 @@ namespace Managers
         private void OnRestartLevel()
         {
             LevelSignals.Instance.onClearActiveLevel?.Invoke();
-            //CoreGameSignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
             //SaveSignals.Instance.onSaveGameData?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
         }
