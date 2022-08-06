@@ -4,7 +4,9 @@ namespace Enums
     {
         Idle,
         Run,
-        Crouch
+        CrouchWalk,
+        Crouch,
+        Dead
         
     }
 }
