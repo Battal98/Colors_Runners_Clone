@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputData:
     PlayerInputSpeed: 2
-    ClampSides: {x: -3, y: 3}
+    ClampSides: {x: -2.3, y: 2.3}
     ClampSpeed: 0.007
