@@ -57,11 +57,11 @@ namespace Managers
 
             #region CoreGameSignals Subscription
 
-           /* CoreGameSignals.Instance.onPlay += OnPlay;
-            CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
-            CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+            CoreGameSignals.Instance.onPlay += OnPlay;
+            LevelSignals.Instance.onLevelFailed += OnLevelFailed;
+            LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onGetLevelID += OnSetLevelText;
-           */
+           
             #endregion
 
             #region SaveLoadSignals Subscription
@@ -79,12 +79,12 @@ namespace Managers
             #region CoreGameSignals Unsubscription
 
             // CoreGameSignals Came here with onplay, onlevelfailed, onlevelSuccess
-            /*
+            
             CoreGameSignals.Instance.onPlay -= OnPlay;
-            CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
-            CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+            LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
+            LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             CoreGameSignals.Instance.onGetLevelID -= OnSetLevelText;
-            */
+            
 
             #endregion
 
@@ -145,26 +145,23 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
 
-            //CoreGameSignals.Instance.onLevelFailed?.Invoke();
+            LevelSignals.Instance.onLevelFailed?.Invoke();
         }
 
         private void OnLevelSuccessful()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-
-            //CoreGameSignals.Instance.onLevelSuccessful?.Invoke();// Trigger in Final 
+            LevelSignals.Instance.onLevelSuccessful?.Invoke();// Trigger in Final 
         }
 
         public void Play()
         {
-            //CoreGameSignals onplay Invoke here
-            /*CoreGameSignals.Instance.onPlay?.Invoke();*/
+            CoreGameSignals.Instance.onPlay?.Invoke();
         }
 
         public void NextLevel()
         {
-            //CoreGameSignals onnextlevel Invoke here
-           /* CoreGameSignals.Instance.onNextLevel?.Invoke();*/
+            LevelSignals.Instance.onNextLevel?.Invoke();
 
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
@@ -172,17 +169,16 @@ namespace Managers
 
         public void RestartLevel()
         {
-            //CoreGameSignals onrestart Invoke here
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            /*CoreGameSignals.Instance.onReset?.Invoke();*/
+            CoreGameSignals.Instance.onReset?.Invoke();
         }
 
         public void RetryButton()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            /*CoreGameSignals.Instance.onReset?.Invoke();*/
+            CoreGameSignals.Instance.onReset?.Invoke();
         }
 
         public void OnClickCloseButton(GameObject _closeButtonObj)
