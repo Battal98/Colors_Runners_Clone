@@ -39,6 +39,7 @@ namespace Managers
         private void Awake()
         {
             _inputData = GetInputData();
+            Debug.Log(_inputData);
         }
 
         private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
@@ -59,15 +60,15 @@ namespace Managers
         {
             InputSignals.Instance.onEnableInput += OnEnableInput;
             InputSignals.Instance.onDisableInput += OnDisableInput;
-            //CoreGameSignals.Instance.onPlay += OnPlay;
-            //CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onReset += OnReset;
         }
         private void UnSubscribeEvents()
         {
             InputSignals.Instance.onEnableInput -= OnEnableInput;
             InputSignals.Instance.onDisableInput -= OnDisableInput;
-            //CoreGameSignals.Instance.onPlay -= OnPlay;
-            //CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onReset -= OnReset;
         }
 
         #endregion
