@@ -13,7 +13,7 @@ namespace Managers
     public class CollectableManager : MonoBehaviour
     {
         #region Self Variables
-        s
+        
         #region Public Variables
         #endregion
         
