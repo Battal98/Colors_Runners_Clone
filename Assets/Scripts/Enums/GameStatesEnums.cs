@@ -9,8 +9,9 @@ namespace Enums
 
     public enum GameStates
     {
-        RunnerGameState,
-        PlayerRoulletteState,
-        IdleGameState,
+        Runner,
+        Idle,
+       
+      
     }
 }

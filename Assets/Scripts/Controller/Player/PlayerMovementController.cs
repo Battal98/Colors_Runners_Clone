@@ -5,6 +5,7 @@ using Keys;
 using Managers;
 using UnityEngine;
 using DG.Tweening;
+using Enums;
 
 namespace Controllers
 {
@@ -17,7 +18,6 @@ namespace Controllers
         [SerializeField] private PlayerManager manager;
         [SerializeField] private Rigidbody rbody;
         [SerializeField] private CharacterController characterController;
-        [SerializeField] bool isJoystick = false;
 
         #endregion
 
@@ -25,9 +25,9 @@ namespace Controllers
 
         [Header("Data")] private PlayerMovementData _movementData;
         private bool _isReadyToMove, _isReadyToPlay;
-        private Vector2 _inputValue;
-        private Vector3 _inputValue2;
+        private Vector3 _inputValue;
         private Vector2 _clampValues;
+        private GameStates _states;
         private CD_MovementList movementList;
 
         #endregion
@@ -38,7 +38,6 @@ namespace Controllers
         {
             movementList = GetMovementTypeList();
         }
-
         private CD_MovementList GetMovementTypeList() => Resources.Load<CD_MovementList>("Data/CD_MovementList");
 
         public void SetMovementData(PlayerMovementData dataMovementData)
@@ -56,10 +55,15 @@ namespace Controllers
             _isReadyToMove = false;
         }
 
+        public void ChangeStates(GameStates states)
+        {
+
+            _states = states;
+
+        }
         public void UpdateInputValue(InputParams inputParam)
         {
             _inputValue = inputParam.Values;
-            _inputValue2 = inputParam.Values;
             _clampValues = inputParam.ClampValues;
         }
 
@@ -72,29 +76,21 @@ namespace Controllers
         {
             if (_isReadyToPlay)
             {
-                if (isJoystick)
-                {
-                    movementList.MovementTypeList[1].DoJoystickMovement(ref _isReadyToMove, rbody, ref _inputValue2,
-                        ref _movementData, ref  characterController, this.gameObject.transform);
-                }
-                else
-                {
-                    movementList.MovementTypeList[0].DoSwerveMovement(ref _isReadyToMove, rbody, ref _inputValue,
-                        ref _movementData, ref _clampValues);
-                }
+               
+                    movementList.MovementTypeList[(int)_states].DoMovement(ref _isReadyToMove, rbody, ref _inputValue,
+                        ref _movementData, ref _clampValues, ref  characterController, this.gameObject.transform);
+                
 
             }
             else
                 Stop();
 
         }
-
         private void Stop()
         {
             rbody.velocity = Vector3.zero;
             rbody.angularVelocity = Vector3.zero;
         }
-
         public void OnReset()
         {
             Stop();

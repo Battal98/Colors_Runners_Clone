@@ -26,7 +26,7 @@ namespace Managers
         [ShowInInspector] private Vector3 _initialPosition;
         private CinemachineTransposer _miniGameTransposer;
         private  Animator _animator;
-        private CameraStatesType _cameraStatesType = CameraStatesType.RunnerCamera;
+        private CameraStatesType _cameraStatesType = CameraStatesType.Runner;
        
         #endregion
         #endregion
@@ -83,6 +83,7 @@ namespace Managers
         {
                var playerManager = FindObjectOfType<PlayerManager>().transform;
                RunnerCamera.Follow = playerManager;
+               IdleGameCamera.Follow = playerManager;
         }
 
         private void OnReset()
@@ -94,16 +95,14 @@ namespace Managers
 
         public void OnSetCameraState(CameraStatesType cameraState)
         {
-            if (cameraState == CameraStatesType.RunnerCamera)
+            if (cameraState == CameraStatesType.Runner)
             {
-                _cameraStatesType = CameraStatesType.IdleCamera;
+                _cameraStatesType = CameraStatesType.Idle;
                 _animator.Play("RunnerCamera");
             }
-            else if (cameraState == CameraStatesType.IdleCamera)
+            else if (cameraState == CameraStatesType.Idle)
             {
-                _cameraStatesType = CameraStatesType.RunnerCamera;
-                var _idleGamePlayer = GameObject.FindGameObjectWithTag("IdleGamePlayer");
-                IdleGameCamera.m_Follow = _idleGamePlayer.transform;
+                _cameraStatesType = CameraStatesType.Runner;
                 _animator.Play("IdleCamera");
             }
         }

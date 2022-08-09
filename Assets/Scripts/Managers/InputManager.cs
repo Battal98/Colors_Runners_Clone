@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
+using Enums;
 using Signals;
 using Keys;
 using UnityEngine;
@@ -65,14 +66,19 @@ namespace Managers
             InputSignals.Instance.onDisableInput += OnDisableInput;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onGetGameState += OnSetGameStates;
+
         }
         private void UnSubscribeEvents()
         {
             InputSignals.Instance.onEnableInput -= OnEnableInput;
             InputSignals.Instance.onDisableInput -= OnDisableInput;
+            CoreGameSignals.Instance.onGetGameState -= OnSetGameStates;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
+
+       
 
         #endregion
         private void Update()
@@ -187,6 +193,20 @@ namespace Managers
             isReadyForTouch = false;
         }
 
+        private void OnSetGameStates(GameStates states)
+        {
+            if (states==GameStates.Idle)
+            {
+                joystick.gameObject.SetActive(true);
+                isJoystick = true;
+            }
+            else
+            {
+                joystick.gameObject.SetActive(false);
+                isJoystick = false;
+
+            }
+        }
         private void OnPlay()
         {
             isReadyForTouch = true;

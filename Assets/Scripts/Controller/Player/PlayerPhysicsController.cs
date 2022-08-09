@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Enums;
 using Signals;
 using UnityEngine;
 namespace Controllers
@@ -15,6 +16,10 @@ namespace Controllers
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag("Finish"))
+            {
+                CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
+            }
         }
     }
 }

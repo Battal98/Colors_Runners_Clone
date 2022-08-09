@@ -25,6 +25,9 @@ namespace Managers
         [SerializeField]private PlayerAnimationController _playerAnimationController;
         [SerializeField]private PlayerMovementController _playerMovementController;
         [SerializeField]private PlayerPhysicsController _playerPhysicsController;
+        [SerializeField]private Rigidbody rb;
+        [SerializeField]private CapsuleCollider col;
+        [SerializeField]private CharacterController characterController;
 
         #endregion
         #region Public Variables
@@ -49,18 +52,20 @@ namespace Managers
 
         private void Subscribe()
         {
-            InputSignals.Instance.onInputTaken += OnActivateMovement;
-            InputSignals.Instance.onInputReleased += OnDeactiveMovement;
-            InputSignals.Instance.onInputDragged += OnGetInputValues;
+            InputSignals.Instance.onInputTaken += _playerMovementController.EnableMovement;
+            InputSignals.Instance.onInputReleased +=  _playerMovementController.DeactiveMovement;
+            InputSignals.Instance.onInputDragged += _playerMovementController.UpdateInputValue;
+            CoreGameSignals.Instance.onGetGameState += OnGetCameraState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
         }
 
         private void Unsubscribe()
         {
-            InputSignals.Instance.onInputTaken -= OnActivateMovement;
-            InputSignals.Instance.onInputReleased -= OnDeactiveMovement;
-            InputSignals.Instance.onInputDragged -= OnGetInputValues;
+            InputSignals.Instance.onInputTaken -= _playerMovementController.EnableMovement;
+            InputSignals.Instance.onInputReleased -=  _playerMovementController.DeactiveMovement;
+            InputSignals.Instance.onInputDragged -= _playerMovementController.UpdateInputValue;
+            CoreGameSignals.Instance.onGetGameState -= OnGetCameraState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
 
@@ -86,23 +91,33 @@ namespace Managers
         {
             _playerMovementController.SetMovementData(Data.MovementData);   
         }
-        
-        private void OnActivateMovement()
+
+        private void OnGetCameraState(GameStates states)
         {
-            _playerMovementController.EnableMovement();
-            
+
+            ChechGameStates(states);
+            _playerMovementController.ChangeStates(states);
         }
 
-        private void OnDeactiveMovement()
+        private void ChechGameStates(GameStates states)
         {
-            _playerMovementController.DeactiveMovement();
+            if (states==GameStates.Runner)
+            {
+                col.enabled = true;
+                rb.isKinematic = false;
+                rb.useGravity = true;
+                characterController.enabled = false;
+
+            }
+            else if (states==GameStates.Idle)
+            {
+                col.enabled = false;
+                rb.isKinematic = true;
+                rb.useGravity = false;
+                characterController.enabled = true;
+
+            }
         }
-        private void OnGetInputValues(InputParams inputParams)
-        {
-            _playerMovementController.UpdateInputValue(inputParams);
-           
-        }
-        
 
         private void OnLevelSuccessful()
         {
@@ -133,6 +148,8 @@ namespace Managers
             gameObject.SetActive(false);
             // CoreGameSignals.Instance.onMiniGameStart?.Invoke();
         }
+
+     
         private void OnPlay()
         {
             _playerMovementController.IsReadyToPlay(true);

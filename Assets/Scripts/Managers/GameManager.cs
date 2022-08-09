@@ -1,21 +1,28 @@
+using System;
 using UnityEngine;
 using Signals;
 using Keys;
 using Enums;
+using Sirenix.OdinInspector;
 
 
 namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
-        private GameStates _gameStates = GameStates.RunnerGameState;
+        [SerializeField]
+        private GameStates gameStates = GameStates.Runner;
+
+        private CameraStatesType cameraType = CameraStatesType.Idle;
 
         private void Awake()
         {
             Application.targetFrameRate = 60;
         }
 
+
         #region Event Subscription
+
         private void OnEnable()
         {
             SubscribeEvents();
@@ -24,12 +31,15 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onSetGameState += OnSetGameState;
-
         }
+
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onSetGameState -= OnSetGameState;
+            
+
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -39,9 +49,9 @@ namespace Managers
 
         private void OnSetGameState(GameStates gameStates)
         {
-            _gameStates = gameStates;
-            CoreGameSignals.Instance.onGetGameState?.Invoke(_gameStates);
+            CoreGameSignals.Instance.onGetGameState?.Invoke(gameStates);
+            
+            CameraSignals.Instance.onSetCameraState?.Invoke(cameraType);
         }
-
     }
 }

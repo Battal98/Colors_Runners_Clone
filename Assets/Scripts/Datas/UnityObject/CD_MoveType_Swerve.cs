@@ -9,12 +9,9 @@ namespace Data.UnityObject
     [CreateAssetMenu(fileName = "Swerve", menuName = "Movement/SwerveMove", order = 0)]
     public class CD_MoveType_Swerve : Movement
     {
-        public override void DoJoystickMovement(ref bool _isReadyToMove, Rigidbody _rigidbody, ref Vector3 _inputValue, ref PlayerMovementData _moveData, ref CharacterController characterController, Transform transform)
-        {
+       
 
-        }
-
-        public override void DoSwerveMovement(ref bool _isReadyToMove, Rigidbody _rigidbody, ref Vector2 _inputValue, ref PlayerMovementData _moveData, ref Vector2 _clampValues)
+        public override void DoMovement(ref bool _isReadyToMove, Rigidbody _rigidbody, ref Vector3 _inputValue, ref PlayerMovementData _moveData, ref Vector2 _clampValues, ref CharacterController characterController, Transform transform)
         {
 
             if (_isReadyToMove)
@@ -27,36 +24,36 @@ namespace Data.UnityObject
             }
         }
         #region Swerve Jobs
-        private void SwerveMove(ref Rigidbody rigidbody, ref PlayerMovementData _movementData, ref Vector2 _inputValue, ref Vector2 _clampValues)
+        private void SwerveMove(ref Rigidbody rigidbody, ref PlayerMovementData movementData, ref Vector3 inputValue, ref Vector2 clampValues)
         {
             var velocity = rigidbody.velocity;
-            velocity = new Vector3(_inputValue.x * _movementData.SidewaysSpeed, velocity.y,
-                _movementData.ForwardSpeed);
+            velocity = new Vector3(inputValue.x * movementData.SidewaysSpeed, velocity.y,
+                movementData.ForwardSpeed);
             rigidbody.velocity = velocity;
 
             Vector3 position;
             position = new Vector3(
-                Mathf.Clamp(rigidbody.position.x, _clampValues.x,
-                    _clampValues.y),
+                Mathf.Clamp(rigidbody.position.x, clampValues.x,
+                    clampValues.y),
                 (position = rigidbody.position).y,
                 position.z);
             rigidbody.position = position;
-            RotCalculater(ref _inputValue, rigidbody,velocity);
+            RotCalculater(ref inputValue, rigidbody,velocity);
 
 
         }
 
-        private void StopSideways(Rigidbody rigidbody, ref PlayerMovementData _movementData)
+        private void StopSideways(Rigidbody rigidbody, ref PlayerMovementData movementData)
         {
-            rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, _movementData.ForwardSpeed);
+            rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, movementData.ForwardSpeed);
             rigidbody.angularVelocity = Vector3.zero;
             rigidbody.transform.DOLocalRotate(Vector3.zero, 0.1f);
         }
 
             #endregion
-        private void RotCalculater(ref Vector2 _inputValue, Rigidbody rigidbody, Vector3 position)
+        private void RotCalculater(ref Vector3 inputValue, Rigidbody rigidbody, Vector3 position)
         {
-            if (_inputValue.x == 0)
+            if (inputValue.x == 0)
             {
                 rigidbody.transform.DOLocalRotate(Vector3.zero, 0.05f);
             }

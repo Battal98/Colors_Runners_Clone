@@ -1792,6 +1792,7 @@ GameObject:
   - component: {fileID: 3346495845797470969}
   - component: {fileID: 1944392521816120396}
   - component: {fileID: 4256232788645637966}
+  - component: {fileID: 1985564497}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Player
@@ -1808,7 +1809,7 @@ Transform:
   m_GameObject: {fileID: 9189737620297660623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 8647536700598252535}
   - {fileID: 7971280458043223222}
@@ -1836,6 +1837,7 @@ MonoBehaviour:
     MovementData:
       ForwardSpeed: 5
       SidewaysSpeed: 2
+      PlayerJoystickSpeed: 3
   scoreText: {fileID: 0}
 --- !u!114 &3346495845797470969
 MonoBehaviour:
@@ -1850,7 +1852,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 4701532483818768975}
-  rigidbody: {fileID: 1944392521816120396}
+  rbody: {fileID: 1944392521816120396}
+  characterController: {fileID: 1985564497}
+  isJoystick: 0
 --- !u!54 &1944392521816120396
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1866,7 +1870,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 2
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 3
 --- !u!136 &4256232788645637966
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1881,6 +1885,24 @@ CapsuleCollider:
   m_Height: 0.82
   m_Direction: 1
   m_Center: {x: 0, y: 0.42, z: 0}
+--- !u!143 &1985564497
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9189737620297660623}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Height: 0.88
+  m_Radius: 0.2
+  m_SlopeLimit: 45
+  m_StepOffset: 0.15
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.44, z: 0}
 --- !u!1 &9198625037751114469
 GameObject:
   m_ObjectHideFlags: 0
