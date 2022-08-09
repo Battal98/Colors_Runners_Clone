@@ -9,7 +9,7 @@ namespace RootMotion.Demos {
 	/// <summary>
 	/// Demo for aiming a Turret. All it does is call Transform.LookAt on each part and apply rotation limits one by one, starting from the parent.
 	/// </summary>
-	public class Turret : MonoBehaviour {
+	public class TurretController : MonoBehaviour {
 
 		/// <summary>
 		/// An independent part of the turret
@@ -22,7 +22,7 @@ namespace RootMotion.Demos {
 
 			// Aim this part at the target
 			public void AimAt(Transform target) {
-				transform.LookAt(new Vector3(target.position.x, target.position.y+0.5f, target.position.z), transform.up);
+				transform.LookAt(new Vector3(target.position.x, target.position.y+0.3f, target.position.z), transform.up);
 
 				// Finding the Rotation Limit
 				if (rotationLimit == null) {

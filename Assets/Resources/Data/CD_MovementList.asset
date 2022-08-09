@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementTypeList:
   - {fileID: 11400000, guid: e83c72a3e13cd8a49b81ec39b1a1a93c, type: 2}
+  - {fileID: 11400000, guid: bf053c8a1d3f16c468175f23687f0f2d, type: 2}

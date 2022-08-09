@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     MovementData:
-      ForwardSpeed: 5
+      ForwardSpeed: 4
       SidewaysSpeed: 2
-  MovementList: {fileID: 0}

@@ -4,6 +4,7 @@ using Data.ValueObject;
 using Keys;
 using Managers;
 using UnityEngine;
+using DG.Tweening;
 
 namespace Controllers
 {
@@ -14,7 +15,9 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private PlayerManager manager;
-        [SerializeField] private Rigidbody rigidbody;
+        [SerializeField] private Rigidbody rbody;
+        [SerializeField] private CharacterController characterController;
+        [SerializeField] bool isJoystick = false;
 
         #endregion
 
@@ -23,6 +26,7 @@ namespace Controllers
         [Header("Data")] private PlayerMovementData _movementData;
         private bool _isReadyToMove, _isReadyToPlay;
         private Vector2 _inputValue;
+        private Vector3 _inputValue2;
         private Vector2 _clampValues;
         private CD_MovementList movementList;
 
@@ -55,6 +59,7 @@ namespace Controllers
         public void UpdateInputValue(InputParams inputParam)
         {
             _inputValue = inputParam.Values;
+            _inputValue2 = inputParam.Values;
             _clampValues = inputParam.ClampValues;
         }
 
@@ -67,17 +72,27 @@ namespace Controllers
         {
             if (_isReadyToPlay)
             {
-                movementList.MovementTypeList[0].DoMovement(ref _isReadyToMove, rigidbody, ref _inputValue,
-                    ref _movementData, ref _clampValues);
+                if (isJoystick)
+                {
+                    movementList.MovementTypeList[1].DoJoystickMovement(ref _isReadyToMove, rbody, ref _inputValue2,
+                        ref _movementData, ref  characterController, this.gameObject.transform);
+                }
+                else
+                {
+                    movementList.MovementTypeList[0].DoSwerveMovement(ref _isReadyToMove, rbody, ref _inputValue,
+                        ref _movementData, ref _clampValues);
+                }
+
             }
             else
                 Stop();
+
         }
 
         private void Stop()
         {
-            rigidbody.velocity = Vector3.zero;
-            rigidbody.angularVelocity = Vector3.zero;
+            rbody.velocity = Vector3.zero;
+            rbody.angularVelocity = Vector3.zero;
         }
 
         public void OnReset()

@@ -16,6 +16,7 @@ namespace Managers
         private bool _isTouching;//ref type
         private float _currentVelocity;//ref type
         private Vector2? _mousePosition;//ref type
+        private Vector3 _joystickPos;//ref type
         private Vector3 _moveVector;//ref type
 
 
@@ -24,6 +25,8 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private bool isReadyForTouch, isFirstTimeTouchTaken;
+        [SerializeField] bool isJoystick = false;
+        [SerializeField] private Joystick joystick;
 
 
         #endregion
@@ -76,26 +79,34 @@ namespace Managers
         {
             if (!isReadyForTouch) return;
 
-            if (Input.GetMouseButtonUp(0) && !IsPointerOverUIElement())
+            if (Input.GetMouseButtonUp(0))
             {
                 EndOfDragging();
             }
 
 
-            if (Input.GetMouseButtonDown(0) && !IsPointerOverUIElement())
+            if (Input.GetMouseButtonDown(0))
             {
 
                 StartOfDragging();
             }
 
-            if (Input.GetMouseButton(0) && !IsPointerOverUIElement())
+            if (Input.GetMouseButton(0))
             {
                 if (_isTouching)
                 {
-                    if (_mousePosition != null)
+                    if (isJoystick)
                     {
-                        DuringOnDragging();
+                        DuringOnDraggingJoystick();
                     }
+                    else
+                    {
+                        if (_mousePosition != null)
+                        {
+                            DuringOnDragging();
+                        }
+                    }
+
                 }
             }
         }
@@ -104,6 +115,12 @@ namespace Managers
         {
             _isTouching = false;
             InputSignals.Instance.onInputReleased?.Invoke();
+            _joystickPos = Vector3.zero;
+            _moveVector = _joystickPos;
+            InputSignals.Instance.onInputDragged?.Invoke(new InputParams()
+            {
+                Values = _moveVector,
+            });
         }
         private void StartOfDragging()
         {
@@ -116,6 +133,8 @@ namespace Managers
             }
 
             _mousePosition = Input.mousePosition;
+            _joystickPos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+
         }
         private void DuringOnDragging()
         {
@@ -134,6 +153,17 @@ namespace Managers
             {
                 Values = _moveVector,
                 ClampValues = new Vector2(_inputData.ClampSides.x, _inputData.ClampSides.y)
+            });
+        }
+
+        private void DuringOnDraggingJoystick()
+        {
+            _joystickPos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+            _moveVector = _joystickPos;
+
+            InputSignals.Instance.onInputDragged?.Invoke(new InputParams()
+            {
+                Values = _moveVector,
             });
         }
         private bool IsPointerOverUIElement()
