@@ -20,6 +20,11 @@ namespace Controllers
             {
                 CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
             }
+
+            if (other.CompareTag("Collectable"))
+            {
+                StackSignals.Instance.onIncreaseStack?.Invoke(other.gameObject);
+            }
         }
     }
 }
