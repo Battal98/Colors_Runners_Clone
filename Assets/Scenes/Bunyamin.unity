@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3443,21 +3443,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1926247049787251528, guid: c6705ab2642b875498607d4953fe600f, type: 3}
   m_PrefabInstance: {fileID: 453058060}
   m_PrefabAsset: {fileID: 0}
---- !u!143 &1921522449 stripped
-CharacterController:
-  m_CorrespondingSourceObject: {fileID: 1985564497, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-  m_PrefabInstance: {fileID: 1985564493}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &1921522450 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 4256232788645637966, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-  m_PrefabInstance: {fileID: 1985564493}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1921522451 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 1944392521816120396, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-  m_PrefabInstance: {fileID: 1985564493}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1922603450
 GameObject:
   m_ObjectHideFlags: 0
@@ -3552,46 +3537,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1985564497, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1944392521816120396, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1944392521816120396, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1944392521816120396, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3346495845797470969, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-      propertyPath: isJoystick
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256232788645637966, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256232788645637966, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: e4f9ee99ffc204d4799e5347c41847b9, type: 2}
-    - target: {fileID: 4701532483818768975, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 1921522451}
-    - target: {fileID: 4701532483818768975, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-      propertyPath: col
-      value: 
-      objectReference: {fileID: 1921522450}
-    - target: {fileID: 4701532483818768975, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
-      propertyPath: characterController
-      value: 
-      objectReference: {fileID: 1921522449}
     - target: {fileID: 9189737620297660622, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
       propertyPath: m_RootOrder
       value: 1
