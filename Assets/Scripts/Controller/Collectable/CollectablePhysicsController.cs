@@ -4,7 +4,7 @@ using Signals;
 using System.Collections.Generic;
 using Managers;
 
-namespace Controller.Collectable
+namespace Controllers
 {
     public class CollectablePhysicsController : MonoBehaviour
     {
@@ -29,9 +29,14 @@ namespace Controller.Collectable
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Collectable"))
+            if (other.CompareTag("Collectable") && isTaken)
             {
-                StackSignals.Instance.onIncreaseStack?.Invoke(other.gameObject);
+                var otherPhysic = other.gameObject.GetComponent<CollectablePhysicsController>();
+                if (!otherPhysic.isTaken)
+                {
+                    otherPhysic.isTaken = true;
+                    StackSignals.Instance.onIncreaseStack?.Invoke(other.gameObject.transform.parent.gameObject);
+                }
             }
         }
     }

@@ -2,24 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Commands.Stack
+namespace Commands
 {
     public class StackLerpMovementCommand
     {
-        public void StackLerpMovement(List<GameObject> _stackList, Transform _playerManager, float _stackLerpDelay)
+        public void StackLerpMovement(ref List<GameObject> _stackList, Transform _playerManager, ref float _stackLerpDelay)
         {
-            if (_stackList.Count > 0)
-            {
-                _stackList[0].transform.position = _playerManager.position +
-                                                   new Vector3(0, 0.65f, _playerManager.localScale.z * 1.7f);
+             if (_stackList.Count > 0)
+             {
+                 _stackList[0].transform.position = Vector3.Lerp(_stackList[0].transform.position,
+                         new Vector3(_playerManager.position.x, _playerManager.position.y,
+                            _playerManager.position.z + _playerManager.localScale.z * -0.3f),
+                         _stackLerpDelay);
+
                 for (int i = 1; i < _stackList.Count; i++)
-                {
-                    _stackList[i].transform.position = Vector3.Lerp(_stackList[i].transform.position,
-                        new Vector3(_stackList[i - 1].transform.position.x, 0.65f,
-                            _stackList[i - 1].transform.position.z + _playerManager.localScale.z * 1.4f),
-                        _stackLerpDelay);
-                }
-            }
+                 {
+                     _stackList[i].transform.position = Vector3.Lerp(_stackList[i].transform.position,
+                         new Vector3(_stackList[i - 1].transform.position.x, _stackList[i - 1].transform.position.y,
+                             _stackList[i - 1].transform.position.z + _playerManager.localScale.z * -0.15f),
+                         _stackLerpDelay );
+                 }
+             }
+            
         }
 
     }

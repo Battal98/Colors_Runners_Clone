@@ -14,13 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     CollectableObject: {fileID: 0}
-    StackList:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     StackTaskDelay: 0.05
     StackMaxScaleValue: 1.5
     StackScaleDelay: 0.3
-    StackLerpDelay: 0.3
+    StackLerpDelay: 0.2

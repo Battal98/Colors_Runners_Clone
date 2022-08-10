@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
 
-namespace Commands.Stack
+namespace Commands
 {
     public class StackScaleCommand
     {
@@ -16,7 +16,7 @@ namespace Commands.Stack
             {
                 int index = (_stackList.Count - 1) - i;
                 _stackList[index].transform.DOScale(_maxScaleValueData, _scaleDelay);
-                _stackList[index].transform.DOScale(Vector3.one, _scaleDelay).SetDelay(_stackDelay);
+                _stackList[index].transform.DOScale(new Vector3(0.8f,0.8f,0.8f), _scaleDelay).SetDelay(_stackDelay);
                 yield return new WaitForSeconds(_stackDelay);
             }
         }

@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
-using Controller.Collectable;
+using Controllers;
 
 
-namespace Controller.Stack
+namespace Controllers
 {
     public class StackDecreaseController : MonoBehaviour
     {

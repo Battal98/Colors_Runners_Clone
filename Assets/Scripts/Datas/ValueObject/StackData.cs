@@ -8,7 +8,6 @@ namespace Datas.ValueObject
     public class StackData 
     {
         public GameObject CollectableObject;
-        public List<GameObject> StackList = new List<GameObject>();
         public float StackTaskDelay = 0.05f;
         public float StackMaxScaleValue = 1.5f; 
         public float StackScaleDelay = 0.30f;

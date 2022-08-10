@@ -82,7 +82,6 @@ namespace Managers
         private void Awake()
         {
             Data = GetPlayerData();
-            Debug.Log(Data);
             SendPlayerDataToControllers();
         }
 

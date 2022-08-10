@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Commands.Stack
+namespace Commands
 {
     public class StackIncreaseCommand
     {

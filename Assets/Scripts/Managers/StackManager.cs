@@ -5,9 +5,9 @@ using Enums;
 using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
-using Commands.Stack;
-using Controller.Stack;
+using Commands;
 using Datas.ValueObject;
+using System.Collections.Generic;
 
 namespace Managers
 {
@@ -27,7 +27,12 @@ namespace Managers
 
         [SerializeField]
         private StackDecreaseController stackDecreaseController;
-        [SerializeField] private GameObject collectorMeshRenderer;
+
+        [SerializeField] 
+        private GameObject collectorMeshRenderer;
+
+        [SerializeField]
+        private List<GameObject> stackList = new List<GameObject>();
 
         #endregion
 
@@ -46,15 +51,24 @@ namespace Managers
         private void Awake()
         {
             StackData = GetStackData();
-            StackData.StackList.Clear();
             stackDecreaseController = GetComponent<StackDecreaseController>();
             _stackIncreaseCommand = new StackIncreaseCommand();
             _stackLerpMovementCommand = new StackLerpMovementCommand();
-            _stackScaleCommand = new StackScaleCommand();    
+            _stackScaleCommand = new StackScaleCommand();
+
+        }
+
+        private void Start()
+        {
+            if (!_playerManager)
+            {
+                Debug.Log(_playerManager);
+                _playerManager = FindObjectOfType<PlayerManager>().transform;
+            }
         }
 
         #region Event Subscription
-        
+
 
         private void OnEnable()
         {
@@ -114,16 +128,16 @@ namespace Managers
                 {
                     _playerManager = FindObjectOfType<PlayerManager>().transform;
                 }
-                StartCoroutine(_stackScaleCommand.ScaleSizeUpAndDown(StackData.StackList, StackData.StackMaxScaleValue, StackData.StackScaleDelay, StackData.StackTaskDelay));
-                if (StackData.StackList.Count == 0)
+                StartCoroutine(_stackScaleCommand.ScaleSizeUpAndDown(stackList, StackData.StackMaxScaleValue, StackData.StackScaleDelay, StackData.StackTaskDelay));
+                if (stackList.Count == 0)
                 {
                     var pos = new Vector3(0, _obj.transform.position.y, 1f);
-                    _stackIncreaseCommand.IncreaseFunc(_obj, this.gameObject, pos, StackData.StackList);
+                    _stackIncreaseCommand.IncreaseFunc(_obj, this.gameObject, pos, stackList);
                 }
                 else
                 {
-                    var pos = new Vector3(0, _obj.transform.position.y, StackData.StackList[StackData.StackList.Count - 1].transform.localPosition.z + 1f);
-                    _stackIncreaseCommand.IncreaseFunc(_obj, this.gameObject, pos, StackData.StackList);
+                    var pos = new Vector3(0, _obj.transform.position.y, stackList[stackList.Count - 1].transform.localPosition.z + 1f);
+                    _stackIncreaseCommand.IncreaseFunc(_obj, this.gameObject, pos, stackList);
                 }
            //}
         }
@@ -132,25 +146,25 @@ namespace Managers
         #region Decrease Jobs
         public void OnStackHitTheObstacleDecrease(GameObject _obj)
         {
-            stackDecreaseController.StackHitTheObstacleDecrease(_obj, StackData.StackList);
+            stackDecreaseController.StackHitTheObstacleDecrease(_obj, stackList);
            
         }
         public void OnStackGeneralDecrease(GameObject _obj, Transform _targetParent)
         {
-            stackDecreaseController.StackGeneralDecrease(_obj, StackData.StackList, _targetParent);
+            stackDecreaseController.StackGeneralDecrease(_obj, stackList, _targetParent);
         }
         #endregion
         #endregion
 
         private void FixedUpdate()
         {
-            _stackLerpMovementCommand.StackLerpMovement(StackData.StackList, _playerManager, StackData.StackLerpDelay);
+            _stackLerpMovementCommand.StackLerpMovement(ref stackList, _playerManager,ref StackData.StackLerpDelay);
         }
 
         private void OnReset()
         {
-            StackData.StackList.Clear();
-            StackData.StackList.TrimExcess();
+            stackList.Clear();
+            stackList.TrimExcess();
         }
 
     }

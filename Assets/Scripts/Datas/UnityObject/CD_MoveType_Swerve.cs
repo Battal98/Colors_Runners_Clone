@@ -28,7 +28,7 @@ namespace Data.UnityObject
         {
             var velocity = rigidbody.velocity;
             velocity = new Vector3(inputValue.x * movementData.SidewaysSpeed, velocity.y,
-                movementData.ForwardSpeed);
+                movementData.ForwardSpeed ) ;
             rigidbody.velocity = velocity;
 
             Vector3 position;

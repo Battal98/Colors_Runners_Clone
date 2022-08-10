@@ -2,6 +2,7 @@ using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
+using Controllers;
 namespace Controllers
 {
     public class PlayerPhysicsController : MonoBehaviour
@@ -23,7 +24,12 @@ namespace Controllers
 
             if (other.CompareTag("Collectable"))
             {
-                StackSignals.Instance.onIncreaseStack?.Invoke(other.gameObject);
+                var otherPhysic = other.gameObject.GetComponent<CollectablePhysicsController>();
+                if (!otherPhysic.isTaken)
+                {
+                    otherPhysic.isTaken = true;
+                    StackSignals.Instance.onIncreaseStack?.Invoke(other.gameObject.transform.parent.gameObject);
+                }
             }
         }
     }
