@@ -16,5 +16,6 @@ MonoBehaviour:
     CollectableObject: {fileID: 0}
     StackTaskDelay: 0.05
     StackMaxScaleValue: 1.5
-    StackScaleDelay: 0.3
-    StackLerpDelay: 0.2
+    StackScaleDelay: 0.25
+    StackLerpDelay: 0.18
+    StackOffset: 0.25

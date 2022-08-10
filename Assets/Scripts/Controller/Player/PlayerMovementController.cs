@@ -77,7 +77,7 @@ namespace Controllers
             if (_isReadyToPlay)
             {
                
-                    movementList.MovementTypeList[(int)_states].DoMovement(ref _isReadyToMove, rbody, ref _inputValue,
+                    movementList.MovementTypeList[(int)_states].DoMovement(ref _isReadyToMove,ref rbody, ref _inputValue,
                         ref _movementData, ref _clampValues, ref  characterController, this.gameObject.transform);
                 
 

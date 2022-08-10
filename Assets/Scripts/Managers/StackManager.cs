@@ -128,7 +128,7 @@ namespace Managers
                 {
                     _playerManager = FindObjectOfType<PlayerManager>().transform;
                 }
-                StartCoroutine(_stackScaleCommand.ScaleSizeUpAndDown(stackList, StackData.StackMaxScaleValue, StackData.StackScaleDelay, StackData.StackTaskDelay));
+                StartCoroutine(_stackScaleCommand.ScaleSizeUpAndDown(stackList,StackData.StackMaxScaleValue, StackData.StackScaleDelay, StackData.StackTaskDelay));
                 if (stackList.Count == 0)
                 {
                     var pos = new Vector3(0, _obj.transform.position.y, 1f);
@@ -156,9 +156,9 @@ namespace Managers
         #endregion
         #endregion
 
-        private void FixedUpdate()
+        private void Update()
         {
-            _stackLerpMovementCommand.StackLerpMovement(ref stackList, _playerManager,ref StackData.StackLerpDelay);
+            _stackLerpMovementCommand.StackLerpMovement(ref stackList, _playerManager,ref StackData.StackLerpDelay,ref StackData.StackOffset);
         }
 
         private void OnReset()

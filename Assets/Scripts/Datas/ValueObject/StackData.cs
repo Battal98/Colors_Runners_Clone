@@ -12,5 +12,6 @@ namespace Datas.ValueObject
         public float StackMaxScaleValue = 1.5f; 
         public float StackScaleDelay = 0.30f;
         public float StackLerpDelay = 0.30f;
+        public float StackOffset = 0.30f;
     }
 }

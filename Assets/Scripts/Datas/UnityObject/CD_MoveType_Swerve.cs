@@ -11,7 +11,7 @@ namespace Data.UnityObject
     {
        
 
-        public override void DoMovement(ref bool _isReadyToMove, Rigidbody _rigidbody, ref Vector3 _inputValue, ref PlayerMovementData _moveData, ref Vector2 _clampValues, ref CharacterController characterController, Transform transform)
+        public override void DoMovement(ref bool _isReadyToMove,ref Rigidbody _rigidbody, ref Vector3 _inputValue, ref PlayerMovementData _moveData, ref Vector2 _clampValues, ref CharacterController characterController, Transform transform)
         {
 
             if (_isReadyToMove)

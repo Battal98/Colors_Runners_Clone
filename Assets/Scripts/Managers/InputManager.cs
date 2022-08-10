@@ -16,7 +16,7 @@ namespace Managers
         #region Public Variables
         private bool _isTouching;//ref type
         private float _currentVelocity;//ref type
-        private Vector2? _mousePosition;//ref type
+        private Vector3? _mousePosition;//ref type
         private Vector3 _joystickPos;//ref type
         private Vector3 _moveVector;//ref type
 
@@ -144,7 +144,7 @@ namespace Managers
         }
         private void DuringOnDragging()
         {
-            Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value;
+            Vector3 mouseDeltaPos = (Vector3)Input.mousePosition - _mousePosition.Value;
             if (mouseDeltaPos.x > _inputData.PlayerInputSpeed)
                 _moveVector.x = _inputData.PlayerInputSpeed / 10f * mouseDeltaPos.x;
             else if (mouseDeltaPos.x < -_inputData.PlayerInputSpeed)
