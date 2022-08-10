@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Datas.ValueObject
 {
     [Serializable]
-    public class StackData : MonoBehaviour
+    public class StackData 
     {
         public GameObject CollectableObject;
         public List<GameObject> StackList = new List<GameObject>();

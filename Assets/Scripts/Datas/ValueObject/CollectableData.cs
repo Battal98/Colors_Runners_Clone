@@ -5,8 +5,8 @@ using UnityEngine;
 namespace Datas.ValueObject
 {
     [Serializable]
-    public class CollectableData : MonoBehaviour
+    public class CollectableData 
     {
-        public List<Material> CollectableMaterialList;
+        public List<Mesh> CollectableMaterialList;
     }
 }

@@ -1,101 +1,157 @@
-using System.Collections;
-using System.Collections.Generic;
-using Controller.Stack;
-using Data.UnityObject;
-using DG.Tweening;
-using Signals;
 using UnityEngine;
-using Datas.ValueObject;
+using Controllers;
+using Signals;
 using Enums;
-using Player.Controllers;
+using Data.UnityObject;
+using Data.ValueObject;
+using DG.Tweening;
+using Commands.Stack;
+using Controller.Stack;
+using Datas.ValueObject;
 
 namespace Managers
 {
     public class StackManager : MonoBehaviour
     {
-        #region Self Variables
-    
-        #region Public Variables
-        public CollectableData CollectableData;
-        public List<GameObject> Collected = new List<GameObject>();
-        public GameObject TempHolder;
-        
-        #endregion
-    
-        #region Serialized Variables
+        #region Self Veriables
 
+        #region Public Veriables
+
+        [Header("Data")]
+        public StackData StackData;   
+       
+
+        #endregion
+
+        #region Serilazible Veriables
+
+        [SerializeField]
+        private StackDecreaseController stackDecreaseController;
         [SerializeField] private GameObject collectorMeshRenderer;
-        
-        
-        
-        #endregion
-    
-        #region Private Variables
 
         #endregion
-    
+
+        #region Private Veriables
+
+        private StackIncreaseCommand _stackIncreaseCommand;        
+        private StackLerpMovementCommand _stackLerpMovementCommand;
+        private StackScaleCommand _stackScaleCommand;
+        private Transform _playerManager;
+        private float _StackScore;
+
         #endregion
+
+        #endregion
+
+        private void Awake()
+        {
+            StackData = GetStackData();
+            StackData.StackList.Clear();
+            stackDecreaseController = GetComponent<StackDecreaseController>();
+            _stackIncreaseCommand = new StackIncreaseCommand();
+            _stackLerpMovementCommand = new StackLerpMovementCommand();
+            _stackScaleCommand = new StackScaleCommand();    
+        }
+
+        #region Event Subscription
         
-        #region Event Subscription 
+
         private void OnEnable()
         {
             SubscribeEvents();
         }
+
         private void SubscribeEvents()
         {
             StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
-            // StackSignals.Instance.onDecreaseStack += OnDecreaseStack;
-            // StackSignals.Instance.onStackMove += OnStackMove;
+            
+            StackSignals.Instance.onDecreaseStack += OnStackHitTheObstacleDecrease;
+            
+            StackSignals.Instance.onInitStackIncrease += OnInitStackIncrease;
+           // StackSignals.Instance.onRandomThrowCollectable += OnRandomThrowCollectable;
+
+            CoreGameSignals.Instance.onReset += OnReset;
         }
+
+       
 
         private void UnsubscribeEvents()
         {
             StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
-            // StackSignals.Instance.onDecreaseStack -= OnDecreaseStack;
-            // StackSignals.Instance.onStackMove -= OnStackMove;
+            
+            StackSignals.Instance.onDecreaseStack -= OnStackHitTheObstacleDecrease;
+            
+            StackSignals.Instance.onInitStackIncrease -= OnInitStackIncrease;
+            //StackSignals.Instance.onRandomThrowCollectable -= OnRandomThrowCollectable;
+
+            CoreGameSignals.Instance.onReset -= OnReset;
         }
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
+
         #endregion
 
-        private void Awake()
+
+        private StackData GetStackData()
         {
-            CollectableData = GetCollectableData();
-        }
-        private CollectableData GetCollectableData()
-        {
-            return Resources.Load<CD_Collectable>("Data/CD_Collectable").CollectableData;
-        }
-        private void OnIncreaseStack(GameObject other)
-        {
-            if (collectorMeshRenderer.GetComponent<Renderer>().material.color == other.gameObject.GetComponent<Renderer>().material.color)
-            {
-                AddOnStack(other);
-                //StartCoroutine(CollectableScaleUp());
-            }
+            return Resources.Load<CD_Stack>("Data/CD_Stack").Data;
         }
 
-        private void AddOnStack(GameObject other)
+        #region Stack Increase Decrease Jobs
+
+        #region Increase Jobs
+        private void OnInitStackIncrease()
         {
-            other.transform.parent = transform ;
-            other.gameObject.transform.localPosition = new Vector3(0f, 0f, Collected[Collected.Count - 1].transform.localPosition.z - 0.5f);
-            Collected.Add(other.gameObject);
-            
-            
+            OnIncreaseStack(Instantiate(StackData.CollectableObject));
         }
-        // public IEnumerator CollectableScaleUp()
-        // {
-        //     for (int i = Collected.Count -1; i >= 0; i--)
-        //     {
-        //         int index = i;
-        //         Vector3 scale = Vector3.one * 1.5f;
-        //         Collected[index].transform.DOScale(scale, 0.2f).SetEase(Ease.Flash);
-        //         Collected[index].transform.DOScale(Vector3.one, 0.2f).SetDelay(0.2f).SetEase(Ease.Flash);
-        //         yield return new WaitForSeconds(0.05f);
-        //     }
-        //     
-        // }
+        public void OnIncreaseStack(GameObject _obj)
+        { 
+           // if (collectorMeshRenderer.GetComponent<Material>().color == _obj.gameObject.GetComponent<Material>().color)
+            //{
+                if (!_playerManager)
+                {
+                    _playerManager = FindObjectOfType<PlayerManager>().transform;
+                }
+                StartCoroutine(_stackScaleCommand.ScaleSizeUpAndDown(StackData.StackList, StackData.StackMaxScaleValue, StackData.StackScaleDelay, StackData.StackTaskDelay));
+                if (StackData.StackList.Count == 0)
+                {
+                    var pos = new Vector3(0, _obj.transform.position.y, 1f);
+                    _stackIncreaseCommand.IncreaseFunc(_obj, this.gameObject, pos, StackData.StackList);
+                }
+                else
+                {
+                    var pos = new Vector3(0, _obj.transform.position.y, StackData.StackList[StackData.StackList.Count - 1].transform.localPosition.z + 1f);
+                    _stackIncreaseCommand.IncreaseFunc(_obj, this.gameObject, pos, StackData.StackList);
+                }
+           //}
+        }
+        #endregion
+
+        #region Decrease Jobs
+        public void OnStackHitTheObstacleDecrease(GameObject _obj)
+        {
+            stackDecreaseController.StackHitTheObstacleDecrease(_obj, StackData.StackList);
+           
+        }
+        public void OnStackGeneralDecrease(GameObject _obj, Transform _targetParent)
+        {
+            stackDecreaseController.StackGeneralDecrease(_obj, StackData.StackList, _targetParent);
+        }
+        #endregion
+        #endregion
+
+        private void FixedUpdate()
+        {
+            _stackLerpMovementCommand.StackLerpMovement(StackData.StackList, _playerManager, StackData.StackLerpDelay);
+        }
+
+        private void OnReset()
+        {
+            StackData.StackList.Clear();
+            StackData.StackList.TrimExcess();
+        }
+
     }
 }

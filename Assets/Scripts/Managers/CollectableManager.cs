@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
+using Datas.ValueObject;
 using Enums;
 using Keys;
 using Player.Controllers;
@@ -15,6 +17,7 @@ namespace Managers
         #region Self Variables
         
         #region Public Variables
+        public CollectableData CollectableData;
         #endregion
         
         #region Serializable Variables
@@ -27,6 +30,12 @@ namespace Managers
         #endregion
 
         #region Event Subscription
+
+        private void Awake()
+        {
+            CollectableData = GetCollectableData();
+        }
+
         private void OnEnable()
         {
             SubscribeEvents();
@@ -65,5 +74,10 @@ namespace Managers
                 
             }
         }
+        private CollectableData GetCollectableData()
+        {
+            return Resources.Load<CD_Collectable>("Data/CD_Collectable").CollectableData;
+        }
+
     }
 }
