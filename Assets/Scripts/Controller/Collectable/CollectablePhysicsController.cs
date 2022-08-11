@@ -73,8 +73,7 @@ namespace Controllers
             if (other.CompareTag("ColorCheck"))
             {
                 StackSignals.Instance.onTransportInStack?.Invoke(transform.parent.gameObject);
-
-                transform.parent.transform.DOMove(other.gameObject.transform.position, 0.5f);
+                transform.parent.transform.DOMove(new Vector3(other.gameObject.transform.position.x, transform.parent.transform.position.y, other.gameObject.transform.position.z), 0.5f);
 
             }
         }

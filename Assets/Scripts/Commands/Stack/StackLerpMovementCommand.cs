@@ -40,7 +40,7 @@ namespace Commands
                     directX = Mathf.Lerp(_stackList[i].transform.localPosition.x, pos.x, _stackData.StackLerpXDelay);
                     directY = Mathf.Lerp(_stackList[i].transform.localPosition.y, pos.y, _stackData.StackLerpYDelay);
                     directZ = Mathf.Lerp(_stackList[i].transform.localPosition.z, pos.z - _stackData.StackOffset, _stackData.StackLerpZDelay);
-                    _stackList[i].transform.localPosition = new Vector3(directX, directY, pos.z - _stackData.StackOffset);
+                    _stackList[i].transform.localPosition = new Vector3(directX, directY, directZ);
                     _stackList[i].transform.rotation = Quaternion.Slerp(_stackList[i].transform.rotation, _stackList[i - 1].transform.rotation, _stackData.StackLerpXDelay);
                 }
             }
