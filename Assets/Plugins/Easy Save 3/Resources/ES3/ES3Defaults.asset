@@ -29,10 +29,10 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
+    - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - Boxophobic.PolyverseSkies.Runtime
     - Cinemachine
-    - Assembly-CSharp
     - Boxophobic.Utils.Scripts
     - Sirenix.OdinInspector.CompatibilityLayer
     - Boxophobic.PolyverseSkies.Scripts
