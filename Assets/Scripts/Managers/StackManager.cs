@@ -148,7 +148,9 @@ namespace Managers
 
         private void Update()
         {
-            _stackLerpMovementCommand.StackLerpMovement(ref stackList, _playerManager,ref StackData.StackLerpDelay,ref StackData.StackOffset);
+            transform.position = new Vector3(0, 0,_playerManager.position.z-StackData.StackOffset);
+            _stackLerpMovementCommand.StackLerpMovement(ref stackList, _playerManager,ref StackData.StackLerpXDelay,ref StackData.StackLerpYDelay,ref StackData.StackOffset);
+
         }
 
         private void OnReset()

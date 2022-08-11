@@ -1830,17 +1830,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa59aaf78d04110b8e4b3ff74075685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAnimationController: {fileID: 6004608043649946698}
-  _playerMovementController: {fileID: 3346495845797470969}
-  _playerPhysicsController: {fileID: 8364028642772017776}
-  rb: {fileID: 1944392521816120396}
-  col: {fileID: 4256232788645637966}
-  characterController: {fileID: 1985564497}
   Data:
     MovementData:
       ForwardSpeed: 5
       SidewaysSpeed: 2
       PlayerJoystickSpeed: 3
+  playerAnimationController: {fileID: 6004608043649946698}
+  playerMovementController: {fileID: 3346495845797470969}
+  playerPhysicsController: {fileID: 8364028642772017776}
+  rigidbody: {fileID: 1944392521816120396}
+  capsuleCollider: {fileID: 4256232788645637966}
+  characterController: {fileID: 1985564497}
   scoreText: {fileID: 0}
 --- !u!114 &3346495845797470969
 MonoBehaviour:
@@ -1855,7 +1855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 4701532483818768975}
-  rbody: {fileID: 1944392521816120396}
+  rigidbody: {fileID: 1944392521816120396}
   characterController: {fileID: 1985564497}
 --- !u!54 &1944392521816120396
 Rigidbody:
