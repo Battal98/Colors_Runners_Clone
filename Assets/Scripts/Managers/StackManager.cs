@@ -5,6 +5,7 @@ using Data.UnityObject;
 using Commands;
 using Datas.ValueObject;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Managers
 {
@@ -31,6 +32,7 @@ namespace Managers
         private StackIncreaseCommand _stackIncreaseCommand;        
         private StackLerpMovementCommand _stackLerpMovementCommand;
         private StackScaleCommand _stackScaleCommand;
+        [SerializeField]
         private Transform _playerManager;
         private float _stackScore;
 
@@ -46,15 +48,6 @@ namespace Managers
             _stackLerpMovementCommand = new StackLerpMovementCommand();
             _stackScaleCommand = new StackScaleCommand();
 
-        }
-
-        private void Start()
-        {
-            if (!_playerManager)
-            {
-                Debug.Log(_playerManager);
-                _playerManager = FindObjectOfType<PlayerManager>().transform;
-            }
         }
 
         #region Event Subscription
@@ -75,6 +68,7 @@ namespace Managers
            // StackSignals.Instance.onRandomThrowCollectable += OnRandomThrowCollectable;
 
             CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onPlay += OnLevelInitilize;
         }
 
        
@@ -89,6 +83,7 @@ namespace Managers
             //StackSignals.Instance.onRandomThrowCollectable -= OnRandomThrowCollectable;
 
             CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onPlay -= OnLevelInitilize;
         }
         private void OnDisable()
         {
@@ -148,7 +143,9 @@ namespace Managers
 
         private void Update()
         {
-            transform.position = new Vector3(0, 0,_playerManager.position.z-StackData.StackOffset);
+            if(!_playerManager)
+                return;
+            transform.position = new Vector3(0, 0, _playerManager.position.z-StackData.StackOffset);
             _stackLerpMovementCommand.StackLerpMovement(ref stackList, _playerManager,ref StackData.StackLerpXDelay,ref StackData.StackLerpYDelay,ref StackData.StackOffset);
 
         }
@@ -157,6 +154,20 @@ namespace Managers
         {
             stackList.Clear();
             stackList.TrimExcess();
+        }
+
+        private void OnLevelInitilize()
+        {
+            Init();
+        }
+
+        private void Init()
+        {
+            if (!_playerManager)
+            {
+                Debug.Log(_playerManager);
+                _playerManager = FindObjectOfType<PlayerManager>().transform;
+            }
         }
 
     }
