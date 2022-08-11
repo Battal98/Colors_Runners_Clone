@@ -1,21 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using Datas.ValueObject;
 using UnityEngine;
 using DG.Tweening;
+using Enums;
 
 namespace Commands
 {
     public class StackScaleCommand
     {
-        Tween tween;
-        public IEnumerator ScaleSizeUpAndDown(List<GameObject> _stackList, float _maxScaleValueData,float _scaleDelay,float _stackDelay)
+        #region Self Variables
+
+        #region Private Variables
+
+        private List<GameObject> _stacklist;
+        private StackData _stackData;
+
+        #endregion
+
+        #endregion
+        public StackScaleCommand(ref List<GameObject> stackList, ref StackData stackData)
         {
-            for (int i = 0; i <= _stackList.Count - 1; i++)
+            _stacklist = stackList;
+            _stackData = stackData;
+        }
+        public IEnumerator Execute()
+        {
+            for (int i = 0; i <= _stacklist.Count - 1; i++)
             {
                 int index = i;
-                _stackList[index].transform.DOScale(new Vector3(1,_maxScaleValueData,1), _scaleDelay).SetEase(Ease.Flash);
-                _stackList[index].transform.DOScale(new Vector3(0.8f,0.8f,0.8f), _scaleDelay).SetDelay(_stackDelay).SetEase(Ease.Flash);
-                yield return new WaitForSeconds(_stackDelay/2);
+                _stacklist[index].transform.DOScale(new Vector3(1,_stackData.StackMaxScaleValue,1), _stackData.StackScaleDelay).SetEase(Ease.Flash);
+                _stacklist[index].transform.DOScale(new Vector3(0.8f,0.8f,0.8f), _stackData.StackScaleDelay).SetDelay(_stackData.StackTaskDelay).SetEase(Ease.Flash);
+                yield return new WaitForSeconds(_stackData.StackTaskDelay/2);
             }
         }
     }

@@ -6,8 +6,9 @@ namespace Signals
 {
     public class StackSignals : MonoSingleton<StackSignals>
     {
-        public UnityAction<GameObject> onIncreaseStack = delegate{ };
-        public UnityAction<GameObject> onDecreaseStack = delegate{ };
+        public UnityAction<GameObject> onAddInStack = delegate{ };
+        public UnityAction<GameObject> onRemoveInStack = delegate{ };
+        public UnityAction<GameObject> onTransportInStack = delegate{ };
         public UnityAction<Vector2> onStackMove = delegate { };
         public UnityAction onInitStackIncrease=delegate {  };
     }

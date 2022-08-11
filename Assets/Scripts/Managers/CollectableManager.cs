@@ -38,13 +38,13 @@ namespace Managers
         }
         private void SubscribeEvents()
         {
-            StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
+            StackSignals.Instance.onAddInStack += OnIncreaseStack;
 
         }
         
         private void UnsubscribeEvents()
         { 
-            StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
+            StackSignals.Instance.onAddInStack -= OnIncreaseStack;
         }
         
         private void OnDisable()

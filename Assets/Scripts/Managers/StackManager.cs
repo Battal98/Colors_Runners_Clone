@@ -15,24 +15,25 @@ namespace Managers
 
         #region Public Veriables
 
-        [Header("Data")] public StackData StackData;   
-        
+        [Header("Data")] public StackData StackData;
+
         #endregion
 
         #region Serilazible Veriables
 
-        [SerializeField] private StackDecreaseController stackDecreaseController;
-        [SerializeField] private GameObject collectorMeshRenderer;
         [SerializeField] private List<GameObject> stackList = new List<GameObject>();
+        [SerializeField] private GameObject levelHolder;
+        [SerializeField] private StackManager stackManager;
 
         #endregion
 
         #region Private Veriables
 
-        private StackIncreaseCommand _stackIncreaseCommand;        
+        private CollectableAddOnStackCommand _collectableAddOnStackCommand;
         private StackLerpMovementCommand _stackLerpMovementCommand;
         private StackScaleCommand _stackScaleCommand;
-        [SerializeField]
+        private CollectableRemoveOnStackCommand _collectableRemoveOnStackCommand;
+        private TransportInStack _transportInStack;
         private Transform _playerManager;
         private float _stackScore;
 
@@ -40,18 +41,10 @@ namespace Managers
 
         #endregion
 
-        private void Awake()
-        {
-            StackData = GetStackData();
-            stackDecreaseController = GetComponent<StackDecreaseController>();
-            _stackIncreaseCommand = new StackIncreaseCommand();
-            _stackLerpMovementCommand = new StackLerpMovementCommand();
-            _stackScaleCommand = new StackScaleCommand();
-
-        }
+     
+      
 
         #region Event Subscription
-
 
         private void OnEnable()
         {
@@ -60,31 +53,25 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            StackSignals.Instance.onIncreaseStack += OnIncreaseStack;
+            StackSignals.Instance.onAddInStack += OnAddInStack;
+            StackSignals.Instance.onRemoveInStack += _collectableRemoveOnStackCommand.Execute;
+            StackSignals.Instance.onTransportInStack += OnTransportInStack;
             
-            StackSignals.Instance.onDecreaseStack += OnStackHitTheObstacleDecrease;
-            
-            StackSignals.Instance.onInitStackIncrease += OnInitStackIncrease;
-           // StackSignals.Instance.onRandomThrowCollectable += OnRandomThrowCollectable;
-
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onPlay += OnLevelInitilize;
+            CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
-       
 
         private void UnsubscribeEvents()
         {
-            StackSignals.Instance.onIncreaseStack -= OnIncreaseStack;
-            
-            StackSignals.Instance.onDecreaseStack -= OnStackHitTheObstacleDecrease;
-            
-            StackSignals.Instance.onInitStackIncrease -= OnInitStackIncrease;
-            //StackSignals.Instance.onRandomThrowCollectable -= OnRandomThrowCollectable;
+            StackSignals.Instance.onAddInStack -= OnAddInStack;
+            StackSignals.Instance.onRemoveInStack -= _collectableRemoveOnStackCommand.Execute;
+            StackSignals.Instance.onTransportInStack += OnTransportInStack;
 
             CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onPlay -= OnLevelInitilize;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -97,78 +84,54 @@ namespace Managers
         {
             return Resources.Load<CD_Stack>("Data/CD_Stack").Data;
         }
-
-        #region Stack Increase Decrease Jobs
-
-        #region Increase Jobs
-        private void OnInitStackIncrease()
+        private void Awake()
         {
-            OnIncreaseStack(Instantiate(StackData.CollectableObject));
+            GetReferences();
         }
-        public void OnIncreaseStack(GameObject _obj)
-        { 
-           // if (collectorMeshRenderer.GetComponent<Material>().color == _obj.gameObject.GetComponent<Material>().color)
-            //{
-                if (!_playerManager)
-                {
-                    _playerManager = FindObjectOfType<PlayerManager>().transform;
-                }
-                StartCoroutine(_stackScaleCommand.ScaleSizeUpAndDown(stackList,StackData.StackMaxScaleValue, StackData.StackScaleDelay, StackData.StackTaskDelay));
-                if (stackList.Count == 0)
-                {
-                    var pos = new Vector3(0, _obj.transform.position.y, 1f);
-                    _stackIncreaseCommand.IncreaseFunc(_obj, this.gameObject, pos, stackList);
-                }
-                else
-                {
-                    var pos = new Vector3(0, _obj.transform.position.y, stackList[stackList.Count - 1].transform.localPosition.z + 1f);
-                    _stackIncreaseCommand.IncreaseFunc(_obj, this.gameObject, pos, stackList);
-                }
-           //}
-        }
-        #endregion
-
-        #region Decrease Jobs
-        public void OnStackHitTheObstacleDecrease(GameObject _obj)
-        {
-            stackDecreaseController.StackHitTheObstacleDecrease(_obj, stackList);
-           
-        }
-        public void OnStackGeneralDecrease(GameObject _obj, Transform _targetParent)
-        {
-            stackDecreaseController.StackGeneralDecrease(_obj, stackList, _targetParent);
-        }
-        #endregion
-        #endregion
-
+        
         private void Update()
         {
-            if(!_playerManager)
+            if (!_playerManager)
                 return;
-            transform.position = new Vector3(0, 0, _playerManager.position.z-StackData.StackOffset);
-            _stackLerpMovementCommand.StackLerpMovement(ref stackList, _playerManager,ref StackData.StackLerpXDelay,ref StackData.StackLerpYDelay,ref StackData.StackOffset);
-
+            transform.position = new Vector3(0, 0, _playerManager.position.z - StackData.StackOffset);
+            _stackLerpMovementCommand.Execute(ref _playerManager);
         }
 
+        private void GetReferences()
+        {
+            StackData = GetStackData();
+            _collectableAddOnStackCommand = new CollectableAddOnStackCommand(ref stackManager, ref stackList);
+            _stackLerpMovementCommand = new StackLerpMovementCommand(ref stackList, ref StackData);
+            _stackScaleCommand = new StackScaleCommand(ref stackList, ref StackData);
+            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager, ref levelHolder);
+            _transportInStack = new TransportInStack(ref stackList,ref stackManager,ref levelHolder);
+        }
+        
+        private void FindPlayer()
+        {
+            if (!_playerManager)
+            {
+                _playerManager = FindObjectOfType<PlayerManager>().transform;
+            }
+        }
+        private void OnAddInStack(GameObject obj)
+        {
+            StartCoroutine(_stackScaleCommand.Execute());
+            _collectableAddOnStackCommand.Execute(obj);
+        }
+
+        private void OnTransportInStack(GameObject obj)
+        {
+            _transportInStack.Execute(obj);
+        }
+        private void OnPlay()
+        {
+            FindPlayer();
+        }
         private void OnReset()
         {
             stackList.Clear();
             stackList.TrimExcess();
         }
-
-        private void OnLevelInitilize()
-        {
-            Init();
-        }
-
-        private void Init()
-        {
-            if (!_playerManager)
-            {
-                Debug.Log(_playerManager);
-                _playerManager = FindObjectOfType<PlayerManager>().transform;
-            }
-        }
-
     }
 }

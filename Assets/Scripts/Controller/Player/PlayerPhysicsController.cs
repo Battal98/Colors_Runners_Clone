@@ -29,7 +29,7 @@ namespace Controllers
                 if (!otherPhysic.isTaken)
                 {
                     otherPhysic.isTaken = true;
-                    StackSignals.Instance.onIncreaseStack?.Invoke(other.gameObject.transform.parent.gameObject);
+                    StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
                 }
             }
         }
