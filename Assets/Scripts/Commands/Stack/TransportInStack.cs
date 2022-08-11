@@ -27,7 +27,7 @@ namespace Commands
       
         public IEnumerator Execute(GameObject _obj)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.15f);
             _obj.transform.parent = _levelHolder.transform;
             _stacklist.Remove(_obj);
             _stacklist.TrimExcess();

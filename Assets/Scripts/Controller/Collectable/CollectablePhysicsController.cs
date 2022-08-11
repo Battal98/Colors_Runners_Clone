@@ -74,7 +74,7 @@ namespace Controllers
             {
                 StackSignals.Instance.onTransportInStack?.Invoke(transform.parent.gameObject);
 
-                transform.parent.transform.DOMove(other.gameObject.transform.position, 1f);
+                transform.parent.transform.DOMove(other.gameObject.transform.position, 0.5f);
 
             }
         }
