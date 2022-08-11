@@ -86,7 +86,7 @@ namespace Controllers
                 Stop();
 
         }
-        private void Stop()
+        public void Stop()
         {
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;

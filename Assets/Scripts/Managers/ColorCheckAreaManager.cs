@@ -12,12 +12,12 @@ namespace Managers
 
         #region Public Variables
 
+        public ColorCheckAreaType areaType;
+
         #endregion
 
         #region Seriazible Variables
 
-        [SerializeField]
-        private ColorCheckAreaType areaType;
 
         #endregion
 

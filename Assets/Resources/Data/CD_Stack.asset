@@ -17,7 +17,7 @@ MonoBehaviour:
     StackTaskDelay: 0.05
     StackMaxScaleValue: 1.5
     StackScaleDelay: 0.25
-    StackLerpXDelay: 0.12
+    StackLerpXDelay: 0.18
     StackLerpYDelay: 0.19
-    StackLerpZDelay: 0.12
+    StackLerpZDelay: 0.05
     StackOffset: 0.35

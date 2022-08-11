@@ -1,6 +1,7 @@
 using Enums;
 using Signals;
 using UnityEngine;
+using Managers;
 
 namespace Controllers
 {
@@ -11,10 +12,23 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private new Rigidbody rigidbody;
-        
+        [SerializeField] private GameObject playerMeshObj;
+
         #endregion
-        
+
+        #region Private Variables
+
+        private SkinnedMeshRenderer _playerSkinnedMeshRenderer;
+        private PlayerManager _playerManager;
+
         #endregion
+
+        #endregion
+
+        private void Awake()
+        {
+            GetReferances();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -32,6 +46,35 @@ namespace Controllers
                     StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
                 }
             }
+
+            if (other.CompareTag("Gate"))
+            {
+                var otherMR = other.gameObject.transform.parent.GetComponentInChildren<MeshRenderer>();
+                _playerSkinnedMeshRenderer.material.color = otherMR.material.color;
+            }
+
+            if (other.CompareTag("CheckArea"))
+            {
+                var type = other.gameObject.GetComponentInParent<ColorCheckAreaManager>().areaType;
+                switch (type)
+                {
+                    case ColorCheckAreaType.Drone:
+                        _playerManager.StopPlayer();
+                        //stop player but not sideways
+                        break;
+                    case ColorCheckAreaType.Turret:
+                        //forward speed down
+                        //change animation state 
+                        break;
+                }
+            }
+
+        }
+
+        private void GetReferances()
+        {
+            _playerSkinnedMeshRenderer = playerMeshObj.GetComponentInChildren<SkinnedMeshRenderer>();
+            _playerManager = this.gameObject.GetComponentInParent<PlayerManager>();
         }
     }
 }

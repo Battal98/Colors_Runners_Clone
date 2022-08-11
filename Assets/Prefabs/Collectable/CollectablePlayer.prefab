@@ -824,6 +824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTaken: 0
   _collectableManager: {fileID: 1760233938649184601}
+  collectableMeshObj: {fileID: 1760233938324641910}
 --- !u!54 &1760233938215713220
 Rigidbody:
   m_ObjectHideFlags: 0

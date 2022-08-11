@@ -8,6 +8,9 @@ TagManager:
   - Collectable
   - Collected
   - CollectableParent
+  - CheckArea
+  - ColorCheck
+  - Gate
   layers:
   - Default
   - TransparentFX

@@ -122,7 +122,7 @@ namespace Managers
 
         private void OnTransportInStack(GameObject obj)
         {
-            _transportInStack.Execute(obj);
+            StartCoroutine(_transportInStack.Execute(obj));
         }
         private void OnPlay()
         {

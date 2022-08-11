@@ -969,6 +969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 8065292031746485745}
+  playerMeshObj: {fileID: 8307426609619511629}
 --- !u!1 &7652159215991158951
 GameObject:
   m_ObjectHideFlags: 0

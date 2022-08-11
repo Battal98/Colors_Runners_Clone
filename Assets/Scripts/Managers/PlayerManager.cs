@@ -146,5 +146,11 @@ namespace Managers
             playerMovementController.OnReset();
             playerAnimationController.OnReset();
         }
+
+        public void StopPlayer()
+        {
+            playerMovementController.Stop();
+            Data.MovementData.ForwardSpeed = 0;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Managers;
 using UnityEngine;
@@ -24,8 +25,9 @@ namespace Commands
         }
         
       
-        public void Execute(GameObject _obj)
+        public IEnumerator Execute(GameObject _obj)
         {
+            yield return new WaitForSeconds(1f);
             _obj.transform.parent = _levelHolder.transform;
             _stacklist.Remove(_obj);
             _stacklist.TrimExcess();
