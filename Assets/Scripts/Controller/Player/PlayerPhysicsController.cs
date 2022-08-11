@@ -1,8 +1,7 @@
-using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
-using Controllers;
+
 namespace Controllers
 {
     public class PlayerPhysicsController : MonoBehaviour
@@ -12,7 +11,9 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private new Rigidbody rigidbody;
+        
         #endregion
+        
         #endregion
 
         private void OnTriggerEnter(Collider other)

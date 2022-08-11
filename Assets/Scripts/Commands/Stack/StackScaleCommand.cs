@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using System.Threading.Tasks;
 
 namespace Commands
 {
     public class StackScaleCommand
     {
         Tween tween;
-
         public IEnumerator ScaleSizeUpAndDown(List<GameObject> _stackList, float _maxScaleValueData,float _scaleDelay,float _stackDelay)
         {
             for (int i = 0; i <= _stackList.Count - 1; i++)

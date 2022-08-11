@@ -7,6 +7,5 @@ namespace Enums
         CrouchWalk,
         Crouch,
         Dead
-        
     }
 }

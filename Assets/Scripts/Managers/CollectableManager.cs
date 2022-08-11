@@ -1,15 +1,8 @@
-using System;
-using System.Collections;
 using UnityEngine;
-using Controllers;
 using Data.UnityObject;
-using Data.ValueObject;
 using Datas.ValueObject;
-using Enums;
-using Keys;
-using Player.Controllers;
-using TMPro;
 using Signals;
+
 namespace Managers
 {
     public class CollectableManager : MonoBehaviour
@@ -17,14 +10,17 @@ namespace Managers
         #region Self Variables
         
         #region Public Variables
+        
         public CollectableData CollectableData;
+        
         #endregion
         
-        #region Serializable Variables
+        #region Serialized Variables
        
         #endregion
         
         #region Private Variables
+        
         #endregion
         
         #endregion
@@ -69,9 +65,6 @@ namespace Managers
             if (other.CompareTag("Collectable"))
             {
                 other.CompareTag("Collected");
-                
-                //other.transform.localPosition = new Vector3(0, 0, -0.5f);
-                
             }
         }
         private CollectableData GetCollectableData()

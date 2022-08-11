@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using Signals;
-using System.Collections.Generic;
 using Managers;
 
 namespace Controllers
@@ -18,11 +16,12 @@ namespace Controllers
 
         #region Serializable Variables
         
-        
         [SerializeField] private CollectableManager _collectableManager;
+        
         #endregion
 
         #region Private Variables
+        
         #endregion
 
         #endregion

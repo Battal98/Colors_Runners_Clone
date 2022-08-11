@@ -1,8 +1,5 @@
-using System;
-using Commands.Level;
+using Commands;
 using Data.UnityObject;
-using Data.ValueObject;
-using Keys;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -102,12 +99,12 @@ namespace Managers
 
         private void OnLevelFailed()
         {
-            //öldüğünde ui fln cnm
+            
         }
 
         private void OnLevelSuccessful()
         {
-            //böyle bir şey yok oyunda????
+           
         }
         private void OnNextLevel()
         {

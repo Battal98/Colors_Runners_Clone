@@ -1,7 +1,7 @@
 using Enums;
 using UnityEngine;
 
-namespace Controller.Stack
+namespace Controller
 {
     public class CollectableAnimationController : MonoBehaviour
     {
@@ -15,15 +15,19 @@ namespace Controller.Stack
 
         #region Serialized Variables
 
-        [SerializeField] private Animator _animatorController;
+        [SerializeField] private Animator animatorController;
 
+        #endregion
+
+        #region Private Variables
+        
         #endregion
 
         #endregion
         
         public void PlayCollectableAnim(PlayerAnimationStates animationStates)
         {
-            _animatorController.SetTrigger(animationStates.ToString());
+            animatorController.SetTrigger(animationStates.ToString());
         }
     }
 }

@@ -14,27 +14,26 @@ namespace Managers
         #region SelfVariables
 
         #region Public Variables
+        
         private bool _isTouching;//ref type
         private float _currentVelocity;//ref type
         private Vector3? _mousePosition;//ref type
         private Vector3 _joystickPos;//ref type
         private Vector3 _moveVector;//ref type
-
-
-
+        
         #endregion
+        
         #region Serialized Variables
 
         [SerializeField] private bool isReadyForTouch, isFirstTimeTouchTaken;
         [SerializeField] bool isJoystick = false;
         [SerializeField] private Joystick joystick;
-
-
+        
         #endregion
+        
         #region Private Variables
 
         private InputData _inputData;
-
 
         #endregion
 

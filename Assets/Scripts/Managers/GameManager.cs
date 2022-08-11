@@ -1,19 +1,30 @@
-using System;
 using UnityEngine;
 using Signals;
-using Keys;
 using Enums;
-using Sirenix.OdinInspector;
-
 
 namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField]
-        private GameStates gameStates = GameStates.Runner;
+        #region Self Variables
+    
+        #region Public Variables
 
-        private CameraStatesType cameraType = CameraStatesType.Idle;
+        #endregion
+    
+        #region Serialized Variables
+        
+        [SerializeField] private GameStates gameStates = GameStates.Runner;
+        
+        #endregion
+    
+        #region Private Variables
+        
+        private CameraStatesType _cameraType = CameraStatesType.Idle;
+        
+        #endregion
+    
+        #endregion
 
         private void Awake()
         {
@@ -51,7 +62,7 @@ namespace Managers
         {
             CoreGameSignals.Instance.onGetGameState?.Invoke(gameStates);
             
-            CameraSignals.Instance.onSetCameraState?.Invoke(cameraType);
+            CameraSignals.Instance.onSetCameraState?.Invoke(_cameraType);
         }
     }
 }

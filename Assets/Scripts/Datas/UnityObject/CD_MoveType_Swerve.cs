@@ -1,6 +1,4 @@
 using Data.ValueObject;
-using Keys;
-using Managers;
 using UnityEngine;
 using DG.Tweening;
 
@@ -9,8 +7,6 @@ namespace Data.UnityObject
     [CreateAssetMenu(fileName = "Swerve", menuName = "Movement/SwerveMove", order = 0)]
     public class CD_MoveType_Swerve : Movement
     {
-       
-
         public override void DoMovement(ref bool _isReadyToMove,ref Rigidbody _rigidbody, ref Vector3 _inputValue, ref PlayerMovementData _moveData, ref Vector2 _clampValues, ref CharacterController characterController, Transform transform)
         {
 

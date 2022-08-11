@@ -1,6 +1,4 @@
-using System;
 using Cinemachine;
-using Managers;
 using Enums;
 using Signals;
 using Sirenix.OdinInspector;
@@ -15,6 +13,7 @@ namespace Managers
         #region Public Variables
         public CinemachineVirtualCamera RunnerCamera;
         public CinemachineVirtualCamera IdleGameCamera;
+        
         #endregion
 
         #region Serialized Variables
@@ -29,6 +28,7 @@ namespace Managers
         private CameraStatesType _cameraStatesType = CameraStatesType.Runner;
        
         #endregion
+        
         #endregion
 
         private void Awake()

@@ -8,10 +8,18 @@ namespace Controllers
     {
         #region Self Variables
 
+        #region Public Variables
+
+        #endregion
+
         #region Serialized Variables
 
         [SerializeField] private List<GameObject> panels;
 
+        #endregion
+
+        #region Private Variables
+        
         #endregion
 
         #endregion

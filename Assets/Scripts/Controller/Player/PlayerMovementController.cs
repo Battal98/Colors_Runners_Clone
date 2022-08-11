@@ -1,10 +1,8 @@
-using System;
 using Data.UnityObject;
 using Data.ValueObject;
 using Keys;
 using Managers;
 using UnityEngine;
-using DG.Tweening;
 using Enums;
 
 namespace Controllers
@@ -13,10 +11,14 @@ namespace Controllers
     {
         #region Self Variables
 
+        #region Public Variables
+        
+        #endregion
+
         #region Serialized Variables
 
         [SerializeField] private PlayerManager manager;
-        [SerializeField] private Rigidbody rbody;
+        [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private CharacterController characterController;
 
         #endregion
@@ -28,7 +30,7 @@ namespace Controllers
         private Vector3 _inputValue;
         private Vector2 _clampValues;
         private GameStates _states;
-        private CD_MovementList movementList;
+        private CD_MovementList _movementList;
 
         #endregion
 
@@ -36,7 +38,7 @@ namespace Controllers
 
         private void Awake()
         {
-            movementList = GetMovementTypeList();
+            _movementList = GetMovementTypeList();
         }
         private CD_MovementList GetMovementTypeList() => Resources.Load<CD_MovementList>("Data/CD_MovementList");
 
@@ -77,10 +79,8 @@ namespace Controllers
             if (_isReadyToPlay)
             {
                
-                    movementList.MovementTypeList[(int)_states].DoMovement(ref _isReadyToMove,ref rbody, ref _inputValue,
+                    _movementList.MovementTypeList[(int)_states].DoMovement(ref _isReadyToMove,ref rigidbody, ref _inputValue,
                         ref _movementData, ref _clampValues, ref  characterController, this.gameObject.transform);
-                
-
             }
             else
                 Stop();
@@ -88,8 +88,8 @@ namespace Controllers
         }
         private void Stop()
         {
-            rbody.velocity = Vector3.zero;
-            rbody.angularVelocity = Vector3.zero;
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
         }
         public void OnReset()
         {

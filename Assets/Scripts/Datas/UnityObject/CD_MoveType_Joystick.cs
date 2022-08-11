@@ -1,6 +1,4 @@
 using Data.ValueObject;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Data.UnityObject
@@ -8,13 +6,10 @@ namespace Data.UnityObject
     [CreateAssetMenu(fileName = "Joystick", menuName = "Movement/JoystickMove", order = 0)]
     public class CD_MoveType_Joystick : Movement
     {
-      
-
         public override void DoMovement(ref bool _isReadyToMove, ref Rigidbody _rigidbody, ref Vector3 _inputValue, ref PlayerMovementData _moveData, ref Vector2 _clampValue, ref CharacterController characterController, Transform transform)
         {
             JoystickMove(ref _rigidbody, ref _moveData, ref _inputValue, ref characterController, transform);
         }
-
 
         #region Joystick Jobs
         private void JoystickMove(ref Rigidbody rigidbody, ref PlayerMovementData _movementData, ref Vector3 _inputValue, ref CharacterController characterController, Transform transform)

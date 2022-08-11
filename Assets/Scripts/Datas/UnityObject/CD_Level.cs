@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace Data.UnityObject
 {
     [CreateAssetMenu(fileName = "CD_Level", menuName = "ColorsRunners/CD_Level", order = 0)]

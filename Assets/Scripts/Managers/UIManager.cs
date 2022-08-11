@@ -1,10 +1,7 @@
-using System;
 using Controllers;
 using Enums;
 using Signals;
 using UnityEngine;
-using Data.ValueObject;
-using Data.UnityObject;
 
 namespace Managers
 {
@@ -19,14 +16,9 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField]
-        private UIPanelController uiPanelController;
-
-        [SerializeField]
-        private LevelPanelController levelPanelController;
-
-        [SerializeField]
-        private IdlePanelController idlePanelController;
+        [SerializeField] private UIPanelController uiPanelController;
+        [SerializeField] private LevelPanelController levelPanelController;
+        [SerializeField] private IdlePanelController idlePanelController;
 
         #endregion
 

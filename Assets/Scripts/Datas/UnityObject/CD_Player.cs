@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using Data.ValueObject;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Data.UnityObject
 {

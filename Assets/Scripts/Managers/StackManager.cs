@@ -1,10 +1,7 @@
 using UnityEngine;
 using Controllers;
 using Signals;
-using Enums;
 using Data.UnityObject;
-using Data.ValueObject;
-using DG.Tweening;
 using Commands;
 using Datas.ValueObject;
 using System.Collections.Generic;
@@ -17,22 +14,15 @@ namespace Managers
 
         #region Public Veriables
 
-        [Header("Data")]
-        public StackData StackData;   
-       
-
+        [Header("Data")] public StackData StackData;   
+        
         #endregion
 
         #region Serilazible Veriables
 
-        [SerializeField]
-        private StackDecreaseController stackDecreaseController;
-
-        [SerializeField] 
-        private GameObject collectorMeshRenderer;
-
-        [SerializeField]
-        private List<GameObject> stackList = new List<GameObject>();
+        [SerializeField] private StackDecreaseController stackDecreaseController;
+        [SerializeField] private GameObject collectorMeshRenderer;
+        [SerializeField] private List<GameObject> stackList = new List<GameObject>();
 
         #endregion
 
@@ -42,7 +32,7 @@ namespace Managers
         private StackLerpMovementCommand _stackLerpMovementCommand;
         private StackScaleCommand _stackScaleCommand;
         private Transform _playerManager;
-        private float _StackScore;
+        private float _stackScore;
 
         #endregion
 
