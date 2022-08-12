@@ -1,5 +1,6 @@
 using Data.UnityObject;
 using Data.ValueObject;
+using DG.Tweening;
 using Keys;
 using Managers;
 using UnityEngine;
@@ -84,8 +85,13 @@ namespace Controllers
             }
             else
                 Stop();
-
         }
+
+        // public void PlayerJump(float distance, float duration)
+        // {
+        //     
+        // }
+       
         public void Stop()
         {
             rigidbody.velocity = Vector3.zero;

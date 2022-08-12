@@ -15,5 +15,7 @@ namespace Datas.ValueObject
         public float StackLerpYDelay = 0.30f;
         public float StackLerpZDelay = 0.30f;
         public float StackOffset = 0.30f;
+        public float StackJumpDistance = 100f;
+        public float StackJumpDuration = 1f;
     }
 }

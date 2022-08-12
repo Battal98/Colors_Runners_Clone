@@ -21,7 +21,6 @@ namespace Managers
 
         [SerializeField] private CollectableAnimationController collectableAnimationController;
 
-        
         #endregion
         
         #region Private Variables

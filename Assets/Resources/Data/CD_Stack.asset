@@ -21,3 +21,5 @@ MonoBehaviour:
     StackLerpYDelay: 0.08
     StackLerpZDelay: 0.12
     StackOffset: 0.35
+    StackJumpDistance: 2
+    StackJumpDuration: 1

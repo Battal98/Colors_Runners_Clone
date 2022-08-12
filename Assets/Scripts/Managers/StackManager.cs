@@ -6,6 +6,7 @@ using Commands;
 using Datas.ValueObject;
 using System.Collections.Generic;
 using System.Collections;
+using Data.ValueObject;
 using Enums;
 
 namespace Managers
@@ -17,7 +18,7 @@ namespace Managers
         #region Public Veriables
 
         [Header("Data")] public StackData StackData;
-
+        
         #endregion
 
         #region Serilazible Veriables
@@ -25,6 +26,7 @@ namespace Managers
         [SerializeField] private List<GameObject> stackList = new List<GameObject>();
         [SerializeField] private GameObject levelHolder;
         [SerializeField] private StackManager stackManager;
+       
 
         #endregion
 
@@ -33,12 +35,13 @@ namespace Managers
         private CollectableAddOnStackCommand _collectableAddOnStackCommand;
         private StackLerpMovementCommand _stackLerpMovementCommand;
         private StackScaleCommand _stackScaleCommand;
+        private StackJumpCommand _stackJumpCommand;
         private CollectableRemoveOnStackCommand _collectableRemoveOnStackCommand;
         private TransportInStack _transportInStack;
         private CollectableAnimSetCommand _collectableAnimSetCommand;
         private Transform _playerManager;
         private float _stackScore;
-
+        
         #endregion
 
         #endregion
@@ -58,7 +61,7 @@ namespace Managers
             StackSignals.Instance.onAddInStack += OnAddInStack;
             StackSignals.Instance.onRemoveInStack += _collectableRemoveOnStackCommand.Execute;
             StackSignals.Instance.onTransportInStack += OnTransportInStack;
-            
+            StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
@@ -69,7 +72,7 @@ namespace Managers
             StackSignals.Instance.onAddInStack -= OnAddInStack;
             StackSignals.Instance.onRemoveInStack -= _collectableRemoveOnStackCommand.Execute;
             StackSignals.Instance.onTransportInStack += OnTransportInStack;
-
+            StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
         }
@@ -86,6 +89,7 @@ namespace Managers
         {
             return Resources.Load<CD_Stack>("Data/CD_Stack").Data;
         }
+        
         private void Awake()
         {
             GetReferences();
@@ -108,6 +112,7 @@ namespace Managers
             _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager, ref levelHolder);
             _transportInStack = new TransportInStack(ref stackList,ref stackManager,ref levelHolder);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
+            _stackJumpCommand = new StackJumpCommand(ref stackList, ref StackData);
         }
         private void FindPlayer()
         {
@@ -121,6 +126,11 @@ namespace Managers
             StartCoroutine(_stackScaleCommand.Execute());
             _collectableAddOnStackCommand.Execute(obj);
         }
+
+        private void OnStackJumpPlatform()
+        {
+            StartCoroutine(_stackJumpCommand.Execute(0.5f,0.2f));
+        }
         private void OnTransportInStack(GameObject obj)
         {
             StartCoroutine(_transportInStack.Execute(obj));
@@ -131,7 +141,6 @@ namespace Managers
             {
                 _collectableAnimSetCommand.Execute(stackList[i],CollectableAnimationStates.Run);
             }
-            
         }
 
         private void OnPlay()

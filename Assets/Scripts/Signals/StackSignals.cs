@@ -11,5 +11,6 @@ namespace Signals
         public UnityAction<GameObject> onTransportInStack = delegate{ };
         public UnityAction<Vector2> onStackMove = delegate { };
         public UnityAction onInitStackIncrease=delegate {  };
+        public UnityAction onStackJumpPlatform = delegate {  };
     }
 }

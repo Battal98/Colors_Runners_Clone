@@ -11,6 +11,8 @@ TagManager:
   - CheckArea
   - ColorCheck
   - Gate
+  - JumpArea
+  - BoostArea
   layers:
   - Default
   - TransparentFX

@@ -52,6 +52,7 @@ namespace Managers
             CoreGameSignals.Instance.onGetGameState += OnGetCameraState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
+           // StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
         }
 
         private void Unsubscribe()
@@ -62,6 +63,7 @@ namespace Managers
             CoreGameSignals.Instance.onGetGameState -= OnGetCameraState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
+            //StackSignals.Instance.onStackJumpPlatform -= OnStackJumpPlatform;
         }
 
         private void OnDisable()
@@ -106,6 +108,10 @@ namespace Managers
                 characterController.enabled = true;
             }
         }
+        // private void OnStackJumpPlatform()
+        // {
+        //     playerMovementController.PlayerJump(Data.MovementData.PlayerJumpDistance,Data.MovementData.PlayerJumpDistance);
+        // }
 
         private void OnLevelSuccessful()
         {
