@@ -4,9 +4,25 @@ namespace Commands
 {
     public class LevelLoaderCommand
     {
-        public void InitializeLevel(int _levelID, Transform levelHolder)
+        #region Self Variables
+
+        #region Private Variables
+
+         private GameObject _levelHolder;
+
+        #endregion
+
+        #endregion
+        public LevelLoaderCommand(ref GameObject levelHolder)
         {
-            Object.Instantiate(Resources.Load<GameObject>($"Prefabs/LevelPrefabs/level {_levelID}"), levelHolder);
+            _levelHolder = levelHolder;
+       
+
+
+        }
+        public void Execute(int _levelID)
+        {
+            Object.Instantiate(Resources.Load<GameObject>($"Prefabs/LevelPrefabs/level {_levelID}"), _levelHolder.transform);
         }
     }
 }

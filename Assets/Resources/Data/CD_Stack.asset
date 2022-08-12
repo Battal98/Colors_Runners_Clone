@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: CD_Stack
   m_EditorClassIdentifier: 
   Data:
-    CollectableObject: {fileID: 0}
-    StackTaskDelay: 0.05
-    StackMaxScaleValue: 1.5
+    StackLimit: 10
+    StackTaskDelay: 0.1
+    StackMaxScaleValue: 1.1
     StackScaleDelay: 0.25
     StackLerpXDelay: 0.18
     StackLerpYDelay: 0.08
     StackLerpZDelay: 0.12
     StackOffset: 0.35
-    StackJumpDistance: 2
-    StackJumpDuration: 1
+    StackJumpDistance: 1.7
+    StackJumpDuration: 0.27

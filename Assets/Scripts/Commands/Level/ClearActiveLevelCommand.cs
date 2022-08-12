@@ -4,9 +4,23 @@ namespace Commands
 {
     public class ClearActiveLevelCommand
     {
-        public void ClearActiveLevel(Transform levelHolder)
+        #region Self Variables
+
+        #region Private Variables
+
+        private GameObject _levelholder;
+
+        #endregion
+
+        #endregion
+        public ClearActiveLevelCommand(ref GameObject levelHolder)
         {
-            Object.Destroy(levelHolder.GetChild(0).gameObject);
+            _levelholder = levelHolder;
+
+        }
+        public void Execute()
+        {
+            Object.Destroy(_levelholder.transform.GetChild(0).gameObject);
         }
     }
 }

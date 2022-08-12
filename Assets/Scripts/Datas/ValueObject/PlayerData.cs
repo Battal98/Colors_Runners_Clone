@@ -17,4 +17,4 @@ namespace Data.ValueObject
         public float PlayerJumpDistance = 100f;
         public float PlayerJumpDuration = 1f;
     }
-}
+}   

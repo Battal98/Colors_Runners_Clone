@@ -68,11 +68,19 @@ namespace Controllers
                 StackSignals.Instance.onTransportInStack?.Invoke(transform.parent.gameObject);
                 transform.parent.transform.DOMove(new Vector3(other.gameObject.transform.position.x, transform.parent.transform.position.y, other.gameObject.transform.position.z), 0.5f);
             }
-            if (other.CompareTag("JumpArea") && CompareTag("Collectable"))
+            // if (other.CompareTag("JumpArea") && CompareTag("Collectable"))
+            // {
+            //     StackSignals.Instance.onStackJumpPlatform?.Invoke();
+            // }
+
+
+            if (other.CompareTag("Obstacle") && isTaken)
             {
-                StackSignals.Instance.onStackJumpPlatform?.Invoke();
+                other.gameObject.SetActive(false);
+                StackSignals.Instance.onRemoveInStack?.Invoke(transform.parent.gameObject);
             }
         }
+        
         
         private void CollectablesMovementInDrone()
         {

@@ -32,11 +32,45 @@ namespace Managers
 
         #endregion
 
+        #region Event Subscription
+
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            LevelSignals.Instance.onLevelInitialize += OnInitializeLevel;
+            LevelSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
+            LevelSignals.Instance.onNextLevel += OnNextLevel;
+            LevelSignals.Instance.onRestartLevel += OnRestartLevel;
+            LevelSignals.Instance.onGetLevel += OnGetLevel;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            LevelSignals.Instance.onLevelInitialize -= OnInitializeLevel;
+            LevelSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
+            LevelSignals.Instance.onNextLevel -= OnNextLevel;
+            LevelSignals.Instance.onRestartLevel -= OnRestartLevel;
+            LevelSignals.Instance.onGetLevel -= OnGetLevel;
+
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+        #endregion
+
+        private int OnGetLevel() => _levelID;
+        
         private void Awake()
         {
             _levelID = GetActiveLevel();
-            _clearActiveLevel = new ClearActiveLevelCommand();
-            _levelLoader = new LevelLoaderCommand();
+            _clearActiveLevel = new ClearActiveLevelCommand(ref levelHolder);
+            _levelLoader = new LevelLoaderCommand(ref levelHolder);
             Data = GetLevelCount();
         }
 
@@ -50,39 +84,7 @@ namespace Managers
             return _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
         }
 
-        #region Event Subscription
-
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-
-        private void SubscribeEvents()
-        {
-            LevelSignals.Instance.onLevelInitialize += OnInitializeLevel;
-            LevelSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
-            LevelSignals.Instance.onLevelFailed += OnLevelFailed;
-            LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
-            LevelSignals.Instance.onNextLevel += OnNextLevel;
-            LevelSignals.Instance.onRestartLevel += OnRestartLevel;
-        }
-
-        private void UnsubscribeEvents()
-        {
-            LevelSignals.Instance.onLevelInitialize -= OnInitializeLevel;
-            LevelSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
-            LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
-            LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
-            LevelSignals.Instance.onNextLevel -= OnNextLevel;
-            LevelSignals.Instance.onRestartLevel -= OnRestartLevel;
-        }
-
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-        #endregion
-
+       
         private void Start()
         {
             OnInitializeLevel();
@@ -90,22 +92,13 @@ namespace Managers
         private void OnInitializeLevel()
         {
             int newLevelData = GetLevelCount();
-            _levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
+            _levelLoader.Execute(newLevelData);
         }
         private void OnClearActiveLevel()
         {
-            _clearActiveLevel.ClearActiveLevel(levelHolder.transform);
+            _clearActiveLevel.Execute();
         }
-
-        private void OnLevelFailed()
-        {
-            
-        }
-
-        private void OnLevelSuccessful()
-        {
-           
-        }
+        
         private void OnNextLevel()
         {
             _levelID++;
@@ -113,7 +106,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset?.Invoke();
             //SaveSignals.Instance.onSaveGameData?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
-            //SetLevelText();
+          
         }
         private void OnRestartLevel()
         {

@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using Signals;
 using TMPro;
 using UnityEngine;
 
@@ -23,9 +25,9 @@ namespace Controllers
         
         #endregion
 
-        public void SetLevelText(int value)
+        public void SetLevelText()
         {
-            levelText.text = "LEVEL " + (value + 1).ToString();
+            levelText.text = "Level " + (LevelSignals.Instance.onGetLevel() + 1);
         }
     }
 }

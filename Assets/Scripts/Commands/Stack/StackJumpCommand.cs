@@ -30,11 +30,16 @@ namespace Commands
             for (int i = 0; i <= _stacklist.Count - 1; i++)
             {
                 int index = i;
-                _stacklist[index].transform.DOMoveY(distance, duration);
-                //_stacklist[index].transform.DOMoveY(new Vector3(0,_stackData.StackJumpDistance,1), _stackData.StackJumpDuration);
-                //_stacklist[index].transform.DOScale(new Vector3(0.8f,0.8f,0.8f), _stackData.StackScaleDelay).SetDelay(_stackData.StackTaskDelay).SetEase(Ease.Flash);
-                _stacklist[index].transform.DOMoveY(0, 0.10f);
-                yield return new WaitForSeconds(_stackData.StackJumpDuration);
+                _stacklist[i].transform.DOLocalJump(
+                    new Vector3(
+                        _stacklist[i].transform.localPosition.x,
+                       _stacklist[i].transform.localRotation.y,
+                        _stacklist[i].transform.localPosition.z),
+                    distance,
+                    1, duration
+                ).SetAutoKill();
+             
+                yield return new WaitForSeconds(duration/3);
             }
         }
     }

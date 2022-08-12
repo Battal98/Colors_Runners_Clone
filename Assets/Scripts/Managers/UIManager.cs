@@ -1,3 +1,4 @@
+using System;
 using Controllers;
 using Enums;
 using Signals;
@@ -7,7 +8,6 @@ namespace Managers
 {
     public class UIManager : MonoBehaviour
     {
-
         #region Self Variables
 
         #region Public Variables
@@ -30,10 +30,6 @@ namespace Managers
 
         #endregion
 
-        private void Awake()
-        {
-            InitPanels();
-        }
 
         #region Event Subscriptions
 
@@ -47,20 +43,10 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
 
-            #region CoreGameSignals Subscription
-
             CoreGameSignals.Instance.onPlay += OnPlay;
+
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
             LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
-            CoreGameSignals.Instance.onGetLevelID += OnSetLevelText;
-           
-            #endregion
-
-            #region SaveLoadSignals Subscription
-
-            #endregion
-
-
         }
 
         private void UnsubscribeEvents()
@@ -68,23 +54,10 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
 
-            #region CoreGameSignals Unsubscription
-
-            // CoreGameSignals Came here with onplay, onlevelfailed, onlevelSuccess
-            
             CoreGameSignals.Instance.onPlay -= OnPlay;
+
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
             LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
-            CoreGameSignals.Instance.onGetLevelID -= OnSetLevelText;
-            
-
-            #endregion
-
-            #region SaveLoadSignals Unsubscription
-
-
-            #endregion
-
         }
 
         private void OnDisable()
@@ -94,6 +67,13 @@ namespace Managers
 
         #endregion
 
+
+        private void Awake()
+        {
+            InitPanels();
+        }
+
+        
 
         private void OnOpenPanel(UIPanels panelParam)
         {
@@ -114,9 +94,9 @@ namespace Managers
 
         #region Set Text Jobs
 
-        private void OnSetLevelText(int value)
+        private void OnSetLevelText()
         {
-            levelPanelController.SetLevelText(value);
+            levelPanelController.SetLevelText();
         }
 
         private void SetStackText(int value)
@@ -143,12 +123,13 @@ namespace Managers
         private void OnLevelSuccessful()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-            LevelSignals.Instance.onLevelSuccessful?.Invoke();// Trigger in Final 
+            LevelSignals.Instance.onLevelSuccessful?.Invoke(); // Trigger in Final 
         }
 
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke();
+            OnSetLevelText();
         }
 
         public void NextLevel()
@@ -163,6 +144,7 @@ namespace Managers
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
+            
             CoreGameSignals.Instance.onReset?.Invoke();
         }
 
@@ -170,6 +152,7 @@ namespace Managers
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
+            
             CoreGameSignals.Instance.onReset?.Invoke();
         }
 
