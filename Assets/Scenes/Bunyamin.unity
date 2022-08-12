@@ -1082,6 +1082,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1306594613}
     m_Modifications:
+    - target: {fileID: 907190927851016078, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
+      propertyPath: _states
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1760233938215713219, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: isTaken
       value: 1
@@ -1555,6 +1559,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1306594613}
     m_Modifications:
+    - target: {fileID: 907190927851016078, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
+      propertyPath: _states
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1760233938215713219, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: isTaken
       value: 1
@@ -2243,15 +2251,14 @@ MonoBehaviour:
     StackLerpYDelay: 0.3
     StackLerpZDelay: 0.3
     StackOffset: 0.3
-  stackDecreaseController: {fileID: 1306594614}
-  collectorMeshRenderer: {fileID: 0}
   stackList:
   - {fileID: 745086171}
   - {fileID: 579013312}
   - {fileID: 1021660352}
   - {fileID: 154715245}
   - {fileID: 2036781090}
-  _playerManager: {fileID: 0}
+  levelHolder: {fileID: 695964826}
+  stackManager: {fileID: 1306594615}
 --- !u!1 &1312044467
 GameObject:
   m_ObjectHideFlags: 0

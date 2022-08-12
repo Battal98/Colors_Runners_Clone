@@ -1,30 +1,37 @@
+using System;
 using Enums;
+using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controller
 {
     public class CollectableAnimationController : MonoBehaviour
     {
         #region Self Variables
-    
-        #region Public Variables
-
-        public CollectableAnimationStates State = CollectableAnimationStates.Idle;
-
-        #endregion
 
         #region Serialized Variables
         
         [SerializeField] private Animator animatorController;
+      
         
         #endregion
 
         #region Private Variables
 
-        #endregion
+        [SerializeField]
+        private CollectableAnimationStates _states = CollectableAnimationStates.Idle;
+
+        
 
         #endregion
-        
+        #endregion
+
+
+        private void Start()
+        {
+            Playanim(_states);
+        }
+
         public void Playanim(CollectableAnimationStates animationStates)
         {
             animatorController.SetTrigger(animationStates.ToString());

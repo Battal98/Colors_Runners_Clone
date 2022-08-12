@@ -42,7 +42,7 @@ namespace Managers
         private void Awake()
         {
             _inputData = GetInputData();
-            Debug.Log(_inputData);
+       
         }
 
         private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;

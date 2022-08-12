@@ -1,3 +1,4 @@
+using Controller;
 using UnityEngine;
 using Signals;
 using Managers;
@@ -18,8 +19,9 @@ namespace Controllers
 
         #region Serializable Variables
 
-        [SerializeField] private CollectableManager _collectableManager;
+   
         [SerializeField] private GameObject collectableMeshObj;
+        [SerializeField] private CollectableManager manager;
 
         #endregion
 
@@ -31,17 +33,11 @@ namespace Controllers
         #endregion
 
         #endregion
-
-        private void Awake()
-        {
-            GetReferences();
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Collectable") && isTaken)
             {
-                collectableAnimationController.Playanim(CollectableAnimationStates.Run);
+                manager.SetAnim(CollectableAnimationStates.Run);
                 var otherPhysic = other.gameObject.GetComponent<CollectablePhysicsController>();
                 if (!otherPhysic.isTaken)
                 {
@@ -49,13 +45,11 @@ namespace Controllers
                     StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
                 }
             }
-
             if (other.CompareTag("Gate"))
             {
                 var otherMR = other.gameObject.transform.parent.GetComponentInChildren<MeshRenderer>();
                 _collectableSkinnedMeshRenderer.material.color = otherMR.material.color;
             }
-
             if (other.CompareTag("CheckArea"))
             {
                 var type = other.gameObject.GetComponentInParent<ColorCheckAreaManager>().areaType;
@@ -69,7 +63,6 @@ namespace Controllers
                         break;
                 }
             }
-
             if (other.CompareTag("ColorCheck"))
             {
                 StackSignals.Instance.onTransportInStack?.Invoke(transform.parent.gameObject);
@@ -77,12 +70,7 @@ namespace Controllers
 
             }
         }
-
-        private void GetReferences()
-        {
-            _collectableSkinnedMeshRenderer = collectableMeshObj.GetComponentInChildren<SkinnedMeshRenderer>();
-        }
-
+        
         private void CollectablesMovementInDrone()
         {
             //ColorCheckAreaSignals.Instance.onDroneActive?.Invoke();

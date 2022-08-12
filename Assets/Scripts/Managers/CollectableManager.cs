@@ -1,4 +1,4 @@
-using Controllers;
+using Controller;
 using UnityEngine;
 using Data.UnityObject;
 using Datas.ValueObject;
@@ -19,7 +19,7 @@ namespace Managers
         
         #region Serialized Variables
 
-        
+        [SerializeField] private CollectableAnimationController collectableAnimationController;
 
         
         #endregion
@@ -30,48 +30,19 @@ namespace Managers
         
         #endregion
 
-        #region Event Subscription
-
+      
         private void Awake()
         {
             CollectableData = GetCollectableData();
         }
 
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-        private void SubscribeEvents()
-        {
-            StackSignals.Instance.onAddInStack += OnIncreaseStack;
 
+        public void SetAnim(CollectableAnimationStates states)
+        {
+            collectableAnimationController.Playanim(states);
+            
         }
         
-        private void UnsubscribeEvents()
-        { 
-            StackSignals.Instance.onAddInStack -= OnIncreaseStack;
-        }
-        
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        } 
-        
-
-        #endregion
-
-        private void OnIncreaseStack(GameObject other)
-        {
-            AddOnStack(other);
-        }
-
-        public void AddOnStack(GameObject other)
-        {
-            if (other.CompareTag("Collectable"))
-            {
-                other.CompareTag("Collected");
-            }
-        }
         private CollectableData GetCollectableData()
         {
             return Resources.Load<CD_Collectable>("Data/CD_Collectable").CollectableData;

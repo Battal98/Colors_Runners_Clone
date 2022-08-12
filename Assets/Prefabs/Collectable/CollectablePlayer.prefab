@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 8158796071279927411}
   - component: {fileID: 907190927851016078}
   m_Layer: 0
-  m_Name: PlayerMeshController
+  m_Name: CollectableMeshController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -577,7 +577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f524f5f44f8aa5439779b5da0a641dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 0
   animatorController: {fileID: 8158796071279927411}
 --- !u!1 &1760233937920843108
 GameObject:
@@ -811,7 +810,7 @@ GameObject:
   - component: {fileID: 1760233938215713219}
   - component: {fileID: 1760233938215713220}
   m_Layer: 0
-  m_Name: PlayerPhysicsController
+  m_Name: CollectablePhysicsController
   m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -858,9 +857,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTaken: 0
-  _collectableManager: {fileID: 1760233938649184601}
   collectableMeshObj: {fileID: 1760233938324641910}
-  _collectableSkinnedMeshRenderer: {fileID: 0}
+  manager: {fileID: 1760233938649184601}
+  _collectableSkinnedMeshRenderer: {fileID: 1760233937623715504}
   collectableAnimationController: {fileID: 907190927851016078}
 --- !u!54 &1760233938215713220
 Rigidbody:
@@ -1184,6 +1183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollectableData:
     CollectableMaterialList: []
+  collectableAnimationController: {fileID: 907190927851016078}
 --- !u!1 &1760233938688452301
 GameObject:
   m_ObjectHideFlags: 0

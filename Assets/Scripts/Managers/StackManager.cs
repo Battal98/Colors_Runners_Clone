@@ -6,6 +6,7 @@ using Commands;
 using Datas.ValueObject;
 using System.Collections.Generic;
 using System.Collections;
+using Enums;
 
 namespace Managers
 {
@@ -34,6 +35,7 @@ namespace Managers
         private StackScaleCommand _stackScaleCommand;
         private CollectableRemoveOnStackCommand _collectableRemoveOnStackCommand;
         private TransportInStack _transportInStack;
+        private CollectableAnimSetCommand _collectableAnimSetCommand;
         private Transform _playerManager;
         private float _stackScore;
 
@@ -105,8 +107,8 @@ namespace Managers
             _stackScaleCommand = new StackScaleCommand(ref stackList, ref StackData);
             _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager, ref levelHolder);
             _transportInStack = new TransportInStack(ref stackList,ref stackManager,ref levelHolder);
+            _collectableAnimSetCommand = new CollectableAnimSetCommand();
         }
-        
         private void FindPlayer()
         {
             if (!_playerManager)
@@ -119,14 +121,23 @@ namespace Managers
             StartCoroutine(_stackScaleCommand.Execute());
             _collectableAddOnStackCommand.Execute(obj);
         }
-
         private void OnTransportInStack(GameObject obj)
         {
             StartCoroutine(_transportInStack.Execute(obj));
         }
+        private void Initialized()
+        {
+            for (int i = 0; i < stackList.Count; i++)
+            {
+                _collectableAnimSetCommand.Execute(stackList[i],CollectableAnimationStates.Run);
+            }
+            
+        }
+
         private void OnPlay()
         {
             FindPlayer();
+            Initialized();
         }
         private void OnReset()
         {
