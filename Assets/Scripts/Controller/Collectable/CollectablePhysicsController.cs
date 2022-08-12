@@ -19,15 +19,14 @@ namespace Controllers
         #region Serializable Variables
 
         [SerializeField] private CollectableManager _collectableManager;
-        [SerializeField]
-        private GameObject collectableMeshObj;
+        [SerializeField] private GameObject collectableMeshObj;
 
         #endregion
 
         #region Private Variables
 
-        [SerializeField]
-        private SkinnedMeshRenderer _collectableSkinnedMeshRenderer;
+        [SerializeField] private SkinnedMeshRenderer _collectableSkinnedMeshRenderer;
+        [SerializeField] private CollectableAnimationController collectableAnimationController;
 
         #endregion
 
@@ -42,6 +41,7 @@ namespace Controllers
         {
             if (other.CompareTag("Collectable") && isTaken)
             {
+                collectableAnimationController.Playanim(CollectableAnimationStates.Run);
                 var otherPhysic = other.gameObject.GetComponent<CollectablePhysicsController>();
                 if (!otherPhysic.isTaken)
                 {

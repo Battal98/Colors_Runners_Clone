@@ -1,6 +1,8 @@
+using Controllers;
 using UnityEngine;
 using Data.UnityObject;
 using Datas.ValueObject;
+using Enums;
 using Signals;
 
 namespace Managers
@@ -16,7 +18,10 @@ namespace Managers
         #endregion
         
         #region Serialized Variables
-       
+
+        
+
+        
         #endregion
         
         #region Private Variables
@@ -60,7 +65,7 @@ namespace Managers
             AddOnStack(other);
         }
 
-        private void AddOnStack(GameObject other)
+        public void AddOnStack(GameObject other)
         {
             if (other.CompareTag("Collectable"))
             {
