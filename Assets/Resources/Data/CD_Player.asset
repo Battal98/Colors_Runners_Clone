@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     MovementData:
-      ForwardSpeed: 0
+      ForwardSpeed: 4
       SidewaysSpeed: 2
       PlayerJoystickSpeed: 2
       PlayerJumpDistance: 5

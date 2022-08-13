@@ -31,7 +31,8 @@ namespace Commands
                 float directY = Mathf.Lerp(_stackList[0].transform.localPosition.y, _playerTransform.position.y, _stackData.StackLerpYDelay); 
                 float directZ = Mathf.Lerp(_stackList[0].transform.localPosition.z, _playerTransform.position.z - _stackData.StackOffset, _stackData.StackLerpZDelay);
                 _stackList[0].transform.localPosition = new Vector3(directX, directY, 0);
-                _stackList[0].transform.rotation = Quaternion.Slerp(_stackList[0].transform.rotation, _playerTransform.rotation, _stackData.StackLerpXDelay);
+                // _stackList[0].transform.rotation = Quaternion.Slerp(_stackList[0].transform.rotation, _playerTransform.rotation, _stackData.StackLerpXDelay);
+                _stackList[0].transform.LookAt(_playerTransform);
 
 
                 for (int i = 1; i < _stackList.Count; i++)
@@ -41,7 +42,8 @@ namespace Commands
                     directY = Mathf.Lerp(_stackList[i].transform.localPosition.y, pos.y, _stackData.StackLerpYDelay);
                     directZ = Mathf.Lerp(_stackList[i].transform.localPosition.z, pos.z - _stackData.StackOffset, _stackData.StackLerpZDelay);
                     _stackList[i].transform.localPosition = new Vector3(directX, directY, directZ);
-                    _stackList[i].transform.rotation = Quaternion.Slerp(_stackList[i].transform.rotation, _stackList[i - 1].transform.rotation, _stackData.StackLerpXDelay);
+                    _stackList[i].transform.LookAt(_stackList[i-1].transform);
+                    // _stackList[i].transform.rotation = Quaternion.Slerp(_stackList[i].transform.rotation, _stackList[i - 1].transform.rotation, _stackData.StackLerpXDelay);
                 }
             }
         }

@@ -19,7 +19,6 @@ namespace Controllers
 
         #region Serializable Variables
 
-   
         [SerializeField] private GameObject collectableMeshObj;
         [SerializeField] private CollectableManager manager;
 
@@ -33,24 +32,26 @@ namespace Controllers
         #endregion
 
         #endregion
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Collectable") && isTaken)
             {
-               
+             
                 var otherPhysic = other.gameObject.GetComponent<CollectablePhysicsController>();
                 if (!otherPhysic.isTaken)
                 {
-                    manager.SetAnim(CollectableAnimationStates.Run);
                     otherPhysic.isTaken = true;
-                    StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
+                    StackSignals.Instance.onAddInStack?.Invoke(other.transform.parent.gameObject);
                 }
             }
+
             if (other.CompareTag("Gate"))
             {
                 var otherMR = other.gameObject.transform.parent.GetComponentInChildren<MeshRenderer>();
                 _collectableSkinnedMeshRenderer.material.color = otherMR.material.color;
             }
+
             // if (other.CompareTag("CheckArea"))
             // {
             //     var type = other.gameObject.GetComponentInParent<ColorCheckAreaManager>().areaType;
@@ -80,8 +81,8 @@ namespace Controllers
                 StackSignals.Instance.onRemoveInStack?.Invoke(transform.parent.gameObject);
             }
         }
-        
-        
+
+
         private void CollectablesMovementInDrone()
         {
             //ColorCheckAreaSignals.Instance.onDroneActive?.Invoke();
@@ -94,10 +95,11 @@ namespace Controllers
             StackSignals.Instance.onTransportInStack?.Invoke(transform.parent.gameObject);
             //animation is working but not working correctly :')
             var randomValue = Random.Range(-1f, 1f);
-            transform.parent.transform.DOMove(new Vector3(other.transform.position.x, transform.parent.transform.position.y, other.transform.position.z + randomValue), 0.50f).OnComplete(() => 
-               manager.SetAnim(CollectableAnimationStates.Crouch));
-          
-        
+            transform.parent.transform
+                .DOMove(
+                    new Vector3(other.transform.position.x, transform.parent.transform.position.y,
+                        other.transform.position.z + randomValue), 0.50f).OnComplete(() =>
+                    manager.SetAnim(CollectableAnimationStates.Crouch));
         }
     }
 }
