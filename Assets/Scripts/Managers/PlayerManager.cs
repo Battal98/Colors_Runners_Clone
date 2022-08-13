@@ -88,6 +88,7 @@ namespace Managers
         private void OnGetCameraState(GameStates states)
         {
             ChechGameStates(states);
+            playerAnimationController.gameObject.SetActive(true);
             playerMovementController.ChangeStates(states);
         }
 

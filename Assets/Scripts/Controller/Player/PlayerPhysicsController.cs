@@ -41,6 +41,7 @@ namespace Controllers
         {
             if (other.CompareTag("Finish"))
             {
+                Debug.Log("girdik");
                 CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
             }
 

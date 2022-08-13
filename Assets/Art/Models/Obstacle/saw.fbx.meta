@@ -3,7 +3,22 @@ guid: 279c4d627ee280144af408d3ba107759
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Saw
+    second: {fileID: 2100000, guid: 700e8e366d9ae4540a7bad9b4c33614c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: handle_add
+    second: {fileID: 2100000, guid: 13a18bbf1f8ac1f42be36151c597f515, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: saw_handle
+    second: {fileID: 2100000, guid: 68accb77716a58444a2a318fc1b0bf76, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

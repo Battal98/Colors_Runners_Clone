@@ -6,7 +6,8 @@ namespace Data.UnityObject
     [CreateAssetMenu(fileName = "Joystick", menuName = "Movement/JoystickMove", order = 0)]
     public class CD_MoveType_Joystick : CD_Movement
     {
-        public override void DoMovement(ref int inDroneArea,ref bool _isReadyToMove, ref Rigidbody _rigidbody, ref Vector3 _inputValue, ref PlayerMovementData _moveData, ref Vector2 _clampValue, ref CharacterController characterController, Transform transform)
+        public override void DoMovement(ref int inDroneArea,ref bool _isReadyToMove, ref Rigidbody _rigidbody,
+            ref Vector3 _inputValue, ref PlayerMovementData _moveData, ref Vector2 _clampValue, ref CharacterController characterController, Transform transform)
         {
             JoystickMove(ref _rigidbody, ref _moveData, ref _inputValue, ref characterController, transform);
         }

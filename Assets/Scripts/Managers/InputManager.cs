@@ -65,14 +65,14 @@ namespace Managers
             InputSignals.Instance.onDisableInput += OnDisableInput;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onGetGameState += OnSetGameStates;
+            CoreGameSignals.Instance.onGetGameState += OnGetGameStates;
 
         }
         private void UnSubscribeEvents()
         {
             InputSignals.Instance.onEnableInput -= OnEnableInput;
             InputSignals.Instance.onDisableInput -= OnDisableInput;
-            CoreGameSignals.Instance.onGetGameState -= OnSetGameStates;
+            CoreGameSignals.Instance.onGetGameState -= OnGetGameStates;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
@@ -192,10 +192,11 @@ namespace Managers
             isReadyForTouch = false;
         }
 
-        private void OnSetGameStates(GameStates states)
+        private void OnGetGameStates(GameStates states)
         {
             if (states==GameStates.Idle)
             {
+                Debug.Log("nerde");
                 joystick.gameObject.SetActive(true);
                 isJoystick = true;
             }

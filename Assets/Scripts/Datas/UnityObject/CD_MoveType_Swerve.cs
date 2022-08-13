@@ -46,7 +46,7 @@ namespace Data.UnityObject
             rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, movementData.ForwardSpeed * _inDroneArea);
             rigidbody.angularVelocity = Vector3.zero;
 
-            rigidbody.transform.rotation = Quaternion.Slerp(rigidbody.transform.rotation, Quaternion.identity, 1f);
+         //rigidbody.transform.rotation = Quaternion.Slerp(rigidbody.transform.rotation, Quaternion.identity, 1f);
             // rigidbody.transform.DOLocalRotate(Vector3.zero, 0.1f);
         }
 

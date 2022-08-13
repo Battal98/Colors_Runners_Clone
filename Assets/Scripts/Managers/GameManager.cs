@@ -62,7 +62,7 @@ namespace Managers
         {
             CoreGameSignals.Instance.onGetGameState?.Invoke(gameStates);
             
-            CameraSignals.Instance.onSetCameraState?.Invoke(_cameraType);
+            CameraSignals.Instance.onSetCameraState?.Invoke(CameraStatesType.Idle);
         }
     }
 }

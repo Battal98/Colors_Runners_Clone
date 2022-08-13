@@ -372,6 +372,7 @@ GameObject:
   - component: {fileID: 100832313}
   - component: {fileID: 100832312}
   - component: {fileID: 100832311}
+  - component: {fileID: 100832314}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -428,13 +429,21 @@ MonoBehaviour:
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
-  m_AnimatedTarget: {fileID: 0}
+  m_AnimatedTarget: {fileID: 100832314}
   m_LayerIndex: 0
   m_ShowDebugText: 0
   m_ChildCameras:
   - {fileID: 1933055913}
   - {fileID: 2035841411}
-  m_Instructions: []
+  m_Instructions:
+  - m_FullHash: -1209923626
+    m_VirtualCamera: {fileID: 1933055913}
+    m_ActivateAfter: 0
+    m_MinDuration: 0
+  - m_FullHash: 1681374113
+    m_VirtualCamera: {fileID: 2035841411}
+    m_ActivateAfter: 0
+    m_MinDuration: 0
   m_DefaultBlend:
     m_Style: 1
     m_Time: 0.5
@@ -444,8 +453,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_ParentHash: []
+  m_CustomBlends: {fileID: 11400000, guid: 74a3a9be1cff9ce49bec44a7a4a2e651, type: 2}
+  m_ParentHash:
+  - m_Hash: -1209923626
+    m_ParentHash: 756556552
+  - m_Hash: 1681374113
+    m_ParentHash: 756556552
 --- !u!114 &100832313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,6 +473,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RunnerCamera: {fileID: 1933055913}
   IdleGameCamera: {fileID: 2035841411}
+--- !u!95 &100832314
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100832309}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f0e087d695db21c44bbf5f21d8b335a0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &134551565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,6 +1108,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &506316566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 506316568}
+  - component: {fileID: 506316567}
+  m_Layer: 0
+  m_Name: Finish
+  m_TagString: Finish
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &506316567
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506316566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.3282804, y: 1.7226903, z: 1}
+  m_Center: {x: 0.17013311, y: -0.36134517, z: 0}
+--- !u!4 &506316568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506316566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 70}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &579013310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1532,6 +1608,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 729918692}
+  - component: {fileID: 729918693}
   m_Layer: 0
   m_Name: 'GameManager '
   m_TagString: Untagged
@@ -1553,6 +1630,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &729918693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729918691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948c698b2bfddd74d98fa950f21a26fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameStates: 0
 --- !u!1001 &745086169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2190,7 +2280,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1306594613}
   - component: {fileID: 1306594615}
-  - component: {fileID: 1306594614}
   m_Layer: 0
   m_Name: StackManager
   m_TagString: Untagged
@@ -2217,19 +2306,6 @@ Transform:
   m_Father: {fileID: 281423976}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1306594614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306594612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95f13e0b9e33432699549050a85a46c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectables: {fileID: 0}
 --- !u!114 &1306594615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2243,7 +2319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StackData:
-    CollectableObject: {fileID: 0}
+    StackLimit: 10
     StackTaskDelay: 0.05
     StackMaxScaleValue: 1.5
     StackScaleDelay: 0.3
@@ -3049,7 +3125,7 @@ GameObject:
   - component: {fileID: 1933055912}
   - component: {fileID: 1933055913}
   m_Layer: 0
-  m_Name: RunnerCam
+  m_Name: RuunerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3207,7 +3283,7 @@ GameObject:
   - component: {fileID: 2035841410}
   - component: {fileID: 2035841411}
   m_Layer: 0
-  m_Name: IdleCam
+  m_Name: IdleCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

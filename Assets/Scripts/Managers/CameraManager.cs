@@ -95,16 +95,9 @@ namespace Managers
 
         public void OnSetCameraState(CameraStatesType cameraState)
         {
-            if (cameraState == CameraStatesType.Runner)
-            {
-                _cameraStatesType = CameraStatesType.Idle;
-                _animator.Play("RunnerCamera");
-            }
-            else if (cameraState == CameraStatesType.Idle)
-            {
-                _cameraStatesType = CameraStatesType.Runner;
-                _animator.Play("IdleCamera");
-            }
+            
+                _animator.SetTrigger(cameraState.ToString());
+         
         }
     }
 }
