@@ -87,11 +87,12 @@ namespace Controllers
                 Stop();
         }
 
-        // public void PlayerJump(float distance, float duration)
-        // {
-        //     
-        // }
-       
+        public void PlayerJump(float distance, float duration)
+        {
+            Debug.Log("Jump");
+            this.transform.DOBlendableLocalMoveBy(Vector3.up * distance, duration);
+        }
+
         public void Stop()
         {
             rigidbody.velocity = Vector3.zero;

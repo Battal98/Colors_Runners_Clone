@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Extentions;
+using System.Collections.Generic;
+using Enums;
 
 namespace Signals
 {
@@ -12,5 +14,7 @@ namespace Signals
         public UnityAction<Vector2> onStackMove = delegate { };
         public UnityAction onInitStackIncrease=delegate {  };
         public UnityAction onStackJumpPlatform = delegate {  };
+        public UnityAction<List<GameObject>> onSendStackList = delegate { };
+        public UnityAction<GameObject,CollectableAnimationStates> onSetCollectableAnimState = delegate { };
     }
 }
