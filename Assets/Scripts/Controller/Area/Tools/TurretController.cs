@@ -4,7 +4,7 @@ using RootMotion;
 using RootMotion.FinalIK;
 using DG.Tweening;
 
-namespace RootMotion.Demos {
+namespace Controllers {
 
 	/// <summary>
 	/// Demo for aiming a Turret. All it does is call Transform.LookAt on each part and apply rotation limits one by one, starting from the parent.
@@ -37,13 +37,10 @@ namespace RootMotion.Demos {
         public Transform targetRandom; // The aiming target
 		public Part[] parts; // All the turret parts
 
-        private void Awake()
+        private void Start()
         {
 			targetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
 			targetRandom = GameObject.FindGameObjectWithTag("Target").transform;
-		}
-        private void Start()
-        {
 			StartCoroutine(SetTarget());
         }
         private IEnumerator SetTarget()

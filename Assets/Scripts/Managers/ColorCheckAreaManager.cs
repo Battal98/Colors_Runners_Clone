@@ -2,6 +2,7 @@ using UnityEngine;
 using Signals;
 using Keys;
 using Enums;
+using Controllers;
 
 namespace Managers
 {
@@ -18,6 +19,14 @@ namespace Managers
 
         #region Seriazible Variables
 
+        [SerializeField]
+        private GameObject turret;
+        [SerializeField]
+        private GameObject drone;
+        /*[SerializeField]
+        private DroneController droneController;
+        [SerializeField]
+        private TurretController turretController;*/
 
         #endregion
 
@@ -56,13 +65,30 @@ namespace Managers
 
         #endregion
 
+        private void Awake()
+        {
+            switch (areaType)
+            {
+                case ColorCheckAreaType.Drone:
+                    OnDroneActive();
+                    break;
+                case ColorCheckAreaType.Turret:
+                    OnTurretActive();
+                    break;
+            }
+        }
+
         private void OnTurretActive()
         {
-
+            if(!turret.activeInHierarchy)
+                turret.SetActive(true);
+            drone.SetActive(false);
         }
         private void OnDroneActive()
         {
-
+            if (!drone.activeInHierarchy)
+                drone.SetActive(true);
+            turret.SetActive(false);
         }
         private void OnInteractionColorCheck(GameObject _obj)
         {
