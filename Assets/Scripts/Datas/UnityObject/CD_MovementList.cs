@@ -6,7 +6,7 @@ namespace Data.UnityObject
     [CreateAssetMenu(fileName = "MovementList", menuName = "Movement/MovementList", order = 0)]
     public class CD_MovementList : ScriptableObject
     {
-        public List<Movement> MovementTypeList;
+        public List<CD_Movement> MovementTypeList;
 
     }
     

@@ -122,12 +122,7 @@ namespace Managers
         {
             playerMovementController.IsReadyToPlay(false);
         }
-
-        public void SetStackPosition()
-        {
-            Vector2 pos = new Vector2(transform.position.x,transform.position.z);
-            // StackSignals.Instance.onStackFollowPlayer?.Invoke(pos);
-        }
+        
         
         private void OnSetScoreText(int Values)
         {
@@ -156,7 +151,8 @@ namespace Managers
         public void StopPlayer()
         {
             playerMovementController.Stop();
-            Data.MovementData.ForwardSpeed = 0; // Fix that!
+            playerMovementController.InDroneArea(0);
+        
         }
     }
 }

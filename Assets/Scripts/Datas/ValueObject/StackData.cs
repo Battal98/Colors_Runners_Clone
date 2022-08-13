@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Datas.ValueObject
@@ -14,8 +15,8 @@ namespace Datas.ValueObject
         [Header("Animation Value"),Space(10)]
         public float StackTaskDelay = 0.05f;
         public float StackMaxScaleValue = 1.5f; 
-        [Header("Lerp Value"),Space(10)]
         
+        [Header("Lerp Value"),Space(10)]
         public float StackScaleDelay = 0.30f;
         public float StackLerpXDelay = 0.30f;
         public float StackLerpYDelay = 0.30f;

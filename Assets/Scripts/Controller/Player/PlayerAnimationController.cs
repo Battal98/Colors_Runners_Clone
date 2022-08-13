@@ -8,9 +8,7 @@ namespace Controllers
         #region Self Variables
 
         #region Public Variables
-        
-        public PlayerAnimationStates State = PlayerAnimationStates.Idle;
-        
+
         #endregion
         
         #region Serialized Variables

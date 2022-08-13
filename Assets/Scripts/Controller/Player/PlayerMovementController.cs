@@ -28,6 +28,7 @@ namespace Controllers
 
         [Header("Data")] private PlayerMovementData _movementData;
         private bool _isReadyToMove, _isReadyToPlay;
+        private int _inDroneArea=1;
         private Vector3 _inputValue;
         private Vector2 _clampValues;
         private GameStates _states;
@@ -75,12 +76,18 @@ namespace Controllers
             _isReadyToPlay = state;
         }
 
+        public void InDroneArea(int state)
+        {
+
+            _inDroneArea = state;
+        }
+
         private void FixedUpdate()
         {
             if (_isReadyToPlay)
             {
                
-                    _movementList.MovementTypeList[(int)_states].DoMovement(ref _isReadyToMove,ref rigidbody, ref _inputValue,
+                    _movementList.MovementTypeList[(int)_states].DoMovement(ref _inDroneArea,ref _isReadyToMove,ref rigidbody, ref _inputValue,
                         ref _movementData, ref _clampValues, ref  characterController, this.gameObject.transform);
             }
             else

@@ -111,7 +111,7 @@ namespace Managers
             _stackLerpMovementCommand = new StackLerpMovementCommand(ref stackList, ref StackData);
             _stackScaleCommand = new StackScaleCommand(ref stackList, ref StackData);
             _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager, ref levelHolder,ref StackData);
-            _transportInStack = new TransportInStack(ref stackList,ref stackManager,ref levelHolder);
+            _transportInStack = new TransportInStack(ref stackList,ref stackManager,ref levelHolder,ref StackData);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
             _stackJumpCommand = new StackJumpCommand(ref stackList, ref StackData);
         }
@@ -125,6 +125,7 @@ namespace Managers
         private void OnAddInStack(GameObject obj)
         {
             StartCoroutine(_stackScaleCommand.Execute());
+            _collectableAnimSetCommand.Execute(obj,CollectableAnimationStates.Run);
             _collectableAddOnStackCommand.Execute(obj);
         }
 

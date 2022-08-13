@@ -37,10 +37,11 @@ namespace Controllers
         {
             if (other.CompareTag("Collectable") && isTaken)
             {
-                manager.SetAnim(CollectableAnimationStates.Run);
+               
                 var otherPhysic = other.gameObject.GetComponent<CollectablePhysicsController>();
                 if (!otherPhysic.isTaken)
                 {
+                    manager.SetAnim(CollectableAnimationStates.Run);
                     otherPhysic.isTaken = true;
                     StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
                 }
@@ -50,19 +51,19 @@ namespace Controllers
                 var otherMR = other.gameObject.transform.parent.GetComponentInChildren<MeshRenderer>();
                 _collectableSkinnedMeshRenderer.material.color = otherMR.material.color;
             }
-            if (other.CompareTag("CheckArea"))
-            {
-                var type = other.gameObject.GetComponentInParent<ColorCheckAreaManager>().areaType;
-                switch (type)
-                {
-                    case ColorCheckAreaType.Drone:
-                        CollectablesMovementInDrone();
-                        break;
-                    case ColorCheckAreaType.Turret:
-                        //change animation state 
-                        break;
-                }
-            }
+            // if (other.CompareTag("CheckArea"))
+            // {
+            //     var type = other.gameObject.GetComponentInParent<ColorCheckAreaManager>().areaType;
+            //     switch (type)
+            //     {
+            //         case ColorCheckAreaType.Drone:
+            //             CollectablesMovementInDrone();
+            //             break;
+            //         case ColorCheckAreaType.Turret:
+            //             //change animation state 
+            //             break;
+            //     }
+            // }
             if (other.CompareTag("ColorCheck"))
             {
                 CollectablesMovementInColorCheckArea(other.gameObject);
@@ -90,11 +91,13 @@ namespace Controllers
 
         private void CollectablesMovementInColorCheckArea(GameObject other)
         {
-            //animation is working but not working correctly :')
             StackSignals.Instance.onTransportInStack?.Invoke(transform.parent.gameObject);
+            //animation is working but not working correctly :')
             var randomValue = Random.Range(-1f, 1f);
-            transform.parent.transform.DOMove(new Vector3(other.transform.position.x, transform.parent.transform.position.y, other.transform.position.z + randomValue), 0.5f).OnComplete(() =>
-                            StackSignals.Instance.onSetCollectableAnimState?.Invoke(transform.parent.gameObject, CollectableAnimationStates.Crouch));
+            transform.parent.transform.DOMove(new Vector3(other.transform.position.x, transform.parent.transform.position.y, other.transform.position.z + randomValue), 0.50f).OnComplete(() => 
+               manager.SetAnim(CollectableAnimationStates.Crouch));
+          
+        
         }
     }
 }
