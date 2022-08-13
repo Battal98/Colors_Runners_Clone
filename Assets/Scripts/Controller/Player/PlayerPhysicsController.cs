@@ -2,6 +2,7 @@ using Enums;
 using Signals;
 using UnityEngine;
 using Managers;
+using DG.Tweening;
 
 namespace Controllers
 {
@@ -67,6 +68,12 @@ namespace Controllers
                         //change animation state 
                         break;
                 }
+            }
+
+            if (other.CompareTag("JumpArea"))
+            {
+                Debug.Log("Jump");
+                _playerManager.transform.DOLocalMoveY(2f,0.5f);
             }
 
         }
