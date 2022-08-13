@@ -2476,7 +2476,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1296279360}
   - component: {fileID: 1296279362}
-  - component: {fileID: 1296279361}
   m_Layer: 0
   m_Name: StackManager
   m_TagString: Untagged
@@ -2503,19 +2502,6 @@ Transform:
   m_Father: {fileID: 278229523}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1296279361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1296279359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95f13e0b9e33432699549050a85a46c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectables: {fileID: 0}
 --- !u!114 &1296279362
 MonoBehaviour:
   m_ObjectHideFlags: 0

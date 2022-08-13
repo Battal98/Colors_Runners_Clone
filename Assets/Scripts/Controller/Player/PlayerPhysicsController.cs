@@ -5,6 +5,7 @@ using Managers;
 using DG.Tweening;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using System.Collections;
 
 namespace Controllers
 {
@@ -23,6 +24,7 @@ namespace Controllers
 
         private SkinnedMeshRenderer _playerSkinnedMeshRenderer;
         private PlayerManager _playerManager;
+        private int value;
         [ShowInInspector]
         private List<GameObject> _stackList = new List<GameObject>();
 
@@ -64,8 +66,9 @@ namespace Controllers
                 switch (type)
                 {
                     case ColorCheckAreaType.Drone:
-                        _playerManager.StopPlayer();
+                        _playerManager.PlayerStopForwards();
                         StackSignals.Instance.onSendStackList?.Invoke(_stackList);
+                        StartCoroutine(MoveCollectables());
                         //stop player but not sideways
                         break;
                     case ColorCheckAreaType.Turret:
@@ -73,6 +76,11 @@ namespace Controllers
                         //change animation state 
                         break;
                 }
+            }
+
+            if (other.CompareTag("ColorCheck"))
+            {
+
             }
 
             if (other.CompareTag("JumpArea"))
@@ -89,6 +97,43 @@ namespace Controllers
         {
             _playerSkinnedMeshRenderer = playerMeshObj.GetComponentInChildren<SkinnedMeshRenderer>();
             _playerManager = this.gameObject.GetComponentInParent<PlayerManager>();
+        }
+
+        private IEnumerator MoveCollectables()
+        {
+            for (int i = 0; i < _stackList.Count; i++)
+            {
+                StackSignals.Instance.onTransportInStack?.Invoke(_stackList[i].gameObject);
+                var collectableManager = _stackList[i].GetComponentInChildren<CollectableManager>();
+                var randomValue = Random.Range(-0.2f, 2.5f);
+
+                _stackList[i].transform.DOLocalMove(new Vector3(CalculateXPosCollectables(), 
+                    _stackList[i].transform.position.y,
+                    _playerManager.transform.position.z + randomValue), 0.35f).OnComplete(() =>
+                    {
+
+                        collectableManager.SetAnim(CollectableAnimationStates.Crouch);
+
+                    });
+                yield return new WaitForSeconds(0.35f);
+            }
+        }
+
+        private int CalculateXPosCollectables()
+        {
+            if (_playerManager.transform.position.x < -0.5f)
+            {
+                value = -1;
+            }
+            else if (_playerManager.transform.position.x > 0.5f)
+            {
+                value = 1;
+            }
+            else
+            {
+                value = 0;
+            }
+            return value;
         }
     }
 }

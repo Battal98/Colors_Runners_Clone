@@ -67,7 +67,7 @@ namespace Controllers
             // }
             if (other.CompareTag("ColorCheck"))
             {
-                CollectablesMovementInColorCheckArea(other.gameObject);
+                //CollectablesMovementInColorCheckArea(other.gameObject);
             }
             // if (other.CompareTag("JumpArea") && CompareTag("Collectable"))
             // {

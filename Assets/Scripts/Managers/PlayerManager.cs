@@ -148,7 +148,7 @@ namespace Managers
             playerAnimationController.OnReset();
         }
 
-        public void StopPlayer()
+        public void PlayerStopForwards()
         {
             playerMovementController.Stop();
             playerMovementController.InDroneArea(0);
