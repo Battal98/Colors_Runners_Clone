@@ -78,11 +78,6 @@ namespace Controllers
                 }
             }
 
-            if (other.CompareTag("ColorCheck"))
-            {
-
-            }
-
             if (other.CompareTag("JumpArea"))
             {
                 //StackSignals.Instance.onStackJumpPlatform?.Invoke();
@@ -99,6 +94,8 @@ namespace Controllers
             _playerManager = this.gameObject.GetComponentInParent<PlayerManager>();
         }
 
+        #region Collectable Movement Color Check Area
+
         private IEnumerator MoveCollectables()
         {
             for (int i = 0; i < _stackList.Count; i++)
@@ -107,7 +104,7 @@ namespace Controllers
                 var collectableManager = _stackList[i].GetComponentInChildren<CollectableManager>();
                 var randomValue = Random.Range(-0.2f, 2.5f);
 
-                _stackList[i].transform.DOLocalMove(new Vector3(CalculateXPosCollectables(), 
+                _stackList[i].transform.DOLocalMove(new Vector3(CalculateXPosCollectables(),
                     _stackList[i].transform.position.y,
                     _playerManager.transform.position.z + randomValue), 0.35f).OnComplete(() =>
                     {
@@ -134,6 +131,7 @@ namespace Controllers
                 value = 0;
             }
             return value;
-        }
+        } 
+        #endregion
     }
 }

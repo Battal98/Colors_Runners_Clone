@@ -65,15 +65,6 @@ namespace Controllers
             //             break;
             //     }
             // }
-            if (other.CompareTag("ColorCheck"))
-            {
-                //CollectablesMovementInColorCheckArea(other.gameObject);
-            }
-            // if (other.CompareTag("JumpArea") && CompareTag("Collectable"))
-            // {
-            //     StackSignals.Instance.onStackJumpPlatform?.Invoke();
-            // }
-
 
             if (other.CompareTag("Obstacle") && isTaken)
             {
