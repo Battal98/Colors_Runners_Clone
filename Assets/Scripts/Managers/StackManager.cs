@@ -61,6 +61,7 @@ namespace Managers
             StackSignals.Instance.onSetStackList += OnSetStacklistToPlayer;
             StackSignals.Instance.onGetStackList += OnGetStackList;
             StackSignals.Instance.onSetCollectableAnimState += OnCollectableAnimState;
+            StackSignals.Instance.onChangeCollectableColor += OnChangeCollectableColor;
             // StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
@@ -75,6 +76,7 @@ namespace Managers
             StackSignals.Instance.onSetStackList -= OnSetStacklistToPlayer;
             StackSignals.Instance.onGetStackList -= OnGetStackList;
             StackSignals.Instance.onSetCollectableAnimState -= OnCollectableAnimState;
+            StackSignals.Instance.onChangeCollectableColor -= OnChangeCollectableColor;
             // StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
@@ -136,6 +138,14 @@ namespace Managers
             _collectableRemoveOnStackCommand.Execute(obj);
 
         }
+        private void OnChangeCollectableColor(ColorType colorType)
+        {
+            for (int i = 0; i < stackList.Count; i++)
+            {
+                stackList[i].GetComponent<CollectableManager>().CollectableColorChange(colorType);
+            }
+        }
+
 
         // private void OnStackJumpPlatform()
         // {

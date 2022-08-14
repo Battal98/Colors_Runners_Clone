@@ -20,7 +20,7 @@ namespace Controllers
         #region Serializable Variables
 
         [SerializeField] private GameObject collectableMeshObj;
-        [SerializeField] private CollectableManager manager;
+        [SerializeField] private CollectableManager collectablemanager;
 
         #endregion
 
@@ -43,6 +43,10 @@ namespace Controllers
                 {
                     otherPhysic.isTaken = true;
                     StackSignals.Instance.onAddInStack?.Invoke(other.transform.parent.gameObject);
+                }
+                else
+                {
+                    StackSignals.Instance.onRemoveInStack.Invoke(transform.parent.gameObject);
                 }
             }
 

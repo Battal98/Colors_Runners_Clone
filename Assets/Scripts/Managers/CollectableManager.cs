@@ -1,4 +1,5 @@
 using Controller;
+using Controller.Collectable;
 using UnityEngine;
 using Data.UnityObject;
 using Datas.ValueObject;
@@ -15,12 +16,15 @@ namespace Managers
         
         public CollectableData CollectableData;
         
+        
         #endregion
         
         #region Serialized Variables
 
         [SerializeField] private CollectableAnimationController collectableAnimationController;
-
+        [SerializeField] private CollectableMeshController collectableMeshController;
+        [SerializeField] ColorType collectableColorType;
+        
         #endregion
         
         #region Private Variables
@@ -33,6 +37,7 @@ namespace Managers
         private void Awake()
         {
             CollectableData = GetCollectableData();
+            collectableMeshController.CollectableMaterial(collectableColorType);
         }
 
 
@@ -45,6 +50,11 @@ namespace Managers
         private CollectableData GetCollectableData()
         {
             return Resources.Load<CD_Collectable>("Data/CD_Collectable").CollectableData;
+        }
+
+        public void CollectableColorChange(ColorType colorType)
+        {
+            collectableMeshController.CollectableMaterial(colorType);
         }
 
     }
