@@ -52,6 +52,7 @@ namespace Managers
             CoreGameSignals.Instance.onGetGameState += OnGetCameraState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onPlayerChangeForwardSpeed += OnPlayerChangeForwardSpeed;
             StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
         }
 
@@ -63,6 +64,7 @@ namespace Managers
             CoreGameSignals.Instance.onGetGameState -= OnGetCameraState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onPlayerChangeForwardSpeed -= OnPlayerChangeForwardSpeed;
             StackSignals.Instance.onStackJumpPlatform -= OnStackJumpPlatform;
         }
 
@@ -149,10 +151,11 @@ namespace Managers
             playerAnimationController.OnReset();
         }
 
-        public void PlayerChangeForwardSpeed(int value)
+        public void OnPlayerChangeForwardSpeed(int value)
         {
             playerMovementController.Stop();
             playerMovementController.InDroneArea(value);
+
         
         }
 

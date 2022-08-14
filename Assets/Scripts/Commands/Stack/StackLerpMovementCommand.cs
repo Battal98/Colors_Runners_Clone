@@ -30,7 +30,7 @@ namespace Commands
                 float directX = Mathf.Lerp(_stackList[0].transform.localPosition.x, _playerTransform.position.x, _stackData.StackLerpXDelay);
                 float directY = Mathf.Lerp(_stackList[0].transform.localPosition.y, _playerTransform.position.y, _stackData.StackLerpYDelay); 
                 float directZ = Mathf.Lerp(_stackList[0].transform.localPosition.z, _playerTransform.position.z - _stackData.StackOffset, _stackData.StackLerpZDelay);
-                _stackList[0].transform.localPosition = new Vector3(directX, directY, 0);
+                _stackList[0].transform.localPosition = new Vector3(directX, directY, directZ);
                 // _stackList[0].transform.rotation = Quaternion.Slerp(_stackList[0].transform.rotation, _playerTransform.rotation, _stackData.StackLerpXDelay);
                 _stackList[0].transform.LookAt(_playerTransform);
 

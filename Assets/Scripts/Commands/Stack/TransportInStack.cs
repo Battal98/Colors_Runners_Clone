@@ -13,25 +13,22 @@ namespace Commands
 
         private StackManager _manager;
         private List<GameObject> _stackList;
-        private GameObject _levelHolder;
         private StackData _stackData;
         #endregion
         #endregion
 
-        public TransportInStack(ref List<GameObject> stackList, ref StackManager manager, ref GameObject levelholder, ref StackData stackdata)
+        public TransportInStack(ref List<GameObject> stackList, ref StackManager manager, ref StackData stackdata)
         {
             _stackList = stackList;
             _manager = manager;
-            _levelHolder = levelholder;
             _stackData = stackdata;
         }
 
 
-        public IEnumerator Execute(GameObject _obj, Transform target)
+        public void Execute(GameObject _obj, Transform target)
         {
-            yield return new WaitForSeconds(0.15f);
             _stackList.Remove(_obj);
-            _stackList.TrimExcess();
+            //_stackList.TrimExcess();
             _obj.transform.parent = target;
             if (_stackList.Count >= _stackData.StackLimit)
             {

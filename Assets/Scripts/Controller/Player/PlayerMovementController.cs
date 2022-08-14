@@ -5,6 +5,7 @@ using Keys;
 using Managers;
 using UnityEngine;
 using Enums;
+using Signals;
 
 namespace Controllers
 {
@@ -81,6 +82,13 @@ namespace Controllers
 
             _inDroneArea = state;
         }
+
+       /* public void PlayerAfterDroneMovement()
+        {
+            CameraSignals.Instance.onSetCameraTarget?.Invoke(this.transform);
+            this.transform.DOMoveZ(this.transform.position.z + 2.9f, .5f);
+        }*/
+
 
         private void FixedUpdate()
         {

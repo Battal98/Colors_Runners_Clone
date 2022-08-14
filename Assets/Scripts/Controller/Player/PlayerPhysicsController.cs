@@ -70,9 +70,8 @@ namespace Controllers
                 switch (type)
                 {
                     case ColorCheckAreaType.Drone:
-                        StackSignals.Instance.onSetStackList?.Invoke(_stackList);
-                        _playerManager.PlayerChangeForwardSpeed(0);
-                        StartCoroutine(MoveCollectables(other.gameObject));
+                       // StackSignals.Instance.onSetStackList?.Invoke(_stackList);
+                        //StartCoroutine(MoveCollectables(other.gameObject));
                         //stop player but not sideways
                         break;
                     case ColorCheckAreaType.Turret:
@@ -98,100 +97,5 @@ namespace Controllers
             _playerSkinnedMeshRenderer = playerMeshObj.GetComponentInChildren<SkinnedMeshRenderer>();
             _playerManager = this.gameObject.GetComponentInParent<PlayerManager>();
         }
-
-        #region Collectable Movement Color Check Area
-        private IEnumerator MoveCollectables(GameObject other)
-        {
-            var colorCheckAreaManager =  other.transform.GetComponentInParent<ColorCheckAreaManager>(); 
-            for (int i = 0; i < _stackList.Count; i++)
-            {
-                if (!_target)
-                {
-                    break;
-                }
-                StackSignals.Instance.onTransportInStack?.Invoke(_stackList[i].gameObject, _target);
-                var collectableManager = _stackList[i].GetComponentInChildren<CollectableManager>();
-                var randomValue = Random.Range(0.2f, 2.8f);
-                _count++;
-                _stackList[i].transform.DOMove(new Vector3(CalculateXPosCollectables(),
-                    _stackList[i].transform.position.y,
-                    _playerManager.transform.position.z + randomValue), 1f).OnComplete(() =>
-                    {
-
-                        collectableManager.SetAnim(CollectableAnimationStates.Crouch);
-
-                    });
-                _stackList[i].transform.DORotate(Vector3.zero, 0.1f);
-
-                StartCoroutine(CheckCount(colorCheckAreaManager));
-                yield return new WaitForSeconds(0.15f);
-            }
-        }
-
-        private int CalculateXPosCollectables()
-        {
-            if (_playerManager.transform.position.x < -0.5f)
-            {
-                _value = -1;
-            }
-            else if (_playerManager.transform.position.x > 0.5f)
-            {
-                _value = 1;
-            }
-            else
-            {
-                _value = 0;
-            }
-            return _value;
-        } 
-
-        private IEnumerator CheckCount(ColorCheckAreaManager otherColorCheckAreaManager) 
-        {
-            if (_count >= _stackList.Count)
-            {
-                #region Collectable Material Outline Jobs
-
-                OutlineJobs(0);
-
-                #endregion
-
-                #region Drone Movement and Color Check Jobs
-
-                CameraSignals.Instance.onSetCameraTarget?.Invoke(null);
-                yield return new WaitForSeconds(.5f); // wait for before drone movement 
-                otherColorCheckAreaManager.PlayDroneAnim();
-                yield return new WaitForSeconds(7.5f / 2f);// kill wrong collectables
-                Debug.Log("girdi");
-                otherColorCheckAreaManager.CheckColor();
-                yield return new WaitForSeconds(7.5f / 2f);// wait for drone movement
-                AfterDroneMovementJobs(); 
-                #endregion
-            }
-        }
-
-        private void CheckColor()
-        {
-
-        }
-
-        private void OutlineJobs(float endValue)
-        {
-            for (int i = 0; i < _stackList.Count; i++)
-            {
-                var materialColor = _stackList[i].GetComponentInChildren<SkinnedMeshRenderer>().material;
-                materialColor.DOFloat(endValue, "_OutlineSize", 0.5f);
-            }
-
-        }
-
-        private void AfterDroneMovementJobs()
-        {
-            StackSignals.Instance.onGetStackList?.Invoke(_stackList);
-            CameraSignals.Instance.onSetCameraTarget?.Invoke(_playerManager.transform);
-            _playerManager.transform.DOMoveZ(_playerManager.transform.position.z + 2.9f, .5f);
-            _playerManager.PlayerChangeForwardSpeed(1);
-            OutlineJobs(15);
-        }
-        #endregion
     }
 }
