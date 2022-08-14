@@ -9,5 +9,6 @@ namespace Signals
         public UnityAction onTurretActive = delegate { };
         public UnityAction onDroneActive = delegate { };
         public UnityAction<GameObject> onInteractionColorCheck = delegate { };
+        public UnityAction onCheckStackCount = delegate { };
     } 
 }

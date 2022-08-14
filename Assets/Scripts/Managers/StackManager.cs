@@ -62,6 +62,7 @@ namespace Managers
             StackSignals.Instance.onGetStackList += OnGetStackList;
             StackSignals.Instance.onSetCollectableAnimState += OnCollectableAnimState;
             StackSignals.Instance.onChangeCollectableColor += OnChangeCollectableColor;
+            StackSignals.Instance.onSendStackCount += OnSendStackListCount;
             // StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
@@ -77,6 +78,8 @@ namespace Managers
             StackSignals.Instance.onGetStackList -= OnGetStackList;
             StackSignals.Instance.onSetCollectableAnimState -= OnCollectableAnimState;
             StackSignals.Instance.onChangeCollectableColor -= OnChangeCollectableColor;
+            StackSignals.Instance.onSendStackCount -= OnSendStackListCount;
+
             // StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
@@ -94,6 +97,7 @@ namespace Managers
         {
             return Resources.Load<CD_Stack>("Data/CD_Stack").Data;
         }
+        
         
         private void Awake()
         {
@@ -124,6 +128,10 @@ namespace Managers
             {
                 _playerManager = FindObjectOfType<PlayerManager>().transform;
             }
+        }
+        private int OnSendStackListCount()
+        {
+            return stackList.Count;
         }
         private void OnAddInStack(GameObject obj)
         {

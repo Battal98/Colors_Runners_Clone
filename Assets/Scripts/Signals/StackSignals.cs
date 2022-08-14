@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using Extentions;
 using System.Collections.Generic;
 using Enums;
+using System;
 
 namespace Signals
 {
@@ -18,5 +19,6 @@ namespace Signals
         public UnityAction<List<GameObject>> onGetStackList = delegate { };
         public UnityAction<GameObject,CollectableAnimationStates> onSetCollectableAnimState = delegate { };
         public UnityAction<Material> onChangeCollectableColor = delegate { };
+        public Func<int> onSendStackCount = delegate{ return 0; };
     }
 }
