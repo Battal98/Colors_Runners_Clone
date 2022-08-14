@@ -11,6 +11,7 @@ namespace Commands
         #region Self Variables
 
         #region Private Variables
+        
         private List<GameObject> _stackList;
         private GameObject _levelHolder;
         private StackManager _manager;

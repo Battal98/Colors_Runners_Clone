@@ -344,10 +344,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d465ebc2c7fb24a882948156799bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isJoystick: 0
+  _joystick: {fileID: 1307045719}
+  inputManager: {fileID: 405193369}
   isReadyForTouch: 0
   isFirstTimeTouchTaken: 0
-  isJoystick: 0
-  joystick: {fileID: 1307045719}
 --- !u!1 &419920557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1965,7 +1966,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f13e0b9e33432699549050a85a46c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectables: {fileID: 0}
 --- !u!114 &1285640823
 MonoBehaviour:
   m_ObjectHideFlags: 0

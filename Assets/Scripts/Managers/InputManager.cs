@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Commands;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
@@ -14,26 +15,31 @@ namespace Managers
         #region SelfVariables
 
         #region Public Variables
-        
-        private bool _isTouching;//ref type
-        private float _currentVelocity;//ref type
-        private Vector3? _mousePosition;//ref type
-        private Vector3 _joystickPos;//ref type
-        private Vector3 _moveVector;//ref type
+
         
         #endregion
         
         #region Serialized Variables
 
-        [SerializeField] private bool isReadyForTouch, isFirstTimeTouchTaken;
-        [SerializeField] bool isJoystick = false;
-        [SerializeField] private Joystick joystick;
+        [SerializeField] private bool isJoystick = false;
+        [SerializeField] private Joystick _joystick;
+        [SerializeField] private InputManager inputManager;
+        [SerializeField]private bool isReadyForTouch, isFirstTimeTouchTaken;
         
         #endregion
         
         #region Private Variables
 
+        private bool _isTouching;//ref type
+        private float _currentVelocity;//ref type
+        private Vector3 _mousePosition;//ref type
+        private Vector3 _joystickPos;//ref type
+        private Vector3 _moveVector;//ref type
         private InputData _inputData;
+        private EndOfDraggingCommand _endofDraggingCommand;
+        private StartOfDraggingCommand _startOfDraggingCommand;
+        private DuringOnDraggingCommand _duringOnDraggingCommand;
+        private DuringOnDraggingJoystickCommand _duringOnDraggingJoystickCommand;
 
         #endregion
 
@@ -42,7 +48,16 @@ namespace Managers
         private void Awake()
         {
             _inputData = GetInputData();
-       
+            _endofDraggingCommand = new EndOfDraggingCommand(ref _isTouching,ref _joystickPos, ref _moveVector);
+            _startOfDraggingCommand = new StartOfDraggingCommand(ref _isTouching, ref _joystickPos,
+                ref isFirstTimeTouchTaken, ref _mousePosition, ref _joystick);
+
+            _duringOnDraggingCommand = new DuringOnDraggingCommand(ref _mousePosition, ref _inputData, ref _moveVector,
+                ref _currentVelocity);
+
+            _duringOnDraggingJoystickCommand =
+                new DuringOnDraggingJoystickCommand(ref _joystickPos, ref _moveVector, ref _joystick);
+
         }
 
         private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
@@ -86,14 +101,13 @@ namespace Managers
 
             if (Input.GetMouseButtonUp(0))
             {
-                EndOfDragging();
+                _endofDraggingCommand.Execute();
             }
 
 
             if (Input.GetMouseButtonDown(0))
             {
-
-                StartOfDragging();
+                _startOfDraggingCommand.Execute();
             }
 
             if (Input.GetMouseButton(0))
@@ -102,75 +116,22 @@ namespace Managers
                 {
                     if (isJoystick)
                     {
-                        DuringOnDraggingJoystick();
+                        _duringOnDraggingJoystickCommand.Execute();
                     }
                     else
                     {
                         if (_mousePosition != null)
                         {
-                            DuringOnDragging();
+                            _duringOnDraggingCommand.Execute();
                         }
                     }
 
                 }
             }
         }
-
-        private void EndOfDragging()
-        {
-            _isTouching = false;
-            InputSignals.Instance.onInputReleased?.Invoke();
-            _joystickPos = Vector3.zero;
-            _moveVector = _joystickPos;
-            InputSignals.Instance.onInputDragged?.Invoke(new InputParams()
-            {
-                Values = _moveVector,
-            });
-        }
-        private void StartOfDragging()
-        {
-            _isTouching = true;
-            InputSignals.Instance.onInputTaken?.Invoke();
-            if (!isFirstTimeTouchTaken)
-            {
-                isFirstTimeTouchTaken = true;
-                InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
-            }
-
-            _mousePosition = Input.mousePosition;
-            _joystickPos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
-
-        }
-        private void DuringOnDragging()
-        {
-            Vector3 mouseDeltaPos = (Vector3)Input.mousePosition - _mousePosition.Value;
-            if (mouseDeltaPos.x > _inputData.PlayerInputSpeed)
-                _moveVector.x = _inputData.PlayerInputSpeed / 10f * mouseDeltaPos.x;
-            else if (mouseDeltaPos.x < -_inputData.PlayerInputSpeed)
-                _moveVector.x = -_inputData.PlayerInputSpeed / 10f * -mouseDeltaPos.x;
-            else
-                _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f, ref _currentVelocity,
-                    _inputData.ClampSpeed);
-
-            _mousePosition = Input.mousePosition;
-
-            InputSignals.Instance.onInputDragged?.Invoke(new InputParams()
-            {
-                Values = _moveVector,
-                ClampValues = new Vector2(_inputData.ClampSides.x, _inputData.ClampSides.y)
-            });
-        }
-
-        private void DuringOnDraggingJoystick()
-        {
-            _joystickPos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
-            _moveVector = _joystickPos;
-
-            InputSignals.Instance.onInputDragged?.Invoke(new InputParams()
-            {
-                Values = _moveVector,
-            });
-        }
+       
+        
+       
         private bool IsPointerOverUIElement()
         {
             var eventData = new PointerEventData(EventSystem.current);
@@ -197,12 +158,12 @@ namespace Managers
             if (states==GameStates.Idle)
             {
                 Debug.Log("nerde");
-                joystick.gameObject.SetActive(true);
+                _joystick.gameObject.SetActive(true);
                 isJoystick = true;
             }
             else
             {
-                joystick.gameObject.SetActive(false);
+                _joystick.gameObject.SetActive(false);
                 isJoystick = false;
 
             }

@@ -15,6 +15,7 @@ namespace Commands
         private List<GameObject> _stackList;
         private GameObject _levelHolder;
         private StackData _stackData;
+        
     #endregion
         #endregion
         
