@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 4734514809122935374}
   - component: {fileID: 2394050512329724909}
   - component: {fileID: 1567906077981825803}
+  - component: {fileID: 2564792512153889214}
   m_Layer: 0
   m_Name: saw
   m_TagString: Obstacle
@@ -337,3 +338,16 @@ MonoBehaviour:
   optionalRotationMode: 0
   optionalScrambleMode: 0
   optionalString: 
+--- !u!65 &2564792512153889214
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7680319837375267457}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.9547586, y: 0.15279905, z: 0.7664123}
+  m_Center: {x: 0.048935175, y: -0.00004269929, z: -0.08379901}

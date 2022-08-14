@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Commands;
 using Data.UnityObject;
@@ -16,6 +17,7 @@ namespace Managers
 
         #region Public Variables
 
+        public Vector3? _mousePosition;//ref type
         
         #endregion
         
@@ -32,7 +34,6 @@ namespace Managers
 
         private bool _isTouching;//ref type
         private float _currentVelocity;//ref type
-        private Vector3 _mousePosition;//ref type
         private Vector3 _joystickPos;//ref type
         private Vector3 _moveVector;//ref type
         private InputData _inputData;
@@ -48,18 +49,24 @@ namespace Managers
         private void Awake()
         {
             _inputData = GetInputData();
-            _endofDraggingCommand = new EndOfDraggingCommand(ref _isTouching,ref _joystickPos, ref _moveVector);
-            _startOfDraggingCommand = new StartOfDraggingCommand(ref _isTouching, ref _joystickPos,
-                ref isFirstTimeTouchTaken, ref _mousePosition, ref _joystick);
-
-            _duringOnDraggingCommand = new DuringOnDraggingCommand(ref _mousePosition, ref _inputData, ref _moveVector,
-                ref _currentVelocity);
-
-            _duringOnDraggingJoystickCommand =
-                new DuringOnDraggingJoystickCommand(ref _joystickPos, ref _moveVector, ref _joystick);
-
+           
         }
 
+        private void Start()
+        {
+            GetReferences();
+        }
+        
+
+        private void GetReferences()
+        {
+            _endofDraggingCommand = new EndOfDraggingCommand( ref _joystickPos, ref _moveVector);
+            _startOfDraggingCommand = new StartOfDraggingCommand( ref _joystickPos, ref isFirstTimeTouchTaken,ref _joystick,ref inputManager);
+            _duringOnDraggingCommand =
+                new DuringOnDraggingCommand( ref _inputData, ref _moveVector, ref _currentVelocity,ref inputManager);
+            _duringOnDraggingJoystickCommand =
+                new DuringOnDraggingJoystickCommand(ref _joystickPos, ref _moveVector, ref _joystick);
+        }
         private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
 
         #region EventSubscription
@@ -101,13 +108,17 @@ namespace Managers
 
             if (Input.GetMouseButtonUp(0))
             {
+                _isTouching = false;
                 _endofDraggingCommand.Execute();
             }
 
 
             if (Input.GetMouseButtonDown(0))
             {
+                _isTouching = true;
+             
                 _startOfDraggingCommand.Execute();
+             
             }
 
             if (Input.GetMouseButton(0))
@@ -123,6 +134,7 @@ namespace Managers
                         if (_mousePosition != null)
                         {
                             _duringOnDraggingCommand.Execute();
+                            
                         }
                     }
 

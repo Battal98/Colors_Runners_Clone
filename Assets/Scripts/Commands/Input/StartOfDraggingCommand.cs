@@ -1,36 +1,43 @@
-using Managers;
+using System.Collections.Generic;
+using Data.UnityObject;
+using Data.ValueObject;
+using Enums;
 using Signals;
+using Keys;
+using Managers;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 namespace Commands
 {
-    public class StartOfDraggingCommand : MonoBehaviour
+    public class StartOfDraggingCommand
     {
         #region Self Variables
 
         #region Private Variables
-        
-        
-        private bool _isTouching;
+
+       
         private Vector3 _joystickPos;
         private bool _isFirstTimeTouchTaken;
-        private Vector3? _mousePosition;
+        private InputManager _manager;
         private Joystick _joystick;
-        #endregion
+
         #endregion
 
-        public StartOfDraggingCommand(ref bool isTouching,ref Vector3 joystickPos,ref bool isFirstTimeTouchTaken,ref Vector3 mousePosition, ref Joystick joystick)
+        #endregion
+
+        public StartOfDraggingCommand( ref Vector3 joystickPos, ref bool isFirstTimeTouchTaken,
+             ref Joystick joystick,ref InputManager manager)
         {
-            
-            _isTouching = isTouching;
+      
             _joystickPos = joystickPos;
             _isFirstTimeTouchTaken = isFirstTimeTouchTaken;
-            _mousePosition = mousePosition;
             _joystick = joystick;
+            _manager = manager;
         }
+
         public void Execute()
         {
-            _isTouching = true;
+       
             InputSignals.Instance.onInputTaken?.Invoke();
             if (!_isFirstTimeTouchTaken)
             {
@@ -38,9 +45,8 @@ namespace Commands
                 InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
             }
 
-            _mousePosition = Input.mousePosition;
+            _manager._mousePosition = Input.mousePosition;
             _joystickPos = new Vector3(_joystick.Horizontal, 0, _joystick.Vertical);
-
         }
     }
 }
