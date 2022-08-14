@@ -27,6 +27,8 @@ namespace Managers
         [SerializeField]
         private DroneController droneController;
         [SerializeField]
+        private List<ColorCheckController> colorCheckController;
+        [SerializeField]
         private List<TurretController> turretController;
 
         #endregion
@@ -99,6 +101,14 @@ namespace Managers
         public void PlayDroneAnim()
         {
             droneController.DroneMove();
+        }
+
+        public void CheckColor()
+        {
+            for (int i = 0; i < colorCheckController.Count; i++)
+            {
+                colorCheckController[i].CheckColor();
+            }
         }
 
         public void SetTargetForTurrets(Transform target, bool isPlayerDetected)

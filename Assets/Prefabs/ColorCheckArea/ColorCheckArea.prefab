@@ -51,6 +51,10 @@ MonoBehaviour:
   turret: {fileID: 1539420659791235912}
   drone: {fileID: 1539420661094696322}
   droneController: {fileID: 1539420660999005269}
+  colorCheckController:
+  - {fileID: 1903459241730631499}
+  - {fileID: 9179702524713754327}
+  - {fileID: 8300816243647669440}
   turretController:
   - {fileID: 1145736828265920463}
   - {fileID: 1145736828855780872}
@@ -64,6 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1539420660385351918}
   - component: {fileID: 1539420660385351919}
+  - component: {fileID: 9179702524713754327}
   m_Layer: 0
   m_Name: MidPartPhysic
   m_TagString: ColorCheck
@@ -98,6 +103,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &9179702524713754327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539420660385351917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287f5d118851f5148b8ebd480e19fac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colHolder: {fileID: 3478244308444667793}
 --- !u!1 &1539420660519321427
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +291,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 2, z: 3}
+  m_Size: {x: 3, y: 2, z: 2.85}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1539420660882185052
 GameObject:
@@ -366,6 +384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1539420661282575738}
   - component: {fileID: 1539420661282575739}
+  - component: {fileID: 1903459241730631499}
   m_Layer: 0
   m_Name: LeftPartPhysic
   m_TagString: ColorCheck
@@ -400,6 +419,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1903459241730631499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539420661282575737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287f5d118851f5148b8ebd480e19fac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colHolder: {fileID: 5558357717421516820}
 --- !u!1 &1539420661401513531
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +648,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1539420661522297613}
   - component: {fileID: 1539420661522297614}
+  - component: {fileID: 8300816243647669440}
   m_Layer: 0
   m_Name: RightPartPhysic
   m_TagString: ColorCheck
@@ -650,6 +683,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8300816243647669440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539420661522297612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287f5d118851f5148b8ebd480e19fac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colHolder: {fileID: 7993663874310199914}
 --- !u!1 &2545167702873719770
 GameObject:
   m_ObjectHideFlags: 0

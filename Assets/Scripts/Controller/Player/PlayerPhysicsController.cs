@@ -83,7 +83,7 @@ namespace Controllers
             }
             if (other.CompareTag("ColorCheck"))
             {
-                _target = other.transform.parent.transform.GetChild(2);
+                 _target = other.transform.parent.transform.GetChild(2);
             }
 
             if (other.CompareTag("JumpArea"))
@@ -105,6 +105,10 @@ namespace Controllers
             var colorCheckAreaManager =  other.transform.GetComponentInParent<ColorCheckAreaManager>(); 
             for (int i = 0; i < _stackList.Count; i++)
             {
+                if (!_target)
+                {
+                    break;
+                }
                 StackSignals.Instance.onTransportInStack?.Invoke(_stackList[i].gameObject, _target);
                 var collectableManager = _stackList[i].GetComponentInChildren<CollectableManager>();
                 var randomValue = Random.Range(0.2f, 2.8f);
@@ -147,22 +151,21 @@ namespace Controllers
             {
                 #region Collectable Material Outline Jobs
 
-                // close collectable material outline
-
                 OutlineJobs(0);
 
                 #endregion
+
+                #region Drone Movement and Color Check Jobs
+
                 CameraSignals.Instance.onSetCameraTarget?.Invoke(null);
                 yield return new WaitForSeconds(.5f); // wait for before drone movement 
                 otherColorCheckAreaManager.PlayDroneAnim();
-                yield return new WaitForSeconds(7.5f/2f);// kill wrong collectables
-                
+                yield return new WaitForSeconds(7.5f / 2f);// kill wrong collectables
+                Debug.Log("girdi");
+                otherColorCheckAreaManager.CheckColor();
                 yield return new WaitForSeconds(7.5f / 2f);// wait for drone movement
-                StackSignals.Instance.onGetStackList?.Invoke(_stackList);
-                CameraSignals.Instance.onSetCameraTarget?.Invoke(_playerManager.transform);
-                _playerManager.transform.DOMoveZ(_playerManager.transform.position.z + 2.9f,.5f);
-                _playerManager.PlayerChangeForwardSpeed(1);
-                OutlineJobs(15);
+                AfterDroneMovementJobs(); 
+                #endregion
             }
         }
 
@@ -179,6 +182,15 @@ namespace Controllers
                 materialColor.DOFloat(endValue, "_OutlineSize", 0.5f);
             }
 
+        }
+
+        private void AfterDroneMovementJobs()
+        {
+            StackSignals.Instance.onGetStackList?.Invoke(_stackList);
+            CameraSignals.Instance.onSetCameraTarget?.Invoke(_playerManager.transform);
+            _playerManager.transform.DOMoveZ(_playerManager.transform.position.z + 2.9f, .5f);
+            _playerManager.PlayerChangeForwardSpeed(1);
+            OutlineJobs(15);
         }
         #endregion
     }
