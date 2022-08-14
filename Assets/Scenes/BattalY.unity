@@ -508,10 +508,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d465ebc2c7fb24a882948156799bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isJoystick: 0
+  _joystick: {fileID: 549926150}
+  inputManager: {fileID: 160933480}
   isReadyForTouch: 0
   isFirstTimeTouchTaken: 0
-  isJoystick: 0
-  joystick: {fileID: 549926150}
 --- !u!1 &243802117
 GameObject:
   m_ObjectHideFlags: 0

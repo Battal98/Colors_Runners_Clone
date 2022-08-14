@@ -26,9 +26,10 @@ namespace Managers
         private CinemachineTransposer _miniGameTransposer;
         private  Animator _animator;
         private CameraStatesType _cameraStatesType = CameraStatesType.Runner;
-       
+        private Transform _playerManager;
+
         #endregion
-        
+
         #endregion
 
         private void Awake()
@@ -76,14 +77,14 @@ namespace Managers
 
         private void SetCameraTarget()
         {
-            CameraSignals.Instance.onSetCameraTarget?.Invoke();
+            _playerManager = FindObjectOfType<PlayerManager>().transform;
+            CameraSignals.Instance.onSetCameraTarget?.Invoke(_playerManager);
         }
 
-        private void OnSetCameraTarget()
+        private void OnSetCameraTarget(Transform _target)
         {
-               var playerManager = FindObjectOfType<PlayerManager>().transform;
-               RunnerCamera.Follow = playerManager;
-               IdleGameCamera.Follow = playerManager;
+            RunnerCamera.Follow = _target;
+            IdleGameCamera.Follow = _target;
         }
 
         private void OnReset()

@@ -1,5 +1,6 @@
 using Enums;
 using Extentions;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Signals
@@ -7,6 +8,6 @@ namespace Signals
     public class CameraSignals : MonoSingleton<CameraSignals>
     {
         public UnityAction <CameraStatesType> onSetCameraState = delegate { };
-        public UnityAction onSetCameraTarget = delegate { };
+        public UnityAction <Transform> onSetCameraTarget = delegate { };
     }
 }

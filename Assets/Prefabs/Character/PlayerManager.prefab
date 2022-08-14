@@ -970,6 +970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 8065292031746485745}
   playerMeshObj: {fileID: 8307426609619511629}
+  mats: {fileID: 2100000, guid: f6faf52bfe8b6064189dd4b2ce73e02c, type: 2}
 --- !u!1 &7652159215991158951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,7 +1275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c8d5b494374b74bbc4b1b40793748c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 0
   animatorController: {fileID: 3378284680044489101}
 --- !u!136 &2226570484745507436
 CapsuleCollider:
@@ -1836,6 +1836,8 @@ MonoBehaviour:
       ForwardSpeed: 5
       SidewaysSpeed: 2
       PlayerJoystickSpeed: 3
+      PlayerJumpDistance: 100
+      PlayerJumpDuration: 1
   playerAnimationController: {fileID: 6004608043649946698}
   playerMovementController: {fileID: 3346495845797470969}
   playerPhysicsController: {fileID: 8364028642772017776}

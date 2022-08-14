@@ -6,6 +6,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using System.Collections;
+using MK.Toon;
 
 namespace Controllers
 {
@@ -144,16 +145,39 @@ namespace Controllers
         {
             if (_count >= _stackList.Count)
             {
-                yield return new WaitForSeconds(.5f);
+                #region Collectable Material Outline Jobs
+
+                // close collectable material outline
+
+                OutlineJobs(0);
+
+                #endregion
+                CameraSignals.Instance.onSetCameraTarget?.Invoke(null);
+                yield return new WaitForSeconds(.5f); // wait for before drone movement 
                 otherColorCheckAreaManager.PlayDroneAnim();
-                yield return new WaitForSeconds(7.5f);
+                yield return new WaitForSeconds(7.5f/2f);// kill wrong collectables
+                
+                yield return new WaitForSeconds(7.5f / 2f);// wait for drone movement
                 StackSignals.Instance.onGetStackList?.Invoke(_stackList);
+                CameraSignals.Instance.onSetCameraTarget?.Invoke(_playerManager.transform);
+                _playerManager.transform.DOMoveZ(_playerManager.transform.position.z + 2.9f,.5f);
                 _playerManager.PlayerChangeForwardSpeed(1);
+                OutlineJobs(15);
             }
         }
 
         private void CheckColor()
         {
+
+        }
+
+        private void OutlineJobs(float endValue)
+        {
+            for (int i = 0; i < _stackList.Count; i++)
+            {
+                var materialColor = _stackList[i].GetComponentInChildren<SkinnedMeshRenderer>().material;
+                materialColor.DOFloat(endValue, "_OutlineSize", 0.5f);
+            }
 
         }
         #endregion
