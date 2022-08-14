@@ -14,7 +14,7 @@ namespace Managers
         
         #region Public Variables
         
-        public CollectableData CollectableData;
+        public Material CollectableMaterial;
         
         
         #endregion
@@ -36,8 +36,8 @@ namespace Managers
       
         private void Awake()
         {
-            CollectableData = GetCollectableData();
-            collectableMeshController.CollectableMaterial(collectableColorType);
+            CollectableMaterial = GetCollectableData();
+            collectableMeshController.CollectableMaterial(CollectableMaterial);
         }
 
 
@@ -47,12 +47,12 @@ namespace Managers
             
         }
         
-        private CollectableData GetCollectableData()
+        private Material GetCollectableData()
         {
-            return Resources.Load<CD_Collectable>("Data/CD_Collectable").CollectableData;
+            return Resources.Load<CD_Collectable>("Data/CD_Collectable").CollectableData.CollectableMaterialList[(int)collectableColorType];
         }
 
-        public void CollectableColorChange(ColorType colorType)
+        public void CollectableColorChange(Material colorType)
         {
             collectableMeshController.CollectableMaterial(colorType);
         }

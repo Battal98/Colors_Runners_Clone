@@ -7,6 +7,6 @@ namespace Datas.ValueObject
     [Serializable]
     public class CollectableData 
     {
-        public List<Mesh> CollectableMaterialList;
+        public List<Material> CollectableMaterialList;
     }
 }

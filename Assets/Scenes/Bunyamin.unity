@@ -1108,50 +1108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &506316566
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 506316568}
-  - component: {fileID: 506316567}
-  m_Layer: 0
-  m_Name: Finish
-  m_TagString: Finish
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &506316567
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 506316566}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.3282804, y: 1.7226903, z: 1}
-  m_Center: {x: 0.17013311, y: -0.36134517, z: 0}
---- !u!4 &506316568
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 506316566}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 70}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &579013310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2056,10 +2012,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d465ebc2c7fb24a882948156799bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isJoystick: 0
+  _joystick: {fileID: 505984373}
+  inputManager: {fileID: 1070953764}
   isReadyForTouch: 0
   isFirstTimeTouchTaken: 0
-  isJoystick: 0
-  joystick: {fileID: 505984373}
 --- !u!1 &1191469638
 GameObject:
   m_ObjectHideFlags: 0
@@ -2335,7 +2292,7 @@ MonoBehaviour:
   - {fileID: 1021660352}
   - {fileID: 154715245}
   - {fileID: 2036781090}
-  levelHolder: {fileID: 695964826}
+  collectableHolder: {fileID: 695964826}
   stackManager: {fileID: 1306594615}
 --- !u!1 &1312044467
 GameObject:

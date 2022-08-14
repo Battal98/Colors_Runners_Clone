@@ -17,7 +17,7 @@ namespace Controller.Collectable
         #endregion
     
         #region Private Variables
-
+        [SerializeField]
         private SkinnedMeshRenderer _collectableSkinMeshRenderer;
 
         #endregion
@@ -26,12 +26,12 @@ namespace Controller.Collectable
 
         private void Awake()
         {
-            _collectableSkinMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+            
         }
 
-        public void CollectableMaterial(ColorType colorType)
+        public void CollectableMaterial(Material colorType)
         {
-            _collectableSkinMeshRenderer.material = Resources.Load<Material>($"Materials/{colorType}Material");
+            _collectableSkinMeshRenderer.material = colorType;
         }
     }
 }

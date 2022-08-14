@@ -17,6 +17,6 @@ namespace Signals
         public UnityAction<List<GameObject>> onSetStackList = delegate { };
         public UnityAction<List<GameObject>> onGetStackList = delegate { };
         public UnityAction<GameObject,CollectableAnimationStates> onSetCollectableAnimState = delegate { };
-        public UnityAction<ColorType> onChangeCollectableColor = delegate { };
+        public UnityAction<Material> onChangeCollectableColor = delegate { };
     }
 }

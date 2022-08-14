@@ -405,6 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c87f4148c346bd843f68314e0cb092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collectableSkinMeshRenderer: {fileID: 1760233937623715504}
 --- !u!1 &1760233937665761244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,11 +1196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71f760d60686664096e2a0aeef79c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollectableData:
-    CollectableMaterialList: []
+  CollectableMaterial: {fileID: 2100000, guid: 6d14e967f12d78c4f8966f0c8e2c92f9, type: 2}
   collectableAnimationController: {fileID: 907190927851016078}
   collectableMeshController: {fileID: 7289084589523245379}
-  collectableColorType: 4
+  collectableColorType: 5
 --- !u!1 &1760233938688452301
 GameObject:
   m_ObjectHideFlags: 0

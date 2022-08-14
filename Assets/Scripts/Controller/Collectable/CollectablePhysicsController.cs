@@ -46,7 +46,7 @@ namespace Controllers
                 }
                 else
                 {
-                    StackSignals.Instance.onRemoveInStack.Invoke(transform.parent.gameObject);
+                 
                 }
             }
 

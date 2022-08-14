@@ -104,7 +104,6 @@ namespace Managers
         {
             if (!_playerManager)
                 return;
-            transform.position = new Vector3(0, 0, _playerManager.position.z - StackData.StackOffset);
             _stackLerpMovementCommand.Execute(ref _playerManager);
         }
 
@@ -115,7 +114,7 @@ namespace Managers
             _stackLerpMovementCommand = new StackLerpMovementCommand(ref stackList, ref StackData);
             _stackScaleCommand = new StackScaleCommand(ref stackList, ref StackData);
             _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager, ref collectableHolder,ref StackData);
-            _transportInStack = new TransportInStack(ref stackList,ref stackManager, ref collectableHolder, ref StackData);
+            _transportInStack = new TransportInStack(ref stackList,ref stackManager, ref StackData);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
             _stackJumpCommand = new StackJumpCommand(ref stackList, ref StackData);
         }
@@ -138,7 +137,7 @@ namespace Managers
             _collectableRemoveOnStackCommand.Execute(obj);
 
         }
-        private void OnChangeCollectableColor(ColorType colorType)
+        private void OnChangeCollectableColor(Material colorType)
         {
             for (int i = 0; i < stackList.Count; i++)
             {
@@ -153,7 +152,7 @@ namespace Managers
         // }
         private void OnTransportInStack(GameObject _obj, Transform target)
         {
-            StartCoroutine(_transportInStack.Execute(_obj, target));
+            _transportInStack.Execute(_obj, target);
         }
         private void Initialized()
         {
