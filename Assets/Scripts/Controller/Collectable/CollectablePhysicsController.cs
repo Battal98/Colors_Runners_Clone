@@ -52,19 +52,6 @@ namespace Controllers
                 _collectableSkinnedMeshRenderer.material.color = otherMR.material.color;
             }
 
-            // if (other.CompareTag("CheckArea"))
-            // {
-            //     var type = other.gameObject.GetComponentInParent<ColorCheckAreaManager>().areaType;
-            //     switch (type)
-            //     {
-            //         case ColorCheckAreaType.Drone:
-            //             CollectablesMovementInDrone();
-            //             break;
-            //         case ColorCheckAreaType.Turret:
-            //             //change animation state 
-            //             break;
-            //     }
-            // }
 
             if (other.CompareTag("Obstacle") && isTaken)
             {
@@ -73,24 +60,5 @@ namespace Controllers
             }
         }
 
-
-        private void CollectablesMovementInDrone()
-        {
-            //ColorCheckAreaSignals.Instance.onDroneActive?.Invoke();
-
-            //StackSignals.Instance.onDecreaseStack?.Invoke(this.gameObject);
-        }
-
-        private void CollectablesMovementInColorCheckArea(GameObject other)
-        {
-            StackSignals.Instance.onTransportInStack?.Invoke(transform.parent.gameObject);
-            //animation is working but not working correctly :')
-            var randomValue = Random.Range(-1f, 1f);
-            transform.parent.transform
-                .DOMove(
-                    new Vector3(other.transform.position.x, transform.parent.transform.position.y,
-                        other.transform.position.z + randomValue), 0.50f).OnComplete(() =>
-                    manager.SetAnim(CollectableAnimationStates.Crouch));
-        }
     }
 }

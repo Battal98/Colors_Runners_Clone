@@ -24,7 +24,7 @@ namespace Managers
         #region Serilazible Veriables
 
         [SerializeField] private List<GameObject> stackList = new List<GameObject>();
-        [SerializeField] private GameObject levelHolder;
+        [SerializeField] private GameObject collectableHolder;
         [SerializeField] private StackManager stackManager;
        
 
@@ -58,7 +58,8 @@ namespace Managers
             StackSignals.Instance.onAddInStack += OnAddInStack;
             StackSignals.Instance.onRemoveInStack += OnRemoveInStack;
             StackSignals.Instance.onTransportInStack += OnTransportInStack;
-            StackSignals.Instance.onSendStackList += OnSendStacklistToPlayer;
+            StackSignals.Instance.onSetStackList += OnSetStacklistToPlayer;
+            StackSignals.Instance.onGetStackList += OnGetStackList;
             StackSignals.Instance.onSetCollectableAnimState += OnCollectableAnimState;
             // StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
             CoreGameSignals.Instance.onReset += OnReset;
@@ -71,7 +72,8 @@ namespace Managers
             StackSignals.Instance.onAddInStack -= OnAddInStack;
             StackSignals.Instance.onRemoveInStack -= OnRemoveInStack;
             StackSignals.Instance.onTransportInStack -= OnTransportInStack;
-            StackSignals.Instance.onSendStackList -= OnSendStacklistToPlayer;
+            StackSignals.Instance.onSetStackList -= OnSetStacklistToPlayer;
+            StackSignals.Instance.onGetStackList -= OnGetStackList;
             StackSignals.Instance.onSetCollectableAnimState -= OnCollectableAnimState;
             // StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
             CoreGameSignals.Instance.onReset -= OnReset;
@@ -110,8 +112,8 @@ namespace Managers
             _collectableAddOnStackCommand = new CollectableAddOnStackCommand(ref stackManager, ref stackList,ref StackData);
             _stackLerpMovementCommand = new StackLerpMovementCommand(ref stackList, ref StackData);
             _stackScaleCommand = new StackScaleCommand(ref stackList, ref StackData);
-            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager, ref levelHolder,ref StackData);
-            _transportInStack = new TransportInStack(ref stackList,ref stackManager,ref levelHolder,ref StackData);
+            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager, ref collectableHolder,ref StackData);
+            _transportInStack = new TransportInStack(ref stackList,ref stackManager, ref collectableHolder, ref StackData);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
             _stackJumpCommand = new StackJumpCommand(ref stackList, ref StackData);
         }
@@ -139,9 +141,9 @@ namespace Managers
         // {
         //     StartCoroutine(_stackJumpCommand.Execute(StackData.StackJumpDistance,StackData.StackJumpDuration));
         // }
-        private void OnTransportInStack(GameObject obj)
+        private void OnTransportInStack(GameObject _obj, Transform target)
         {
-            StartCoroutine(_transportInStack.Execute(obj));
+            StartCoroutine(_transportInStack.Execute(_obj, target));
         }
         private void Initialized()
         {
@@ -161,13 +163,24 @@ namespace Managers
             _collectableAnimSetCommand.Execute(obj,animState);
         }
 
-        public void OnSendStacklistToPlayer(List<GameObject> _stackList)
+        private void OnSetStacklistToPlayer(List<GameObject> _stackList)
         {
             for (int i = 0; i < stackList.Count; i++)
             {
                 _stackList.Add(stackList[i]);
             }
         }
+
+        private void OnGetStackList(List<GameObject> _stackList)
+        {
+            for (int i = 0; i < _stackList.Count; i++)
+            {
+                _stackList[i].transform.parent = this.transform;
+                _collectableAnimSetCommand.Execute(_stackList[i], CollectableAnimationStates.Run);
+                stackList.Add(_stackList[i]);
+            }
+        }
+        
 
         private void OnPlay()
         {

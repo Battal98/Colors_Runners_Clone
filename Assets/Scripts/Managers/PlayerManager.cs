@@ -149,11 +149,12 @@ namespace Managers
             playerAnimationController.OnReset();
         }
 
-        public void PlayerStopForwards()
+        public void PlayerChangeForwardSpeed(int value)
         {
             playerMovementController.Stop();
-            playerMovementController.InDroneArea(0);
+            playerMovementController.InDroneArea(value);
         
         }
+
     }
 }

@@ -24,7 +24,9 @@ namespace Controllers
 
         private SkinnedMeshRenderer _playerSkinnedMeshRenderer;
         private PlayerManager _playerManager;
-        private int value;
+        private int _value;
+        private int _count;
+        private Transform _target;
         [ShowInInspector]
         private List<GameObject> _stackList = new List<GameObject>();
 
@@ -67,9 +69,9 @@ namespace Controllers
                 switch (type)
                 {
                     case ColorCheckAreaType.Drone:
-                        _playerManager.PlayerStopForwards();
-                        StackSignals.Instance.onSendStackList?.Invoke(_stackList);
-                        StartCoroutine(MoveCollectables());
+                        StackSignals.Instance.onSetStackList?.Invoke(_stackList);
+                        _playerManager.PlayerChangeForwardSpeed(0);
+                        StartCoroutine(MoveCollectables(other.gameObject));
                         //stop player but not sideways
                         break;
                     case ColorCheckAreaType.Turret:
@@ -78,12 +80,13 @@ namespace Controllers
                         break;
                 }
             }
+            if (other.CompareTag("ColorCheck"))
+            {
+                _target = other.transform.parent.transform.GetChild(2);
+            }
 
             if (other.CompareTag("JumpArea"))
             {
-                //StackSignals.Instance.onStackJumpPlatform?.Invoke();
-                //_playerManager.transform.DOLocalMoveY(1f, 1f);
-                //_playerManager.transform.DOLocalJump(new Vector3(_playerManager.transform.position.x, 1f, _playerManager.transform.position.z + 1f), 2f,0,1,false);
                 _playerManager.transform.DOBlendableLocalMoveBy(Vector3.up * 3f,1f); // it works
             }
 
@@ -96,24 +99,27 @@ namespace Controllers
         }
 
         #region Collectable Movement Color Check Area
-
-        private IEnumerator MoveCollectables()
+        private IEnumerator MoveCollectables(GameObject other)
         {
+            var colorCheckAreaManager =  other.transform.GetComponentInParent<ColorCheckAreaManager>(); 
             for (int i = 0; i < _stackList.Count; i++)
             {
-                StackSignals.Instance.onTransportInStack?.Invoke(_stackList[i].gameObject);
+                StackSignals.Instance.onTransportInStack?.Invoke(_stackList[i].gameObject, _target);
                 var collectableManager = _stackList[i].GetComponentInChildren<CollectableManager>();
-                var randomValue = Random.Range(-0.2f, 2.5f);
-
-                _stackList[i].transform.DOLocalMove(new Vector3(CalculateXPosCollectables(),
+                var randomValue = Random.Range(0.2f, 2.8f);
+                _count++;
+                _stackList[i].transform.DOMove(new Vector3(CalculateXPosCollectables(),
                     _stackList[i].transform.position.y,
-                    _playerManager.transform.position.z + randomValue), 0.35f).OnComplete(() =>
+                    _playerManager.transform.position.z + randomValue), 1f).OnComplete(() =>
                     {
 
                         collectableManager.SetAnim(CollectableAnimationStates.Crouch);
 
                     });
-                yield return new WaitForSeconds(0.35f);
+                _stackList[i].transform.DORotate(Vector3.zero, 0.1f);
+
+                StartCoroutine(CheckCount(colorCheckAreaManager));
+                yield return new WaitForSeconds(0.15f);
             }
         }
 
@@ -121,18 +127,35 @@ namespace Controllers
         {
             if (_playerManager.transform.position.x < -0.5f)
             {
-                value = -1;
+                _value = -1;
             }
             else if (_playerManager.transform.position.x > 0.5f)
             {
-                value = 1;
+                _value = 1;
             }
             else
             {
-                value = 0;
+                _value = 0;
             }
-            return value;
+            return _value;
         } 
+
+        private IEnumerator CheckCount(ColorCheckAreaManager otherColorCheckAreaManager) 
+        {
+            if (_count >= _stackList.Count)
+            {
+                yield return new WaitForSeconds(.5f);
+                otherColorCheckAreaManager.PlayDroneAnim();
+                yield return new WaitForSeconds(7.5f);
+                StackSignals.Instance.onGetStackList?.Invoke(_stackList);
+                _playerManager.PlayerChangeForwardSpeed(1);
+            }
+        }
+
+        private void CheckColor()
+        {
+
+        }
         #endregion
     }
 }

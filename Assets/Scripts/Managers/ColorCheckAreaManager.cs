@@ -3,6 +3,7 @@ using Signals;
 using Keys;
 using Enums;
 using Controllers;
+using System.Collections.Generic;
 
 namespace Managers
 {
@@ -23,10 +24,10 @@ namespace Managers
         private GameObject turret;
         [SerializeField]
         private GameObject drone;
-        /*[SerializeField]
+        [SerializeField]
         private DroneController droneController;
         [SerializeField]
-        private TurretController turretController;*/
+        private List<TurretController> turretController;
 
         #endregion
 
@@ -93,6 +94,23 @@ namespace Managers
         private void OnInteractionColorCheck(GameObject _obj)
         {
 
+        }
+
+        public void PlayDroneAnim()
+        {
+            droneController.DroneMove();
+        }
+
+        public void SetTargetForTurrets(Transform target, bool isPlayerDetected)
+        {
+            for (int i = 0; i < turretController.Count; i++)
+            {
+                //target = FindObjectOfType<PlayerManager>().gameObject.transform;
+                turretController[i].targetPlayer = target.transform;
+                turretController[i].isTargetPlayer = isPlayerDetected;
+                
+
+            }
         }
 
     }

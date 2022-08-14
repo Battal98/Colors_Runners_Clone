@@ -17,14 +17,7 @@ namespace Controllers
         private void Start()
         {
             SetDronePath();
-            DroneMovement();
         }
-
-        public void DroneMovement()
-        {
-            this.transform.DOLocalPath(path, duration, PathType.CatmullRom);
-        }
-
         private void SetDronePath()
         {
             path = new Vector3[pathList.Count];
@@ -33,6 +26,12 @@ namespace Controllers
                 path[i] = pathList[i].transform.localPosition;
             }
         }
+
+        public void DroneMove()
+        {
+            this.transform.DOLocalPath(path, duration, PathType.CatmullRom);
+        }
+
 
     } 
 }
