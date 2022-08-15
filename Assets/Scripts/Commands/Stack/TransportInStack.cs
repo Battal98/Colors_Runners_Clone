@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Datas.ValueObject;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Commands
@@ -28,13 +29,19 @@ namespace Commands
         public void Execute(GameObject _obj, Transform target)
         {
             _stackList.Remove(_obj);
-            //_stackList.TrimExcess();
             _obj.transform.parent = target;
             if (_stackList.Count >= _stackData.StackLimit)
             {
                 _stackList[_stackData.StackLimit - 1].SetActive(true);
                 _manager.CollectableAnimSet(_stackList[_stackData.StackLimit - 1]);
             }
+
+            if (_stackList.Count==0)
+            {
+                StackSignals.Instance.onStackTransferComplete?.Invoke();
+            }
+            _stackList.TrimExcess();
+          
         }
     }
 }

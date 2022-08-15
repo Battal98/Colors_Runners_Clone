@@ -50,11 +50,11 @@ MonoBehaviour:
   areaType: 0
   turret: {fileID: 1539420659791235912}
   drone: {fileID: 1539420661094696322}
+  _colorCheckAreaManager: {fileID: 1539420660308345274}
   droneController: {fileID: 1539420660999005269}
   turretController:
   - {fileID: 1145736828265920463}
   - {fileID: 1145736828855780872}
-  stackList: []
   colorCheckPhysicControllers:
   - {fileID: 2109190698697599005}
   - {fileID: 1903459241730631499}

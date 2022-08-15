@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using UnityEngine;
 using Signals;
 using Managers;
@@ -8,15 +9,12 @@ using DG.Tweening;
 
 public class ColorCheckPhysicController : MonoBehaviour
 {
-
     private MeshRenderer _meshRenderer;
     private int _count;
 
-    [SerializeField]
-    private ColorCheckAreaManager colorCheckAreaManager;
+    [SerializeField] private ColorCheckAreaManager colorCheckAreaManager;
 
-    [SerializeField]
-    private Transform _colHolder;
+    [SerializeField] private Transform _colHolder;
     public List<GameObject> stackList;
 
 
@@ -24,6 +22,7 @@ public class ColorCheckPhysicController : MonoBehaviour
     {
         _meshRenderer = this.transform.parent.GetComponentInChildren<MeshRenderer>();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Collectable"))
@@ -46,17 +45,19 @@ public class ColorCheckPhysicController : MonoBehaviour
             }
         }
     }
+
     public void CheckColor()
     {
         int count = stackList.Count;
+        transform.GetComponent<Collider>().enabled=false;
         for (int i = 0; i < count; i++)
         {
             var color = _colHolder.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().material.color;
-            Debug.Log("character: " + ColorUtility.ToHtmlStringRGB(color) + "GroundMesh: " + ColorUtility.ToHtmlStringRGB(_meshRenderer.material.color));
             if (ColorUtility.ToHtmlStringRGB(_meshRenderer.material.color) != ColorUtility.ToHtmlStringRGB(color))
             {
                 Debug.Log(this.name + ": Dead");
-                _colHolder.GetChild(0).gameObject.GetComponent<CollectableManager>().SetAnim(CollectableAnimationStates.Dead);
+                _colHolder.GetChild(0).gameObject.GetComponent<CollectableManager>()
+                    .SetAnim(CollectableAnimationStates.Dead);
                 stackList.Remove(_colHolder.GetChild(0).gameObject);
                 _colHolder.GetChild(0).transform.parent = null;
                 stackList.TrimExcess();
@@ -64,14 +65,18 @@ public class ColorCheckPhysicController : MonoBehaviour
             else
             {
                 Debug.Log(this.name + ": Alive");
-                StackSignals.Instance.onGetStackList?.Invoke(_colHolder.GetChild(0).gameObject);
+
+                
+                _colHolder.GetChild(0).GetComponentInChildren<Collider>().enabled = true;
                 stackList.Remove(_colHolder.GetChild(0).gameObject);
+                StackSignals.Instance.onGetStackList?.Invoke(_colHolder.GetChild(0).gameObject);
                 stackList.TrimExcess();
             }
         }
     }
 
     #region Collectable Movement Color Check Area
+
     private void MoveCollectables(GameObject other)
     {
         var collectableManager = other.GetComponent<CollectableManager>();
@@ -79,13 +84,11 @@ public class ColorCheckPhysicController : MonoBehaviour
         other.transform.DOMove(new Vector3(_colHolder.transform.position.x,
             other.transform.position.y,
             _colHolder.transform.position.z + randomValue), 1f).OnComplete(() =>
-            {
-                collectableManager.SetAnim(CollectableAnimationStates.Crouch);
-
-            });
+        {
+            collectableManager.SetAnim(CollectableAnimationStates.Crouch);
+        });
         other.transform.DORotate(Vector3.zero, 0.1f);
     }
+
     #endregion
-
-
 }

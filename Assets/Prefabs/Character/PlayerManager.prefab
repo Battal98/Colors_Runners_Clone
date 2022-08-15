@@ -970,7 +970,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 8065292031746485745}
   playerMeshObj: {fileID: 8307426609619511629}
-  mats: {fileID: 2100000, guid: f6faf52bfe8b6064189dd4b2ce73e02c, type: 2}
 --- !u!1 &7652159215991158951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8647536700598252535
 Transform:
   m_ObjectHideFlags: 0

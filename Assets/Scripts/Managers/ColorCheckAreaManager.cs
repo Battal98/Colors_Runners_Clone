@@ -1,17 +1,16 @@
-using UnityEngine;
-using Signals;
-using Keys;
-using Enums;
-using Controllers;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using Commands;
+using Controllers;
 using DG.Tweening;
+using Enums;
+using Signals;
+using UnityEngine;
 
 namespace Managers
 {
     public class ColorCheckAreaManager : MonoBehaviour
     {
-
         #region Self Variables
 
         #region Public Variables
@@ -22,20 +21,20 @@ namespace Managers
 
         #region Seriazible Variables
 
-        [SerializeField]
-        private GameObject turret;
-        [SerializeField]
-        private GameObject drone;
-        [SerializeField]
-        private DroneController droneController;
-        [SerializeField]
-        private List<TurretController> turretController;
-        [SerializeField]
-        private List<ColorCheckPhysicController> colorCheckPhysicControllers;
+        [SerializeField] private GameObject turret;
+        [SerializeField] private GameObject drone;
+        [SerializeField] private ColorCheckAreaManager _colorCheckAreaManager;
+        [SerializeField] private DroneController droneController;
+        [SerializeField] private List<TurretController> turretController;
+        [SerializeField] private List<ColorCheckPhysicController> colorCheckPhysicControllers;
 
         #endregion
 
         #region Private Variables
+
+        private OutLineChangeCommand _outLineChangeCommand;
+        private DroneCheckCountCommand _droneCheckCountCommand;
+        private GameObject _platformCheck;
 
         #endregion
 
@@ -54,7 +53,11 @@ namespace Managers
             ColorCheckAreaSignals.Instance.onTurretActive += OnTurretActive;
             ColorCheckAreaSignals.Instance.onDroneActive += OnDroneActive;
             ColorCheckAreaSignals.Instance.onInteractionColorCheck += OnInteractionColorCheck;
-            ColorCheckAreaSignals.Instance.onCheckStackCount += OnCheckStackCount;
+            ColorCheckAreaSignals.Instance.onCheckAreaControl += OnCheckAreaControl;
+
+            StackSignals.Instance.onStackTransferComplete += OnCheckStackCount;
+
+
         }
 
         private void UnsubscribeEvents()
@@ -62,7 +65,10 @@ namespace Managers
             ColorCheckAreaSignals.Instance.onTurretActive -= OnTurretActive;
             ColorCheckAreaSignals.Instance.onDroneActive -= OnDroneActive;
             ColorCheckAreaSignals.Instance.onInteractionColorCheck -= OnInteractionColorCheck;
-            ColorCheckAreaSignals.Instance.onCheckStackCount -= OnCheckStackCount;
+           
+            ColorCheckAreaSignals.Instance.onCheckAreaControl -= OnCheckAreaControl;
+            StackSignals.Instance.onStackTransferComplete -= OnCheckStackCount;
+
         }
 
         private void OnDisable()
@@ -74,6 +80,11 @@ namespace Managers
 
         private void Awake()
         {
+            GetReferences();
+        }
+
+        private void GetReferences()
+        {
             switch (areaType)
             {
                 case ColorCheckAreaType.Drone:
@@ -83,11 +94,13 @@ namespace Managers
                     OnTurretActive();
                     break;
             }
-        }
 
+            _outLineChangeCommand = new OutLineChangeCommand( );
+            _droneCheckCountCommand = new DroneCheckCountCommand(ref colorCheckPhysicControllers,ref _colorCheckAreaManager);
+        }
         private void OnTurretActive()
         {
-            if(!turret.activeInHierarchy)
+            if (!turret.activeInHierarchy)
                 turret.SetActive(true);
             drone.SetActive(false);
         }
@@ -97,86 +110,42 @@ namespace Managers
                 drone.SetActive(true);
             turret.SetActive(false);
         }
-        private void OnInteractionColorCheck(GameObject _obj)
+        private void OnInteractionColorCheck(GameObject _obj)   
         {
-
         }
-
         public void PlayDroneAnim()
         {
             droneController.DroneMove();
         }
-
         public void SetTargetForTurrets(Transform target, bool isPlayerDetected)
         {
-            for (int i = 0; i < turretController.Count; i++)
+            for (var i = 0; i < turretController.Count; i++)
             {
                 //target = FindObjectOfType<PlayerManager>().gameObject.transform;
                 turretController[i].targetPlayer = target.transform;
                 turretController[i].isTargetPlayer = isPlayerDetected;
             }
         }
-
-        private int GetStackCount()
-        {
-            return StackSignals.Instance.onSendStackCount.Invoke();
-        }
+       
         private void OnCheckStackCount()
         {
-            for (int i = 0; i < colorCheckPhysicControllers.Count; i++)
+            if (transform.gameObject==_platformCheck)
             {
-                StartCoroutine(CheckCount(colorCheckPhysicControllers[i].stackList,i));
-            }
-        }
-        private IEnumerator CheckCount(List<GameObject> stackList, int index)
-        {
-            Debug.Log(GetStackCount());
-
-            if (GetStackCount() <= 0)
-            {
-                #region Collectable Material Outline Jobs
-
-                OutlineJobs(0, stackList);
-
-                #endregion
-
-                #region Drone Movement and Color Check Jobs
-
-                CameraSignals.Instance.onSetCameraTarget?.Invoke(null);
-                yield return new WaitForSeconds(.5f); // wait for before drone movement 
-
-                PlayDroneAnim();
-
-                yield return new WaitForSeconds(7.5f / 2f);// kill wrong collectables
-
-
-                colorCheckPhysicControllers[index].CheckColor();
-
-
-                yield return new WaitForSeconds(7.5f / 2f);// wait for drone movement
-                var _playerManager = FindObjectOfType<PlayerManager>();
-                AfterDroneMovementJobs(_playerManager);
-                OutlineJobs(25, stackList);
-                #endregion
+                for (var i = 0; i < colorCheckPhysicControllers.Count; i++)
+                    StartCoroutine(_droneCheckCountCommand.Execute(colorCheckPhysicControllers[i].stackList,i));
             }
         }
 
-        private void OutlineJobs(float endValue, List<GameObject> stackList)
+        public void SetOutline(List<GameObject> stack,float endValue)
         {
-            for (int i = 0; i < stackList.Count; i++)
-            {
-                var materialColor = stackList[i].GetComponentInChildren<SkinnedMeshRenderer>().material;
-                materialColor.DOFloat(endValue, "_OutlineSize", 1f);
-            }
-
-        }
-        
-        private void AfterDroneMovementJobs(PlayerManager _playerManager)
-        {
-            CameraSignals.Instance.onSetCameraTarget?.Invoke(_playerManager.transform);
-            _playerManager.transform.DOMoveZ(_playerManager.transform.position.z + 2.9f, .5f);
-            CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(1);
+            _outLineChangeCommand.Execute(stack,endValue);
         }
 
+        private void OnCheckAreaControl(GameObject other)
+        {
+            _platformCheck = other;
+        }
+
+     
     }
 }

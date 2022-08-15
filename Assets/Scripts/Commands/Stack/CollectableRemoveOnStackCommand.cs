@@ -35,7 +35,7 @@ namespace Commands
             collectableGameObject.SetActive(false);
             _stackList.RemoveAt(index);
             _stackList.TrimExcess();
-            if (_stackList.Count>_stackData.StackLimit)
+            if (_stackList.Count>=_stackData.StackLimit)
             {
                 _stackList[_stackData.StackLimit-1].SetActive(true);
                 _manager.CollectableAnimSet(_stackList[_stackData.StackLimit-1]);

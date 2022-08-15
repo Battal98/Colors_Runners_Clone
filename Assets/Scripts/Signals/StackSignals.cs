@@ -20,5 +20,7 @@ namespace Signals
         public UnityAction<GameObject,CollectableAnimationStates> onSetCollectableAnimState = delegate { };
         public UnityAction<Material> onChangeCollectableColor = delegate { };
         public Func<int> onSendStackCount = delegate{ return 0; };
+        
+        public UnityAction onStackTransferComplete=delegate {  };
     }
 }

@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287f5d118851f5148b8ebd480e19fac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorCheckAreaManager: {fileID: 0}
+  colorCheckAreaManager: {fileID: 1539420660308345274, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
   _colHolder: {fileID: 1498588698117348132}
   stackList: []
 --- !u!1 &5526568140435815220

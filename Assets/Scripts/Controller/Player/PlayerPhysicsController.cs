@@ -48,55 +48,29 @@ namespace Controllers
                 CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
             }
 
-            if (other.CompareTag("Collectable"))
-            {
-                var otherPhysic = other.gameObject.GetComponent<CollectablePhysicsController>();
-                if (!otherPhysic.isTaken)
-                {
-                    otherPhysic.isTaken = true;
-                    StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
-                }
-            }
+        
 
             if (other.CompareTag("Gate"))
             {
                 var otherMR = other.gameObject.transform.parent.GetComponentInChildren<MeshRenderer>();
                 _playerSkinnedMeshRenderer.material.color = otherMR.material.color;
             }
-
-            if (other.CompareTag("CheckArea"))
-            {
-                type = other.gameObject.GetComponentInParent<ColorCheckAreaManager>().areaType;
-            }
-
+            
             if (other.CompareTag("JumpArea"))
             {
                 _playerManager.transform.DOBlendableLocalMoveBy(Vector3.up * 3f,1f); // it works
             }
 
-        }
-
-        private void OnTriggerStay(Collider other)
-        {
             if (other.CompareTag("CheckArea"))
             {
-                switch (type)
-                {
-                    case ColorCheckAreaType.Drone:
-                        Debug.Log(GetStackCount());
-                        if (GetStackCount() <= 0)
-                        {
-                            other.gameObject.GetComponent<Collider>().enabled = false;
-                            ColorCheckAreaSignals.Instance.onCheckStackCount?.Invoke();
-                        }
-                        break;
-                    case ColorCheckAreaType.Turret:
-                        //forward speed down
-                        //change animation state 
-                        break;
-                }
+                Debug.Log(other.transform.parent);
+                ColorCheckAreaSignals.Instance.onCheckAreaControl?.Invoke(other.transform.parent.gameObject);
             }
+
         }
+
+      
+        
         private int GetStackCount()
         {
             return StackSignals.Instance.onSendStackCount.Invoke();

@@ -1,3 +1,5 @@
+using System;
+using Commands;
 using Controller;
 using Controller.Collectable;
 using UnityEngine;
@@ -21,13 +23,17 @@ namespace Managers
         
         #region Serialized Variables
 
-        [SerializeField] private CollectableAnimationController collectableAnimationController;
-        [SerializeField] private CollectableMeshController collectableMeshController;
-        [SerializeField] ColorType collectableColorType;
+        [SerializeField] private CollectableAnimationController collectableAnimationController; 
+        [SerializeField] private ColorType collectableColorType;
+        [SerializeField] private CollectableManager _collectableManager;
+        [SerializeField] private SkinnedMeshRenderer skinnedMesh;
         
         #endregion
         
         #region Private Variables
+
+        private CollectableMeshController _collectableMeshController;
+        private CollectableColorCheckCommand _collectableColorCheckCommand;
         
         #endregion
         
@@ -37,24 +43,36 @@ namespace Managers
         private void Awake()
         {
             CollectableMaterial = GetCollectableData();
-            collectableMeshController.CollectableMaterial(CollectableMaterial);
+            References();
+           
         }
+        private void References()
+        {
+            _collectableColorCheckCommand = new CollectableColorCheckCommand(ref _collectableManager);
+            _collectableMeshController = new CollectableMeshController(ref skinnedMesh,ref _collectableManager);
+        }
+        private void Start()
+        {
+            _collectableMeshController.CollectableMaterial(CollectableMaterial);
 
-
+        }
         public void SetAnim(CollectableAnimationStates states)
         {
             collectableAnimationController.Playanim(states);
             
         }
-        
+
+        public void CollectableColorCheck(GameObject other)
+        {
+            _collectableColorCheckCommand.Exucute(other);
+        }
         private Material GetCollectableData()
         {
             return Resources.Load<CD_Collectable>("Data/CD_Collectable").CollectableData.CollectableMaterialList[(int)collectableColorType];
         }
-
         public void CollectableColorChange(Material colorType)
         {
-            collectableMeshController.CollectableMaterial(colorType);
+            _collectableMeshController.CollectableMaterial(colorType);
         }
 
     }
