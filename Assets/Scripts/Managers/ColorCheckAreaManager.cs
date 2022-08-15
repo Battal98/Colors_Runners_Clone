@@ -34,6 +34,7 @@ namespace Managers
 
         private OutLineChangeCommand _outLineChangeCommand;
         private DroneCheckCountCommand _droneCheckCountCommand;
+        private MoveCollectableToCheckAreaCommand _moveCollectableToCheckAreaCommand;
         private GameObject _platformCheck;
 
         #endregion
@@ -96,6 +97,7 @@ namespace Managers
             }
 
             _outLineChangeCommand = new OutLineChangeCommand( );
+            _moveCollectableToCheckAreaCommand = new MoveCollectableToCheckAreaCommand( );
             _droneCheckCountCommand = new DroneCheckCountCommand(ref colorCheckPhysicControllers,ref _colorCheckAreaManager);
         }
         private void OnTurretActive()
@@ -146,6 +148,14 @@ namespace Managers
             _platformCheck = other;
         }
 
-     
+        #region Collectable Movement To Color Check Area
+
+        public void MoveCollectablesToArea(GameObject other, Transform _colHolder)
+        {
+            _moveCollectableToCheckAreaCommand.Execute(other, _colHolder);
+        }
+
+        #endregion
+
     }
 }

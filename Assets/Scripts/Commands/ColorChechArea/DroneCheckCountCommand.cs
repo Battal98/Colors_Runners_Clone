@@ -29,7 +29,6 @@ namespace Commands
         {
             if (StackSignals.Instance.onSendStackCount() <= 0)
             {
-               
                 CameraSignals.Instance.onSetCameraTarget?.Invoke(null);
                 yield return new WaitForSeconds(1); // wait for before drone movement 
                 _manager.SetOutline(_stack,0);
@@ -38,8 +37,6 @@ namespace Commands
                 _manager.SetOutline(_stack,25);
                 _stackList[index].CheckColor();
                 CoreGameSignals.Instance.onExitDroneArea?.Invoke();
-              
-         
             }
         }
     }

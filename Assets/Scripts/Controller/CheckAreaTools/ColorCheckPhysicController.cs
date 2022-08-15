@@ -31,11 +31,10 @@ public class ColorCheckPhysicController : MonoBehaviour
             {
                 case ColorCheckAreaType.Drone:
 
-                    CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(0);
-                    StackSignals.Instance.onTransportInStack?.Invoke(other.transform.parent.gameObject, _colHolder);
+                    InvokeSignalsForDrone(other.transform.parent.gameObject);
                     stackList.Add(other.transform.parent.gameObject);
                     other.gameObject.GetComponent<Collider>().enabled = false;
-                    MoveCollectables(other.transform.parent.gameObject);
+                    colorCheckAreaManager.MoveCollectablesToArea(other.transform.parent.gameObject, _colHolder);
                     break;
 
                 case ColorCheckAreaType.Turret:
@@ -46,10 +45,19 @@ public class ColorCheckPhysicController : MonoBehaviour
         }
     }
 
+    #region Invoke Signals
+    private void InvokeSignalsForDrone(GameObject other)
+    {
+        CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(0);
+        StackSignals.Instance.onTransportInStack?.Invoke(other, _colHolder);
+    } 
+    #endregion
+
     public void CheckColor()
     {
         int count = stackList.Count;
         transform.GetComponent<Collider>().enabled=false;
+
         for (int i = 0; i < count; i++)
         {
             var color = _colHolder.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().material.color;
@@ -65,8 +73,6 @@ public class ColorCheckPhysicController : MonoBehaviour
             else
             {
                 Debug.Log(this.name + ": Alive");
-
-                
                 _colHolder.GetChild(0).GetComponentInChildren<Collider>().enabled = true;
                 stackList.Remove(_colHolder.GetChild(0).gameObject);
                 StackSignals.Instance.onGetStackList?.Invoke(_colHolder.GetChild(0).gameObject);
@@ -75,20 +81,5 @@ public class ColorCheckPhysicController : MonoBehaviour
         }
     }
 
-    #region Collectable Movement Color Check Area
 
-    private void MoveCollectables(GameObject other)
-    {
-        var collectableManager = other.GetComponent<CollectableManager>();
-        var randomValue = Random.Range(-1f, 1f);
-        other.transform.DOMove(new Vector3(_colHolder.transform.position.x,
-            other.transform.position.y,
-            _colHolder.transform.position.z + randomValue), 1f).OnComplete(() =>
-        {
-            collectableManager.SetAnim(CollectableAnimationStates.Crouch);
-        });
-        other.transform.DORotate(Vector3.zero, 0.1f);
-    }
-
-    #endregion
 }

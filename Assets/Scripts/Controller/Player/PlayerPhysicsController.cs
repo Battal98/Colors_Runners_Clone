@@ -69,12 +69,6 @@ namespace Controllers
 
         }
 
-      
-        
-        private int GetStackCount()
-        {
-            return StackSignals.Instance.onSendStackCount.Invoke();
-        }
         private void GetReferances()
         {
             _playerSkinnedMeshRenderer = playerMeshObj.GetComponentInChildren<SkinnedMeshRenderer>();
