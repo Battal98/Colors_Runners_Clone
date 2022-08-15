@@ -188,14 +188,11 @@ namespace Managers
             }
         }
 
-        private void OnGetStackList(List<GameObject> _stackList)
+        private void OnGetStackList(GameObject _stackListObj)
         {
-            for (int i = 0; i < _stackList.Count; i++)
-            {
-                _stackList[i].transform.parent = this.transform;
-                _collectableAnimSetCommand.Execute(_stackList[i], CollectableAnimationStates.Run);
-                stackList.Add(_stackList[i]);
-            }
+            _stackListObj.transform.parent = this.transform;
+            _collectableAnimSetCommand.Execute(_stackListObj, CollectableAnimationStates.Run);
+            stackList.Add(_stackListObj);
         }
         
 

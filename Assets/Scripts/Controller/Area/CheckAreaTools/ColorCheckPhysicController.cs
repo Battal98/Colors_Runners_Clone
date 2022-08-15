@@ -17,28 +17,12 @@ public class ColorCheckPhysicController : MonoBehaviour
 
     [SerializeField]
     private Transform _colHolder;
-    [SerializeField]
-    private List<GameObject> stackList;
+    public List<GameObject> stackList;
 
 
     private void Awake()
     {
         _meshRenderer = this.transform.parent.GetComponentInChildren<MeshRenderer>();
-    }
-    public void CheckColor()
-    {
-        for (int i = 0; i < _colHolder.childCount; i++)
-        {
-            var color = _colHolder.GetChild(i).GetComponentInChildren<SkinnedMeshRenderer>().material.color;
-            if (_meshRenderer.material.color != color)
-            {
-                Debug.Log(this.name + ": Dead");
-            }
-            else
-            {
-                Debug.Log(this.name + ": Alive");
-            }
-        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -62,6 +46,30 @@ public class ColorCheckPhysicController : MonoBehaviour
             }
         }
     }
+    public void CheckColor()
+    {
+        int count = stackList.Count;
+        for (int i = 0; i < count; i++)
+        {
+            var color = _colHolder.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().material.color;
+            Debug.Log("character: " + ColorUtility.ToHtmlStringRGB(color) + "GroundMesh: " + ColorUtility.ToHtmlStringRGB(_meshRenderer.material.color));
+            if (ColorUtility.ToHtmlStringRGB(_meshRenderer.material.color) != ColorUtility.ToHtmlStringRGB(color))
+            {
+                Debug.Log(this.name + ": Dead");
+                _colHolder.GetChild(0).gameObject.GetComponent<CollectableManager>().SetAnim(CollectableAnimationStates.Dead);
+                stackList.Remove(_colHolder.GetChild(0).gameObject);
+                _colHolder.GetChild(0).transform.parent = null;
+                stackList.TrimExcess();
+            }
+            else
+            {
+                Debug.Log(this.name + ": Alive");
+                StackSignals.Instance.onGetStackList?.Invoke(_colHolder.GetChild(0).gameObject);
+                stackList.Remove(_colHolder.GetChild(0).gameObject);
+                stackList.TrimExcess();
+            }
+        }
+    }
 
     #region Collectable Movement Color Check Area
     private void MoveCollectables(GameObject other)
@@ -78,5 +86,6 @@ public class ColorCheckPhysicController : MonoBehaviour
         other.transform.DORotate(Vector3.zero, 0.1f);
     }
     #endregion
+
 
 }

@@ -30,7 +30,7 @@ namespace Controllers
         private Transform _target;
         [ShowInInspector]
         private List<GameObject> _stackList = new List<GameObject>();
-
+        private ColorCheckAreaType type;
         #endregion
 
         #endregion
@@ -66,23 +66,7 @@ namespace Controllers
 
             if (other.CompareTag("CheckArea"))
             {
-                var type = other.gameObject.GetComponentInParent<ColorCheckAreaManager>().areaType;
-                switch (type)
-                {
-                    case ColorCheckAreaType.Drone:
-                       // StackSignals.Instance.onSetStackList?.Invoke(_stackList);
-                        //StartCoroutine(MoveCollectables(other.gameObject));
-                        //stop player but not sideways
-                        break;
-                    case ColorCheckAreaType.Turret:
-                        //forward speed down
-                        //change animation state 
-                        break;
-                }
-            }
-            if (other.CompareTag("ColorCheck"))
-            {
-                 _target = other.transform.parent.transform.GetChild(2);
+                type = other.gameObject.GetComponentInParent<ColorCheckAreaManager>().areaType;
             }
 
             if (other.CompareTag("JumpArea"))
@@ -92,6 +76,31 @@ namespace Controllers
 
         }
 
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("CheckArea"))
+            {
+                switch (type)
+                {
+                    case ColorCheckAreaType.Drone:
+                        Debug.Log(GetStackCount());
+                        if (GetStackCount() <= 0)
+                        {
+                            other.gameObject.GetComponent<Collider>().enabled = false;
+                            ColorCheckAreaSignals.Instance.onCheckStackCount?.Invoke();
+                        }
+                        break;
+                    case ColorCheckAreaType.Turret:
+                        //forward speed down
+                        //change animation state 
+                        break;
+                }
+            }
+        }
+        private int GetStackCount()
+        {
+            return StackSignals.Instance.onSendStackCount.Invoke();
+        }
         private void GetReferances()
         {
             _playerSkinnedMeshRenderer = playerMeshObj.GetComponentInChildren<SkinnedMeshRenderer>();

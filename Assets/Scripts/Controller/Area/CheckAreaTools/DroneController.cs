@@ -7,7 +7,6 @@ namespace Controllers
 
     public class DroneController : MonoBehaviour
     {
-
         [SerializeField]
         private List<Transform> pathList;
         [SerializeField]

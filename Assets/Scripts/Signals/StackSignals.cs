@@ -16,7 +16,7 @@ namespace Signals
         public UnityAction onInitStackIncrease=delegate {  };
         public UnityAction onStackJumpPlatform = delegate {  };
         public UnityAction<List<GameObject>> onSetStackList = delegate { };
-        public UnityAction<List<GameObject>> onGetStackList = delegate { };
+        public UnityAction<GameObject> onGetStackList = delegate { };
         public UnityAction<GameObject,CollectableAnimationStates> onSetCollectableAnimState = delegate { };
         public UnityAction<Material> onChangeCollectableColor = delegate { };
         public Func<int> onSendStackCount = delegate{ return 0; };

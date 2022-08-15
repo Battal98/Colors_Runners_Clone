@@ -30,6 +30,8 @@ namespace Managers
         private DroneController droneController;
         [SerializeField]
         private List<TurretController> turretController;
+        [SerializeField]
+        private List<ColorCheckPhysicController> colorCheckPhysicControllers;
 
         #endregion
 
@@ -121,17 +123,20 @@ namespace Managers
         }
         private void OnCheckStackCount()
         {
-            StartCoroutine(CheckCount());
+            for (int i = 0; i < colorCheckPhysicControllers.Count; i++)
+            {
+                StartCoroutine(CheckCount(colorCheckPhysicControllers[i].stackList,i));
+            }
         }
-        private IEnumerator CheckCount()
+        private IEnumerator CheckCount(List<GameObject> stackList, int index)
         {
             Debug.Log(GetStackCount());
-            if (GetStackCount() <= 1)
+
+            if (GetStackCount() <= 0)
             {
-                Debug.Log("In");
                 #region Collectable Material Outline Jobs
 
-                //OutlineJobs(0);
+                OutlineJobs(0, stackList);
 
                 #endregion
 
@@ -143,32 +148,35 @@ namespace Managers
                 PlayDroneAnim();
 
                 yield return new WaitForSeconds(7.5f / 2f);// kill wrong collectables
-                //CheckColor();
+
+
+                colorCheckPhysicControllers[index].CheckColor();
+
+
                 yield return new WaitForSeconds(7.5f / 2f);// wait for drone movement
                 var _playerManager = FindObjectOfType<PlayerManager>();
-                //AfterDroneMovementJobs(_playerManager);
+                AfterDroneMovementJobs(_playerManager);
+                OutlineJobs(25, stackList);
                 #endregion
             }
         }
 
-       /* private void OutlineJobs(float endValue)
+        private void OutlineJobs(float endValue, List<GameObject> stackList)
         {
             for (int i = 0; i < stackList.Count; i++)
             {
                 var materialColor = stackList[i].GetComponentInChildren<SkinnedMeshRenderer>().material;
-                materialColor.DOFloat(endValue, "_OutlineSize", 0.5f);
+                materialColor.DOFloat(endValue, "_OutlineSize", 1f);
             }
 
         }
-
+        
         private void AfterDroneMovementJobs(PlayerManager _playerManager)
         {
-            StackSignals.Instance.onGetStackList?.Invoke(stackList);
             CameraSignals.Instance.onSetCameraTarget?.Invoke(_playerManager.transform);
             _playerManager.transform.DOMoveZ(_playerManager.transform.position.z + 2.9f, .5f);
             CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(1);
-            OutlineJobs(15);
-        }*/
+        }
 
     }
 }

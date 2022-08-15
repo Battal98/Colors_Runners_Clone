@@ -63,11 +63,6 @@ namespace Controllers
                 StackSignals.Instance.onRemoveInStack?.Invoke(transform.parent.gameObject);
             }
 
-            if (other.CompareTag("CheckArea"))
-            {
-                Debug.Log("Deneme");
-                ColorCheckAreaSignals.Instance.onCheckStackCount?.Invoke();
-            }
         }
 
     }
