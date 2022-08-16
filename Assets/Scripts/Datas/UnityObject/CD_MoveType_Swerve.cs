@@ -26,54 +26,20 @@ namespace Data.UnityObject
         private void SwerveMove(ref int _inDroneArea, ref Rigidbody rigidbody, ref PlayerMovementData movementData,
             ref Vector3 inputValue, ref Vector2 clampValues)
         {
-            var velocity = rigidbody.velocity;
-            velocity = new Vector3(inputValue.x * movementData.SidewaysSpeed, velocity.y,
+            rigidbody.velocity = new Vector3(inputValue.x * movementData.SidewaysSpeed, rigidbody.velocity.y,
                 movementData.ForwardSpeed * _inDroneArea);
-            rigidbody.velocity = velocity;
 
-            Vector3 position;
-            position = new Vector3(
+
+            rigidbody.position = new Vector3(
                 Mathf.Clamp(rigidbody.position.x, clampValues.x,
                     clampValues.y),
-                (position = rigidbody.position).y,
-                position.z);
-            rigidbody.position = position;
-            // RotCalculater(ref inputValue, rigidbody, velocity);
+                (rigidbody.position).y,
+                rigidbody.position.z);
         }
 
         private void StopSideways(ref int _inDroneArea, ref Rigidbody rigidbody, ref PlayerMovementData movementData)
         {
-            rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, movementData.ForwardSpeed * _inDroneArea);
-            rigidbody.angularVelocity = Vector3.zero;
-
-         //rigidbody.transform.rotation = Quaternion.Slerp(rigidbody.transform.rotation, Quaternion.identity, 1f);
-            // rigidbody.transform.DOLocalRotate(Vector3.zero, 0.1f);
-        }
-
-
-        private void RotCalculater(ref Vector3 inputValue, Rigidbody rigidbody, Vector3 position)
-        {
-            if (inputValue.x == 0)
-            {
-                rigidbody.transform.rotation =
-                    Quaternion.Slerp(rigidbody.transform.rotation, Quaternion.identity, 1);
-
-                // rigidbody.transform.DOLocalRotate(Vector3.zero, 0.05f);
-            }
-            else
-            {
-                rigidbody.transform.rotation = Quaternion.Slerp(
-                    quaternion.identity,
-                    new Quaternion(
-                       0,  rigidbody.velocity.x*Time.fixedDeltaTime,0, 1
-                    ),
-                    1
-                );
-
-
-                // rigidbody.transform.rotation = Quaternion.Lerp(rigidbody.transform.rotation, new Quaternion(rigidbody.transform.rotation.x,rigidbody.velocity.x,rigidbody.transform.rotation.z,1), 0.95f);
-                // rigidbody.transform.DOLocalRotate(new Vector3(0, position.x * 10f, 0), 0.05f);
-            }
+         
         }
     }
 }

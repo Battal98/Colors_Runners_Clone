@@ -27,7 +27,6 @@ namespace Managers
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private CapsuleCollider capsuleCollider;
-        [SerializeField] private CharacterController characterController;
         [SerializeField] private TextMeshPro scoreText;
 
         #endregion
@@ -91,39 +90,17 @@ namespace Managers
 
         private void OnGetGameState(GameStates states)
         {
-            CheckGameStates(states);
+           
             playerAnimationController.gameObject.SetActive(true);
             playerMovementController.ChangeStates(states);
         }
 
-        private void CheckGameStates(GameStates states)
-        {
-            if (states == GameStates.Runner)
-            {
-                capsuleCollider.enabled = true;
-                rigidbody.isKinematic = false;
-                rigidbody.useGravity = true;
-                characterController.enabled = false;
-            }
-            else if (states == GameStates.Idle)
-            {
-                capsuleCollider.enabled = false;
-                rigidbody.isKinematic = true;
-                rigidbody.useGravity = false;
-                characterController.enabled = true;
-            }
-        }
+       
         private void OnSetScoreText(int Values)
         {
             scoreText.text = Values.ToString();
         }
-
-        IEnumerator WaitForFinal()
-        {
-            playerAnimationController.Playanim(animationStates: PlayerAnimationStates.Idle);
-            yield return new WaitForSeconds(2f);
-            gameObject.SetActive(false);
-        }
+        
 
         private void OnPlay()
         {
@@ -143,7 +120,6 @@ namespace Managers
             playerMovementController.Stop();
             playerMovementController.InDroneArea(value);
         }
-
         private void OnExitDroneArea()
         { 
             CameraSignals.Instance.onSetCameraTarget?.Invoke(transform);

@@ -1,12 +1,12 @@
-using Data.UnityObject;
+using Commands;
+using Commands.Player;
 using Data.ValueObject;
-using DG.Tweening;
 using Keys;
 using Managers;
 using UnityEngine;
 using Enums;
-using Signals;
 using Sirenix.OdinInspector;
+
 
 namespace Controllers
 {
@@ -15,7 +15,7 @@ namespace Controllers
         #region Self Variables
 
         #region Public Variables
-        
+
         #endregion
 
         #region Serialized Variables
@@ -27,14 +27,17 @@ namespace Controllers
         #endregion
 
         #region Private Variables
-        [ShowInInspector]
-        [Header("Data")] private PlayerMovementData _movementData;
+
+        [ShowInInspector] [Header("Data")] private PlayerMovementData _playerMovementData;
         private bool _isReadyToMove, _isReadyToPlay;
-        private int _inDroneArea=1;
+        private int _inDroneArea = 1;
         private Vector3 _inputValue;
         private Vector2 _clampValues;
         private GameStates _states;
-        private CD_MovementList _movementList;
+        private InputParams _inputParams;
+        private MoveSwerveCommand _moveSwerveCommand;
+        private StopSideWaysCommand _stopSideWaysCommand;
+        private JoyStickMoveCommand _joyStickMoveCommand;
 
         #endregion
 
@@ -42,13 +45,19 @@ namespace Controllers
 
         private void Awake()
         {
-            _movementList = GetMovementTypeList();
+            Init();
         }
-        private CD_MovementList GetMovementTypeList() => Resources.Load<CD_MovementList>("Data/CD_MovementList");
+
+        private void Init()
+        {
+            _moveSwerveCommand = new MoveSwerveCommand(ref rigidbody, ref _playerMovementData);
+            _stopSideWaysCommand = new StopSideWaysCommand(ref rigidbody, ref _playerMovementData);
+            _joyStickMoveCommand = new JoyStickMoveCommand(ref rigidbody, ref _playerMovementData,ref characterController);
+        }
 
         public void SetMovementData(PlayerMovementData dataMovementData)
         {
-            _movementData = dataMovementData;
+            _playerMovementData = dataMovementData;
         }
 
         public void EnableMovement()
@@ -63,14 +72,12 @@ namespace Controllers
 
         public void ChangeStates(GameStates states)
         {
-
             _states = states;
-
         }
+
         public void UpdateInputValue(InputParams inputParam)
         {
-            _inputValue = inputParam.Values;
-            _clampValues = inputParam.ClampValues;
+            _inputParams = inputParam;
         }
 
         public void IsReadyToPlay(bool state)
@@ -80,27 +87,55 @@ namespace Controllers
 
         public void InDroneArea(int state)
         {
-
             _inDroneArea = state;
         }
-
-       /* public void PlayerAfterDroneMovement()
-        {
-            CameraSignals.Instance.onSetCameraTarget?.Invoke(this.transform);
-            this.transform.DOMoveZ(this.transform.position.z + 2.9f, .5f);
-        }*/
 
 
         private void FixedUpdate()
         {
             if (_isReadyToPlay)
             {
-               
-                    _movementList.MovementTypeList[(int)_states].DoMovement(ref _inDroneArea,ref _isReadyToMove,ref rigidbody, ref _inputValue,
-                        ref _movementData, ref _clampValues, ref  characterController, this.gameObject.transform);
+                ChangeMoveType();
             }
             else
                 Stop();
+        }
+
+        private void ChangeMoveType()
+        {
+            switch (_states)
+            {
+                case GameStates.Runner:
+                    MoveSwerve();
+                    break;
+                case GameStates.Idle:
+                    Moveidle();
+                    break;
+            }
+        }
+
+        private void Moveidle()
+        {
+            if (_isReadyToMove)
+            {
+                _joyStickMoveCommand.Execute(_inputParams);
+            }
+            else
+            {
+                rigidbody.velocity = Vector3.zero;
+            }
+        }
+
+        private void MoveSwerve()
+        {
+            if (_isReadyToMove)
+            {
+                _moveSwerveCommand.Execute(_inputParams);
+            }
+            else
+            {
+                _stopSideWaysCommand.Execute();
+            }
         }
 
         public void Stop()
@@ -108,6 +143,7 @@ namespace Controllers
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
         }
+
         public void OnReset()
         {
             Stop();
