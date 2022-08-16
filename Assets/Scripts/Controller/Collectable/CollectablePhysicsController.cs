@@ -55,8 +55,8 @@ namespace Controllers
             if (other.CompareTag("Gate"))
             {
                 var otherMR = other.gameObject.transform.parent.GetComponentInChildren<MeshRenderer>();
-                collectablemanager.CollectableMaterial = otherMR.material;
-                collectableSkinnedMeshRenderer.material.color = otherMR.material.color;
+                //otherMR.material
+                StackSignals.Instance.onChangeCollectableColor?.Invoke(otherMR.material);
             }
 
 

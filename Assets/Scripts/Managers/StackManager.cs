@@ -38,6 +38,7 @@ namespace Managers
         private CollectableRemoveOnStackCommand _collectableRemoveOnStackCommand;
         private TransportInStack _transportInStack;
         private CollectableAnimSetCommand _collectableAnimSetCommand;
+        private ChangeCollectableColorCommand _changeCollectableColorCommand;
         private Transform _playerManager;
         private float _stackScore;
         
@@ -111,6 +112,8 @@ namespace Managers
             _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager, ref collectableHolder, ref StackData);
             _transportInStack = new TransportInStack(ref stackList, ref stackManager, ref StackData);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
+            _changeCollectableColorCommand = new ChangeCollectableColorCommand(ref stackList);
+
         }
 
         private void Update()
@@ -146,10 +149,7 @@ namespace Managers
         }
         private void OnChangeCollectableColor(Material colorType)
         {
-            for (int i = 0; i < stackList.Count; i++)
-            {
-                stackList[i].GetComponent<CollectableManager>().CollectableColorChange(colorType);//command olustur
-            }
+            _changeCollectableColorCommand.Execute(colorType);
         }
 
         private void OnTransportInStack(GameObject _obj, Transform target)
