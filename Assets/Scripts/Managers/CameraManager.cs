@@ -13,6 +13,8 @@ namespace Managers
         #region Public Variables
         public CinemachineVirtualCamera RunnerCamera;
         public CinemachineVirtualCamera IdleGameCamera;
+        [SerializeField]
+        private CinemachineStateDrivenCamera stateDrivenCamera;
         
         #endregion
 
@@ -83,14 +85,14 @@ namespace Managers
 
         private void OnSetCameraTarget(Transform _target)
         {
-            RunnerCamera.Follow = _target;
-            IdleGameCamera.Follow = _target;
+            stateDrivenCamera.Follow = _target;
+            stateDrivenCamera.Follow = _target;
         }
 
         private void OnReset()
         {
-            RunnerCamera.Follow = null;
-            RunnerCamera.LookAt = null;
+            stateDrivenCamera.Follow = null;
+            stateDrivenCamera.LookAt = null;
             OnMoveToInitialPosition();
         }
 

@@ -1714,6 +1714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RunnerCamera: {fileID: 915307334}
   IdleGameCamera: {fileID: 1060677121}
+  stateDrivenCamera: {fileID: 826220961}
 --- !u!1 &884425883
 GameObject:
   m_ObjectHideFlags: 0

@@ -113,13 +113,6 @@ namespace Managers
                 characterController.enabled = true;
             }
         }
-
-        public void StackJumpPlatform()
-        {
-            playerMovementController.PlayerJump(Data.MovementData.PlayerJumpDistance,
-                Data.MovementData.PlayerJumpDistance);
-        }
-
         private void OnSetScoreText(int Values)
         {
             scoreText.text = Values.ToString();

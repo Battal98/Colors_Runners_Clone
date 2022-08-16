@@ -53,12 +53,7 @@ namespace Controllers
                 var otherMR = other.gameObject.transform.parent.GetComponentInChildren<MeshRenderer>();
                 _playerSkinnedMeshRenderer.material.color = otherMR.material.color;
             }
-            
-            if (other.CompareTag("JumpArea"))
-            {
-                _playerManager.StackJumpPlatform();
-            }
-
+           
             if (other.CompareTag("CheckArea"))
             {
                 Debug.Log(other.transform.parent);
