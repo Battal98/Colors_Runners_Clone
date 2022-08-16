@@ -1185,7 +1185,7 @@ MonoBehaviour:
   CollectableMaterial: {fileID: 2100000, guid: 6d14e967f12d78c4f8966f0c8e2c92f9, type: 2}
   collectableAnimationController: {fileID: 907190927851016078}
   collectableColorType: 4
-  _collectableManager: {fileID: 1760233938649184601}
+  collectableManager: {fileID: 1760233938649184601}
   skinnedMesh: {fileID: 1760233937623715504}
 --- !u!1 &1760233938688452301
 GameObject:

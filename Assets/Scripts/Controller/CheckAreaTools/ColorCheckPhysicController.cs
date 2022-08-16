@@ -27,7 +27,7 @@ public class ColorCheckPhysicController : MonoBehaviour
     {
         if (other.CompareTag("Collectable"))
         {
-            switch (colorCheckAreaManager.areaType)
+            switch (colorCheckAreaManager.AreaType)
             {
                 case ColorCheckAreaType.Drone:
 

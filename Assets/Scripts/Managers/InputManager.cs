@@ -17,14 +17,14 @@ namespace Managers
 
         #region Public Variables
 
-        public Vector3? _mousePosition;//ref type
+        public Vector3? MousePosition;//ref type
         
         #endregion
         
         #region Serialized Variables
 
         [SerializeField] private bool isJoystick = false;
-        [SerializeField] private Joystick _joystick;
+        [SerializeField] private Joystick joystick;
         [SerializeField] private InputManager inputManager;
         [SerializeField]private bool isReadyForTouch, isFirstTimeTouchTaken;
         
@@ -49,23 +49,17 @@ namespace Managers
         private void Awake()
         {
             _inputData = GetInputData();
-           
+            Init();
         }
 
-        private void Start()
-        {
-            GetReferences();
-        }
-        
-
-        private void GetReferences()
+        private void Init()
         {
             _endofDraggingCommand = new EndOfDraggingCommand( ref _joystickPos, ref _moveVector);
-            _startOfDraggingCommand = new StartOfDraggingCommand( ref _joystickPos, ref isFirstTimeTouchTaken,ref _joystick,ref inputManager);
+            _startOfDraggingCommand = new StartOfDraggingCommand( ref _joystickPos, ref isFirstTimeTouchTaken,ref joystick,ref inputManager);
             _duringOnDraggingCommand =
                 new DuringOnDraggingCommand( ref _inputData, ref _moveVector, ref _currentVelocity,ref inputManager);
             _duringOnDraggingJoystickCommand =
-                new DuringOnDraggingJoystickCommand(ref _joystickPos, ref _moveVector, ref _joystick);
+                new DuringOnDraggingJoystickCommand(ref _joystickPos, ref _moveVector, ref joystick);
         }
         private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
 
@@ -102,6 +96,7 @@ namespace Managers
        
 
         #endregion
+
         private void Update()
         {
             if (!isReadyForTouch) return;
@@ -131,7 +126,7 @@ namespace Managers
                     }
                     else
                     {
-                        if (_mousePosition != null)
+                        if (MousePosition != null)
                         {
                             _duringOnDraggingCommand.Execute();
                             
@@ -170,12 +165,12 @@ namespace Managers
             if (states==GameStates.Idle)
             {
                 Debug.Log("nerde");
-                _joystick.gameObject.SetActive(true);
+                joystick.gameObject.SetActive(true);
                 isJoystick = true;
             }
             else
             {
-                _joystick.gameObject.SetActive(false);
+                joystick.gameObject.SetActive(false);
                 isJoystick = false;
 
             }

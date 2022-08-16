@@ -15,7 +15,7 @@ namespace Managers
 
         #region Public Variables
 
-        public ColorCheckAreaType areaType;
+        public ColorCheckAreaType AreaType;
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace Managers
 
         [SerializeField] private GameObject turret;
         [SerializeField] private GameObject drone;
-        [SerializeField] private ColorCheckAreaManager _colorCheckAreaManager;
+        [SerializeField] private ColorCheckAreaManager colorCheckAreaManager;
         [SerializeField] private DroneController droneController;
         [SerializeField] private List<TurretController> turretController;
         [SerializeField] private List<ColorCheckPhysicController> colorCheckPhysicControllers;
@@ -51,9 +51,6 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            ColorCheckAreaSignals.Instance.onTurretActive += OnTurretActive;
-            ColorCheckAreaSignals.Instance.onDroneActive += OnDroneActive;
-            ColorCheckAreaSignals.Instance.onInteractionColorCheck += OnInteractionColorCheck;
             ColorCheckAreaSignals.Instance.onCheckAreaControl += OnCheckAreaControl;
 
             StackSignals.Instance.onStackTransferComplete += OnCheckStackCount;
@@ -63,9 +60,6 @@ namespace Managers
 
         private void UnsubscribeEvents()
         {
-            ColorCheckAreaSignals.Instance.onTurretActive -= OnTurretActive;
-            ColorCheckAreaSignals.Instance.onDroneActive -= OnDroneActive;
-            ColorCheckAreaSignals.Instance.onInteractionColorCheck -= OnInteractionColorCheck;
            
             ColorCheckAreaSignals.Instance.onCheckAreaControl -= OnCheckAreaControl;
             StackSignals.Instance.onStackTransferComplete -= OnCheckStackCount;
@@ -82,39 +76,41 @@ namespace Managers
         private void Awake()
         {
             GetReferences();
+            Init();
         }
 
         private void GetReferences()
         {
-            switch (areaType)
+            switch (AreaType)
             {
                 case ColorCheckAreaType.Drone:
-                    OnDroneActive();
+                    DroneActive();
                     break;
                 case ColorCheckAreaType.Turret:
-                    OnTurretActive();
+                    TurretActive();
                     break;
             }
-
-            _outLineChangeCommand = new OutLineChangeCommand( );
-            _moveCollectableToCheckAreaCommand = new MoveCollectableToCheckAreaCommand( );
-            _droneCheckCountCommand = new DroneCheckCountCommand(ref colorCheckPhysicControllers,ref _colorCheckAreaManager);
         }
-        private void OnTurretActive()
+
+        private void Init()
+        {
+            _outLineChangeCommand = new OutLineChangeCommand();
+            _moveCollectableToCheckAreaCommand = new MoveCollectableToCheckAreaCommand();
+            _droneCheckCountCommand = new DroneCheckCountCommand(ref colorCheckPhysicControllers, ref colorCheckAreaManager);
+        }
+        private void TurretActive()
         {
             if (!turret.activeInHierarchy)
                 turret.SetActive(true);
             drone.SetActive(false);
         }
-        private void OnDroneActive()
+        private void DroneActive()
         {
             if (!drone.activeInHierarchy)
                 drone.SetActive(true);
             turret.SetActive(false);
         }
-        private void OnInteractionColorCheck(GameObject _obj)   
-        {
-        }
+
         public void PlayDroneAnim()
         {
             droneController.DroneMove();

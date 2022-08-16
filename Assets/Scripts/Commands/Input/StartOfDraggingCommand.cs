@@ -45,7 +45,7 @@ namespace Commands
                 InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
             }
 
-            _manager._mousePosition = Input.mousePosition;
+            _manager.MousePosition = Input.mousePosition;
             _joystickPos = new Vector3(_joystick.Horizontal, 0, _joystick.Vertical);
         }
     }

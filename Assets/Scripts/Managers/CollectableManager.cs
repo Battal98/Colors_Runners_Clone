@@ -25,7 +25,7 @@ namespace Managers
 
         [SerializeField] private CollectableAnimationController collectableAnimationController; 
         [SerializeField] private ColorType collectableColorType;
-        [SerializeField] private CollectableManager _collectableManager;
+        [SerializeField] private CollectableManager collectableManager;
         [SerializeField] private SkinnedMeshRenderer skinnedMesh;
         
         #endregion
@@ -43,13 +43,13 @@ namespace Managers
         private void Awake()
         {
             CollectableMaterial = GetCollectableData();
-            References();
+            Init();
            
         }
-        private void References()
+        private void Init()
         {
-            _collectableColorCheckCommand = new CollectableColorCheckCommand(ref _collectableManager);
-            _collectableMeshController = new CollectableMeshController(ref skinnedMesh,ref _collectableManager);
+            _collectableColorCheckCommand = new CollectableColorCheckCommand(ref collectableManager);
+            _collectableMeshController = new CollectableMeshController(ref skinnedMesh,ref collectableManager);
         }
         private void Start()
         {

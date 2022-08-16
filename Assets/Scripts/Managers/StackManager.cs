@@ -35,7 +35,6 @@ namespace Managers
         private CollectableAddOnStackCommand _collectableAddOnStackCommand;
         private StackLerpMovementCommand _stackLerpMovementCommand;
         private StackScaleCommand _stackScaleCommand;
-        private StackJumpCommand _stackJumpCommand;
         private CollectableRemoveOnStackCommand _collectableRemoveOnStackCommand;
         private TransportInStack _transportInStack;
         private CollectableAnimSetCommand _collectableAnimSetCommand;
@@ -58,12 +57,10 @@ namespace Managers
             StackSignals.Instance.onAddInStack += OnAddInStack;
             StackSignals.Instance.onRemoveInStack += OnRemoveInStack;
             StackSignals.Instance.onTransportInStack += OnTransportInStack;
-            StackSignals.Instance.onSetStackList += OnSetStacklistToPlayer;
             StackSignals.Instance.onGetStackList += OnGetStackList;
             StackSignals.Instance.onSetCollectableAnimState += OnCollectableAnimState;
             StackSignals.Instance.onChangeCollectableColor += OnChangeCollectableColor;
             StackSignals.Instance.onSendStackCount += OnSendStackListCount;
-            // StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
@@ -74,13 +71,10 @@ namespace Managers
             StackSignals.Instance.onAddInStack -= OnAddInStack;
             StackSignals.Instance.onRemoveInStack -= OnRemoveInStack;
             StackSignals.Instance.onTransportInStack -= OnTransportInStack;
-            StackSignals.Instance.onSetStackList -= OnSetStacklistToPlayer;
             StackSignals.Instance.onGetStackList -= OnGetStackList;
             StackSignals.Instance.onSetCollectableAnimState -= OnCollectableAnimState;
             StackSignals.Instance.onChangeCollectableColor -= OnChangeCollectableColor;
             StackSignals.Instance.onSendStackCount -= OnSendStackListCount;
-
-            // StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
         }
@@ -102,8 +96,23 @@ namespace Managers
         private void Awake()
         {
             GetReferences();
+            Init();
         }
-        
+        private void GetReferences()
+        {
+            StackData = GetStackData();
+        }
+
+        private void Init()
+        {
+            _collectableAddOnStackCommand = new CollectableAddOnStackCommand(ref stackManager, ref stackList, ref StackData);
+            _stackLerpMovementCommand = new StackLerpMovementCommand(ref stackList, ref StackData);
+            _stackScaleCommand = new StackScaleCommand(ref stackList, ref StackData);
+            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager, ref collectableHolder, ref StackData);
+            _transportInStack = new TransportInStack(ref stackList, ref stackManager, ref StackData);
+            _collectableAnimSetCommand = new CollectableAnimSetCommand();
+        }
+
         private void Update()
         {
             if (!_playerManager)
@@ -111,17 +120,7 @@ namespace Managers
             _stackLerpMovementCommand.Execute(ref _playerManager);
         }
 
-        private void GetReferences()
-        {
-            StackData = GetStackData();
-            _collectableAddOnStackCommand = new CollectableAddOnStackCommand(ref stackManager, ref stackList,ref StackData);
-            _stackLerpMovementCommand = new StackLerpMovementCommand(ref stackList, ref StackData);
-            _stackScaleCommand = new StackScaleCommand(ref stackList, ref StackData);
-            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager, ref collectableHolder,ref StackData);
-            _transportInStack = new TransportInStack(ref stackList,ref stackManager, ref StackData);
-            _collectableAnimSetCommand = new CollectableAnimSetCommand();
-            _stackJumpCommand = new StackJumpCommand(ref stackList, ref StackData);
-        }
+
         private void FindPlayer()
         {
             if (!_playerManager)
@@ -149,15 +148,10 @@ namespace Managers
         {
             for (int i = 0; i < stackList.Count; i++)
             {
-                stackList[i].GetComponent<CollectableManager>().CollectableColorChange(colorType);
+                stackList[i].GetComponent<CollectableManager>().CollectableColorChange(colorType);//command olustur
             }
         }
 
-
-        // private void OnStackJumpPlatform()
-        // {
-        //     StartCoroutine(_stackJumpCommand.Execute(StackData.StackJumpDistance,StackData.StackJumpDuration));
-        // }
         private void OnTransportInStack(GameObject _obj, Transform target)
         {
             _transportInStack.Execute(_obj, target);
@@ -180,22 +174,12 @@ namespace Managers
             _collectableAnimSetCommand.Execute(obj,animState);
         }
 
-        private void OnSetStacklistToPlayer(List<GameObject> _stackList)
-        {
-            for (int i = 0; i < stackList.Count; i++)
-            {
-                _stackList.Add(stackList[i]);
-            }
-        }
-
         private void OnGetStackList(GameObject _stackListObj)
         {
             _stackListObj.transform.parent = this.transform;
             _collectableAnimSetCommand.Execute(_stackListObj, CollectableAnimationStates.Run);
             stackList.Add(_stackListObj);
         }
-        
-
         private void OnPlay()
         {
             FindPlayer();

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class ObstacleManager : MonoBehaviour
+    public class ObstacleAnimationStarter : MonoBehaviour
     {
         #region Self Variables
     

@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isJoystick: 0
-  _joystick: {fileID: 549926150}
+  joystick: {fileID: 549926150}
   inputManager: {fileID: 160933480}
   isReadyForTouch: 0
   isFirstTimeTouchTaken: 0

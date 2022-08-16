@@ -50,12 +50,11 @@ namespace Managers
             InputSignals.Instance.onInputTaken += playerMovementController.EnableMovement;
             InputSignals.Instance.onInputReleased += playerMovementController.DeactiveMovement;
             InputSignals.Instance.onInputDragged += playerMovementController.UpdateInputValue;
-            CoreGameSignals.Instance.onGetGameState += OnGetCameraState;
+            CoreGameSignals.Instance.onGetGameState += OnGetGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlayerChangeForwardSpeed += OnPlayerChangeForwardSpeed;
             CoreGameSignals.Instance.onExitDroneArea += OnExitDroneArea;
-            StackSignals.Instance.onStackJumpPlatform += OnStackJumpPlatform;
         }
 
         private void Unsubscribe()
@@ -63,12 +62,11 @@ namespace Managers
             InputSignals.Instance.onInputTaken -= playerMovementController.EnableMovement;
             InputSignals.Instance.onInputReleased -= playerMovementController.DeactiveMovement;
             InputSignals.Instance.onInputDragged -= playerMovementController.UpdateInputValue;
-            CoreGameSignals.Instance.onGetGameState -= OnGetCameraState;
+            CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlayerChangeForwardSpeed -= OnPlayerChangeForwardSpeed;
             CoreGameSignals.Instance.onExitDroneArea -= OnExitDroneArea;
-            StackSignals.Instance.onStackJumpPlatform -= OnStackJumpPlatform;
         }
 
         private void OnDisable()
@@ -91,14 +89,14 @@ namespace Managers
             playerMovementController.SetMovementData(Data.MovementData);
         }
 
-        private void OnGetCameraState(GameStates states)
+        private void OnGetGameState(GameStates states)
         {
-            ChechGameStates(states);
+            CheckGameStates(states);
             playerAnimationController.gameObject.SetActive(true);
             playerMovementController.ChangeStates(states);
         }
 
-        private void ChechGameStates(GameStates states)
+        private void CheckGameStates(GameStates states)
         {
             if (states == GameStates.Runner)
             {
@@ -116,22 +114,11 @@ namespace Managers
             }
         }
 
-        private void OnStackJumpPlatform()
+        public void StackJumpPlatform()
         {
             playerMovementController.PlayerJump(Data.MovementData.PlayerJumpDistance,
                 Data.MovementData.PlayerJumpDistance);
         }
-
-        private void OnLevelSuccessful()
-        {
-            playerMovementController.IsReadyToPlay(false);
-        }
-
-        private void OnLevelFailed()
-        {
-            playerMovementController.IsReadyToPlay(false);
-        }
-
 
         private void OnSetScoreText(int Values)
         {
@@ -143,7 +130,6 @@ namespace Managers
             playerAnimationController.Playanim(animationStates: PlayerAnimationStates.Idle);
             yield return new WaitForSeconds(2f);
             gameObject.SetActive(false);
-            // CoreGameSignals.Instance.onMiniGameStart?.Invoke();
         }
 
         private void OnPlay()

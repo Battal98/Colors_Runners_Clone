@@ -33,7 +33,7 @@ namespace Commands
         
         public void Execute()
         {
-            Vector3 mouseDeltaPos = (Vector3)Input.mousePosition - _manager._mousePosition.Value;
+            Vector3 mouseDeltaPos = (Vector3)Input.mousePosition - _manager.MousePosition.Value;
             if (mouseDeltaPos.x > _inputData.PlayerInputSpeed)
                 _moveVector.x = _inputData.PlayerInputSpeed / 10f * mouseDeltaPos.x;
             else if (mouseDeltaPos.x < -_inputData.PlayerInputSpeed)
@@ -42,7 +42,7 @@ namespace Commands
                 _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f,ref _currentVelocity,
                     _inputData.ClampSpeed);
 
-            _manager._mousePosition = Input.mousePosition;
+            _manager.MousePosition = Input.mousePosition;
 
             InputSignals.Instance.onInputDragged?.Invoke(new InputParams()
             {

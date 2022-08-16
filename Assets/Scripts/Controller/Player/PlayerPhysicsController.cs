@@ -25,12 +25,6 @@ namespace Controllers
 
         private SkinnedMeshRenderer _playerSkinnedMeshRenderer;
         private PlayerManager _playerManager;
-        private int _value;
-        private int _count;
-        private Transform _target;
-        [ShowInInspector]
-        private List<GameObject> _stackList = new List<GameObject>();
-        private ColorCheckAreaType type;
         #endregion
 
         #endregion
@@ -38,6 +32,12 @@ namespace Controllers
         private void Awake()
         {
             GetReferances();
+        }
+
+        private void GetReferances()
+        {
+            _playerSkinnedMeshRenderer = playerMeshObj.GetComponentInChildren<SkinnedMeshRenderer>();
+            _playerManager = this.gameObject.GetComponentInParent<PlayerManager>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -48,8 +48,6 @@ namespace Controllers
                 CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
             }
 
-        
-
             if (other.CompareTag("Gate"))
             {
                 var otherMR = other.gameObject.transform.parent.GetComponentInChildren<MeshRenderer>();
@@ -58,7 +56,7 @@ namespace Controllers
             
             if (other.CompareTag("JumpArea"))
             {
-                _playerManager.transform.DOBlendableLocalMoveBy(Vector3.up * 3f,1f); // it works
+                _playerManager.StackJumpPlatform();
             }
 
             if (other.CompareTag("CheckArea"))
@@ -69,10 +67,5 @@ namespace Controllers
 
         }
 
-        private void GetReferances()
-        {
-            _playerSkinnedMeshRenderer = playerMeshObj.GetComponentInChildren<SkinnedMeshRenderer>();
-            _playerManager = this.gameObject.GetComponentInParent<PlayerManager>();
-        }
     }
 }

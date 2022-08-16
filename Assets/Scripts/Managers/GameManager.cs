@@ -61,7 +61,7 @@ namespace Managers
         private void OnSetGameState(GameStates gameStates)
         {
             CoreGameSignals.Instance.onGetGameState?.Invoke(gameStates);
-            
+            //oyunnu state i degisti diye sinyal olustur
             CameraSignals.Instance.onSetCameraState?.Invoke(CameraStatesType.Idle);
         }
     }

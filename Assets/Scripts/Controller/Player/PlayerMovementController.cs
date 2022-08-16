@@ -6,6 +6,7 @@ using Managers;
 using UnityEngine;
 using Enums;
 using Signals;
+using Sirenix.OdinInspector;
 
 namespace Controllers
 {
@@ -26,7 +27,7 @@ namespace Controllers
         #endregion
 
         #region Private Variables
-
+        [ShowInInspector]
         [Header("Data")] private PlayerMovementData _movementData;
         private bool _isReadyToMove, _isReadyToPlay;
         private int _inDroneArea=1;
