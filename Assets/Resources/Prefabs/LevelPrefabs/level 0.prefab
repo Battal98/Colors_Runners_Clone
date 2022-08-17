@@ -2903,6 +2903,10 @@ PrefabInstance:
       value: ColorCheckArea (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1539420660308345274, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+      propertyPath: AreaType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539420660308345274, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: areaType
       value: 0
       objectReference: {fileID: 0}
@@ -2924,7 +2928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1539420660308345275, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 61.84
+      value: 33.08
       objectReference: {fileID: 0}
     - target: {fileID: 1539420660308345275, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_LocalRotation.w

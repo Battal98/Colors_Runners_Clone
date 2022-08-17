@@ -35,7 +35,7 @@ namespace Commands
                 _manager.PlayDroneAnim();
                 yield return new WaitForSeconds(7.5f / 2f); // kill wrong collectables
                 _manager.SetOutline(_stack,25);
-                _stackList[index].CheckColor();
+                _stackList[index].CheckColorsForDrone();
                 CoreGameSignals.Instance.onExitDroneArea?.Invoke();
             }
         }

@@ -38,11 +38,27 @@ public class ColorCheckPhysicController : MonoBehaviour
                     break;
 
                 case ColorCheckAreaType.Turret:
-                    //forward speed down
+
+                    colorCheckAreaManager.SetTargetForTurrets();
+                    StackSignals.Instance.onSetCollectableAnimState(other.transform.parent.gameObject, CollectableAnimationStates.CrouchWalk);
+                    // player forward speed down
                     //change animation state 
                     break;
             }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+
+        if (other.CompareTag("Collectable"))
+        {
+            if (colorCheckAreaManager.AreaType == ColorCheckAreaType.Turret)
+            {
+                StackSignals.Instance.onSetCollectableAnimState(other.transform.parent.gameObject, CollectableAnimationStates.Run);
+            }
+        }
+
     }
 
     #region Invoke Signals
@@ -53,7 +69,8 @@ public class ColorCheckPhysicController : MonoBehaviour
     } 
     #endregion
 
-    public void CheckColor()
+    //burasi mesh controller'a alinacak 
+    public void CheckColorsForDrone()
     {
         int count = stackList.Count;
         transform.GetComponent<Collider>().enabled=false;
@@ -77,6 +94,28 @@ public class ColorCheckPhysicController : MonoBehaviour
                 stackList.Remove(_colHolder.GetChild(0).gameObject);
                 StackSignals.Instance.onGetStackList?.Invoke(_colHolder.GetChild(0).gameObject);
                 stackList.TrimExcess();
+            }
+        }
+    }
+
+    public void CheckColorForTurrets(TurretController turretControllers, Transform target)
+    {
+        int count = stackList.Count;
+        transform.GetComponent<Collider>().enabled = false;
+
+        for (int i = 0; i < count; i++)
+        {
+            var color = _colHolder.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().material.color;
+            if (ColorUtility.ToHtmlStringRGB(_meshRenderer.material.color) != ColorUtility.ToHtmlStringRGB(color))
+            {
+                Debug.Log("target");
+                turretControllers.targetPlayer = target.transform;
+                turretControllers.isTargetPlayer = true;
+            }
+            else
+            {
+                turretControllers.targetPlayer = null;
+                turretControllers.isTargetPlayer = false;
             }
         }
     }

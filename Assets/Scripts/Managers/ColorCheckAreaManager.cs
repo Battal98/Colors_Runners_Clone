@@ -35,7 +35,9 @@ namespace Managers
         private OutLineChangeCommand _outLineChangeCommand;
         private DroneCheckCountCommand _droneCheckCountCommand;
         private MoveCollectableToCheckAreaCommand _moveCollectableToCheckAreaCommand;
+        private SetTargetForTurretCommand _setTargetForTurret;
         private GameObject _platformCheck;
+        private Transform _target;
 
         #endregion
 
@@ -90,6 +92,8 @@ namespace Managers
                     TurretActive();
                     break;
             }
+
+            _target = FindObjectOfType<PlayerManager>().gameObject.transform;
         }
 
         private void Init()
@@ -97,6 +101,7 @@ namespace Managers
             _outLineChangeCommand = new OutLineChangeCommand();
             _moveCollectableToCheckAreaCommand = new MoveCollectableToCheckAreaCommand();
             _droneCheckCountCommand = new DroneCheckCountCommand(ref colorCheckPhysicControllers, ref colorCheckAreaManager);
+            _setTargetForTurret = new SetTargetForTurretCommand(ref turretController, ref colorCheckPhysicControllers);
         }
         private void TurretActive()
         {
@@ -115,14 +120,10 @@ namespace Managers
         {
             droneController.DroneMove();
         }
-        public void SetTargetForTurrets(Transform target, bool isPlayerDetected)
+        public void SetTargetForTurrets()
         {
-            for (var i = 0; i < turretController.Count; i++)
-            {
-                //target = FindObjectOfType<PlayerManager>().gameObject.transform;
-                turretController[i].targetPlayer = target.transform;
-                turretController[i].isTargetPlayer = isPlayerDetected;
-            }
+            for (var i = 0; i < colorCheckPhysicControllers.Count; i++)
+                _setTargetForTurret.Execute(i, _target);
         }
        
         private void OnCheckStackCount()

@@ -170,7 +170,6 @@ namespace Managers
         }
         private void OnCollectableAnimState(GameObject obj, CollectableAnimationStates animState)
         {
-            Debug.Log(animState.ToString()+ " " + animState);
             _collectableAnimSetCommand.Execute(obj,animState);
         }
 

@@ -55,7 +55,7 @@ namespace Controllers
             if (other.CompareTag("Gate"))
             {
                 var otherMR = other.gameObject.transform.parent.GetComponentInChildren<MeshRenderer>();
-                //otherMR.material
+                other.GetComponent<Collider>().enabled = false;
                 StackSignals.Instance.onChangeCollectableColor?.Invoke(otherMR.material);
             }
 
