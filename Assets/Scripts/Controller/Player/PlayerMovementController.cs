@@ -1,10 +1,12 @@
 using Commands;
 using Commands.Player;
 using Data.ValueObject;
+using DG.Tweening;
 using Keys;
 using Managers;
 using UnityEngine;
 using Enums;
+using Signals;
 using Sirenix.OdinInspector;
 
 
@@ -30,7 +32,7 @@ namespace Controllers
 
         [ShowInInspector] [Header("Data")] private PlayerMovementData _playerMovementData;
         private bool _isReadyToMove, _isReadyToPlay;
-        private int _inDroneArea = 1;
+        private float _colorAreaSpeed = 1;
         private Vector3 _inputValue;
         private Vector2 _clampValues;
         private GameStates _states;
@@ -50,7 +52,7 @@ namespace Controllers
 
         private void Init()
         {
-            _moveSwerveCommand = new MoveSwerveCommand(ref rigidbody, ref _playerMovementData);
+            _moveSwerveCommand = new MoveSwerveCommand(ref rigidbody, ref _playerMovementData,ref _colorAreaSpeed);
             _stopSideWaysCommand = new StopSideWaysCommand(ref rigidbody, ref _playerMovementData);
             _joyStickMoveCommand = new JoyStickMoveCommand(ref rigidbody, ref _playerMovementData);
         }
@@ -85,9 +87,26 @@ namespace Controllers
             _isReadyToPlay = state;
         }
 
-        public void InDroneArea(int state)
+      
+        public void OnPlayerChangeForwardSpeed(ColorCheckAreaType value)
+        { 
+            Stop();
+            switch (value)
+            {
+                case ColorCheckAreaType.Drone:
+                    _colorAreaSpeed = 0;
+                    break;
+                
+                case ColorCheckAreaType.Turret:
+                    _colorAreaSpeed = 0.5f;
+                    break;
+                        
+            }
+        }
+        public void ExitDroneArea()
         {
-            _inDroneArea = state;
+            transform.parent.DOMoveZ(transform.parent.position.z + 2.9f, .5f);
+
         }
 
 

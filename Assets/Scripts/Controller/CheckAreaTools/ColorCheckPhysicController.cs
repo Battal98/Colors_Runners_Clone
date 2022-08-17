@@ -64,13 +64,13 @@ public class ColorCheckPhysicController : MonoBehaviour
     #region Invoke Signals
     private void InvokeSignalsForDrone(GameObject other)
     {
-        CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(0);
+        CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Drone);
         StackSignals.Instance.onTransportInStack?.Invoke(other, _colHolder);
     } 
     #endregion
 
     //burasi mesh controller'a alinacak 
-    public void CheckColorsForDrone()
+    public void  CheckColorsForDrone()
     {
         int count = stackList.Count;
         transform.GetComponent<Collider>().enabled=false;
@@ -80,7 +80,7 @@ public class ColorCheckPhysicController : MonoBehaviour
             var color = _colHolder.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().material.color;
             if (ColorUtility.ToHtmlStringRGB(_meshRenderer.material.color) != ColorUtility.ToHtmlStringRGB(color))
             {
-                Debug.Log(this.name + ": Dead");
+               
                 _colHolder.GetChild(0).gameObject.GetComponent<CollectableManager>()
                     .SetAnim(CollectableAnimationStates.Dead);
                 stackList.Remove(_colHolder.GetChild(0).gameObject);
@@ -89,7 +89,6 @@ public class ColorCheckPhysicController : MonoBehaviour
             }
             else
             {
-                Debug.Log(this.name + ": Alive");
                 _colHolder.GetChild(0).GetComponentInChildren<Collider>().enabled = true;
                 stackList.Remove(_colHolder.GetChild(0).gameObject);
                 StackSignals.Instance.onGetStackList?.Invoke(_colHolder.GetChild(0).gameObject);

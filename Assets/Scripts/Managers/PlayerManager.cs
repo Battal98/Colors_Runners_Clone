@@ -52,7 +52,7 @@ namespace Managers
             CoreGameSignals.Instance.onGetGameState += OnGetGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onPlayerChangeForwardSpeed += OnPlayerChangeForwardSpeed;
+            CoreGameSignals.Instance.onPlayerChangeForwardSpeed += playerMovementController.OnPlayerChangeForwardSpeed;
             CoreGameSignals.Instance.onExitDroneArea += OnExitDroneArea;
         }
 
@@ -64,7 +64,7 @@ namespace Managers
             CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onPlayerChangeForwardSpeed -= OnPlayerChangeForwardSpeed;
+            CoreGameSignals.Instance.onPlayerChangeForwardSpeed -= playerMovementController.OnPlayerChangeForwardSpeed;
             CoreGameSignals.Instance.onExitDroneArea -= OnExitDroneArea;
         }
 
@@ -90,17 +90,16 @@ namespace Managers
 
         private void OnGetGameState(GameStates states)
         {
-           
             playerAnimationController.gameObject.SetActive(true);
             playerMovementController.ChangeStates(states);
         }
 
-       
+
         private void OnSetScoreText(int Values)
         {
             scoreText.text = Values.ToString();
         }
-        
+
 
         private void OnPlay()
         {
@@ -115,17 +114,11 @@ namespace Managers
             playerAnimationController.OnReset();
         }
 
-        public void OnPlayerChangeForwardSpeed(int value)
-        {
-            playerMovementController.Stop();
-            playerMovementController.InDroneArea(value);
-        }
         private void OnExitDroneArea()
-        { 
+        {
             CameraSignals.Instance.onSetCameraTarget?.Invoke(transform);
-            transform.DOMoveZ(transform.position.z + 2.9f, .5f);
-            OnPlayerChangeForwardSpeed(1);
-            playerPhysicsController.GetComponent<Collider>().enabled = true;
+            playerPhysicsController.ExitDroneArea();
+            playerMovementController.ExitDroneArea();
         }
     }
 }

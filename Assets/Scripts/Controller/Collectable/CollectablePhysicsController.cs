@@ -19,12 +19,9 @@ namespace Controllers
         #endregion
 
         #region Serializable Variables
-
-        [SerializeField] private GameObject collectableMeshObj;
+        
         [SerializeField] private CollectableManager collectablemanager;
-        [SerializeField] private SkinnedMeshRenderer collectableSkinnedMeshRenderer;
-        [SerializeField] private CollectableAnimationController collectableAnimationController;
-
+       
         #endregion
 
         #region Private Variables
@@ -34,7 +31,21 @@ namespace Controllers
 
         #endregion
 
-
+        private  void CheckAreaEnter(Collider other,ColorCheckAreaType areaType)
+        {
+          
+            if ( areaType== ColorCheckAreaType.Turret)
+            { 
+                collectablemanager.SetAnim(CollectableAnimationStates.CrouchWalk);
+            }
+        }
+        private  void ColorAreaExit(Collider other,ColorCheckAreaType areaType)
+        {
+            if (areaType == ColorCheckAreaType.Turret)
+            {
+                collectablemanager.SetAnim(CollectableAnimationStates.Run);
+            }
+        }
         
 
         private void OnTriggerEnter(Collider other)
@@ -50,6 +61,11 @@ namespace Controllers
 
                 }
               
+            }
+            if (other.CompareTag("CheckArea"))
+            {
+                var areaType = other.GetComponentInParent<ColorCheckAreaManager>().AreaType;
+                CheckAreaEnter(other,areaType);
             }
 
             if (other.CompareTag("Gate"))
@@ -68,5 +84,16 @@ namespace Controllers
 
         }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("CheckArea"))
+            {
+                var areaType = other.GetComponentInParent<ColorCheckAreaManager>().AreaType;
+                ColorAreaExit(other,areaType);
+            }
+        }
+
+      
     }
+    
 }

@@ -3,9 +3,9 @@ using Managers;
 using DG.Tweening;
 using Enums;
 
-namespace Commands
+namespace Commands.ColorCheckArea
 {
-    public class MoveCollectableToCheckAreaCommand
+    public class CollectablePositionSetCommand
     {
         public void Execute(GameObject other, Transform _colHolder)
         {

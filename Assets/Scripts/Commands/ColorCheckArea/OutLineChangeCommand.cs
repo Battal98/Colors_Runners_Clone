@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Commands
+namespace Commands.ColorCheckArea
 {
     public class OutLineChangeCommand 
     {

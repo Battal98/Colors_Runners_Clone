@@ -4,9 +4,9 @@ using Managers;
 using Signals;
 using UnityEngine;
 
-namespace Commands
+namespace Commands.ColorCheckArea
 {
-    public class DroneCheckCountCommand
+    public class DroneSquencePlayCommand
     {
         #region Self Variables
 
@@ -19,7 +19,7 @@ namespace Commands
 
         #endregion
 
-        public DroneCheckCountCommand(ref List<ColorCheckPhysicController> stackList, ref ColorCheckAreaManager manager)
+        public DroneSquencePlayCommand(ref List<ColorCheckPhysicController> stackList, ref ColorCheckAreaManager manager)
         {
             _stackList = stackList;
             _manager = manager;

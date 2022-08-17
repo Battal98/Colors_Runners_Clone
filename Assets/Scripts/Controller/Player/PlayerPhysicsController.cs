@@ -39,12 +39,17 @@ namespace Controllers
             _playerSkinnedMeshRenderer = playerMeshObj.GetComponentInChildren<SkinnedMeshRenderer>();
             _playerManager = this.gameObject.GetComponentInParent<PlayerManager>();
         }
+        public void ExitDroneArea()
+        {
+       
+           transform.gameObject.SetActive(false);
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Finish"))
             {
-                Debug.Log("girdik");
+          
                 CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
             }
 

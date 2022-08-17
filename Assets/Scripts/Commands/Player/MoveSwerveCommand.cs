@@ -11,17 +11,18 @@ namespace Commands.Player
         #region Private Variables
 
         private Rigidbody _rigidbody;
-        // private InputParams _inputParams;
+        private float _colorAreaSpeed;
         private PlayerMovementData _playerMovementData;
         #endregion
         #endregion
 
         public MoveSwerveCommand(ref Rigidbody rigidbody,
-            ref PlayerMovementData playerMovementData)
+            ref PlayerMovementData playerMovementData,ref float colorAreaSpeed)
         {
             _rigidbody = rigidbody;
     
             _playerMovementData = playerMovementData;
+            _colorAreaSpeed = colorAreaSpeed;
         }
 
         public void Execute(InputParams _inputParams)
@@ -30,7 +31,7 @@ namespace Commands.Player
             _rigidbody.velocity = new Vector3(
                 _inputParams.Values.x * _playerMovementData.SidewaysSpeed,
                 _rigidbody.velocity.y,
-                _playerMovementData.ForwardSpeed);
+                _playerMovementData.ForwardSpeed*_colorAreaSpeed);
            
 
 

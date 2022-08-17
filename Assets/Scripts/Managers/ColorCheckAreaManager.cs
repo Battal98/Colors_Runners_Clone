@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Commands;
+using Commands.ColorCheckArea;
 using Controllers;
 using DG.Tweening;
 using Enums;
@@ -33,9 +34,9 @@ namespace Managers
         #region Private Variables
 
         private OutLineChangeCommand _outLineChangeCommand;
-        private DroneCheckCountCommand _droneCheckCountCommand;
-        private MoveCollectableToCheckAreaCommand _moveCollectableToCheckAreaCommand;
-        private SetTargetForTurretCommand _setTargetForTurret;
+        private DroneSquencePlayCommand _droneSquencePlayCommand;
+        private CollectablePositionSetCommand _collectablePositionSetCommand;
+        private SetTurretTargetCommand _setTurretTarget;
         private GameObject _platformCheck;
         private Transform _target;
 
@@ -99,9 +100,9 @@ namespace Managers
         private void Init()
         {
             _outLineChangeCommand = new OutLineChangeCommand();
-            _moveCollectableToCheckAreaCommand = new MoveCollectableToCheckAreaCommand();
-            _droneCheckCountCommand = new DroneCheckCountCommand(ref colorCheckPhysicControllers, ref colorCheckAreaManager);
-            _setTargetForTurret = new SetTargetForTurretCommand(ref turretController, ref colorCheckPhysicControllers);
+            _collectablePositionSetCommand = new CollectablePositionSetCommand();
+            _droneSquencePlayCommand = new DroneSquencePlayCommand(ref colorCheckPhysicControllers, ref colorCheckAreaManager);
+            _setTurretTarget = new SetTurretTargetCommand(ref turretController, ref colorCheckPhysicControllers);
         }
         private void TurretActive()
         {
@@ -123,7 +124,7 @@ namespace Managers
         public void SetTargetForTurrets()
         {
             for (var i = 0; i < colorCheckPhysicControllers.Count; i++)
-                _setTargetForTurret.Execute(i, _target);
+                _setTurretTarget.Execute(i, _target);
         }
        
         private void OnCheckStackCount()
@@ -131,7 +132,7 @@ namespace Managers
             if (transform.gameObject==_platformCheck)
             {
                 for (var i = 0; i < colorCheckPhysicControllers.Count; i++)
-                    StartCoroutine(_droneCheckCountCommand.Execute(colorCheckPhysicControllers[i].stackList,i));
+                    StartCoroutine(_droneSquencePlayCommand.Execute(colorCheckPhysicControllers[i].stackList,i));
             }
         }
 
@@ -149,7 +150,7 @@ namespace Managers
 
         public void MoveCollectablesToArea(GameObject other, Transform _colHolder)
         {
-            _moveCollectableToCheckAreaCommand.Execute(other, _colHolder);
+            _collectablePositionSetCommand.Execute(other, _colHolder);
         }
 
         #endregion

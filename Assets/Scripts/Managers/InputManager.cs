@@ -164,7 +164,7 @@ namespace Managers
         {
             if (states==GameStates.Idle)
             {
-                Debug.Log("nerde");
+          
                 joystick.gameObject.SetActive(true);
                 isJoystick = true;
             }
