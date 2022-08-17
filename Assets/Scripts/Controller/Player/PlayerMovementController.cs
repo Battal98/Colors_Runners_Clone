@@ -52,7 +52,7 @@ namespace Controllers
         {
             _moveSwerveCommand = new MoveSwerveCommand(ref rigidbody, ref _playerMovementData);
             _stopSideWaysCommand = new StopSideWaysCommand(ref rigidbody, ref _playerMovementData);
-            _joyStickMoveCommand = new JoyStickMoveCommand(ref rigidbody, ref _playerMovementData,ref characterController);
+            _joyStickMoveCommand = new JoyStickMoveCommand(ref rigidbody, ref _playerMovementData);
         }
 
         public void SetMovementData(PlayerMovementData dataMovementData)

@@ -8,8 +8,6 @@ namespace Commands
         #region Self Variables
 
         #region Private Variables
-
-        private CharacterController _characterController;
         private PlayerMovementData _playerMovementData;
         private Rigidbody _rigidbody;
 
@@ -17,12 +15,12 @@ namespace Commands
 
         #endregion
 
-        public JoyStickMoveCommand(ref Rigidbody rigidbody,ref PlayerMovementData playerMovementData,ref CharacterController characterController)
+        public JoyStickMoveCommand(ref Rigidbody rigidbody,ref PlayerMovementData playerMovementData)
         {
 
             _playerMovementData = playerMovementData;
             _rigidbody = rigidbody;
-            _characterController = characterController;
+          
         }
 
         public void Execute(InputParams _inputParams)
