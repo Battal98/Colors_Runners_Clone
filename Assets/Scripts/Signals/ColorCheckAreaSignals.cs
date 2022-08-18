@@ -10,7 +10,6 @@ namespace Signals
         public UnityAction onDroneActive = delegate { };
         public UnityAction<GameObject> onInteractionColorCheck = delegate { };
 
-        public UnityAction<GameObject> onCheckAreaControl=delegate{};
-
-    } 
+        public UnityAction<GameObject> onCheckAreaControl = delegate { };
+    }
 }

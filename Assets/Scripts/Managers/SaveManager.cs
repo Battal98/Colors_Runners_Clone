@@ -21,7 +21,6 @@ namespace Managers
         private void Unsubscribe()
         {
             SaveSignals.Instance.onSaveData -= OnSaveData;
-
         }
 
         private void OnDisable()
@@ -30,12 +29,13 @@ namespace Managers
         }
 
         #endregion
+
         private void OnSaveData()
         {
             OnSaveGame(
                 new SaveGameDataParams()
                 {
-                  Level = SaveSignals.Instance.onGetLevel(),
+                    Level = SaveSignals.Instance.onGetLevel(),
                 }
             );
         }
@@ -45,5 +45,4 @@ namespace Managers
             if (saveDataParams.Level != null) ES3.Save("Level", saveDataParams.Level);
         }
     }
-    
 }

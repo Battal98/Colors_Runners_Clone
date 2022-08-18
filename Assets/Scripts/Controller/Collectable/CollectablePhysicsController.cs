@@ -1,10 +1,8 @@
-using System;
-using Controller;
 using UnityEngine;
 using Signals;
 using Managers;
 using Enums;
-using DG.Tweening;
+
 
 namespace Controllers
 {
@@ -19,9 +17,9 @@ namespace Controllers
         #endregion
 
         #region Serializable Variables
-        
+
         [SerializeField] private CollectableManager collectablemanager;
-       
+
         #endregion
 
         #region Private Variables
@@ -32,21 +30,22 @@ namespace Controllers
 
         #endregion
 
-        private  void CheckAreaEnter(ColorCheckAreaType areaType)
+        private void CheckAreaEnter(ColorCheckAreaType areaType)
         {
-          
-            if ( areaType== ColorCheckAreaType.Turret)
-            { 
+            if (areaType == ColorCheckAreaType.Turret)
+            {
                 collectablemanager.SetAnim(CollectableAnimationStates.CrouchWalk);
             }
         }
-        private  void ColorAreaExit(ColorCheckAreaType areaType)
+
+        private void ColorAreaExit(ColorCheckAreaType areaType)
         {
             if (areaType == ColorCheckAreaType.Turret)
             {
                 collectablemanager.SetAnim(CollectableAnimationStates.Run);
             }
         }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Collectable") && isTaken)
@@ -56,12 +55,12 @@ namespace Controllers
                 {
                     otherPhysic.isTaken = true;
                     collectablemanager.CollectableColorCheck(other.transform.parent.gameObject);
-
                 }
             }
+
             if (other.CompareTag("CheckArea"))
             {
-                 _areaType = other.GetComponentInParent<MiniGameAreaManager>().AreaType;
+                _areaType = other.GetComponentInParent<MiniGameAreaManager>().AreaType;
                 CheckAreaEnter(_areaType);
             }
 
@@ -78,7 +77,6 @@ namespace Controllers
                 other.gameObject.SetActive(false);
                 StackSignals.Instance.onRemoveInStack?.Invoke(transform.parent.gameObject);
             }
-
         }
 
         private void OnTriggerExit(Collider other)
@@ -89,5 +87,4 @@ namespace Controllers
             }
         }
     }
-    
 }

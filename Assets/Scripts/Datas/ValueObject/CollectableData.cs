@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Datas.ValueObject
 {
     [Serializable]
-    public class CollectableData 
+    public class CollectableData
     {
         public List<Material> CollectableMaterialList;
     }

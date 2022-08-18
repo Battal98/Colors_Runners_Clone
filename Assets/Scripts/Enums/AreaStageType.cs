@@ -1,6 +1,6 @@
 namespace Enums
 {
-    public enum AreaStageType 
+    public enum AreaStageType
     {
         House,
         Garden

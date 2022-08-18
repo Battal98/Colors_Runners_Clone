@@ -1,13 +1,10 @@
 using Commands;
-using Commands.Player;
 using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
 using Keys;
-using Managers;
 using UnityEngine;
 using Enums;
-using Signals;
 using Sirenix.OdinInspector;
 
 
@@ -20,7 +17,9 @@ namespace Controllers
         #region Public Variables
 
         #endregion
+
         #region Serialized Variables
+
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private CD_MovementList cdMovementList;
 
@@ -85,9 +84,9 @@ namespace Controllers
             _isReadyToPlay = state;
         }
 
-      
+
         public void PlayerChangeForwardSpeed(ColorCheckAreaType value)
-        { 
+        {
             Stop();
             switch (value)
             {
@@ -95,16 +94,15 @@ namespace Controllers
                     _colorAreaSpeed = 0;
 
                     break;
-                
+
                 case ColorCheckAreaType.Turret:
                     _colorAreaSpeed = 0.5f;
                     break;
-                        
             }
         }
+
         public void ExitColorCheckArea(ColorCheckAreaType areaType)
         {
-
             switch (areaType)
             {
                 case ColorCheckAreaType.Drone:
@@ -116,27 +114,25 @@ namespace Controllers
                     break;
             }
 
-            if (areaType==ColorCheckAreaType.Drone)
+            if (areaType == ColorCheckAreaType.Drone)
             {
                 transform.parent.DOMoveZ(transform.parent.position.z + 2.9f, .5f);
                 _colorAreaSpeed = 1;
             }
-           else if (areaType==ColorCheckAreaType.Turret)
+            else if (areaType == ColorCheckAreaType.Turret)
             {
                 _colorAreaSpeed = 1;
-
             }
-
         }
-        
 
 
         private void FixedUpdate()
         {
             if (_isReadyToPlay)
             {
-                cdMovementList.MovementTypeList[(int)_states].DoMovement(ref _colorAreaSpeed,ref _isReadyToMove,ref rigidbody,
-                    ref  _inputParams,ref _playerMovementData);
+                cdMovementList.MovementTypeList[(int)_states].DoMovement(ref _colorAreaSpeed, ref _isReadyToMove,
+                    ref rigidbody,
+                    ref _inputParams, ref _playerMovementData);
                 // ChangeMoveType();
             }
             else
@@ -183,7 +179,7 @@ namespace Controllers
         // }
 
         #endregion
-        
+
 
         public void Stop()
         {

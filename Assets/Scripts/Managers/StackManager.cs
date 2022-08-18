@@ -1,36 +1,32 @@
 using UnityEngine;
-using Controllers;
 using Signals;
 using Data.UnityObject;
 using Commands;
 using Datas.ValueObject;
 using System.Collections.Generic;
-using System.Collections;
-using Data.ValueObject;
 using Enums;
 
 namespace Managers
 {
     public class StackManager : MonoBehaviour
     {
-        #region Self Veriables
+        #region Self Variables
 
-        #region Public Veriables
+        #region Public Variables
 
         [Header("Data")] public StackData StackData;
-        
+
         #endregion
 
-        #region Serilazible Veriables
+        #region Serilazible Variables
 
         [SerializeField] private List<GameObject> stackList = new List<GameObject>();
         [SerializeField] private GameObject collectableHolder;
         [SerializeField] private StackManager stackManager;
-       
 
         #endregion
 
-        #region Private Veriables
+        #region Private Variables
 
         private CollectableAddOnStackCommand _collectableAddOnStackCommand;
         private StackLerpMovementCommand _stackLerpMovementCommand;
@@ -41,7 +37,7 @@ namespace Managers
         private ChangeCollectableColorCommand _changeCollectableColorCommand;
         private Transform _playerManager;
         private float _stackScore;
-        
+
         #endregion
 
         #endregion
@@ -92,13 +88,14 @@ namespace Managers
         {
             return Resources.Load<CD_Stack>("Data/CD_Stack").Data;
         }
-        
-        
+
+
         private void Awake()
         {
             GetReferences();
             Init();
         }
+
         private void GetReferences()
         {
             StackData = GetStackData();
@@ -106,14 +103,15 @@ namespace Managers
 
         private void Init()
         {
-            _collectableAddOnStackCommand = new CollectableAddOnStackCommand(ref stackManager, ref stackList, ref StackData);
+            _collectableAddOnStackCommand =
+                new CollectableAddOnStackCommand(ref stackManager, ref stackList, ref StackData);
             _stackLerpMovementCommand = new StackLerpMovementCommand(ref stackList, ref StackData);
             _stackScaleCommand = new StackScaleCommand(ref stackList, ref StackData);
-            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager, ref collectableHolder, ref StackData);
+            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager,
+                ref collectableHolder, ref StackData);
             _transportInStack = new TransportInStack(ref stackList, ref stackManager, ref StackData);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
             _changeCollectableColorCommand = new ChangeCollectableColorCommand(ref stackList);
-
         }
 
         private void Update()
@@ -131,22 +129,24 @@ namespace Managers
                 _playerManager = FindObjectOfType<PlayerManager>().transform;
             }
         }
+
         private int OnSendStackListCount()
         {
             return stackList.Count;
         }
+
         private void OnAddInStack(GameObject obj)
         {
             StartCoroutine(_stackScaleCommand.Execute());
-            _collectableAnimSetCommand.Execute(obj,CollectableAnimationStates.Run);
+            _collectableAnimSetCommand.Execute(obj, CollectableAnimationStates.Run);
             _collectableAddOnStackCommand.Execute(obj);
         }
 
         private void OnRemoveInStack(GameObject obj)
         {
             _collectableRemoveOnStackCommand.Execute(obj);
-
         }
+
         private void OnChangeCollectableColor(Material colorType)
         {
             _changeCollectableColorCommand.Execute(colorType);
@@ -156,6 +156,7 @@ namespace Managers
         {
             _transportInStack.Execute(_obj, target);
         }
+
         private void Initialized()
         {
             for (int i = 0; i < stackList.Count; i++)
@@ -166,11 +167,12 @@ namespace Managers
 
         public void CollectableAnimSet(GameObject obj)
         {
-            _collectableAnimSetCommand.Execute(obj,CollectableAnimationStates.Run);
+            _collectableAnimSetCommand.Execute(obj, CollectableAnimationStates.Run);
         }
+
         private void OnCollectableAnimState(GameObject obj, CollectableAnimationStates animState)
         {
-            _collectableAnimSetCommand.Execute(obj,animState);
+            _collectableAnimSetCommand.Execute(obj, animState);
         }
 
         private void OnGetStackList(GameObject _stackListObj)
@@ -179,11 +181,13 @@ namespace Managers
             _collectableAnimSetCommand.Execute(_stackListObj, CollectableAnimationStates.Run);
             stackList.Add(_stackListObj);
         }
+
         private void OnPlay()
         {
             FindPlayer();
             Initialized();
         }
+
         private void OnReset()
         {
             stackList.Clear();

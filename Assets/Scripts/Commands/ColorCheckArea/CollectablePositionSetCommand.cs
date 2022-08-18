@@ -3,11 +3,10 @@ using Managers;
 using DG.Tweening;
 using Enums;
 
-namespace Commands.ColorCheckArea
+namespace Commands
 {
     public class CollectablePositionSetCommand
     {
-   
         public void Execute(GameObject other, Transform _colHolder)
         {
             var collectableManager = other.GetComponent<CollectableManager>();
@@ -15,10 +14,10 @@ namespace Commands.ColorCheckArea
             other.transform.DOMove(new Vector3(_colHolder.transform.position.x,
                 other.transform.position.y,
                 _colHolder.transform.position.z + randomValue), 1f).OnComplete(() =>
-                {
-                    collectableManager.SetAnim(CollectableAnimationStates.Crouch);
-                });
+            {
+                collectableManager.SetAnim(CollectableAnimationStates.Crouch);
+            });
             other.transform.DORotate(Vector3.zero, 0.1f);
         }
-    } 
+    }
 }

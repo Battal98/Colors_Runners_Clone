@@ -65,6 +65,7 @@ namespace Managers
         {
             Unsubscribe();
         }
+
         #endregion
 
         private void Awake()
@@ -114,8 +115,8 @@ namespace Managers
         public void ChangeSpeed(ColorCheckAreaType colorAreaType)
         {
             playerMovementController.PlayerChangeForwardSpeed(colorAreaType);
-            
         }
+
         private void OnReset()
         {
             gameObject.SetActive(true);

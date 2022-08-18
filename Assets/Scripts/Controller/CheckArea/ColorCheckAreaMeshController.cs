@@ -12,17 +12,19 @@ namespace Controllers
 
         #region Private Variables
 
-        private int count;
+        private int _count;
         private MeshRenderer _meshRenderer;
-        
 
         #endregion
 
         #region Serialized Variables
-        
+
         [SerializeField] private Transform colHolder;
+
         #endregion
+
         #endregion
+
         private void Awake()
         {
             GetReferences();
@@ -32,12 +34,13 @@ namespace Controllers
         {
             _meshRenderer = this.transform.parent.GetComponentInChildren<MeshRenderer>();
         }
-        public void CheckColorsForDrone(List<GameObject> ColorCheckAreaStackList,Transform colHolder)
+
+        public void CheckColorsForDrone(List<GameObject> ColorCheckAreaStackList, Transform colHolder)
         {
-             count = ColorCheckAreaStackList.Count;
+            _count = ColorCheckAreaStackList.Count;
             transform.GetComponent<Collider>().enabled = false;
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < _count; i++)
             {
                 var color = colHolder.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().material.color;
                 if (ColorUtility.ToHtmlStringRGB(_meshRenderer.material.color) != ColorUtility.ToHtmlStringRGB(color))
@@ -58,17 +61,17 @@ namespace Controllers
             }
         }
 
-        public void CheckColorForTurrets(TurretController turretControllers, Transform target,List<GameObject> ColorCheckAreaStackList)
+        public void CheckColorForTurrets(TurretController turretControllers, Transform target,
+            List<GameObject> ColorCheckAreaStackList)
         {
-             count = ColorCheckAreaStackList.Count;
+            _count = ColorCheckAreaStackList.Count;
             transform.GetComponent<Collider>().enabled = false;
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < _count; i++)
             {
                 var color = colHolder.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().material.color;
                 if (ColorUtility.ToHtmlStringRGB(_meshRenderer.material.color) != ColorUtility.ToHtmlStringRGB(color))
                 {
-                    Debug.Log("target");
                     turretControllers.targetPlayer = target.transform;
                     turretControllers.isTargetPlayer = true;
                 }

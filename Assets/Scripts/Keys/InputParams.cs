@@ -8,4 +8,3 @@ namespace Keys
         public Vector2 ClampValues;
     }
 }
-

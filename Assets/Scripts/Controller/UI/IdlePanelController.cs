@@ -8,7 +8,7 @@ namespace Controllers
         #region Self Variables
 
         #region Public Variables
-        
+
         #endregion
 
         #region Serialized Variables
@@ -18,7 +18,7 @@ namespace Controllers
         #endregion
 
         #region Private Variables
-        
+
         #endregion
 
         #endregion

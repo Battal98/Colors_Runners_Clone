@@ -1,6 +1,5 @@
 using Commands;
 using Controller;
-using Controller.Collectable;
 using Data.UnityObject;
 using Enums;
 using UnityEngine;
@@ -27,7 +26,7 @@ namespace Managers
         #endregion
 
         #region Private Variables
-        
+
         private CollectableColorCheckCommand _collectableColorCheckCommand;
 
         #endregion
@@ -49,7 +48,6 @@ namespace Managers
         private void Init()
         {
             _collectableColorCheckCommand = new CollectableColorCheckCommand(ref collectableManager);
-           
         }
 
         private void Start()

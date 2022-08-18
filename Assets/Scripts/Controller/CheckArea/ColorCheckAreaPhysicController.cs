@@ -4,65 +4,64 @@ using Managers;
 using Signals;
 using UnityEngine;
 
-public class ColorCheckAreaPhysicController : MonoBehaviour
+namespace Controller
 {
-    #region Self Variables
-
-    #region Private Variables
-
-    #endregion
-
-    #region Serialized Variables
-
-    [SerializeField] private ColorCheckAreaManager colorCheckAreaManager;
-    [SerializeField] private Transform colHolder;
-
-    #endregion
-
-    #region Public Variables
-
-    public List<GameObject> ColorCheckAreaStackList;
-
-    #endregion
-
-    #endregion
-
-
-    private void TurretAreaJobs()
+    public class ColorCheckAreaPhysicController : MonoBehaviour
     {
-        // CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Turret);
-        colorCheckAreaManager.SetTargetForTurrets();
-   
-    }
+        #region Self Variables
 
-    private void DroneAreaJobs(Collider other)
-    {
-        // CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Drone);
-        StackSignals.Instance.onTransportInStack?.Invoke(other.transform.parent.gameObject, colHolder);
-        ColorCheckAreaStackList.Add(other.transform.parent.gameObject);
-        other.gameObject.GetComponent<Collider>().enabled = false;
-        colorCheckAreaManager.MoveCollectablesToArea(other.transform.parent.gameObject,colHolder);
-    }
+        #region Public Variables
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Collectable"))
+        public List<GameObject> ColorCheckAreaStackList;
+
+        #endregion
+
+        #region Serialized Variables
+
+        [SerializeField] private ColorCheckAreaManager colorCheckAreaManager;
+        [SerializeField] private Transform colHolder;
+
+        #endregion
+
+        #region Private Variables
+
+        #endregion
+
+        #endregion
+
+
+        private void TurretAreaJobs()
         {
+            // CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Turret);
+            colorCheckAreaManager.SetTargetForTurrets();
+        }
 
-            switch (colorCheckAreaManager.AreaType)
+        private void DroneAreaJobs(Collider other)
+        {
+            // CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Drone);
+            StackSignals.Instance.onTransportInStack?.Invoke(other.transform.parent.gameObject, colHolder);
+            ColorCheckAreaStackList.Add(other.transform.parent.gameObject);
+            other.gameObject.GetComponent<Collider>().enabled = false;
+            colorCheckAreaManager.MoveCollectablesToArea(other.transform.parent.gameObject, colHolder);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Collectable"))
             {
-                case ColorCheckAreaType.Drone:
+                switch (colorCheckAreaManager.AreaType)
+                {
+                    case ColorCheckAreaType.Drone:
 
-                    DroneAreaJobs(other);
-                    break;
+                        DroneAreaJobs(other);
+                        break;
 
-                case ColorCheckAreaType.Turret:
+                    case ColorCheckAreaType.Turret:
 
-                    TurretAreaJobs();
-                    break;
+                        TurretAreaJobs();
+                        break;
+                }
             }
         }
     }
-
-   
 }

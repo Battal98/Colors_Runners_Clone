@@ -4,6 +4,5 @@ namespace Controller
 {
     public class AreaBuildColorController : MonoBehaviour
     {
-        
     }
 }

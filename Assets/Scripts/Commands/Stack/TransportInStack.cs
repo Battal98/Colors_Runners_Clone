@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Datas.ValueObject;
 using Managers;
@@ -10,12 +9,15 @@ namespace Commands
     public class TransportInStack
     {
         #region Self Variables
+
         #region Private Variables
 
         private StackManager _manager;
         private List<GameObject> _stackList;
         private StackData _stackData;
+
         #endregion
+
         #endregion
 
         public TransportInStack(ref List<GameObject> stackList, ref StackManager manager, ref StackData stackdata)
@@ -36,12 +38,12 @@ namespace Commands
                 _manager.CollectableAnimSet(_stackList[_stackData.StackLimit - 1]);
             }
 
-            if (_stackList.Count==0)
+            if (_stackList.Count == 0)
             {
                 StackSignals.Instance.onStackTransferComplete?.Invoke();
             }
+
             _stackList.TrimExcess();
-          
         }
     }
 }

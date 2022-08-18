@@ -22,8 +22,7 @@ namespace Managers
 
         #region Private Variables
 
-        [ShowInInspector] 
-        private Vector3 _initialPosition;
+        [ShowInInspector] private Vector3 _initialPosition;
         private Animator _animator;
         private CameraStatesType _cameraStatesType = CameraStatesType.Runner;
         private Transform _playerManager;

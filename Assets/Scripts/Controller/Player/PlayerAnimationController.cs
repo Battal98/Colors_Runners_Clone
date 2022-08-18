@@ -10,15 +10,15 @@ namespace Controllers
         #region Public Variables
 
         #endregion
-        
+
         #region Serialized Variables
 
         [SerializeField] private Animator animatorController;
-        
+
         #endregion
 
         #region Private Variables
-        
+
         #endregion
 
         #endregion
@@ -32,5 +32,5 @@ namespace Controllers
         {
             animatorController.SetTrigger(PlayerAnimationStates.Idle.ToString());
         }
-    }           
+    }
 }

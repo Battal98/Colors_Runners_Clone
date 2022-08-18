@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using Enums;
 using Managers;
 using Signals;
 using UnityEngine;
 
-namespace Commands.ColorCheckArea
+namespace Commands
 {
     public class DroneSquencePlayCommand
     {
@@ -26,13 +25,11 @@ namespace Commands.ColorCheckArea
 
         public IEnumerator Execute()
         {
-        
-                CameraSignals.Instance.onSetCameraTarget?.Invoke(null);
-                yield return new WaitForSeconds(1); // wait for before drone movement 
-                _manager.PlayDroneAnim();
-                yield return new WaitForSeconds(7.5f / 2f); // kill wrong collectables
-                CoreGameSignals.Instance.onExitColorCheckArea?.Invoke(ColorCheckAreaType.Drone);
-            
+            CameraSignals.Instance.onSetCameraTarget?.Invoke(null);
+            yield return new WaitForSeconds(1); // wait for before drone movement 
+            _manager.PlayDroneAnim();
+            yield return new WaitForSeconds(7.5f / 2f); // kill wrong collectables
+            CoreGameSignals.Instance.onExitColorCheckArea?.Invoke(ColorCheckAreaType.Drone);
         }
     }
 }

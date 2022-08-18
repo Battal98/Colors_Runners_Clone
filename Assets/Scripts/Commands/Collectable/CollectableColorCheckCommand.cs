@@ -1,25 +1,24 @@
-using Datas.ValueObject;
 using Managers;
 using Signals;
 using UnityEngine;
 
 namespace Commands
 {
-    public class CollectableColorCheckCommand 
+    public class CollectableColorCheckCommand
     {
-
         #region Self Variables
+
         #region Private Variables
 
         private CollectableManager _manager;
-        
 
         #endregion
+
         #endregion
+
         public CollectableColorCheckCommand(ref CollectableManager manager)
         {
-            _manager=manager;
-            
+            _manager = manager;
         }
 
         public void Exucute(GameObject other)
@@ -28,7 +27,6 @@ namespace Commands
                 ColorUtility.ToHtmlStringRGB(_manager.CollectableMaterialData.color))
             {
                 StackSignals.Instance.onAddInStack?.Invoke(other);
-
             }
             else
             {
@@ -36,8 +34,5 @@ namespace Commands
                 StackSignals.Instance.onRemoveInStack?.Invoke(_manager.transform.gameObject);
             }
         }
-        
-        
-        
     }
 }

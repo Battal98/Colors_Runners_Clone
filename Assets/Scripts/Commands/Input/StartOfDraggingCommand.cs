@@ -1,12 +1,7 @@
-using System.Collections.Generic;
-using Data.UnityObject;
-using Data.ValueObject;
-using Enums;
 using Signals;
-using Keys;
 using Managers;
 using UnityEngine;
-using UnityEngine.EventSystems;
+
 namespace Commands
 {
     public class StartOfDraggingCommand
@@ -15,7 +10,6 @@ namespace Commands
 
         #region Private Variables
 
-       
         private Vector3 _joystickPos;
         private bool _isFirstTimeTouchTaken;
         private InputManager _manager;
@@ -25,10 +19,9 @@ namespace Commands
 
         #endregion
 
-        public StartOfDraggingCommand( ref Vector3 joystickPos, ref bool isFirstTimeTouchTaken,
-             ref Joystick joystick,ref InputManager manager)
+        public StartOfDraggingCommand(ref Vector3 joystickPos, ref bool isFirstTimeTouchTaken,
+            ref Joystick joystick, ref InputManager manager)
         {
-      
             _joystickPos = joystickPos;
             _isFirstTimeTouchTaken = isFirstTimeTouchTaken;
             _joystick = joystick;
@@ -37,7 +30,6 @@ namespace Commands
 
         public void Execute()
         {
-       
             InputSignals.Instance.onInputTaken?.Invoke();
             if (!_isFirstTimeTouchTaken)
             {

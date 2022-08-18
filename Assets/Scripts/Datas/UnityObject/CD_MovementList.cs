@@ -7,7 +7,5 @@ namespace Data.UnityObject
     public class CD_MovementList : ScriptableObject
     {
         public List<CD_Movement> MovementTypeList;
-
     }
-    
 }

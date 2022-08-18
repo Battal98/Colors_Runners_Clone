@@ -1,11 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using Commands;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Signals;
-using Keys;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,29 +11,29 @@ namespace Managers
 {
     public class InputManager : MonoBehaviour
     {
-        #region SelfVariables
+        #region Self Variables
 
         #region Public Variables
 
-        public Vector3? MousePosition;//ref type
-        
+        public Vector3? MousePosition; //ref type
+
         #endregion
-        
+
         #region Serialized Variables
 
         [SerializeField] private bool isJoystick = false;
         [SerializeField] private Joystick joystick;
         [SerializeField] private InputManager inputManager;
-        [SerializeField]private bool isReadyForTouch, isFirstTimeTouchTaken;
-        
+        [SerializeField] private bool isReadyForTouch, isFirstTimeTouchTaken;
+
         #endregion
-        
+
         #region Private Variables
 
-        private bool _isTouching;//ref type
-        private float _currentVelocity;//ref type
-        private Vector3 _joystickPos;//ref type
-        private Vector3 _moveVector;//ref type
+        private bool _isTouching; //ref type
+        private float _currentVelocity; //ref type
+        private Vector3 _joystickPos; //ref type
+        private Vector3 _moveVector; //ref type
         private InputData _inputData;
         private EndOfDraggingCommand _endofDraggingCommand;
         private StartOfDraggingCommand _startOfDraggingCommand;
@@ -54,13 +52,15 @@ namespace Managers
 
         private void Init()
         {
-            _endofDraggingCommand = new EndOfDraggingCommand( ref _joystickPos, ref _moveVector);
-            _startOfDraggingCommand = new StartOfDraggingCommand( ref _joystickPos, ref isFirstTimeTouchTaken,ref joystick,ref inputManager);
+            _endofDraggingCommand = new EndOfDraggingCommand(ref _joystickPos, ref _moveVector);
+            _startOfDraggingCommand = new StartOfDraggingCommand(ref _joystickPos, ref isFirstTimeTouchTaken,
+                ref joystick, ref inputManager);
             _duringOnDraggingCommand =
-                new DuringOnDraggingCommand( ref _inputData, ref _moveVector, ref _currentVelocity,ref inputManager);
+                new DuringOnDraggingCommand(ref _inputData, ref _moveVector, ref _currentVelocity, ref inputManager);
             _duringOnDraggingJoystickCommand =
                 new DuringOnDraggingJoystickCommand(ref _joystickPos, ref _moveVector, ref joystick);
         }
+
         private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
 
         #region EventSubscription
@@ -82,8 +82,8 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onGetGameState += OnGetGameStates;
-
         }
+
         private void UnSubscribeEvents()
         {
             InputSignals.Instance.onEnableInput -= OnEnableInput;
@@ -92,8 +92,6 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
-
-       
 
         #endregion
 
@@ -111,9 +109,8 @@ namespace Managers
             if (Input.GetMouseButtonDown(0))
             {
                 _isTouching = true;
-             
+
                 _startOfDraggingCommand.Execute();
-             
             }
 
             if (Input.GetMouseButton(0))
@@ -129,16 +126,13 @@ namespace Managers
                         if (MousePosition != null)
                         {
                             _duringOnDraggingCommand.Execute();
-                            
                         }
                     }
-
                 }
             }
         }
-       
-        
-       
+
+
         private bool IsPointerOverUIElement()
         {
             var eventData = new PointerEventData(EventSystem.current);
@@ -150,6 +144,7 @@ namespace Managers
 
 
         #region SubscribedMethods
+
         private void OnEnableInput()
         {
             isReadyForTouch = true;
@@ -162,9 +157,8 @@ namespace Managers
 
         private void OnGetGameStates(GameStates states)
         {
-            if (states==GameStates.Idle)
+            if (states == GameStates.Idle)
             {
-          
                 joystick.gameObject.SetActive(true);
                 isJoystick = true;
             }
@@ -172,13 +166,14 @@ namespace Managers
             {
                 joystick.gameObject.SetActive(false);
                 isJoystick = false;
-
             }
         }
+
         private void OnPlay()
         {
             isReadyForTouch = true;
         }
+
         private void OnReset()
         {
             _isTouching = false;
@@ -187,6 +182,5 @@ namespace Managers
         }
 
         #endregion
-
     }
 }

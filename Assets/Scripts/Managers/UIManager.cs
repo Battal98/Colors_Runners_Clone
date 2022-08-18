@@ -73,7 +73,6 @@ namespace Managers
             InitPanels();
         }
 
-        
 
         private void OnOpenPanel(UIPanels panelParam)
         {
@@ -144,7 +143,7 @@ namespace Managers
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            
+
             CoreGameSignals.Instance.onReset?.Invoke();
         }
 
@@ -152,7 +151,7 @@ namespace Managers
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            
+
             CoreGameSignals.Instance.onReset?.Invoke();
         }
 

@@ -2,12 +2,11 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Commands.ColorCheckArea
+namespace Commands
 {
-    public class OutLineChangeCommand 
+    public class OutLineChangeCommand
     {
-     
-        public void Execute(List<GameObject> _stack,float endValue)
+        public void Execute(List<GameObject> _stack, float endValue)
         {
             for (var i = 0; i < _stack.Count; i++)
             {

@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using Commands;
-using Commands.ColorCheckArea;
 using Controllers;
-using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -53,15 +50,12 @@ namespace Managers
         {
             ColorCheckAreaSignals.Instance.onCheckAreaControl += OnCheckAreaControl;
             StackSignals.Instance.onStackTransferComplete += OnOnEnterInDroneArea;
-      
         }
 
         private void UnsubscribeEvents()
         {
             ColorCheckAreaSignals.Instance.onCheckAreaControl -= OnCheckAreaControl;
             StackSignals.Instance.onStackTransferComplete -= OnOnEnterInDroneArea;
-          
-
         }
 
         private void OnDisable()

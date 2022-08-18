@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using Commands.ColorCheckArea;
+using Commands;
+using Controller;
 using Controllers;
 using Enums;
 using UnityEngine;
@@ -12,7 +13,8 @@ namespace Managers
 
         #region Public Variables
 
-        public ColorCheckAreaType AreaType=ColorCheckAreaType.Drone;
+        public ColorCheckAreaType AreaType = ColorCheckAreaType.Drone;
+
         #endregion
 
         #region Serialized Variables
@@ -35,6 +37,7 @@ namespace Managers
         {
             Init();
         }
+
         private void Init()
         {
             _outLineChangeCommand = new OutLineChangeCommand();
@@ -53,7 +56,6 @@ namespace Managers
 
         public void SetTargetForTurrets()
         {
-            
         }
     }
 }

@@ -9,17 +9,17 @@ namespace Managers
     public class LevelManager : MonoBehaviour
     {
         #region Self Variables
-    
+
         #region Public Variables
-        
+
         [Header("Data")] public int Data;
-        
+
         #endregion
 
         #region Serialized Variables
-        
+
         [SerializeField] private GameObject levelHolder;
-       
+
         #endregion
 
         #region Private Variables
@@ -55,17 +55,17 @@ namespace Managers
             LevelSignals.Instance.onNextLevel -= OnNextLevel;
             LevelSignals.Instance.onRestartLevel -= OnRestartLevel;
             LevelSignals.Instance.onGetLevel -= OnGetLevel;
-
         }
 
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
+
         #endregion
 
         private int OnGetLevel() => _levelID;
-        
+
         private void Awake()
         {
             _levelID = GetActiveLevel();
@@ -79,26 +79,29 @@ namespace Managers
             if (!ES3.FileExists()) return 0;
             return ES3.KeyExists("Level") ? ES3.Load<int>("Level") : 0;
         }
+
         private int GetLevelCount()
         {
             return _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
         }
 
-       
+
         private void Start()
         {
             OnInitializeLevel();
         }
+
         private void OnInitializeLevel()
         {
             int newLevelData = GetLevelCount();
             _levelLoader.Execute(newLevelData);
         }
+
         private void OnClearActiveLevel()
         {
             _clearActiveLevel.Execute();
         }
-        
+
         private void OnNextLevel()
         {
             _levelID++;
@@ -106,8 +109,8 @@ namespace Managers
             CoreGameSignals.Instance.onReset?.Invoke();
             //SaveSignals.Instance.onSaveGameData?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
-          
         }
+
         private void OnRestartLevel()
         {
             LevelSignals.Instance.onClearActiveLevel?.Invoke();
@@ -115,6 +118,5 @@ namespace Managers
             //SaveSignals.Instance.onSaveGameData?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
         }
-        
     }
 }

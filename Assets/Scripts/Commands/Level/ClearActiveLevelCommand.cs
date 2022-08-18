@@ -13,11 +13,12 @@ namespace Commands
         #endregion
 
         #endregion
+
         public ClearActiveLevelCommand(ref GameObject levelHolder)
         {
             _levelholder = levelHolder;
-
         }
+
         public void Execute()
         {
             Object.Destroy(_levelholder.transform.GetChild(0).gameObject);

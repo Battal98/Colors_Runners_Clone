@@ -9,6 +9,5 @@ namespace Signals
         public UnityAction<UIPanels> onOpenPanel;
         public UnityAction<UIPanels> onClosePanel;
         public UnityAction<float> onSetMoneyText;
-
     }
 }

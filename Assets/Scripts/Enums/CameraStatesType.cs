@@ -1,9 +1,8 @@
 namespace Enums
 {
-    public enum CameraStatesType 
+    public enum CameraStatesType
     {
         Idle,
         Runner,
-        
     }
 }

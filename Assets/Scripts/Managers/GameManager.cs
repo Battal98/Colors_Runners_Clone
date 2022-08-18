@@ -7,23 +7,23 @@ namespace Managers
     public class GameManager : MonoBehaviour
     {
         #region Self Variables
-    
+
         #region Public Variables
 
         #endregion
-    
+
         #region Serialized Variables
-        
+
         [SerializeField] private GameStates gameStates = GameStates.Runner;
-        
+
         #endregion
-    
+
         #region Private Variables
-        
+
         private CameraStatesType _cameraType = CameraStatesType.Idle;
-        
+
         #endregion
-    
+
         #endregion
 
         private void Awake()
@@ -47,8 +47,6 @@ namespace Managers
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onSetGameState -= OnSetGameState;
-            
-
         }
 
         private void OnDisable()
