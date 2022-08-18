@@ -23,8 +23,8 @@ Material:
   m_Name: Right
   m_Shader: {fileID: 4800000, guid: 6c046203321edf34fb092959a05e5b4a, type: 3}
   m_ShaderKeywords: _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
-    _MK_LIGHT_CEL _MK_OUTLINE_HULL_CLIP _MK_RECEIVE_SHADOWS _MK_SPECULAR_ISOTROPIC
-    _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+    _MK_LIGHT_CEL _MK_OUTLINE_HULL_CLIP _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE
+    _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -220,7 +220,7 @@ Material:
     - _OutlineTab: 0
     - _Parallax: 0.005
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
+    - _ReceiveShadows: 0
     - _RenderFace: 2
     - _RenderPriority: 0
     - _Rim: 0

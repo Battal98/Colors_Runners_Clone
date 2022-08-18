@@ -3748,6 +3748,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate
       objectReference: {fileID: 0}
+    - target: {fileID: 3321128927124613002, guid: fdb5a03f33cd7d2419371a2e31dc7d33, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3321128927124613003, guid: fdb5a03f33cd7d2419371a2e31dc7d33, type: 3}
       propertyPath: m_RootOrder
       value: 9

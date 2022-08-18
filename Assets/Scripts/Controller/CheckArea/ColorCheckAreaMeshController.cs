@@ -29,6 +29,7 @@ namespace Controllers
         private void Awake()
         {
             GetReferences();
+            SetColorMaterial();
         }
 
         private void GetReferences()
@@ -81,6 +82,11 @@ namespace Controllers
                     // turretControllers.isTargetPlayer = false;
                 }
             }
+        }
+
+        private void SetColorMaterial()
+        {
+            _meshRenderer.material.color = manager.Datas[(int)manager.ColorType].Color;
         }
     }
 }

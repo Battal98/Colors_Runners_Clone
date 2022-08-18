@@ -96,6 +96,7 @@ namespace Managers
         {
             if (!turret.activeInHierarchy)
                 turret.SetActive(true);
+
             drone.SetActive(false);
         }
 
@@ -103,6 +104,7 @@ namespace Managers
         {
             if (!drone.activeInHierarchy)
                 drone.SetActive(true);
+
             turret.SetActive(false);
         }
 

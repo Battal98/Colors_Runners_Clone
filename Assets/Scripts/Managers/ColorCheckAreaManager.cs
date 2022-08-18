@@ -6,6 +6,8 @@ using Controllers;
 using Enums;
 using Signals;
 using UnityEngine;
+using Data.UnityObject;
+using Data.ValueObject;
 
 namespace Managers
 {
@@ -16,7 +18,9 @@ namespace Managers
         #region Public Variables
 
         public ColorCheckAreaType AreaType = ColorCheckAreaType.Drone;
+        public ColorType ColorType = ColorType.Blue;
         public List<GameObject> ColorCheckAreaStackList;
+        public List<ColorData> Datas;
 
 
         #endregion
@@ -68,10 +72,15 @@ namespace Managers
 
         private void Awake()
         {
+            Datas = GetColorData();
             Init();
         }
 
-      
+        private List<ColorData> GetColorData()
+        {
+            return Resources.Load<CD_Color>("Data/CD_Color").Data;
+        }
+
         private void Init()
         {
             _outLineChangeCommand = new OutLineChangeCommand(ref ColorCheckAreaStackList);

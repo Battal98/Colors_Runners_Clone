@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e41fde815552f44871479e938ee743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ColorType: 5
+  ColorType: 1
   ColorDatas: []
   gateMeshController: {fileID: 3321128926274292876}
 --- !u!1 &3321128927694798969
