@@ -1,5 +1,6 @@
 using Managers;
 using UnityEngine;
+using Enums;
 
 namespace Controller
 {
@@ -24,11 +25,10 @@ namespace Controller
 
         #endregion
 
-
-        public void CollectableMaterial(Material colorType)
+        public void ChangeCollectableColor(ColorType colorType)
         {
-            manager.CollectableMaterialData = colorType;
-            collectableSkinMeshRenderer.material = colorType;
+            collectableSkinMeshRenderer.material.color = manager.Datas[(int)colorType].Color;
+            manager.CollectableColorType = colorType;
         }
     }
 }

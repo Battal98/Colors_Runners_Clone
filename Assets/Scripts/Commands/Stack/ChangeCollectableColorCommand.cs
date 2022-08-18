@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Managers;
 using UnityEngine;
+using Enums;
 
 namespace Commands
 {
@@ -29,7 +30,7 @@ namespace Commands
             _stackList = stackList;
         }
 
-        public void Execute(Material colorType)
+        public void Execute(ColorType colorType)
         {
             for (int i = 0; i < _stackList.Count; i++)
             {

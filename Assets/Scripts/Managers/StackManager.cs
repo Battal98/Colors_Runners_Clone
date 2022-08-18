@@ -147,7 +147,7 @@ namespace Managers
             _collectableRemoveOnStackCommand.Execute(obj);
         }
 
-        private void OnChangeCollectableColor(Material colorType)
+        private void OnChangeCollectableColor(ColorType colorType)
         {
             _changeCollectableColorCommand.Execute(colorType);
         }

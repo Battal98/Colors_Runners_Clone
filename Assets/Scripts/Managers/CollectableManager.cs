@@ -3,6 +3,8 @@ using Controller;
 using Data.UnityObject;
 using Enums;
 using UnityEngine;
+using Data.ValueObject;
+using System.Collections.Generic;
 
 namespace Managers
 {
@@ -13,7 +15,8 @@ namespace Managers
         #region Public Variables
 
         public ColorType CollectableColorType;
-        public Material CollectableMaterialData;
+        [HideInInspector]
+        public List<ColorData> Datas;
 
         #endregion
 
@@ -36,15 +39,14 @@ namespace Managers
 
         private void Awake()
         {
-            GetReferences();
+            Datas = GetColorData();
             Init();
         }
 
-        private void GetReferences()
+        private List<ColorData> GetColorData()
         {
-            CollectableMaterialData = GetCollectableData();
+            return Resources.Load<CD_Color>("Data/CD_Color").Data;
         }
-
         private void Init()
         {
             _collectableColorCheckCommand = new CollectableColorCheckCommand(ref collectableManager);
@@ -52,7 +54,7 @@ namespace Managers
 
         private void Start()
         {
-            collectableMeshController.CollectableMaterial(CollectableMaterialData);
+            collectableMeshController.ChangeCollectableColor(CollectableColorType);
         }
 
         public void SetAnim(CollectableAnimationStates states)
@@ -71,9 +73,9 @@ namespace Managers
                 .CollectableMaterialList[(int)CollectableColorType];
         }
 
-        public void CollectableColorChange(Material colorType)
+        public void CollectableColorChange(ColorType colorType)
         {
-            collectableMeshController.CollectableMaterial(colorType);
+            collectableMeshController.ChangeCollectableColor(colorType);
         }
     }
 }

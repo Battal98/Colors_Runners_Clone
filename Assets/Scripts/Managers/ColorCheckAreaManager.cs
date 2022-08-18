@@ -88,10 +88,7 @@ namespace Managers
                 case ColorCheckAreaType.Turret:
                     colorCheckAreaMeshController.CheckColorForTurrets();
                     break;
-                
-                
             }
-            
         }
 
         public void MoveCollectablesToArea(GameObject other, Transform _colHolder)

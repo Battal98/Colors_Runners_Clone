@@ -1173,7 +1173,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760233938649184603}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 18.48}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollectableColorType: 0
-  CollectableMaterialData: {fileID: 2100000, guid: f6faf52bfe8b6064189dd4b2ce73e02c, type: 2}
+  Datas: []
   collectableAnimationController: {fileID: 907190927851016078}
   collectableMeshController: {fileID: 3996111679647133346}
   collectableManager: {fileID: 1760233938649184601}
