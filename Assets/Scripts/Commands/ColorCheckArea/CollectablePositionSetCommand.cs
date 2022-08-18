@@ -7,6 +7,7 @@ namespace Commands.ColorCheckArea
 {
     public class CollectablePositionSetCommand
     {
+   
         public void Execute(GameObject other, Transform _colHolder)
         {
             var collectableManager = other.GetComponent<CollectableManager>();

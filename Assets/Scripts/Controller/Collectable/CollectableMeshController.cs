@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Controller.Collectable
 {
-    public class CollectableMeshController 
+    public class CollectableMeshController :MonoBehaviour
     {
         #region Self Variables
         #region Public Variables
@@ -13,23 +13,16 @@ namespace Controller.Collectable
         #region Serialized Variables
         #endregion
         #region Private Variables
-        private SkinnedMeshRenderer _collectableSkinMeshRenderer;
-        private CollectableManager _manager;
+        [SerializeField]private SkinnedMeshRenderer collectableSkinMeshRenderer;
+        [SerializeField]private CollectableManager manager;
         #endregion
         #endregion
-
-        public CollectableMeshController(ref SkinnedMeshRenderer collectableSkinMeshRenderer,ref CollectableManager manager)
-        {
-
-            _collectableSkinMeshRenderer = collectableSkinMeshRenderer;
-            _manager = manager;
-        }
         
 
         public void CollectableMaterial(Material colorType)
         {
-            _manager.CollectableMaterial = colorType;
-            _collectableSkinMeshRenderer.material = colorType;
+            manager.CollectableMaterialData = colorType;
+            collectableSkinMeshRenderer.material = colorType;
         }
     }
 }

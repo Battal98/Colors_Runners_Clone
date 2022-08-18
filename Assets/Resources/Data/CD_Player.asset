@@ -15,7 +15,7 @@ MonoBehaviour:
   Data:
     MovementData:
       ForwardSpeed: 4
-      SidewaysSpeed: 2
+      SidewaysSpeed: 0.98
       PlayerJoystickSpeed: 4
       PlayerJumpDistance: 1.5
       PlayerJumpDuration: 1

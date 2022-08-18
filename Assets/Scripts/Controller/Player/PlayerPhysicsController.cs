@@ -47,7 +47,9 @@ namespace Controllers
 
             if (other.CompareTag("CheckArea"))
             {
-                _checkAreaType = other.gameObject.GetComponentInParent<ColorCheckAreaManager>().AreaType;
+                Debug.Log("girdk");
+                _checkAreaType = other.GetComponentInParent<MiniGameAreaManager>().AreaType;
+              
                 ColorCheckAreaSignals.Instance.onCheckAreaControl?.Invoke(other.transform.parent.gameObject);
             
                
@@ -58,6 +60,7 @@ namespace Controllers
         {
             if (other.CompareTag("CheckArea"))
             {
+                Debug.Log("Çıktık");
                 if (_checkAreaType==ColorCheckAreaType.Turret)
                 {
                     _playerManager.ExitColorCheckArea(ColorCheckAreaType.Turret);

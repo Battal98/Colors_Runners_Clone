@@ -6,27 +6,25 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class CameraManager: MonoBehaviour
+    public class CameraManager : MonoBehaviour
     {
         #region Self Variables
-        
+
         #region Public Variables
-        public CinemachineVirtualCamera RunnerCamera;
-        public CinemachineVirtualCamera IdleGameCamera;
-        [SerializeField]
-        private CinemachineStateDrivenCamera stateDrivenCamera;
-        
+
+        [SerializeField] private CinemachineStateDrivenCamera stateDrivenCamera;
+
         #endregion
 
         #region Serialized Variables
-        
+
         #endregion
 
         #region Private Variables
-        
-        [ShowInInspector] private Vector3 _initialPosition;
-        private CinemachineTransposer _miniGameTransposer;
-        private  Animator _animator;
+
+        [ShowInInspector] 
+        private Vector3 _initialPosition;
+        private Animator _animator;
         private CameraStatesType _cameraStatesType = CameraStatesType.Runner;
         private Transform _playerManager;
 
@@ -36,13 +34,17 @@ namespace Managers
 
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
-            _miniGameTransposer = IdleGameCamera.GetCinemachineComponent<CinemachineTransposer>();
+            GetReferences();
             GetInitialPosition();
         }
 
+        private void GetReferences()
+        {
+            _animator = GetComponent<Animator>();
+        }
+
         #region Event Subscriptions
-        
+
         private void OnEnable()
         {
             SubscribeEvents();
@@ -55,6 +57,7 @@ namespace Managers
             CameraSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
             CoreGameSignals.Instance.onReset += OnReset;
         }
+
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= SetCameraTarget;
@@ -62,16 +65,19 @@ namespace Managers
             CameraSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
+
         #endregion
-        
+
         private void GetInitialPosition()
         {
             _initialPosition = transform.localPosition;
         }
+
         private void OnMoveToInitialPosition()
         {
             transform.localPosition = _initialPosition;
@@ -98,9 +104,7 @@ namespace Managers
 
         public void OnSetCameraState(CameraStatesType cameraState)
         {
-            
-                _animator.SetTrigger(cameraState.ToString());
-         
+            _animator.SetTrigger(cameraState.ToString());
         }
     }
 }

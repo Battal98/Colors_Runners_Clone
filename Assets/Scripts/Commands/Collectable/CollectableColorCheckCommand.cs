@@ -24,8 +24,8 @@ namespace Commands
 
         public void Exucute(GameObject other)
         {
-            if (ColorUtility.ToHtmlStringRGB(other.GetComponent<CollectableManager>().CollectableMaterial.color) ==
-                ColorUtility.ToHtmlStringRGB(_manager.CollectableMaterial.color))
+            if (ColorUtility.ToHtmlStringRGB(other.GetComponent<CollectableManager>().CollectableMaterialData.color) ==
+                ColorUtility.ToHtmlStringRGB(_manager.CollectableMaterialData.color))
             {
                 StackSignals.Instance.onAddInStack?.Invoke(other);
 

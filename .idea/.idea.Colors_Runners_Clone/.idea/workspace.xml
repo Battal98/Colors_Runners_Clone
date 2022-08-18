@@ -39,6 +39,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/edef46c9b2db4b878c98495bfdc516fa568ba8/fa/3092481c/Nullable`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Commands/ColorCheckArea/DroneSquencePlayCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Commands/ColorCheckArea/SetTurretTargetCommand.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controller/Collectable/CollectableMeshController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_MoveType_Swerve.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mathematics@1.1.0/Unity.Mathematics/quaternion.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -115,7 +116,8 @@
       <workItem from="1660665098389" duration="16915000" />
       <workItem from="1660722821011" duration="3325000" />
       <workItem from="1660750229607" duration="7137000" />
-      <workItem from="1660805280843" duration="9076000" />
+      <workItem from="1660805280843" duration="9574000" />
+      <workItem from="1660823802224" duration="12490000" />
     </task>
     <servers />
   </component>

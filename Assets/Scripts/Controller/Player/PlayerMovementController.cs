@@ -20,12 +20,8 @@ namespace Controllers
         #region Public Variables
 
         #endregion
-
         #region Serialized Variables
-
-        [SerializeField] private PlayerManager manager;
         [SerializeField] private Rigidbody rigidbody;
-        [SerializeField] private CharacterController characterController;
         [SerializeField] private CD_MovementList cdMovementList;
 
         #endregion
@@ -119,14 +115,20 @@ namespace Controllers
                     _colorAreaSpeed = 1;
                     break;
             }
-           
+
+            if (areaType==ColorCheckAreaType.Drone)
+            {
+                transform.parent.DOMoveZ(transform.parent.position.z + 2.9f, .5f);
+                _colorAreaSpeed = 1;
+            }
+           else if (areaType==ColorCheckAreaType.Turret)
+            {
+                _colorAreaSpeed = 1;
+
+            }
 
         }
-
-        public void ExitTurretArea()
-        {
-            _colorAreaSpeed = 1;
-        }
+        
 
 
         private void FixedUpdate()

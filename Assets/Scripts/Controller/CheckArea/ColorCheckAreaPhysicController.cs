@@ -1,0 +1,65 @@
+using System.Collections.Generic;
+using Enums;
+using Managers;
+using Signals;
+using UnityEngine;
+
+public class ColorCheckAreaPhysicController : MonoBehaviour
+{
+    #region Self Variables
+
+    #region Private Variables
+
+    #endregion
+
+    #region Serialized Variables
+
+    [SerializeField] private ColorCheckAreaManager colorCheckAreaManager;
+    [SerializeField] private Transform colHolder;
+
+    #endregion
+
+    #region Public Variables
+
+    public List<GameObject> ColorCheckAreaStackList;
+
+    #endregion
+
+    #endregion
+
+
+    private void TurretAreaJobs(Collider other)
+    {
+        colorCheckAreaManager.SetTargetForTurrets();
+        CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Turret);
+    }
+
+    private void DroneAreaJobs(Collider other)
+    {
+        CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Drone);
+        StackSignals.Instance.onTransportInStack?.Invoke(other.transform.parent.gameObject, colHolder);
+        ColorCheckAreaStackList.Add(other.transform.parent.gameObject);
+        other.gameObject.GetComponent<Collider>().enabled = false;
+        colorCheckAreaManager.MoveCollectablesToArea(other.transform.parent.gameObject,colHolder);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Collectable"))
+           
+            switch (colorCheckAreaManager.AreaType)
+            {
+                case ColorCheckAreaType.Drone:
+
+                    DroneAreaJobs(other);
+                    break;
+
+                case ColorCheckAreaType.Turret:
+
+                    TurretAreaJobs(other);
+                    break;
+            }
+    }
+
+   
+}

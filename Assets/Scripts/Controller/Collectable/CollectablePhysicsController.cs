@@ -61,7 +61,7 @@ namespace Controllers
             }
             if (other.CompareTag("CheckArea"))
             {
-                 _areaType = other.GetComponentInParent<ColorCheckAreaManager>().AreaType;
+                 _areaType = other.GetComponentInParent<MiniGameAreaManager>().AreaType;
                 CheckAreaEnter(_areaType);
             }
 
