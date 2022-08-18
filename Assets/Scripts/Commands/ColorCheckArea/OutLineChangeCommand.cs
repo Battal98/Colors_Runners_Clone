@@ -1,12 +1,26 @@
 using System.Collections.Generic;
 using DG.Tweening;
+
 using UnityEngine;
 
 namespace Commands
 {
     public class OutLineChangeCommand
     {
-        public void Execute(List<GameObject> _stack, float endValue)
+        #region Self Variables
+
+        #region Private Variables
+
+        private List<GameObject> _stack;
+
+        #endregion
+
+        #endregion
+        public OutLineChangeCommand(ref List<GameObject> stack)
+        {
+            _stack = stack;
+        }
+        public void Execute( float endValue)
         {
             for (var i = 0; i < _stack.Count; i++)
             {

@@ -12,7 +12,6 @@ namespace Controller
 
         #region Public Variables
 
-        public List<GameObject> ColorCheckAreaStackList;
 
         #endregion
 
@@ -29,22 +28,20 @@ namespace Controller
 
         #endregion
 
-
         private void TurretAreaJobs()
         {
-            // CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Turret);
             colorCheckAreaManager.SetTargetForTurrets();
         }
 
+    
         private void DroneAreaJobs(Collider other)
         {
-            // CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Drone);
+         
             StackSignals.Instance.onTransportInStack?.Invoke(other.transform.parent.gameObject, colHolder);
-            ColorCheckAreaStackList.Add(other.transform.parent.gameObject);
+            colorCheckAreaManager.ColorCheckAreaStackList.Add(other.transform.parent.gameObject);
             other.gameObject.GetComponent<Collider>().enabled = false;
             colorCheckAreaManager.MoveCollectablesToArea(other.transform.parent.gameObject, colHolder);
         }
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Collectable"))

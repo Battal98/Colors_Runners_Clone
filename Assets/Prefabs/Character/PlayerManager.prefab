@@ -998,8 +998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a194ba3a3324f8468fa84a68536999b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 8065292031746485745}
-  playerMeshObj: {fileID: 8307426609619511629}
 --- !u!1 &7652159215991158951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8647536700598252535
 Transform:
   m_ObjectHideFlags: 0
@@ -1869,9 +1867,6 @@ MonoBehaviour:
       PlayerJumpDuration: 1
   playerAnimationController: {fileID: 6004608043649946698}
   playerMovementController: {fileID: 3346495845797470969}
-  playerPhysicsController: {fileID: 8364028642772017776}
-  rigidbody: {fileID: 1944392521816120396}
-  capsuleCollider: {fileID: 4256232788645637966}
   scoreText: {fileID: 0}
 --- !u!114 &3346495845797470969
 MonoBehaviour:
@@ -1885,9 +1880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b790753736e0d541bc02067a87356d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 4701532483818768975}
   rigidbody: {fileID: 1944392521816120396}
-  characterController: {fileID: 0}
   cdMovementList: {fileID: 11400000, guid: cad7738aa5db8b04fa75fd34eb46a7b8, type: 2}
 --- !u!54 &1944392521816120396
 Rigidbody:

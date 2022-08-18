@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AreaType: 0
+  ColorCheckAreaStackList: []
   colorCheckAreaMeshController: {fileID: 2247622276263380468}
   colorCheckAreaPhysicController: {fileID: 4865361519959807099}
 --- !u!1 &5526568140296939081
@@ -138,7 +139,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorCheckAreaManager: {fileID: 9009479499935576460}
   colHolder: {fileID: 1498588698117348132}
-  ColorCheckAreaStackList: []
 --- !u!1 &5526568140435815220
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,3 +234,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colHolder: {fileID: 1498588698117348132}
+  manager: {fileID: 9009479499935576460}

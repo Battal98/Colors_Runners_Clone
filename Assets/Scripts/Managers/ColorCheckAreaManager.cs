@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Commands;
 using Controller;
 using Controllers;
 using Enums;
+using Signals;
 using UnityEngine;
 
 namespace Managers
@@ -14,6 +16,8 @@ namespace Managers
         #region Public Variables
 
         public ColorCheckAreaType AreaType = ColorCheckAreaType.Drone;
+        public List<GameObject> ColorCheckAreaStackList;
+
 
         #endregion
 
@@ -33,20 +37,61 @@ namespace Managers
 
         #endregion
 
+
+        #region Event Subscription
+
+        private void OnEnable()
+        {
+            Subscribe();
+        }
+        
+        private void Subscribe()
+        {
+            ColorCheckAreaSignals.Instance.onSetCollectableOutline += _outLineChangeCommand.Execute;
+            ColorCheckAreaSignals.Instance.onChangeJobsOnColorArea += OnChangeJobsColorArea;
+
+        }
+        private void UnSubscribe()
+        {
+            ColorCheckAreaSignals.Instance.onSetCollectableOutline -=  _outLineChangeCommand.Execute;
+            ColorCheckAreaSignals.Instance.onChangeJobsOnColorArea -= OnChangeJobsColorArea;
+
+        }
+
+       
+        private void OnDisable()
+        {
+            UnSubscribe();
+        }
+
+        #endregion
+
         private void Awake()
         {
             Init();
         }
 
+      
         private void Init()
         {
-            _outLineChangeCommand = new OutLineChangeCommand();
+            _outLineChangeCommand = new OutLineChangeCommand(ref ColorCheckAreaStackList);
             _collectablePositionSetCommand = new CollectablePositionSetCommand();
         }
 
-        public void SetOutline(List<GameObject> stack, float endValue)
+        private void OnChangeJobsColorArea(ColorCheckAreaType areaType)
         {
-            _outLineChangeCommand.Execute(stack, endValue);
+            switch (areaType)
+            {
+                case ColorCheckAreaType.Drone:
+                    colorCheckAreaMeshController.CheckColorsForDrone();
+                    break;
+                case ColorCheckAreaType.Turret:
+                    colorCheckAreaMeshController.CheckColorForTurrets();
+                    break;
+                
+                
+            }
+            
         }
 
         public void MoveCollectablesToArea(GameObject other, Transform _colHolder)

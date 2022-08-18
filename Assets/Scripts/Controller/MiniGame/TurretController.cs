@@ -6,41 +6,37 @@ using DG.Tweening;
 
 namespace Controllers
 {
-    /// <summary>
-    /// Demo for aiming a Turret. All it does is call Transform.LookAt on each part and apply rotation limits one by one, starting from the parent.
-    /// </summary>
+    
     public class TurretController : MonoBehaviour
     {
-        /// <summary>
-        /// An independent part of the turret
-        /// </summary>
+       
         [System.Serializable]
         public class Part
         {
-            public Transform transform; // The Transform
-            private RotationLimit rotationLimit; // The Rotation Limit component
+            public Transform transform; 
+            private RotationLimit rotationLimit; 
 
-            // Aim this part at the target
+         
             public void AimAt(Transform target)
             {
                 transform.LookAt(new Vector3(target.position.x, target.position.y + 0.3f, target.position.z),
                     transform.up);
 
-                // Finding the Rotation Limit
+               
                 if (rotationLimit == null)
                 {
                     rotationLimit = transform.GetComponent<RotationLimit>();
                     rotationLimit.Disable();
                 }
 
-                // Apply rotation limits
+           
                 rotationLimit.Apply();
             }
         }
 
-        public Transform targetPlayer; // The aiming target
-        public Transform targetRandom; // The aiming target
-        public Part[] parts; // All the turret parts
+        public Transform targetPlayer; 
+        public Transform targetRandom;
+        public Part[] parts;
 
         private void Start()
         {

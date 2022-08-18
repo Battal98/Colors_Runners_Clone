@@ -27,8 +27,11 @@ namespace Commands
         {
             CameraSignals.Instance.onSetCameraTarget?.Invoke(null);
             yield return new WaitForSeconds(1); // wait for before drone movement 
+            ColorCheckAreaSignals.Instance.onSetCollectableOutline?.Invoke(0);
             _manager.PlayDroneAnim();
             yield return new WaitForSeconds(7.5f / 2f); // kill wrong collectables
+            ColorCheckAreaSignals.Instance.onSetCollectableOutline?.Invoke(25);
+            ColorCheckAreaSignals.Instance.onChangeJobsOnColorArea?.Invoke(ColorCheckAreaType.Drone);
             CoreGameSignals.Instance.onExitColorCheckArea?.Invoke(ColorCheckAreaType.Drone);
         }
     }
