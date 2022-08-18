@@ -86,7 +86,7 @@ namespace Controllers
         }
 
       
-        public void OnPlayerChangeForwardSpeed(ColorCheckAreaType value)
+        public void PlayerChangeForwardSpeed(ColorCheckAreaType value)
         { 
             Stop();
             switch (value)

@@ -53,8 +53,8 @@ MonoBehaviour:
   miniGameAreaManager: {fileID: 1539420660308345274}
   droneController: {fileID: 1539420660999005269}
   turretController:
-  - {fileID: 1145736828265920463}
   - {fileID: 1145736828855780872}
+  - {fileID: 1145736828265920463}
 --- !u!1 &1539420660622136444
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,8 +130,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 2, z: 3}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 3, y: 2, z: 2.720726}
+  m_Center: {x: 0, y: 1, z: 0.139637}
 --- !u!1 &1539420661451767965
 GameObject:
   m_ObjectHideFlags: 0

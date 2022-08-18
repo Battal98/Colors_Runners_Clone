@@ -47,7 +47,6 @@ namespace Managers
             CoreGameSignals.Instance.onGetGameState += OnGetGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onPlayerChangeForwardSpeed += playerMovementController.OnPlayerChangeForwardSpeed;
             CoreGameSignals.Instance.onExitColorCheckArea += OnExitColorCheckArea;
         }
 
@@ -59,7 +58,6 @@ namespace Managers
             CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onPlayerChangeForwardSpeed -= playerMovementController.OnPlayerChangeForwardSpeed;
             CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
         }
 
@@ -113,6 +111,11 @@ namespace Managers
             playerAnimationController.Playanim(PlayerAnimationStates.Run);
         }
 
+        public void ChangeSpeed(ColorCheckAreaType colorAreaType)
+        {
+            playerMovementController.PlayerChangeForwardSpeed(colorAreaType);
+            
+        }
         private void OnReset()
         {
             gameObject.SetActive(true);

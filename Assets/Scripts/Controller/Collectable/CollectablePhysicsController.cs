@@ -80,6 +80,7 @@ namespace Controllers
             }
 
         }
+
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("CheckArea"))
@@ -87,8 +88,6 @@ namespace Controllers
                 ColorAreaExit(_areaType);
             }
         }
-
-      
     }
     
 }

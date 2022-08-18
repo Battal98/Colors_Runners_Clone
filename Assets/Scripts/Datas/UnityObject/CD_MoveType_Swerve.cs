@@ -37,6 +37,7 @@ namespace Data.UnityObject
                 _rigidbody.position.x,
                 _rigidbody.position.y ,
                 _rigidbody.position.z );
+            Debug.Log(_colorAreaSpeed+" ben Scriptabledan geldim");
         }
 
         private void StopSideways(ref float _colorAreaSpeed, ref Rigidbody _rigidbody, ref PlayerMovementData _playerMovementData)

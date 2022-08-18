@@ -28,15 +28,16 @@ public class ColorCheckAreaPhysicController : MonoBehaviour
     #endregion
 
 
-    private void TurretAreaJobs(Collider other)
+    private void TurretAreaJobs()
     {
+        // CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Turret);
         colorCheckAreaManager.SetTargetForTurrets();
-        CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Turret);
+   
     }
 
     private void DroneAreaJobs(Collider other)
     {
-        CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Drone);
+        // CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Drone);
         StackSignals.Instance.onTransportInStack?.Invoke(other.transform.parent.gameObject, colHolder);
         ColorCheckAreaStackList.Add(other.transform.parent.gameObject);
         other.gameObject.GetComponent<Collider>().enabled = false;
@@ -46,7 +47,8 @@ public class ColorCheckAreaPhysicController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Collectable"))
-           
+        {
+
             switch (colorCheckAreaManager.AreaType)
             {
                 case ColorCheckAreaType.Drone:
@@ -56,9 +58,10 @@ public class ColorCheckAreaPhysicController : MonoBehaviour
 
                 case ColorCheckAreaType.Turret:
 
-                    TurretAreaJobs(other);
+                    TurretAreaJobs();
                     break;
             }
+        }
     }
 
    
