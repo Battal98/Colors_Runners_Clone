@@ -1,3 +1,4 @@
+using System;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -16,15 +17,13 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private new Rigidbody rigidbody;
-        [SerializeField] private GameObject playerMeshObj;
-
         #endregion
 
         #region Private Variables
-
-        private SkinnedMeshRenderer _playerSkinnedMeshRenderer;
+        
         private PlayerManager _playerManager;
+        private ColorCheckAreaType _checkAreaType;
+
         #endregion
 
         #endregion
@@ -36,36 +35,36 @@ namespace Controllers
 
         private void GetReferances()
         {
-            _playerSkinnedMeshRenderer = playerMeshObj.GetComponentInChildren<SkinnedMeshRenderer>();
             _playerManager = this.gameObject.GetComponentInParent<PlayerManager>();
         }
-        public void ExitDroneArea()
-        {
-       
-           transform.gameObject.SetActive(false);
-        }
-
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Finish"))
             {
-          
                 CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
             }
 
-            if (other.CompareTag("Gate"))
-            {
-                var otherMR = other.gameObject.transform.parent.GetComponentInChildren<MeshRenderer>();
-                _playerSkinnedMeshRenderer.material.color = otherMR.material.color;
-            }
-           
             if (other.CompareTag("CheckArea"))
             {
-                Debug.Log(other.transform.parent);
+                _checkAreaType = other.gameObject.GetComponentInParent<ColorCheckAreaManager>().AreaType;
                 ColorCheckAreaSignals.Instance.onCheckAreaControl?.Invoke(other.transform.parent.gameObject);
+            
+               
             }
-
         }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("CheckArea"))
+            {
+                if (_checkAreaType==ColorCheckAreaType.Turret)
+                {
+                    _playerManager.ExitColorCheckArea(ColorCheckAreaType.Turret);
+                }
+              
+            
+            }
+        }
     }
 }

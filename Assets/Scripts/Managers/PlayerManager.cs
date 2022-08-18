@@ -1,12 +1,10 @@
-using System.Collections;
-using UnityEngine;
 using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
-using DG.Tweening;
 using Enums;
-using TMPro;
 using Signals;
+using TMPro;
+using UnityEngine;
 
 namespace Managers
 {
@@ -24,9 +22,6 @@ namespace Managers
 
         [SerializeField] private PlayerAnimationController playerAnimationController;
         [SerializeField] private PlayerMovementController playerMovementController;
-        [SerializeField] private PlayerPhysicsController playerPhysicsController;
-        [SerializeField] private Rigidbody rigidbody;
-        [SerializeField] private CapsuleCollider capsuleCollider;
         [SerializeField] private TextMeshPro scoreText;
 
         #endregion
@@ -53,7 +48,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlayerChangeForwardSpeed += playerMovementController.OnPlayerChangeForwardSpeed;
-            CoreGameSignals.Instance.onExitDroneArea += OnExitDroneArea;
+            CoreGameSignals.Instance.onExitColorCheckArea += OnExitColorCheckArea;
         }
 
         private void Unsubscribe()
@@ -65,14 +60,13 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlayerChangeForwardSpeed -= playerMovementController.OnPlayerChangeForwardSpeed;
-            CoreGameSignals.Instance.onExitDroneArea -= OnExitDroneArea;
+            CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
         }
 
         private void OnDisable()
         {
             Unsubscribe();
         }
-
         #endregion
 
         private void Awake()
@@ -81,7 +75,10 @@ namespace Managers
             SendPlayerDataToControllers();
         }
 
-        private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
+        private PlayerData GetPlayerData()
+        {
+            return Resources.Load<CD_Player>("Data/CD_Player").Data;
+        }
 
         private void SendPlayerDataToControllers()
         {
@@ -94,12 +91,21 @@ namespace Managers
             playerMovementController.ChangeStates(states);
         }
 
-
         private void OnSetScoreText(int Values)
         {
             scoreText.text = Values.ToString();
         }
 
+        private void OnExitColorCheckArea(ColorCheckAreaType colorAreaType)
+        {
+            CameraSignals.Instance.onSetCameraTarget?.Invoke(transform);
+            ExitColorCheckArea(colorAreaType);
+        }
+
+        public void ExitColorCheckArea(ColorCheckAreaType colorAreaType)
+        {
+            playerMovementController.ExitColorCheckArea(colorAreaType);
+        }
 
         private void OnPlay()
         {
@@ -112,13 +118,6 @@ namespace Managers
             gameObject.SetActive(true);
             playerMovementController.OnReset();
             playerAnimationController.OnReset();
-        }
-
-        private void OnExitDroneArea()
-        {
-            CameraSignals.Instance.onSetCameraTarget?.Invoke(transform);
-            playerPhysicsController.ExitDroneArea();
-            playerMovementController.ExitDroneArea();
         }
     }
 }

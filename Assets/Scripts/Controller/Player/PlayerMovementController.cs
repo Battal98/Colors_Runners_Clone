@@ -1,5 +1,6 @@
 using Commands;
 using Commands.Player;
+using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
 using Keys;
@@ -25,6 +26,7 @@ namespace Controllers
         [SerializeField] private PlayerManager manager;
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private CharacterController characterController;
+        [SerializeField] private CD_MovementList cdMovementList;
 
         #endregion
 
@@ -52,9 +54,9 @@ namespace Controllers
 
         private void Init()
         {
-            _moveSwerveCommand = new MoveSwerveCommand(ref rigidbody, ref _playerMovementData,ref _colorAreaSpeed);
-            _stopSideWaysCommand = new StopSideWaysCommand(ref rigidbody, ref _playerMovementData);
-            _joyStickMoveCommand = new JoyStickMoveCommand(ref rigidbody, ref _playerMovementData);
+            // _moveSwerveCommand = new MoveSwerveCommand(ref rigidbody, ref _playerMovementData,ref _colorAreaSpeed);
+            // _stopSideWaysCommand = new StopSideWaysCommand(ref rigidbody, ref _playerMovementData);
+            // _joyStickMoveCommand = new JoyStickMoveCommand(ref rigidbody, ref _playerMovementData);
         }
 
         public void SetMovementData(PlayerMovementData dataMovementData)
@@ -95,6 +97,7 @@ namespace Controllers
             {
                 case ColorCheckAreaType.Drone:
                     _colorAreaSpeed = 0;
+
                     break;
                 
                 case ColorCheckAreaType.Turret:
@@ -103,10 +106,26 @@ namespace Controllers
                         
             }
         }
-        public void ExitDroneArea()
+        public void ExitColorCheckArea(ColorCheckAreaType areaType)
         {
-            transform.parent.DOMoveZ(transform.parent.position.z + 2.9f, .5f);
 
+            switch (areaType)
+            {
+                case ColorCheckAreaType.Drone:
+                    transform.parent.DOMoveZ(transform.parent.position.z + 2.9f, .5f);
+                    _colorAreaSpeed = 1;
+                    break;
+                case ColorCheckAreaType.Turret:
+                    _colorAreaSpeed = 1;
+                    break;
+            }
+           
+
+        }
+
+        public void ExitTurretArea()
+        {
+            _colorAreaSpeed = 1;
         }
 
 
@@ -114,48 +133,55 @@ namespace Controllers
         {
             if (_isReadyToPlay)
             {
-                ChangeMoveType();
+                cdMovementList.MovementTypeList[(int)_states].DoMovement(ref _colorAreaSpeed,ref _isReadyToMove,ref rigidbody,
+                    ref  _inputParams,ref _playerMovementData);
+                // ChangeMoveType();
             }
             else
                 Stop();
         }
 
-        private void ChangeMoveType()
-        {
-            switch (_states)
-            {
-                case GameStates.Runner:
-                    MoveSwerve();
-                    break;
-                case GameStates.Idle:
-                    Moveidle();
-                    break;
-            }
-        }
+        #region PlayerMovementCommands
 
-        private void Moveidle()
-        {
-            if (_isReadyToMove)
-            {
-                _joyStickMoveCommand.Execute(_inputParams);
-            }
-            else
-            {
-                rigidbody.velocity = Vector3.zero;
-            }
-        }
+        // private void ChangeMoveType()
+        // {
+        //     switch (_states)
+        //     {
+        //         case GameStates.Runner:
+        //             MoveSwerve();
+        //             break;
+        //         case GameStates.Idle:
+        //             Moveidle();
+        //             break;
+        //     }
+        // }
+        //
+        // private void Moveidle()
+        // {
+        //     if (_isReadyToMove)
+        //     {
+        //         _joyStickMoveCommand.Execute(_inputParams,_colorAreaSpeed);
+        //     }
+        //     else
+        //     {
+        //         rigidbody.velocity = Vector3.zero;
+        //     }
+        // }
+        //
+        // private void MoveSwerve()
+        // {
+        //     if (_isReadyToMove)
+        //     {
+        //         _moveSwerveCommand.Execute(_inputParams,_colorAreaSpeed);
+        //     }
+        //     else
+        //     {
+        //         _stopSideWaysCommand.Execute();
+        //     }
+        // }
 
-        private void MoveSwerve()
-        {
-            if (_isReadyToMove)
-            {
-                _moveSwerveCommand.Execute(_inputParams);
-            }
-            else
-            {
-                _stopSideWaysCommand.Execute();
-            }
-        }
+        #endregion
+        
 
         public void Stop()
         {

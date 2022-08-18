@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Enums;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -36,7 +37,7 @@ namespace Commands.ColorCheckArea
                 yield return new WaitForSeconds(7.5f / 2f); // kill wrong collectables
                 _manager.SetOutline(_stack,25);
                 _stackList[index].CheckColorsForDrone();
-                CoreGameSignals.Instance.onExitDroneArea?.Invoke();
+                CoreGameSignals.Instance.onExitColorCheckArea?.Invoke(ColorCheckAreaType.Drone);
             }
         }
     }

@@ -22,6 +22,23 @@ public class ColorCheckPhysicController : MonoBehaviour
     {
         _meshRenderer = this.transform.parent.GetComponentInChildren<MeshRenderer>();
     }
+    private void TurretAreaJobs(Collider other)
+    {
+        colorCheckAreaManager.SetTargetForTurrets();
+        CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Turret);
+        // player forward speed down
+        //change animation state 
+    }
+
+    private void DroneAreaJobs(Collider other)
+    {
+        CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Drone);
+        StackSignals.Instance.onTransportInStack?.Invoke(other.transform.parent.gameObject, _colHolder);
+        stackList.Add(other.transform.parent.gameObject);
+        other.gameObject.GetComponent<Collider>().enabled = false;
+        colorCheckAreaManager.MoveCollectablesToArea(other.transform.parent.gameObject, _colHolder);
+        return;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,22 +48,18 @@ public class ColorCheckPhysicController : MonoBehaviour
             {
                 case ColorCheckAreaType.Drone:
 
-                    InvokeSignalsForDrone(other.transform.parent.gameObject);
-                    stackList.Add(other.transform.parent.gameObject);
-                    other.gameObject.GetComponent<Collider>().enabled = false;
-                    colorCheckAreaManager.MoveCollectablesToArea(other.transform.parent.gameObject, _colHolder);
+                    DroneAreaJobs(other);
                     break;
 
                 case ColorCheckAreaType.Turret:
 
-                    colorCheckAreaManager.SetTargetForTurrets();
-                    StackSignals.Instance.onSetCollectableAnimState(other.transform.parent.gameObject, CollectableAnimationStates.CrouchWalk);
-                    // player forward speed down
-                    //change animation state 
+                    TurretAreaJobs(other);
                     break;
             }
         }
     }
+
+ 
 
     private void OnTriggerExit(Collider other)
     {
@@ -60,14 +73,8 @@ public class ColorCheckPhysicController : MonoBehaviour
         }
 
     }
+    
 
-    #region Invoke Signals
-    private void InvokeSignalsForDrone(GameObject other)
-    {
-        CoreGameSignals.Instance.onPlayerChangeForwardSpeed?.Invoke(ColorCheckAreaType.Drone);
-        StackSignals.Instance.onTransportInStack?.Invoke(other, _colHolder);
-    } 
-    #endregion
 
     //burasi mesh controller'a alinacak 
     public void  CheckColorsForDrone()
@@ -117,7 +124,9 @@ public class ColorCheckPhysicController : MonoBehaviour
                 turretControllers.isTargetPlayer = false;
             }
         }
+        
     }
+    ///////////////////////////////////////////////////////////////////////////
 
 
 }

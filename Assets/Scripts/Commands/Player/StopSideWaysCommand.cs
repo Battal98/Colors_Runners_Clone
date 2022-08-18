@@ -22,9 +22,9 @@ namespace Commands.Player
 
         }
 
-        public void Execute()
+        public void Execute(float _colorAreaSpeed)
         {
-            _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, _playerMovementData.ForwardSpeed );
+            _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, _playerMovementData.ForwardSpeed* _colorAreaSpeed );
             _rigidbody.angularVelocity = Vector3.zero;
         }
     }

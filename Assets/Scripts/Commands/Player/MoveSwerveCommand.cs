@@ -11,7 +11,6 @@ namespace Commands.Player
         #region Private Variables
 
         private Rigidbody _rigidbody;
-        private float _colorAreaSpeed;
         private PlayerMovementData _playerMovementData;
         #endregion
         #endregion
@@ -20,12 +19,11 @@ namespace Commands.Player
             ref PlayerMovementData playerMovementData,ref float colorAreaSpeed)
         {
             _rigidbody = rigidbody;
-    
             _playerMovementData = playerMovementData;
-            _colorAreaSpeed = colorAreaSpeed;
+           
         }
 
-        public void Execute(InputParams _inputParams)
+        public void Execute(InputParams _inputParams,float _colorAreaSpeed)
         {
             
             _rigidbody.velocity = new Vector3(

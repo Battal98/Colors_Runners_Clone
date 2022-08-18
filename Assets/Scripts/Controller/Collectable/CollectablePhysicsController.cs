@@ -26,12 +26,13 @@ namespace Controllers
 
         #region Private Variables
 
+        private ColorCheckAreaType _areaType;
 
         #endregion
 
         #endregion
 
-        private  void CheckAreaEnter(Collider other,ColorCheckAreaType areaType)
+        private  void CheckAreaEnter(ColorCheckAreaType areaType)
         {
           
             if ( areaType== ColorCheckAreaType.Turret)
@@ -39,20 +40,17 @@ namespace Controllers
                 collectablemanager.SetAnim(CollectableAnimationStates.CrouchWalk);
             }
         }
-        private  void ColorAreaExit(Collider other,ColorCheckAreaType areaType)
+        private  void ColorAreaExit(ColorCheckAreaType areaType)
         {
             if (areaType == ColorCheckAreaType.Turret)
             {
                 collectablemanager.SetAnim(CollectableAnimationStates.Run);
             }
         }
-        
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Collectable") && isTaken)
             {
-             
                 var otherPhysic = other.gameObject.GetComponent<CollectablePhysicsController>();
                 if (!otherPhysic.isTaken)
                 {
@@ -60,12 +58,11 @@ namespace Controllers
                     collectablemanager.CollectableColorCheck(other.transform.parent.gameObject);
 
                 }
-              
             }
             if (other.CompareTag("CheckArea"))
             {
-                var areaType = other.GetComponentInParent<ColorCheckAreaManager>().AreaType;
-                CheckAreaEnter(other,areaType);
+                 _areaType = other.GetComponentInParent<ColorCheckAreaManager>().AreaType;
+                CheckAreaEnter(_areaType);
             }
 
             if (other.CompareTag("Gate"))
@@ -83,13 +80,11 @@ namespace Controllers
             }
 
         }
-
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("CheckArea"))
             {
-                var areaType = other.GetComponentInParent<ColorCheckAreaManager>().AreaType;
-                ColorAreaExit(other,areaType);
+                ColorAreaExit(_areaType);
             }
         }
 

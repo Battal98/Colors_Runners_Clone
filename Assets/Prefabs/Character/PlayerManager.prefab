@@ -1888,6 +1888,7 @@ MonoBehaviour:
   manager: {fileID: 4701532483818768975}
   rigidbody: {fileID: 1944392521816120396}
   characterController: {fileID: 0}
+  cdMovementList: {fileID: 11400000, guid: cad7738aa5db8b04fa75fd34eb46a7b8, type: 2}
 --- !u!54 &1944392521816120396
 Rigidbody:
   m_ObjectHideFlags: 0

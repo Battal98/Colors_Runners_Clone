@@ -1,6 +1,7 @@
 using Data.ValueObject;
 using UnityEngine;
 using DG.Tweening;
+using Keys;
 using Unity.Mathematics;
 using UnityEngine.UI;
 
@@ -9,37 +10,39 @@ namespace Data.UnityObject
     [CreateAssetMenu(fileName = "Swerve", menuName = "Movement/SwerveMove", order = 0)]
     public class CD_MoveType_Swerve : CD_Movement
     {
-        public override void DoMovement(ref int inDroneArea, ref bool _isReadyToMove, ref Rigidbody _rigidbody,
-            ref Vector3 _inputValue, ref PlayerMovementData _moveData, ref Vector2 _clampValues,
-            ref CharacterController characterController, Transform transform)
+        public override void DoMovement( ref float _colorAreaSpeed,ref bool _isReadyToMove,ref Rigidbody _rigidbody,
+            ref InputParams _inputParams,ref PlayerMovementData _playerMovementData)
         {
             if (_isReadyToMove)
             {
-                SwerveMove(ref inDroneArea, ref _rigidbody, ref _moveData, ref _inputValue, ref _clampValues);
+                SwerveMove(ref _colorAreaSpeed,ref _rigidbody, ref _playerMovementData,ref _inputParams);
             }
             else
             {
-                StopSideways(ref inDroneArea, ref _rigidbody, ref _moveData);
+                StopSideways(ref _colorAreaSpeed, ref _rigidbody, ref _playerMovementData);
             }
         }
 
-        private void SwerveMove(ref int _inDroneArea, ref Rigidbody rigidbody, ref PlayerMovementData movementData,
-            ref Vector3 inputValue, ref Vector2 clampValues)
+        private void SwerveMove(ref float _colorAreaSpeed,ref Rigidbody _rigidbody, ref PlayerMovementData _playerMovementData,
+           ref InputParams _inputParams )
         {
-            rigidbody.velocity = new Vector3(inputValue.x * movementData.SidewaysSpeed, rigidbody.velocity.y,
-                movementData.ForwardSpeed * _inDroneArea);
-
-
-            rigidbody.position = new Vector3(
-                Mathf.Clamp(rigidbody.position.x, clampValues.x,
-                    clampValues.y),
-                (rigidbody.position).y,
-                rigidbody.position.z);
+            _rigidbody.velocity = new Vector3(
+                _inputParams.Values.x * _playerMovementData.SidewaysSpeed,
+                _rigidbody.velocity.y,
+                _playerMovementData.ForwardSpeed*_colorAreaSpeed);
+           
+            
+            _rigidbody.position = new Vector3(
+                // Mathf.Clamp(_rigidbody.position.x, -_inputParams.ClampValues.x, _inputParams.ClampValues.x),
+                _rigidbody.position.x,
+                _rigidbody.position.y ,
+                _rigidbody.position.z );
         }
 
-        private void StopSideways(ref int _inDroneArea, ref Rigidbody rigidbody, ref PlayerMovementData movementData)
+        private void StopSideways(ref float _colorAreaSpeed, ref Rigidbody _rigidbody, ref PlayerMovementData _playerMovementData)
         {
-         
+            _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, _playerMovementData.ForwardSpeed*_colorAreaSpeed );
+            _rigidbody.angularVelocity = Vector3.zero;
         }
     }
 }
