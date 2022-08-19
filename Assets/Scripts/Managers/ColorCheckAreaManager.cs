@@ -28,7 +28,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private ColorCheckAreaMeshController colorCheckAreaMeshController;
-        [SerializeField] private ColorCheckAreaPhysicController colorCheckAreaPhysicController;
+    
 
         #endregion
 

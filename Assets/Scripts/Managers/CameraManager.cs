@@ -48,62 +48,70 @@ namespace Managers
         {
             SubscribeEvents();
         }
-
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay += SetCameraTarget;
-            CameraSignals.Instance.onSetCameraState += OnSetCameraState;
-            CameraSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
+            CoreGameSignals.Instance.onGetGameState += OnGetGameState;
+            CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
             CoreGameSignals.Instance.onReset += OnReset;
         }
-
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay -= SetCameraTarget;
-            CameraSignals.Instance.onSetCameraState -= OnSetCameraState;
-            CameraSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
+            CoreGameSignals.Instance.onGetGameState += OnGetGameState;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
-
+        
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
 
         #endregion
-
         private void GetInitialPosition()
         {
             _initialPosition = transform.localPosition;
         }
-
-        private void OnMoveToInitialPosition()
+        private void MoveToInitialPosition()
         {
             transform.localPosition = _initialPosition;
         }
-
-        private void SetCameraTarget()
+        private void SetPlayerFollow()
         {
             _playerManager = FindObjectOfType<PlayerManager>().transform;
-            CameraSignals.Instance.onSetCameraTarget?.Invoke(_playerManager);
+            OnSetCameraTarget(_playerManager);
         }
-
         private void OnSetCameraTarget(Transform _target)
         {
             stateDrivenCamera.Follow = _target;
             stateDrivenCamera.Follow = _target;
         }
-
+        private void SetCameraState(CameraStatesType cameraState)
+        {
+            _animator.SetTrigger(cameraState.ToString());
+        }
+        private void OnGetGameState(GameStates states)
+        {
+            switch (states)
+            {
+                case GameStates.Idle :
+                    SetCameraState(CameraStatesType.Idle);
+                    break;
+                case GameStates.Runner:
+                    SetCameraState(CameraStatesType.Runner);
+                    break;
+            }
+        }
+        private void OnPlay()
+        {
+            SetPlayerFollow();
+        }
         private void OnReset()
         {
             stateDrivenCamera.Follow = null;
             stateDrivenCamera.LookAt = null;
-            OnMoveToInitialPosition();
-        }
-
-        public void OnSetCameraState(CameraStatesType cameraState)
-        {
-            _animator.SetTrigger(cameraState.ToString());
+            MoveToInitialPosition();
         }
     }
 }

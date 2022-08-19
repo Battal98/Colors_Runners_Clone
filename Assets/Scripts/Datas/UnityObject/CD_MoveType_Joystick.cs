@@ -20,7 +20,7 @@ namespace Data.UnityObject
         {
             Vector3 _movement = new Vector3(_inputParams.Values.x * _playerMovementData.PlayerJoystickSpeed, 0,
                 _inputParams.Values.z * _playerMovementData.PlayerJoystickSpeed);
-            // _characterController.Move(_movement * Time.fixedDeltaTime);
+
             _rigidbody.velocity = _movement;
             if (_movement != Vector3.zero)
             {

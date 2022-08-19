@@ -5,6 +5,7 @@ using Commands;
 using Datas.ValueObject;
 using System.Collections.Generic;
 using Enums;
+using Sirenix.OdinInspector;
 
 namespace Managers
 {
@@ -37,6 +38,8 @@ namespace Managers
         private ChangeCollectableColorCommand _changeCollectableColorCommand;
         private Transform _playerManager;
         private float _stackScore;
+        [ShowInInspector]
+        private ColorType _type;
 
         #endregion
 
@@ -55,11 +58,10 @@ namespace Managers
             StackSignals.Instance.onRemoveInStack += OnRemoveInStack;
             StackSignals.Instance.onTransportInStack += OnTransportInStack;
             StackSignals.Instance.onGetStackList += OnGetStackList;
-            StackSignals.Instance.onSetCollectableAnimState += OnCollectableAnimState;
             StackSignals.Instance.onChangeCollectableColor += OnChangeCollectableColor;
-            StackSignals.Instance.onSendStackCount += OnSendStackListCount;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
+            StackSignals.Instance.onGetColorType += OnGetColorType;
         }
 
 
@@ -69,11 +71,10 @@ namespace Managers
             StackSignals.Instance.onRemoveInStack -= OnRemoveInStack;
             StackSignals.Instance.onTransportInStack -= OnTransportInStack;
             StackSignals.Instance.onGetStackList -= OnGetStackList;
-            StackSignals.Instance.onSetCollectableAnimState -= OnCollectableAnimState;
             StackSignals.Instance.onChangeCollectableColor -= OnChangeCollectableColor;
-            StackSignals.Instance.onSendStackCount -= OnSendStackListCount;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            StackSignals.Instance.onGetColorType -= OnGetColorType;
         }
 
         private void OnDisable()
@@ -88,7 +89,6 @@ namespace Managers
         {
             return Resources.Load<CD_Stack>("Data/CD_Stack").Data;
         }
-
 
         private void Awake()
         {
@@ -121,7 +121,6 @@ namespace Managers
             _stackLerpMovementCommand.Execute(ref _playerManager);
         }
 
-
         private void FindPlayer()
         {
             if (!_playerManager)
@@ -130,10 +129,7 @@ namespace Managers
             }
         }
 
-        private int OnSendStackListCount()
-        {
-            return stackList.Count;
-        }
+        private ColorType OnGetColorType() => _type;
 
         private void OnAddInStack(GameObject obj)
         {
@@ -149,6 +145,7 @@ namespace Managers
 
         private void OnChangeCollectableColor(ColorType colorType)
         {
+            _type = colorType;
             _changeCollectableColorCommand.Execute(colorType);
         }
 
@@ -170,10 +167,6 @@ namespace Managers
             _collectableAnimSetCommand.Execute(obj, CollectableAnimationStates.Run);
         }
 
-        private void OnCollectableAnimState(GameObject obj, CollectableAnimationStates animState)
-        {
-            _collectableAnimSetCommand.Execute(obj, animState);
-        }
 
         private void OnGetStackList(GameObject _stackListObj)
         {

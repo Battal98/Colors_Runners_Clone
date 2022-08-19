@@ -23,11 +23,10 @@ namespace Controllers
 
         #endregion
 
-        public void Playanim(PlayerAnimationStates animationStates)
+        public void PlayAnim(PlayerAnimationStates animationStates)
         {
             animatorController.SetTrigger(animationStates.ToString());
         }
-
         public void OnReset()
         {
             animatorController.SetTrigger(PlayerAnimationStates.Idle.ToString());

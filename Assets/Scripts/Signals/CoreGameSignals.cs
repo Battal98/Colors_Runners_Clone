@@ -1,6 +1,7 @@
 using Extentions;
 using UnityEngine.Events;
 using Enums;
+using UnityEngine;
 
 namespace Signals
 {
@@ -11,5 +12,7 @@ namespace Signals
         public UnityAction<ColorCheckAreaType> onExitColorCheckArea = delegate { };
         public UnityAction<GameStates> onSetGameState = delegate { };
         public UnityAction<GameStates> onGetGameState = delegate { };
+        public UnityAction<Transform> onSetCameraTarget = delegate { };
+
     }
 }

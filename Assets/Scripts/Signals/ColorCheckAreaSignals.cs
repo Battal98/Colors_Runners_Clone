@@ -10,5 +10,6 @@ namespace Signals
         public UnityAction<float> onSetCollectableOutline = delegate { };
         public UnityAction<ColorCheckAreaType> onChangeJobsOnColorArea=delegate {  };
         public UnityAction<GameObject> onCheckAreaControl = delegate { };
+        public UnityAction<bool> onTurretIsActive=delegate {  };
     }
 }

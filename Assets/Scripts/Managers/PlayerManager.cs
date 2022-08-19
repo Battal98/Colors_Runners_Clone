@@ -97,7 +97,7 @@ namespace Managers
 
         private void OnExitColorCheckArea(ColorCheckAreaType colorAreaType)
         {
-            CameraSignals.Instance.onSetCameraTarget?.Invoke(transform);
+            CoreGameSignals.Instance.onSetCameraTarget?.Invoke(transform);
             ExitColorCheckArea(colorAreaType);
         }
 
@@ -105,18 +105,21 @@ namespace Managers
         {
             playerMovementController.ExitColorCheckArea(colorAreaType);
         }
-
-        private void OnPlay()
-        {
-            playerMovementController.IsReadyToPlay(true);
-            playerAnimationController.Playanim(PlayerAnimationStates.Run);
-        }
-
+        
         public void ChangeSpeed(ColorCheckAreaType colorAreaType)
         {
             playerMovementController.PlayerChangeForwardSpeed(colorAreaType);
         }
 
+        public void PlayAnim(PlayerAnimationStates animationStates)
+        {
+            playerAnimationController.PlayAnim(animationStates);
+        }
+
+        private void OnPlay()
+        {
+            playerMovementController.IsReadyToPlay(true);
+        }
         private void OnReset()
         {
             gameObject.SetActive(true);

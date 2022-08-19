@@ -341,6 +341,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6435384569821097470, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: max
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384569821097470, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: min
+      value: -48.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384569821097470, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: defaultLocalRotation.w
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384569821097470, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: defaultLocalRotation.z
+      value: -0.7071069
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384570088546104, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: isTargetPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384571502604027, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: max
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384571502604027, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: min
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384571502604027, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: axis.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384571502604027, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: useLimits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384571502604027, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: zeroAxisDisplayOffset
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384571510693879, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: max
+      value: 62.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384571510693879, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: min
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384571510693879, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: defaultLocalRotation.w
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435384571510693879, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
+      propertyPath: defaultLocalRotation.z
+      value: 0.7071069
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf872360bb85f2f468a7af4b01cf1237, type: 3}
 --- !u!1 &1539420659791235912 stripped

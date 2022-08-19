@@ -27,12 +27,7 @@ namespace Controller
         #endregion
 
         #endregion
-
-        private void TurretAreaJobs()
-        {
-            //ColorCheckAreaSignals.Instance.onChangeJobsOnColorArea(ColorCheckAreaType.Turret);
-        }
-
+        
     
         private void DroneAreaJobs(Collider other)
         {
@@ -41,7 +36,8 @@ namespace Controller
             colorCheckAreaManager.ColorCheckAreaStackList.Add(other.transform.parent.gameObject);
             other.gameObject.GetComponent<Collider>().enabled = false;
             colorCheckAreaManager.MoveCollectablesToArea(other.transform.parent.gameObject, colHolder);
-        }
+        }  
+       
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Collectable"))
@@ -52,11 +48,8 @@ namespace Controller
 
                         DroneAreaJobs(other);
                         break;
-
-                    case ColorCheckAreaType.Turret:
-
-                        TurretAreaJobs();
-                        break;
+                    
+                 
                 }
             }
         }

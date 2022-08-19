@@ -5,6 +5,7 @@ using DG.Tweening;
 using Keys;
 using UnityEngine;
 using Enums;
+using Managers;
 using Sirenix.OdinInspector;
 
 
@@ -22,6 +23,7 @@ namespace Controllers
 
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private CD_MovementList cdMovementList;
+        [SerializeField] private PlayerManager playerManager;
 
         #endregion
 
@@ -83,8 +85,7 @@ namespace Controllers
         {
             _isReadyToPlay = state;
         }
-
-
+        
         public void PlayerChangeForwardSpeed(ColorCheckAreaType value)
         {
             Stop();
@@ -100,13 +101,12 @@ namespace Controllers
                     break;
             }
         }
-
         public void ExitColorCheckArea(ColorCheckAreaType areaType)
         {
             switch (areaType)
             {
-                case ColorCheckAreaType.Drone:
-                    transform.parent.DOMoveZ(transform.parent.position.z + 2.9f, .5f);
+                case ColorCheckAreaType.Drone:  
+                    transform.DOLocalMoveZ(transform.localPosition.z + 2.9f, .5f);
                     _colorAreaSpeed = 1;
                     break;
                 case ColorCheckAreaType.Turret:
@@ -114,18 +114,9 @@ namespace Controllers
                     break;
             }
 
-            if (areaType == ColorCheckAreaType.Drone)
-            {
-                transform.parent.DOMoveZ(transform.parent.position.z + 2.9f, .5f);
-                _colorAreaSpeed = 1;
-            }
-            else if (areaType == ColorCheckAreaType.Turret)
-            {
-                _colorAreaSpeed = 1;
-            }
+        
         }
-
-
+        
         private void FixedUpdate()
         {
             if (_isReadyToPlay)
@@ -137,6 +128,7 @@ namespace Controllers
             }
             else
                 Stop();
+
         }
 
         #region PlayerMovementCommands

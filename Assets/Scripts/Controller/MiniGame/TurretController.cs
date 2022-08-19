@@ -1,47 +1,35 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using RootMotion;
 using RootMotion.FinalIK;
 using DG.Tweening;
+using Random = UnityEngine.Random;
 
 namespace Controllers
 {
-    
     public class TurretController : MonoBehaviour
     {
-       
-        [System.Serializable]
-        public class Part
-        {
-            public Transform transform; 
-            private RotationLimit rotationLimit; 
+            #region self Variables
 
-         
-            public void AimAt(Transform target)
-            {
-                transform.LookAt(new Vector3(target.position.x, target.position.y + 0.3f, target.position.z),
-                    transform.up);
+            #region Serialized Variables
 
-               
-                if (rotationLimit == null)
-                {
-                    rotationLimit = transform.GetComponent<RotationLimit>();
-                    rotationLimit.Disable();
-                }
+            [SerializeField] private Transform targetPlayer;
+            [SerializeField] private Transform targetRandom;
 
-           
-                rotationLimit.Apply();
-            }
-        }
+            #endregion
 
-        public Transform targetPlayer; 
-        public Transform targetRandom;
-        public Part[] parts;
+            #region Public Variables
+
+            public Part[] parts;
+            public bool isTargetPlayer;
+            #endregion
+
+            #endregion
+      
 
         private void Start()
         {
-            targetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
-            targetRandom = GameObject.FindGameObjectWithTag("Target").transform;
             StartCoroutine(SetTarget());
         }
 
@@ -57,8 +45,11 @@ namespace Controllers
             }
         }
 
-        public bool isTargetPlayer;
-
+        public void SetTarget(Transform target)
+        {
+            targetPlayer = target;
+        }
+        
         void Update()
         {
             if (isTargetPlayer)
@@ -69,9 +60,35 @@ namespace Controllers
 
             foreach (Part part in parts) part.AimAt(targetRandom);
         }
+        
+    }
 
-        private void ShootPlayer()
+    #region Part
+
+    [Serializable]
+    public class Part
+    {
+        public Transform transform;
+        private RotationLimit rotationLimit;
+
+
+        public void AimAt(Transform target)
         {
+            transform.LookAt(new Vector3(target.position.x, target.position.y + 0.3f, target.position.z),
+                transform.up);
+
+
+            if (rotationLimit == null)
+            {
+                rotationLimit = transform.GetComponent<RotationLimit>();
+                rotationLimit.Disable();
+            }
+
+
+            rotationLimit.Apply();
         }
     }
+
+    #endregion
+
 }

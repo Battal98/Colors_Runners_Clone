@@ -20,7 +20,6 @@ namespace Data.UnityObject
                 StopSideways(ref _colorAreaSpeed, ref _rigidbody, ref _playerMovementData);
             }
         }
-
         private void SwerveMove(ref float _colorAreaSpeed, ref Rigidbody _rigidbody,
             ref PlayerMovementData _playerMovementData,
             ref InputParams _inputParams)
@@ -30,11 +29,11 @@ namespace Data.UnityObject
                 _rigidbody.velocity.y,
                 _playerMovementData.ForwardSpeed * _colorAreaSpeed);
 
-
+          
+        
             _rigidbody.position = new Vector3(
-                // Mathf.Clamp(_rigidbody.position.x, -_inputParams.ClampValues.x, _inputParams.ClampValues.x),
-                _rigidbody.position.x,
-                _rigidbody.position.y,
+                 Mathf.Clamp(_rigidbody.position.x, -_inputParams.ClampValues.x, _inputParams.ClampValues.x),
+                 _rigidbody.position.y,
                 _rigidbody.position.z);
         }
 

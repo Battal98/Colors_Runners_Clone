@@ -30,9 +30,7 @@ namespace Managers
         #region Private Variables
 
         private DroneSquencePlayCommand _droneSquencePlayCommand;
-        private SetTurretTargetCommand _setTurretTarget;
         private GameObject _platformCheck;
-        private Transform _target;
 
         #endregion
 
@@ -50,13 +48,19 @@ namespace Managers
         {
             ColorCheckAreaSignals.Instance.onCheckAreaControl += OnCheckAreaControl;
             StackSignals.Instance.onStackTransferComplete += OnOnEnterInDroneArea;
+            ColorCheckAreaSignals.Instance.onTurretIsActive +=OnTurretIsActive ;
+            CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
         private void UnsubscribeEvents()
         {
             ColorCheckAreaSignals.Instance.onCheckAreaControl -= OnCheckAreaControl;
             StackSignals.Instance.onStackTransferComplete -= OnOnEnterInDroneArea;
+            ColorCheckAreaSignals.Instance.onTurretIsActive -=OnTurretIsActive;
+
+            CoreGameSignals.Instance.onPlay -= OnPlay;
         }
+
 
         private void OnDisable()
         {
@@ -82,14 +86,14 @@ namespace Managers
                     TurretActive();
                     break;
             }
-
-            _target = FindObjectOfType<PlayerManager>().gameObject.transform;
         }
 
         private void Init()
         {
             _droneSquencePlayCommand = new DroneSquencePlayCommand(ref miniGameAreaManager);
         }
+
+        #region SetType
 
         private void TurretActive()
         {
@@ -107,10 +111,11 @@ namespace Managers
             turret.SetActive(false);
         }
 
-        public void PlayDroneAnim()
-        {
-            droneController.DroneMove();
-        }
+        #endregion
+
+      
+
+        #region ForDrone
 
         private void OnOnEnterInDroneArea()
         {
@@ -120,9 +125,45 @@ namespace Managers
             }
         }
 
+        #endregion
+
+
+        #region ForTurret
+
+        private void SetTarget()
+        {
+            var _target = FindObjectOfType<PlayerManager>().transform;
+            for (int i = 0; i < turretController.Count; i++)
+            {
+                turretController[i].SetTarget(_target);
+            }
+        }
+
+        private void OnTurretIsActive(bool isCheck)
+        {
+            
+                for (int i = 0; i < turretController.Count; i++)
+                {
+                    turretController[i].isTargetPlayer=isCheck;
+                }
+                
+        }
+        
+
+        #endregion
+
+        public void PlayDroneAnim()
+        {
+            droneController.DroneMove();
+        }
         private void OnCheckAreaControl(GameObject other)
         {
             _platformCheck = other;
+        }
+
+        private void OnPlay()
+        {
+            SetTarget();
         }
     }
 }

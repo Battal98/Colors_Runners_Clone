@@ -15,8 +15,7 @@ namespace Managers
         #region Public Variables
 
         public ColorType CollectableColorType;
-        [HideInInspector]
-        public List<ColorData> Datas;
+        [HideInInspector] public List<ColorData> Datas;
 
         #endregion
 
@@ -47,6 +46,7 @@ namespace Managers
         {
             return Resources.Load<CD_Color>("Data/CD_Color").Data;
         }
+
         private void Init()
         {
             _collectableColorCheckCommand = new CollectableColorCheckCommand(ref collectableManager);
@@ -67,11 +67,11 @@ namespace Managers
             _collectableColorCheckCommand.Exucute(other);
         }
 
-        private Material GetCollectableData()
-        {
-            return Resources.Load<CD_Collectable>("Data/CD_Collectable").CollectableData
-                .CollectableMaterialList[(int)CollectableColorType];
-        }
+        // private Material GetCollectableData()
+        // {
+        //     return Resources.Load<CD_Collectable>("Data/CD_Collectable").CollectableData
+        //         .CollectableMaterialList[(int)CollectableColorType];
+        // }
 
         public void CollectableColorChange(ColorType colorType)
         {

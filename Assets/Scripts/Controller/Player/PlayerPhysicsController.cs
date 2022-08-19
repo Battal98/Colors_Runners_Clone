@@ -30,9 +30,18 @@ namespace Controllers
 
         private void GetReferances()
         {
-            _playerManager = this.gameObject.GetComponentInParent<PlayerManager>();
+            _playerManager = gameObject.GetComponentInParent<PlayerManager>();
         }
 
+        private void ChooseJobType()
+        {
+            switch (_checkAreaType)
+            {
+                case ColorCheckAreaType.Turret:
+                    ColorCheckAreaSignals.Instance.onChangeJobsOnColorArea?.Invoke(ColorCheckAreaType.Turret);
+                    break;
+            }
+        }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Finish"))
@@ -45,9 +54,16 @@ namespace Controllers
                 _checkAreaType = other.GetComponentInParent<MiniGameAreaManager>().AreaType;
 
                 ColorCheckAreaSignals.Instance.onCheckAreaControl?.Invoke(other.transform.parent.gameObject);
+              
                 _playerManager.ChangeSpeed(_checkAreaType);
             }
+
+            if (other.CompareTag("ColorCheck"))
+            {
+                ChooseJobType();
+            }
         }
+
 
         private void OnTriggerExit(Collider other)
         {
@@ -57,10 +73,7 @@ namespace Controllers
                 {
                     _playerManager.ExitColorCheckArea(ColorCheckAreaType.Turret);
                 }
-                else if (_checkAreaType == ColorCheckAreaType.Drone)
-                {
-                    _playerManager.ExitColorCheckArea(ColorCheckAreaType.Drone);
-                }
+              
             }
         }
     }
