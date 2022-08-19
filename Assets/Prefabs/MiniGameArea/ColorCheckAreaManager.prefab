@@ -78,10 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AreaType: 1
   ColorType: 0
-  ColorCheckAreaStackList:
-  - {fileID: 5526568139411412533}
-  - {fileID: 0}
-  - {fileID: 0}
+  ColorCheckAreaStackList: []
   Datas: []
   colorCheckAreaMeshController: {fileID: 2247622276263380468}
   colorCheckAreaPhysicController: {fileID: 4865361519959807099}
