@@ -3,6 +3,8 @@ using Enums;
 using Managers;
 using Signals;
 using UnityEngine;
+using System.Threading.Tasks;
+using DG.Tweening;
 
 namespace Controllers
 {
@@ -20,7 +22,8 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private Transform colHolder;
-        [SerializeField] private ColorCheckAreaManager manager;
+        [SerializeField] private ColorCheckAreaManager colorCheckAreaManager;
+        [SerializeField] private MiniGameAreaManager miniGameAreaManager;
 
         #endregion
 
@@ -37,56 +40,60 @@ namespace Controllers
             _meshRenderer = this.transform.parent.GetComponentInChildren<MeshRenderer>();
         }
 
-        public void CheckColorsForDrone()
+        public async void CheckColorsForDrone()
         {
-            _count = manager.ColorCheckAreaStackList.Count;
-            manager.transform.GetChild(1).gameObject.SetActive(false);
+            _count = colorCheckAreaManager.ColorCheckAreaStackList.Count;
+            colorCheckAreaManager.transform.GetChild(1).gameObject.SetActive(false);
+
+            this.transform.DOScaleZ(0f, 0.5f).OnComplete(() => this.gameObject.SetActive(false)) ;
+
+            await Task.Delay(500);
 
             for (int i = 0; i < _count; i++)
             {
-                var color = colHolder.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().material.color;
-                if (ColorUtility.ToHtmlStringRGB(_meshRenderer.material.color) != ColorUtility.ToHtmlStringRGB(color))
+                var colManager = colHolder.GetChild(0).GetComponent<CollectableManager>();
+                if (colorCheckAreaManager.ColorType != colManager.CollectableColorType)
                 {
-                    colHolder.GetChild(0).gameObject.GetComponent<CollectableManager>()
-                        .SetAnim(CollectableAnimationStates.Dead);
-                    manager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
+
+                    colManager.SetAnim(CollectableAnimationStates.Dead);
+                    colorCheckAreaManager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
                     colHolder.GetChild(0).transform.parent = null;
-                    manager.ColorCheckAreaStackList.TrimExcess();
+                    colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
                 }
                 else
                 {
                     colHolder.GetChild(0).GetComponentInChildren<Collider>().enabled = true;
-                    manager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
+                    colorCheckAreaManager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
                     StackSignals.Instance.onGetStackList?.Invoke(colHolder.GetChild(0).gameObject);
-                    manager.ColorCheckAreaStackList.TrimExcess();
+                    colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
                 }
             }
         }
 
         public void CheckColorForTurrets()
         {
-            _count = manager.ColorCheckAreaStackList.Count;
-            transform.GetComponent<Collider>().enabled = false;
-
+            _count = miniGameAreaManager.turretController.Count;
+            //transform.GetComponent<Collider>().enabled = false;
+            Debug.Log("Entry1");
             for (int i = 0; i < _count; i++)
             {
-                var color = colHolder.GetChild(0).GetComponentInChildren<SkinnedMeshRenderer>().material.color;
-                if (ColorUtility.ToHtmlStringRGB(_meshRenderer.material.color) != ColorUtility.ToHtmlStringRGB(color))
+                var colManager = colHolder.GetChild(0).GetComponent<CollectableManager>();
+                if (colorCheckAreaManager.ColorType != colManager.CollectableColorType)
                 {
-                    // turretControllers.targetPlayer = target.transform;
-                    // turretControllers.isTargetPlayer = true;
+                    Debug.Log("Entry2");
+                    miniGameAreaManager.turretController[i].isTargetPlayer = true;
                 }
                 else
                 {
-                    // turretControllers.targetPlayer = null;
-                    // turretControllers.isTargetPlayer = false;
+                    Debug.Log("Entry3");
+                    miniGameAreaManager.turretController[i].isTargetPlayer = false;
                 }
             }
         }
 
         private void SetColorMaterial()
         {
-            _meshRenderer.material.color = manager.Datas[(int)manager.ColorType].Color;
+            _meshRenderer.material.color = colorCheckAreaManager.Datas[(int)colorCheckAreaManager.ColorType].Color;
         }
     }
 }

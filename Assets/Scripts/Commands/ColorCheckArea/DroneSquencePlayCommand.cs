@@ -32,6 +32,7 @@ namespace Commands
             yield return new WaitForSeconds(7.5f / 2f); // kill wrong collectables
             ColorCheckAreaSignals.Instance.onSetCollectableOutline?.Invoke(25);
             ColorCheckAreaSignals.Instance.onChangeJobsOnColorArea?.Invoke(ColorCheckAreaType.Drone);
+            yield return new WaitForSeconds(1f);
             CoreGameSignals.Instance.onExitColorCheckArea?.Invoke(ColorCheckAreaType.Drone);
         }
     }

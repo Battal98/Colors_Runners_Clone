@@ -76,8 +76,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 495eb4fbabac41b0ab0ec1b86f18d8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AreaType: 0
-  ColorCheckAreaStackList: []
+  AreaType: 1
+  ColorType: 0
+  ColorCheckAreaStackList:
+  - {fileID: 5526568139411412533}
+  - {fileID: 0}
+  - {fileID: 0}
+  Datas: []
   colorCheckAreaMeshController: {fileID: 2247622276263380468}
   colorCheckAreaPhysicController: {fileID: 4865361519959807099}
 --- !u!1 &5526568140296939081
@@ -234,4 +239,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colHolder: {fileID: 1498588698117348132}
-  manager: {fileID: 9009479499935576460}
+  colorCheckAreaManager: {fileID: 9009479499935576460}
+  miniGameAreaManager: {fileID: 0}

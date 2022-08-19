@@ -104,9 +104,5 @@ namespace Managers
         {
             _collectablePositionSetCommand.Execute(other, _colHolder);
         }
-
-        public void SetTargetForTurrets()
-        {
-        }
     }
 }

@@ -30,7 +30,7 @@ namespace Controller
 
         private void TurretAreaJobs()
         {
-            colorCheckAreaManager.SetTargetForTurrets();
+            //ColorCheckAreaSignals.Instance.onChangeJobsOnColorArea(ColorCheckAreaType.Turret);
         }
 
     

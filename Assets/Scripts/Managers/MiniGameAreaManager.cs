@@ -14,6 +14,7 @@ namespace Managers
         #region Public Variables
 
         public ColorCheckAreaType AreaType;
+        public List<TurretController> turretController;
 
         #endregion
 
@@ -23,7 +24,6 @@ namespace Managers
         [SerializeField] private GameObject drone;
         [SerializeField] private MiniGameAreaManager miniGameAreaManager;
         [SerializeField] private DroneController droneController;
-        [SerializeField] private List<TurretController> turretController;
 
         #endregion
 
@@ -89,7 +89,6 @@ namespace Managers
         private void Init()
         {
             _droneSquencePlayCommand = new DroneSquencePlayCommand(ref miniGameAreaManager);
-            _setTurretTarget = new SetTurretTargetCommand(ref turretController);
         }
 
         private void TurretActive()
@@ -111,11 +110,6 @@ namespace Managers
         public void PlayDroneAnim()
         {
             droneController.DroneMove();
-        }
-
-        public void SetTargetForTurrets()
-        {
-            _setTurretTarget.Execute(_target);
         }
 
         private void OnOnEnterInDroneArea()
