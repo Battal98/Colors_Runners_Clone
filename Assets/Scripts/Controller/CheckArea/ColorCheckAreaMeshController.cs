@@ -45,8 +45,6 @@ namespace Controllers
             _count = colorCheckAreaManager.ColorCheckAreaStackList.Count;
             colorCheckAreaManager.transform.GetChild(1).gameObject.SetActive(false);
 
-            this.transform.DOScaleZ(0f, 0.5f).OnComplete(() => this.gameObject.SetActive(false)) ;
-
             await Task.Delay(500);
 
             for (int i = 0; i < _count; i++)
@@ -57,6 +55,10 @@ namespace Controllers
 
                     colManager.SetAnim(CollectableAnimationStates.Dead);
                     colorCheckAreaManager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
+                    if (this.gameObject.activeInHierarchy)
+                    {
+                        this.transform.DOScaleZ(0f, 0.5f).OnComplete(() => this.gameObject.SetActive(false));
+                    }
                     colHolder.GetChild(0).transform.parent = null;
                     colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
                 }

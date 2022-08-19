@@ -879,29 +879,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1257352933}
     m_Modifications:
-    - target: {fileID: 1760233937623715504, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f6faf52bfe8b6064189dd4b2ce73e02c, type: 2}
     - target: {fileID: 1760233938215713219, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: isTaken
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1760233938324641908, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1760233938324641908, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
-      propertyPath: CollectableColorType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
-      propertyPath: collectableColorType
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1760233938649184602, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: m_RootOrder
@@ -951,9 +931,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollectablePlayer (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1760233938324641908, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
-    - {fileID: 7289084589523245379, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
 --- !u!4 &462115203 stripped
 Transform:
