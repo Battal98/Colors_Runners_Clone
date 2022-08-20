@@ -170,7 +170,7 @@ namespace Managers
 
         private void OnGetStackList(GameObject _stackListObj)
         {
-            _stackListObj.transform.parent = this.transform;
+            _stackListObj.transform.parent = transform;
             _collectableAnimSetCommand.Execute(_stackListObj, CollectableAnimationStates.Run);
             stackList.Add(_stackListObj);
         }

@@ -57,7 +57,6 @@ namespace Controllers
                 foreach (Part part in parts) part.AimAt(targetPlayer);
                 return;
             }
-
             foreach (Part part in parts) part.AimAt(targetRandom);
         }
         

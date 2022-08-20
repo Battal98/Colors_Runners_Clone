@@ -85,7 +85,7 @@ namespace Managers
         private void OnSetCameraTarget(Transform _target)
         {
             stateDrivenCamera.Follow = _target;
-            stateDrivenCamera.Follow = _target;
+             
         }
         private void SetCameraState(CameraStatesType cameraState)
         {
@@ -106,6 +106,7 @@ namespace Managers
         private void OnPlay()
         {
             SetPlayerFollow();
+            GetInitialPosition();
         }
         private void OnReset()
         {

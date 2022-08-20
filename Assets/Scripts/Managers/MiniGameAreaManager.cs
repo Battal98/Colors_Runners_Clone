@@ -141,12 +141,15 @@ namespace Managers
 
         private void OnTurretIsActive(bool isCheck)
         {
-            
+
+            if (_platformCheck=gameObject)
+            {
                 for (int i = 0; i < turretController.Count; i++)
                 {
                     turretController[i].isTargetPlayer=isCheck;
                 }
                 
+            }
         }
         
 

@@ -80,18 +80,20 @@ namespace Controllers
 
         public void CheckColorForTurrets()
         {
-            Debug.Log("yukarı");
+            bool ischeck;
             if (colorCheckAreaManager.ColorType != StackSignals.Instance.onGetColorType())
             {
-                Debug.Log("false");
 
-                ColorCheckAreaSignals.Instance.onTurretIsActive?.Invoke(true);
+                ischeck =true;
+
+                ColorCheckAreaSignals.Instance.onTurretIsActive?.Invoke(ischeck);
             }
             else
             {
-                Debug.Log("true");
+            
+                ischeck=false;
 
-                ColorCheckAreaSignals.Instance.onTurretIsActive?.Invoke(false);
+                ColorCheckAreaSignals.Instance.onTurretIsActive?.Invoke(ischeck);
             }
         }
 

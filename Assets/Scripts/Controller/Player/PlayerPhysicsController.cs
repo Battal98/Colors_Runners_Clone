@@ -54,14 +54,11 @@ namespace Controllers
                 _checkAreaType = other.GetComponentInParent<MiniGameAreaManager>().AreaType;
 
                 ColorCheckAreaSignals.Instance.onCheckAreaControl?.Invoke(other.transform.parent.gameObject);
-              
                 _playerManager.ChangeSpeed(_checkAreaType);
-            }
-
-            if (other.CompareTag("ColorCheck"))
-            {
                 ChooseJobType();
             }
+
+         
         }
 
 
