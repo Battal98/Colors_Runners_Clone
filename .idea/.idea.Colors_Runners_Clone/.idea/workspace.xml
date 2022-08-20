@@ -8,7 +8,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5406a456cf734443b3d02a7d123287f1299290/05/2c1f08a0/Int32.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5406a456cf734443b3d02a7d123287f1299290/7a/e4eeec49/Single.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5406a456cf734443b3d02a7d123287f1299290/db/694da681/List`1.cs" root0="SKIP_HIGHLIGHTING" />
@@ -59,6 +58,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;rider.run.widget.enabled.cache&quot;: &quot;false&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -123,7 +123,8 @@
       <workItem from="1660839561614" duration="9744000" />
       <workItem from="1660928434646" duration="16584000" />
       <workItem from="1660945207736" duration="31000" />
-      <workItem from="1660983316648" duration="14910000" />
+      <workItem from="1660983316648" duration="29147000" />
+      <workItem from="1661024335523" duration="991000" />
     </task>
     <servers />
   </component>

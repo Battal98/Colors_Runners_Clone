@@ -21,14 +21,13 @@ namespace Managers
         public ColorType ColorType = ColorType.Blue;
         public List<GameObject> ColorCheckAreaStackList;
         public List<ColorData> Datas;
-
-
+        
         #endregion
 
         #region Serialized Variables
 
         [SerializeField] private ColorCheckAreaMeshController colorCheckAreaMeshController;
-    
+        [SerializeField] private MiniGameAreaManager miniGameAreaManager;
 
         #endregion
 
@@ -40,40 +39,17 @@ namespace Managers
         #endregion
 
         #endregion
-
-
-        #region Event Subscription
-
-        private void OnEnable()
-        {
-            Subscribe();
-        }
         
-        private void Subscribe()
-        {
-            ColorCheckAreaSignals.Instance.onSetCollectableOutline += _outLineChangeCommand.Execute;
-            ColorCheckAreaSignals.Instance.onChangeJobsOnColorArea += OnChangeJobsColorArea;
-
-        }
-        private void UnSubscribe()
-        {
-            ColorCheckAreaSignals.Instance.onSetCollectableOutline -=  _outLineChangeCommand.Execute;
-            ColorCheckAreaSignals.Instance.onChangeJobsOnColorArea -= OnChangeJobsColorArea;
-
-        }
-
-       
-        private void OnDisable()
-        {
-            UnSubscribe();
-        }
-
-        #endregion
 
         private void Awake()
         {
             Datas = GetColorData();
             Init();
+        }
+
+        private void Start()
+        {
+            AreaType=miniGameAreaManager.AreaType;
         }
 
         private List<ColorData> GetColorData()
@@ -86,8 +62,20 @@ namespace Managers
             _outLineChangeCommand = new OutLineChangeCommand(ref ColorCheckAreaStackList);
             _collectablePositionSetCommand = new CollectablePositionSetCommand();
         }
+        
 
-        private void OnChangeJobsColorArea(ColorCheckAreaType areaType)
+        public void SetCollectableOutline(float value)
+        {
+            _outLineChangeCommand.Execute(value);
+        }
+        public void SetTurretActive(bool IsActive)
+        {
+            
+            miniGameAreaManager.TurretIsActive(IsActive);
+            
+        }
+
+        public void ChangeJobsColorArea(ColorCheckAreaType areaType)
         {
             switch (areaType)
             {
@@ -99,7 +87,6 @@ namespace Managers
                     break;
             }
         }
-
         public void MoveCollectablesToArea(GameObject other, Transform _colHolder)
         {
             _collectablePositionSetCommand.Execute(other, _colHolder);

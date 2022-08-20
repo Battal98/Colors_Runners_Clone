@@ -36,9 +36,9 @@ namespace Controllers
         private Vector2 _clampValues;
         private GameStates _states;
         private InputParams _inputParams;
-        private MoveSwerveCommand _moveSwerveCommand;
-        private StopSideWaysCommand _stopSideWaysCommand;
-        private JoyStickMoveCommand _joyStickMoveCommand;
+        // private MoveSwerveCommand _moveSwerveCommand;
+        // private StopSideWaysCommand _stopSideWaysCommand;
+        // private JoyStickMoveCommand _joyStickMoveCommand;
 
         #endregion
 

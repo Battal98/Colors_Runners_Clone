@@ -23,7 +23,6 @@ namespace Controllers
 
         [SerializeField] private Transform colHolder;
         [SerializeField] private ColorCheckAreaManager colorCheckAreaManager;
-     
 
         #endregion
 
@@ -37,63 +36,55 @@ namespace Controllers
 
         private void GetReferences()
         {
-            _meshRenderer = this.transform.parent.GetComponentInChildren<MeshRenderer>();
+            _meshRenderer = transform.parent.GetComponentInChildren<MeshRenderer>();
         }
 
         public void CheckColorsForDrone()
         {
-            _count = colorCheckAreaManager.ColorCheckAreaStackList.Count;
-            colorCheckAreaManager.transform.GetChild(1).gameObject.SetActive(false);
-
-            for (int i = 0; i < _count; i++)
+            if (colorCheckAreaManager.AreaType == ColorCheckAreaType.Drone)
             {
-                var colManager = colHolder.GetChild(0).GetComponent<CollectableManager>();
-                if (colorCheckAreaManager.ColorType == colManager.CollectableColorType)
+                _count = colorCheckAreaManager.ColorCheckAreaStackList.Count;
+                colorCheckAreaManager.transform.GetChild(1).gameObject.SetActive(false);
+                for (int i = 0; i < _count; i++)
                 {
-                    colHolder.GetChild(0).GetComponentInChildren<Collider>().enabled = true;
-                    colorCheckAreaManager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
-                    StackSignals.Instance.onGetStackList?.Invoke(colHolder.GetChild(0).gameObject);
-                    colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
-                }
-                else
-                {
-                    if (gameObject.activeInHierarchy)
+                    var colManager = colHolder.GetChild(0).GetComponent<CollectableManager>();
+                    if (colorCheckAreaManager.ColorType == colManager.CollectableColorType)
                     {
-                        transform.DOScaleZ(0f, 0.5f).OnComplete(() => this.gameObject.SetActive(false));
+                        colHolder.GetChild(0).GetComponentInChildren<Collider>().enabled = true;
+                        colorCheckAreaManager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
+                        StackSignals.Instance.onGetStackList?.Invoke(colHolder.GetChild(0).gameObject);
+                        colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
                     }
+                    else
+                    {
+                        if (gameObject.activeInHierarchy)
+                        {
+                            transform.DOScaleZ(0f, 0.5f).OnComplete(() => this.gameObject.SetActive(false));
+                        }
 
-                    colManager.SetAnim(CollectableAnimationStates.Dead);
-                    colorCheckAreaManager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
-                    colHolder.GetChild(0).transform.parent = null;
-                    colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
+                        colManager.SetAnim(CollectableAnimationStates.Dead);
+                        colorCheckAreaManager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
+                        colHolder.GetChild(0).transform.parent = null;
+                        colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
+                    }
                 }
-            }
 
-            if (_count == 0)
-            {
-                if (gameObject.activeInHierarchy)
+                if (_count == 0)
                 {
-                    transform.DOScaleZ(0f, 0.5f).OnComplete(() => this.gameObject.SetActive(false));
+                    transform.DOScaleZ(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
                 }
             }
         }
 
         public void CheckColorForTurrets()
         {
-            bool ischeck;
             if (colorCheckAreaManager.ColorType != StackSignals.Instance.onGetColorType())
             {
-
-                ischeck =true;
-
-                ColorCheckAreaSignals.Instance.onTurretIsActive?.Invoke(ischeck);
+                colorCheckAreaManager.SetTurretActive(true);
             }
             else
             {
-            
-                ischeck=false;
-
-                ColorCheckAreaSignals.Instance.onTurretIsActive?.Invoke(ischeck);
+                colorCheckAreaManager.SetTurretActive(false);
             }
         }
 

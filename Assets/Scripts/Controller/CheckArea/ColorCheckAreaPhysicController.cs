@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Enums;
 using Managers;
@@ -11,7 +12,6 @@ namespace Controller
         #region Self Variables
 
         #region Public Variables
-
 
         #endregion
 
@@ -27,31 +27,40 @@ namespace Controller
         #endregion
 
         #endregion
-        
-    
+
+        private void TurretAreaJobs()
+        {
+            colorCheckAreaManager.ChangeJobsColorArea(ColorCheckAreaType.Turret);
+        }
+
         private void DroneAreaJobs(Collider other)
         {
-         
             StackSignals.Instance.onTransportInStack?.Invoke(other.transform.parent.gameObject, colHolder);
             colorCheckAreaManager.ColorCheckAreaStackList.Add(other.transform.parent.gameObject);
             other.gameObject.GetComponent<Collider>().enabled = false;
             colorCheckAreaManager.MoveCollectablesToArea(other.transform.parent.gameObject, colHolder);
-        }  
-       
+        }
+
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Collectable"))
             {
-                switch (colorCheckAreaManager.AreaType)
+                if (colorCheckAreaManager.AreaType == ColorCheckAreaType.Drone)
                 {
-                    case ColorCheckAreaType.Drone:
+                    DroneAreaJobs(other);
+                }
+            }
 
-                        DroneAreaJobs(other);
-                        break;
-                    
-                 
+            if (other.CompareTag("Player"))
+            {
+                if (colorCheckAreaManager.AreaType == ColorCheckAreaType.Turret)
+                {
+                    TurretAreaJobs();
                 }
             }
         }
+
+     
     }
 }

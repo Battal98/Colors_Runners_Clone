@@ -24,6 +24,7 @@ namespace Managers
         [SerializeField] private GameObject drone;
         [SerializeField] private MiniGameAreaManager miniGameAreaManager;
         [SerializeField] private DroneController droneController;
+        [SerializeField] private List<ColorCheckAreaManager> colorCheckAreaManagers;
 
         #endregion
 
@@ -48,7 +49,6 @@ namespace Managers
         {
             ColorCheckAreaSignals.Instance.onCheckAreaControl += OnCheckAreaControl;
             StackSignals.Instance.onStackTransferComplete += OnOnEnterInDroneArea;
-            ColorCheckAreaSignals.Instance.onTurretIsActive +=OnTurretIsActive ;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
@@ -56,8 +56,6 @@ namespace Managers
         {
             ColorCheckAreaSignals.Instance.onCheckAreaControl -= OnCheckAreaControl;
             StackSignals.Instance.onStackTransferComplete -= OnOnEnterInDroneArea;
-            ColorCheckAreaSignals.Instance.onTurretIsActive -=OnTurretIsActive;
-
             CoreGameSignals.Instance.onPlay -= OnPlay;
         }
 
@@ -93,6 +91,11 @@ namespace Managers
             _droneSquencePlayCommand = new DroneSquencePlayCommand(ref miniGameAreaManager);
         }
 
+        private void OnCheckAreaControl(GameObject other)
+        {
+            _platformCheck = other;
+        }
+
         #region SetType
 
         private void TurretActive()
@@ -113,7 +116,6 @@ namespace Managers
 
         #endregion
 
-      
 
         #region ForDrone
 
@@ -127,7 +129,6 @@ namespace Managers
 
         #endregion
 
-
         #region ForTurret
 
         private void SetTarget()
@@ -139,19 +140,16 @@ namespace Managers
             }
         }
 
-        private void OnTurretIsActive(bool isCheck)
+        public void TurretIsActive(bool isCheck)
         {
-
-            if (_platformCheck=gameObject)
+            if (_platformCheck = gameObject)
             {
                 for (int i = 0; i < turretController.Count; i++)
                 {
-                    turretController[i].isTargetPlayer=isCheck;
+                    turretController[i].isTargetPlayer = isCheck;
                 }
-                
             }
         }
-        
 
         #endregion
 
@@ -159,9 +157,21 @@ namespace Managers
         {
             droneController.DroneMove();
         }
-        private void OnCheckAreaControl(GameObject other)
+
+        public void SetCollectableOutline(float Value)
         {
-            _platformCheck = other;
+            for (int i = 0; i < colorCheckAreaManagers.Count; i++)
+            {
+                colorCheckAreaManagers[i].SetCollectableOutline(Value);
+            }
+        }
+
+        public void ChangeJobType(ColorCheckAreaType checkAreaType)
+        {
+            for (int i = 0; i < colorCheckAreaManagers.Count; i++)
+            {
+                colorCheckAreaManagers[i].ChangeJobsColorArea(checkAreaType);
+            }
         }
 
         private void OnPlay()

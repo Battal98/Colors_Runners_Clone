@@ -33,15 +33,7 @@ namespace Controllers
             _playerManager = gameObject.GetComponentInParent<PlayerManager>();
         }
 
-        private void ChooseJobType()
-        {
-            switch (_checkAreaType)
-            {
-                case ColorCheckAreaType.Turret:
-                    ColorCheckAreaSignals.Instance.onChangeJobsOnColorArea?.Invoke(ColorCheckAreaType.Turret);
-                    break;
-            }
-        }
+      
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Finish"))
@@ -55,7 +47,7 @@ namespace Controllers
 
                 ColorCheckAreaSignals.Instance.onCheckAreaControl?.Invoke(other.transform.parent.gameObject);
                 _playerManager.ChangeSpeed(_checkAreaType);
-                ChooseJobType();
+      
             }
 
          
