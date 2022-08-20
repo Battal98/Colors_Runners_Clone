@@ -2155,6 +2155,7 @@ MonoBehaviour:
   playerAnimationController: {fileID: 6004608043649946698}
   playerMovementController: {fileID: 3346495845797470969}
   scoreText: {fileID: 7988492305357165983}
+  scoreArea: {fileID: 5631977582833176158}
 --- !u!114 &3346495845797470969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2169,7 +2170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 1944392521816120396}
   cdMovementList: {fileID: 11400000, guid: cad7738aa5db8b04fa75fd34eb46a7b8, type: 2}
-  playerManager: {fileID: 0}
+  playerManager: {fileID: 4701532483818768975}
 --- !u!54 &1944392521816120396
 Rigidbody:
   m_ObjectHideFlags: 0

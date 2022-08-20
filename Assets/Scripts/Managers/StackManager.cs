@@ -37,9 +37,7 @@ namespace Managers
         private CollectableAnimSetCommand _collectableAnimSetCommand;
         private ChangeCollectableColorCommand _changeCollectableColorCommand;
         private Transform _playerManager;
-        private float _stackScore;
-        [ShowInInspector]
-        private ColorType _type;
+        [ShowInInspector] private ColorType _type;
 
         #endregion
 
@@ -136,11 +134,13 @@ namespace Managers
             StartCoroutine(_stackScaleCommand.Execute());
             _collectableAnimSetCommand.Execute(obj, CollectableAnimationStates.Run);
             _collectableAddOnStackCommand.Execute(obj);
+            refreshStackCount();
         }
 
         private void OnRemoveInStack(GameObject obj)
         {
             _collectableRemoveOnStackCommand.Execute(obj);
+            refreshStackCount();
         }
 
         private void OnChangeCollectableColor(ColorType colorType)
@@ -152,6 +152,12 @@ namespace Managers
         private void OnTransportInStack(GameObject _obj, Transform target)
         {
             _transportInStack.Execute(_obj, target);
+         
+        }
+
+        private void refreshStackCount()
+        {
+            ScoreSignals.Instance.onGetScore?.Invoke(stackList.Count);
         }
 
         private void Initialized()
@@ -173,12 +179,14 @@ namespace Managers
             _stackListObj.transform.parent = transform;
             _collectableAnimSetCommand.Execute(_stackListObj, CollectableAnimationStates.Run);
             stackList.Add(_stackListObj);
+            refreshStackCount();
         }
 
         private void OnPlay()
         {
             FindPlayer();
             Initialized();
+            refreshStackCount();
         }
 
         private void OnReset()

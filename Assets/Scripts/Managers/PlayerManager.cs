@@ -1,3 +1,5 @@
+using System;
+using Cinemachine;
 using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -23,11 +25,13 @@ namespace Managers
         [SerializeField] private PlayerAnimationController playerAnimationController;
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private TextMeshPro scoreText;
+        [SerializeField] private GameObject scoreArea;
 
         #endregion
 
         #region Private Variables
 
+        private Transform _camera;
         #endregion
 
         #endregion
@@ -48,6 +52,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onExitColorCheckArea += OnExitColorCheckArea;
+            ScoreSignals.Instance.onSetScore += OnSetScore;
         }
 
         private void Unsubscribe()
@@ -59,6 +64,8 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
+            ScoreSignals.Instance.onSetScore -= OnSetScore;
+
         }
 
         private void OnDisable()
@@ -90,7 +97,7 @@ namespace Managers
             playerMovementController.ChangeStates(states);
         }
 
-        private void OnSetScoreText(int Values)
+        private void OnSetScore(int Values)
         {
             scoreText.text = Values.ToString();
         }
@@ -116,9 +123,20 @@ namespace Managers
             playerAnimationController.PlayAnim(animationStates);
         }
 
+        private void Start()
+        {
+            _camera = Camera.main.transform;
+        }
+
+        private void Update()
+        {
+            scoreArea.transform.rotation = Quaternion.LookRotation(transform.position - _camera.transform.position);
+        }
+
         private void OnPlay()
         {
             playerMovementController.IsReadyToPlay(true);
+       
         }
         private void OnReset()
         {

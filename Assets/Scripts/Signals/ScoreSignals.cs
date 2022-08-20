@@ -7,8 +7,8 @@ namespace Signals
 {
     public class ScoreSignals : MonoSingleton<ScoreSignals>
     {
-        public UnityAction<int> onSetStackScore = delegate { };
+        public UnityAction<int> onSetScore = delegate { };
 
-        public UnityAction<int> onGetStackScore = delegate { };
+        public UnityAction<int> onGetScore = delegate { };
     }
 }
