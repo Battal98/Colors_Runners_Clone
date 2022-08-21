@@ -2208,6 +2208,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GiletteRight
       objectReference: {fileID: 0}
+    - target: {fileID: 6815461106444641351, guid: ed4570afed8218448935ec7890ea1cdf, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.408234
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815461106444641351, guid: ed4570afed8218448935ec7890ea1cdf, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4167
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815461106444641351, guid: ed4570afed8218448935ec7890ea1cdf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.66
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed4570afed8218448935ec7890ea1cdf, type: 3}
 --- !u!4 &2188941243707869783 stripped
@@ -3876,6 +3888,22 @@ PrefabInstance:
     - target: {fileID: 3631606587250442485, guid: 37e727a2be8d23844ae62508114e3e5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7222729830148620370, guid: 37e727a2be8d23844ae62508114e3e5a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4082344
+      objectReference: {fileID: 0}
+    - target: {fileID: 7222729830148620370, guid: 37e727a2be8d23844ae62508114e3e5a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4167
+      objectReference: {fileID: 0}
+    - target: {fileID: 7222729830148620370, guid: 37e727a2be8d23844ae62508114e3e5a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0090322
+      objectReference: {fileID: 0}
+    - target: {fileID: 7222729830148620370, guid: 37e727a2be8d23844ae62508114e3e5a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.66
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37e727a2be8d23844ae62508114e3e5a, type: 3}
