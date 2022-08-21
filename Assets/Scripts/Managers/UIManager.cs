@@ -19,6 +19,7 @@ namespace Managers
         [SerializeField] private UIPanelController uiPanelController;
         [SerializeField] private LevelPanelController levelPanelController;
         [SerializeField] private IdlePanelController idlePanelController;
+        
 
         #endregion
 
@@ -109,6 +110,7 @@ namespace Managers
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
+            
         }
 
         private void OnLevelFailed()

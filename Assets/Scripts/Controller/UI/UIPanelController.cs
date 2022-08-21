@@ -15,7 +15,7 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private List<GameObject> panels;
-
+        
         #endregion
 
         #region Private Variables
@@ -27,6 +27,7 @@ namespace Controllers
         public void OpenPanel(UIPanels panelParam)
         {
             panels[(int)panelParam].SetActive(true);
+            
         }
 
         public void ClosePanel(UIPanels panelParam)
