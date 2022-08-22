@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Target
   - Collectable
-  - Collected
   - CheckArea
   - ColorCheck
   - Gate

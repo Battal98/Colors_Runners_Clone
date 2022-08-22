@@ -42,11 +42,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onSetGameState += OnSetGameState;
+            CoreGameSignals.Instance.onReset += OnReset;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onSetGameState -= OnSetGameState;
+            CoreGameSignals.Instance.onReset -= OnReset;
+
         }
 
         private void OnDisable()
@@ -60,6 +63,11 @@ namespace Managers
         {
             CoreGameSignals.Instance.onGetGameState?.Invoke(gameStates);
            
+        }
+
+        private void OnReset()
+        {
+            CoreGameSignals.Instance.onGetGameState?.Invoke(GameStates.Runner);
         }
     }
 }

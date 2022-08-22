@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Datas.ValueObject;
+using Enums;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Commands
         #region Private Variables
 
         private List<GameObject> _stackList;
-        private GameObject _levelHolder;
+       
         private StackManager _manager;
         private StackData _stackData;
 
@@ -22,19 +23,20 @@ namespace Commands
         #endregion
 
         public CollectableRemoveOnStackCommand(ref List<GameObject> stackList, ref StackManager manager,
-            ref GameObject levelHolder, ref StackData stackData)
+             ref StackData stackData)
         {
             _stackList = stackList;
             _manager = manager;
-            _levelHolder = levelHolder;
+           
             _stackData = stackData;
         }
 
         public void Execute(GameObject collectableGameObject)
         {
             int index = _stackList.IndexOf(collectableGameObject);
-            collectableGameObject.transform.SetParent(_levelHolder.transform);
             collectableGameObject.SetActive(false);
+            PoolSignals.Instance.onSendPool?.Invoke(collectableGameObject,PoolType.Collectable);
+            collectableGameObject.transform.localPosition = Vector3.zero;
             _stackList.RemoveAt(index);
             _stackList.TrimExcess();
             if (_stackList.Count >= _stackData.StackLimit)

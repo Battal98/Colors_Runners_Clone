@@ -32,10 +32,12 @@ namespace Managers
         #region Private Variables
 
         private Transform _camera;
-        private bool _scoreAreaVisible=true;
+        private bool _scoreAreaVisible = true;
+
         #endregion
 
         #endregion
+
         private void Awake()
         {
             Data = GetPlayerData();
@@ -75,7 +77,6 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
             ScoreSignals.Instance.onSetScore -= OnSetScore;
-
         }
 
         private void OnDisable()
@@ -86,8 +87,8 @@ namespace Managers
         #endregion
 
 
-        private PlayerData GetPlayerData()=>Resources.Load<CD_Player>("Data/CD_Player").Data;
-       
+        private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
+
         private void Update()
         {
             scoreArea.transform.rotation = Quaternion.LookRotation(transform.position - _camera.transform.position);
@@ -119,7 +120,7 @@ namespace Managers
         {
             playerMovementController.ExitColorCheckArea(colorAreaType);
         }
-        
+
         public void ChangeSpeed(ColorCheckAreaType colorAreaType)
         {
             playerMovementController.PlayerChangeForwardSpeed(colorAreaType);
@@ -137,7 +138,7 @@ namespace Managers
 
         public void ChangeScoreAreaVisible(ColorCheckAreaType areaType)
         {
-            if (areaType==ColorCheckAreaType.Drone)
+            if (areaType == ColorCheckAreaType.Drone)
             {
                 scoreArea.SetActive(!_scoreAreaVisible);
                 _scoreAreaVisible = !_scoreAreaVisible;
@@ -147,19 +148,18 @@ namespace Managers
         private void OnLevelFailed()
         {
             playerMovementController.IsReadyToPlay(false);
-
         }
+
         private void OnLevelSuccesful()
         {
             playerMovementController.IsReadyToPlay(false);
-
         }
 
         private void OnPlay()
         {
             playerMovementController.IsReadyToPlay(true);
-       
         }
+
         private void OnReset()
         {
             playerMovementController.OnReset();

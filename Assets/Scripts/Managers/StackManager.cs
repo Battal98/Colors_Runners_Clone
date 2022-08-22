@@ -22,7 +22,6 @@ namespace Managers
         #region Serilazible Variables
 
         [SerializeField] private List<GameObject> stackList = new List<GameObject>();
-        [SerializeField] private GameObject collectableHolder;
         [SerializeField] private StackManager stackManager;
 
         #endregion
@@ -60,6 +59,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
             StackSignals.Instance.onGetColorType += OnGetColorType;
+            CoreGameSignals.Instance.onExitColorCheckArea += OnExitColorCheckArea;
         }
 
 
@@ -73,7 +73,11 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             StackSignals.Instance.onGetColorType -= OnGetColorType;
+            CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
+
         }
+
+      
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -100,7 +104,7 @@ namespace Managers
             _stackLerpMovementCommand = new StackLerpMovementCommand(ref stackList, ref StackData);
             _stackScaleCommand = new StackScaleCommand(ref stackList, ref StackData);
             _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager,
-                ref collectableHolder, ref StackData);
+                 ref StackData);
             _transportInStack = new TransportInStack(ref stackList, ref stackManager, ref StackData);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
             _changeCollectableColorCommand = new ChangeCollectableColorCommand(ref stackList);
@@ -139,7 +143,7 @@ namespace Managers
         private void OnTransportInStack(GameObject _obj, Transform target)
         {
             _transportInStack.Execute(_obj, target);
-         
+
         }
         private void RefreshStackCount()
         {
@@ -164,6 +168,14 @@ namespace Managers
             RefreshStackCount();
         }
 
+        private void OnExitColorCheckArea(ColorCheckAreaType areaType)
+        {
+            if (areaType==ColorCheckAreaType.Drone && stackList.Count==0)
+            {
+                LevelSignals.Instance.onLevelFailed?.Invoke();
+
+            }
+        }
         private void OnPlay()
         {
             FindPlayer();
@@ -173,8 +185,14 @@ namespace Managers
         private void OnReset()
         {
             stackList.Clear();
-            
             stackList.TrimExcess();
+            for (int i = 0; i < 5; i++)
+            {
+                var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Collectable);
+                obj.transform.localPosition = Vector3.zero;
+                obj.SetActive(true);
+                OnAddInStack(obj);  
+            }
             
         }
     }

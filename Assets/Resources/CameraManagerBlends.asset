@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: CameraManagerBlends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: RunnerCamera
+  - m_From: RuunerCamera
     m_To: IdleCamera
     m_Blend:
       m_Style: 1
-      m_Time: 2
+      m_Time: 1
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -25,10 +25,10 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: IdleCamera
-    m_To: RunnerCamera
+    m_To: RuunerCamera
     m_Blend:
-      m_Style: 1
-      m_Time: 2
+      m_Style: 0
+      m_Time: 0
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
