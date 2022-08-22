@@ -105,8 +105,7 @@ namespace Controllers
         {
             switch (areaType)
             {
-                case ColorCheckAreaType.Drone:  
-                    transform.DOLocalMoveZ(transform.localPosition.z + 2.9f, .5f);
+                case ColorCheckAreaType.Drone:
                     _colorAreaSpeed = 1;
                     break;
                 case ColorCheckAreaType.Turret:

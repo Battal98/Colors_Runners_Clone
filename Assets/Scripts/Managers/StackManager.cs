@@ -74,31 +74,25 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             StackSignals.Instance.onGetColorType -= OnGetColorType;
         }
-
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
 
         #endregion
-
-
         private StackData GetStackData()
         {
             return Resources.Load<CD_Stack>("Data/CD_Stack").Data;
         }
-
         private void Awake()
         {
             GetReferences();
             Init();
         }
-
         private void GetReferences()
         {
             StackData = GetStackData();
         }
-
         private void Init()
         {
             _collectableAddOnStackCommand =
@@ -111,14 +105,12 @@ namespace Managers
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
             _changeCollectableColorCommand = new ChangeCollectableColorCommand(ref stackList);
         }
-
         private void Update()
         {
             if (!_playerManager)
                 return;
             _stackLerpMovementCommand.Execute(ref _playerManager);
         }
-
         private void FindPlayer()
         {
             if (!_playerManager)
@@ -126,40 +118,33 @@ namespace Managers
                 _playerManager = FindObjectOfType<PlayerManager>().transform;
             }
         }
-
         private ColorType OnGetColorType() => _type;
-
         private void OnAddInStack(GameObject obj)
         {
             StartCoroutine(_stackScaleCommand.Execute());
             _collectableAnimSetCommand.Execute(obj, CollectableAnimationStates.Run);
             _collectableAddOnStackCommand.Execute(obj);
-            refreshStackCount();
+            RefreshStackCount();
         }
-
         private void OnRemoveInStack(GameObject obj)
         {
             _collectableRemoveOnStackCommand.Execute(obj);
-            refreshStackCount();
+            RefreshStackCount();
         }
-
         private void OnChangeCollectableColor(ColorType colorType)
         {
             _type = colorType;
             _changeCollectableColorCommand.Execute(colorType);
         }
-
         private void OnTransportInStack(GameObject _obj, Transform target)
         {
             _transportInStack.Execute(_obj, target);
          
         }
-
-        private void refreshStackCount()
+        private void RefreshStackCount()
         {
             ScoreSignals.Instance.onGetScore?.Invoke(stackList.Count);
         }
-
         private void Initialized()
         {
             for (int i = 0; i < stackList.Count; i++)
@@ -167,32 +152,30 @@ namespace Managers
                 CollectableAnimSet(stackList[i]);
             }
         }
-
         public void CollectableAnimSet(GameObject obj)
         {
             _collectableAnimSetCommand.Execute(obj, CollectableAnimationStates.Run);
         }
-
-
         private void OnGetStackList(GameObject _stackListObj)
         {
             _stackListObj.transform.parent = transform;
             _collectableAnimSetCommand.Execute(_stackListObj, CollectableAnimationStates.Run);
             stackList.Add(_stackListObj);
-            refreshStackCount();
+            RefreshStackCount();
         }
 
         private void OnPlay()
         {
             FindPlayer();
             Initialized();
-            refreshStackCount();
+            RefreshStackCount();
         }
-
         private void OnReset()
         {
             stackList.Clear();
+            
             stackList.TrimExcess();
+            
         }
     }
 }

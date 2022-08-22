@@ -102,6 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1539420660644408796}
   - component: {fileID: 1539420660644408797}
+  - component: {fileID: 6896424887203488638}
   m_Layer: 0
   m_Name: CheckAreaPhysic
   m_TagString: CheckArea
@@ -136,6 +137,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 2, z: 2.7069263}
   m_Center: {x: 0, y: 1, z: 0.14653677}
+--- !u!114 &6896424887203488638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539420660644408795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99522713ddf0442cb2d6ea7c5105c56e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miniGameAreaManager: {fileID: 1539420660308345274}
 --- !u!1 &1539420661451767965
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,6 +508,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5526568140296939083, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
+      propertyPath: m_Size.z
+      value: 0.93333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 5526568140296939083, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
+      propertyPath: m_Center.z
+      value: -0.033333343
+      objectReference: {fileID: 0}
     - target: {fileID: 9009479499935576460, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
       propertyPath: miniGameAreaManager
       value: 
@@ -574,6 +596,14 @@ PrefabInstance:
     - target: {fileID: 5526568139411412534, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5526568140296939083, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
+      propertyPath: m_Size.z
+      value: 0.9333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 5526568140296939083, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
+      propertyPath: m_Center.z
+      value: -0.033333343
       objectReference: {fileID: 0}
     - target: {fileID: 9009479499935576460, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
       propertyPath: AreaType
@@ -659,6 +689,14 @@ PrefabInstance:
     - target: {fileID: 5526568139411412534, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5526568140296939083, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
+      propertyPath: m_Size.z
+      value: 0.9333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 5526568140296939083, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
+      propertyPath: m_Center.z
+      value: -0.033333343
       objectReference: {fileID: 0}
     - target: {fileID: 9009479499935576460, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
       propertyPath: AreaType

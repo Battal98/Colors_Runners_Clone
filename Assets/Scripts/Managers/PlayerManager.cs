@@ -32,9 +32,15 @@ namespace Managers
         #region Private Variables
 
         private Transform _camera;
+        private bool _scoreAreaVisible=true;
         #endregion
 
         #endregion
+        private void Awake()
+        {
+            Data = GetPlayerData();
+            SendPlayerDataToControllers();
+        }
 
         #region Event Subscription
 
@@ -51,6 +57,8 @@ namespace Managers
             CoreGameSignals.Instance.onGetGameState += OnGetGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
+            LevelSignals.Instance.onLevelFailed += OnLevelFailed;
+            LevelSignals.Instance.onLevelSuccessful += OnLevelSuccesful;
             CoreGameSignals.Instance.onExitColorCheckArea += OnExitColorCheckArea;
             ScoreSignals.Instance.onSetScore += OnSetScore;
         }
@@ -61,6 +69,8 @@ namespace Managers
             InputSignals.Instance.onInputReleased -= playerMovementController.DeactiveMovement;
             InputSignals.Instance.onInputDragged -= playerMovementController.UpdateInputValue;
             CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
+            LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
+            LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccesful;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
@@ -75,15 +85,12 @@ namespace Managers
 
         #endregion
 
-        private void Awake()
-        {
-            Data = GetPlayerData();
-            SendPlayerDataToControllers();
-        }
 
-        private PlayerData GetPlayerData()
+        private PlayerData GetPlayerData()=>Resources.Load<CD_Player>("Data/CD_Player").Data;
+       
+        private void Update()
         {
-            return Resources.Load<CD_Player>("Data/CD_Player").Data;
+            scoreArea.transform.rotation = Quaternion.LookRotation(transform.position - _camera.transform.position);
         }
 
         private void SendPlayerDataToControllers()
@@ -128,9 +135,24 @@ namespace Managers
             _camera = Camera.main.transform;
         }
 
-        private void Update()
+        public void ChangeScoreAreaVisible(ColorCheckAreaType areaType)
         {
-            scoreArea.transform.rotation = Quaternion.LookRotation(transform.position - _camera.transform.position);
+            if (areaType==ColorCheckAreaType.Drone)
+            {
+                scoreArea.SetActive(!_scoreAreaVisible);
+                _scoreAreaVisible = !_scoreAreaVisible;
+            }
+        }
+
+        private void OnLevelFailed()
+        {
+            playerMovementController.IsReadyToPlay(false);
+
+        }
+        private void OnLevelSuccesful()
+        {
+            playerMovementController.IsReadyToPlay(false);
+
         }
 
         private void OnPlay()
@@ -140,7 +162,6 @@ namespace Managers
         }
         private void OnReset()
         {
-            gameObject.SetActive(true);
             playerMovementController.OnReset();
             playerAnimationController.OnReset();
         }

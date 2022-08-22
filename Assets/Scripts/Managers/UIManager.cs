@@ -19,7 +19,6 @@ namespace Managers
         [SerializeField] private UIPanelController uiPanelController;
         [SerializeField] private LevelPanelController levelPanelController;
         [SerializeField] private IdlePanelController idlePanelController;
-        
 
         #endregion
 
@@ -110,14 +109,12 @@ namespace Managers
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
-            
         }
 
         private void OnLevelFailed()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
-            LevelSignals.Instance.onLevelFailed?.Invoke();
         }
 
         private void OnLevelSuccessful()
@@ -140,19 +137,17 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
         }
 
-        public void RestartLevel()
+        public void Restart()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-
-            CoreGameSignals.Instance.onReset?.Invoke();
+            LevelSignals.Instance.onRestartLevel?.Invoke();
         }
 
         public void RetryButton()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-
             CoreGameSignals.Instance.onReset?.Invoke();
         }
 

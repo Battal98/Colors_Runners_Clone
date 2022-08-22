@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Datas.ValueObject;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Commands
@@ -41,7 +42,12 @@ namespace Commands
                 _stackList[_stackData.StackLimit - 1].SetActive(true);
                 _manager.CollectableAnimSet(_stackList[_stackData.StackLimit - 1]);
             }
-            // _manager.StackValueUpdateCommand.StackValuesUpdate();
+
+            if (_stackList.Count==0)
+            {
+                LevelSignals.Instance.onLevelFailed?.Invoke();
+            }
+        
         }
     }
 }

@@ -71,11 +71,11 @@ namespace Managers
         #endregion
         private void GetInitialPosition()
         {
-            _initialPosition = transform.localPosition;
+            _initialPosition = transform.GetChild(0).localPosition;
         }
         private void MoveToInitialPosition()
         {
-            transform.localPosition = _initialPosition;
+            transform.GetChild(0).localPosition = _initialPosition;
         }
         private void SetPlayerFollow()
         {
@@ -110,6 +110,7 @@ namespace Managers
         }
         private void OnReset()
         {
+            
             stateDrivenCamera.Follow = null;
             stateDrivenCamera.LookAt = null;
             MoveToInitialPosition();

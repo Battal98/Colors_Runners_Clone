@@ -31,6 +31,13 @@ namespace Managers
         #endregion
 
         #endregion
+        private void Awake()
+        {
+            _levelID = GetActiveLevel();
+            _clearActiveLevel = new ClearActiveLevelCommand(ref levelHolder);
+            _levelLoader = new LevelLoaderCommand(ref levelHolder);
+            Data = GetLevelCount();
+        }
 
         #region Event Subscription
 
@@ -46,6 +53,7 @@ namespace Managers
             LevelSignals.Instance.onNextLevel += OnNextLevel;
             LevelSignals.Instance.onRestartLevel += OnRestartLevel;
             LevelSignals.Instance.onGetLevel += OnGetLevel;
+       
         }
 
         private void UnsubscribeEvents()
@@ -65,14 +73,7 @@ namespace Managers
         #endregion
 
         private int OnGetLevel() => _levelID;
-
-        private void Awake()
-        {
-            _levelID = GetActiveLevel();
-            _clearActiveLevel = new ClearActiveLevelCommand(ref levelHolder);
-            _levelLoader = new LevelLoaderCommand(ref levelHolder);
-            Data = GetLevelCount();
-        }
+        
 
         private int GetActiveLevel()
         {
@@ -84,7 +85,6 @@ namespace Managers
         {
             return _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
         }
-
 
         private void Start()
         {

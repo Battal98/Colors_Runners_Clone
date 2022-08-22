@@ -1,3 +1,4 @@
+using System;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -12,28 +13,19 @@ namespace Controllers
 
         #region Serialized Variables
 
+        [SerializeField] private PlayerManager playerManager;
+
         #endregion
 
         #region Private Variables
 
-        private PlayerManager _playerManager;
         private ColorCheckAreaType _checkAreaType;
 
         #endregion
 
         #endregion
 
-        private void Awake()
-        {
-            GetReferances();
-        }
 
-        private void GetReferances()
-        {
-            _playerManager = gameObject.GetComponentInParent<PlayerManager>();
-        }
-
-      
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Finish"))
@@ -46,11 +38,9 @@ namespace Controllers
                 _checkAreaType = other.GetComponentInParent<MiniGameAreaManager>().AreaType;
 
                 ColorCheckAreaSignals.Instance.onCheckAreaControl?.Invoke(other.transform.parent.gameObject);
-                _playerManager.ChangeSpeed(_checkAreaType);
-      
+                playerManager.ChangeSpeed(_checkAreaType);
+                playerManager.ChangeScoreAreaVisible(_checkAreaType);
             }
-
-         
         }
 
 
@@ -58,11 +48,8 @@ namespace Controllers
         {
             if (other.CompareTag("CheckArea"))
             {
-                if (_checkAreaType == ColorCheckAreaType.Turret)
-                {
-                    _playerManager.ExitColorCheckArea(ColorCheckAreaType.Turret);
-                }
-              
+                playerManager.ExitColorCheckArea(_checkAreaType);
+                playerManager.ChangeScoreAreaVisible(_checkAreaType);
             }
         }
     }
