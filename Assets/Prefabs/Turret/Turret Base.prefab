@@ -2273,6 +2273,9 @@ MonoBehaviour:
   - transform: {fileID: 1926247048225759763}
   - transform: {fileID: 1926247049170841713}
   isTargetPlayer: 0
+  Bullet: {fileID: 8369813758284220713, guid: a6f93e583da990743bcf34bd66a1aba5, type: 3}
+  BulletSpawnPoint: {fileID: 1926247048009004227}
+  ShootTimer: 1
 --- !u!1 &1926247049836970527
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,8 +23,17 @@ namespace Controllers
 
             public Part[] parts;
             public bool isTargetPlayer;
+            public GameObject Bullet;
+            public GameObject BulletSpawnPoint;
+            public float ShootTimer = 1f;
+            
             #endregion
 
+            #region Private Variables
+            private bool shootReady = true;
+            
+
+            #endregion
             #endregion
       
 
@@ -55,9 +64,29 @@ namespace Controllers
             if (isTargetPlayer)
             {
                 foreach (Part part in parts) part.AimAt(targetPlayer);
+                
+                if (shootReady)
+                {
+                    Shoot();
+                }
                 return;
             }
             foreach (Part part in parts) part.AimAt(targetRandom);
+        }
+
+        public void Shoot()
+        {
+           Transform _bullet = Instantiate(Bullet.transform,BulletSpawnPoint.transform.position, Quaternion.identity);
+           _bullet.transform.rotation = BulletSpawnPoint.transform.rotation;
+           shootReady = false;
+           StartCoroutine(ShootRate());
+          
+        }
+
+        private IEnumerator ShootRate()
+        {
+            yield return new WaitForSeconds(ShootTimer);
+            shootReady = true;
         }
         
     }
