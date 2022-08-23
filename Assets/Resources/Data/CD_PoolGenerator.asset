@@ -15,4 +15,4 @@ MonoBehaviour:
   PoolObjectList:
   - ObjName: Collectable
     Pref: {fileID: 1760233938649184603, guid: 1972b5b1c9167f24ea8b9d92951986fc, type: 3}
-    ObjectCount: 10
+    ObjectCount: 50

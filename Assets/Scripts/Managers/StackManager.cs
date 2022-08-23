@@ -35,6 +35,7 @@ namespace Managers
         private TransportInStack _transportInStack;
         private CollectableAnimSetCommand _collectableAnimSetCommand;
         private ChangeCollectableColorCommand _changeCollectableColorCommand;
+        private RandomKillInStackCommand _randomKillInStackCommand;
         private Transform _playerManager;
         [ShowInInspector] private ColorType _type;
 
@@ -60,6 +61,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             StackSignals.Instance.onGetColorType += OnGetColorType;
             CoreGameSignals.Instance.onExitColorCheckArea += OnExitColorCheckArea;
+            StackSignals.Instance.onKillRandomInStack += _randomKillInStackCommand.Execute;
         }
 
 
@@ -74,6 +76,8 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             StackSignals.Instance.onGetColorType -= OnGetColorType;
             CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
+            StackSignals.Instance.onKillRandomInStack -= _randomKillInStackCommand.Execute;
+
 
         }
 
@@ -108,6 +112,8 @@ namespace Managers
             _transportInStack = new TransportInStack(ref stackList, ref stackManager, ref StackData);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
             _changeCollectableColorCommand = new ChangeCollectableColorCommand(ref stackList);
+            _randomKillInStackCommand = new RandomKillInStackCommand(ref stackManager,ref stackList, 
+                ref StackData);
         }
         private void Update()
         {
@@ -176,6 +182,11 @@ namespace Managers
 
             }
         }
+
+        private void OnKillRandomInStack()
+        {
+            
+        }
         private void OnPlay()
         {
             FindPlayer();
@@ -195,5 +206,6 @@ namespace Managers
             }
             
         }
+     
     }
 }

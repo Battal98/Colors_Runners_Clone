@@ -111,7 +111,8 @@ namespace Managers
         private async void OnSendPool(GameObject CollectableObject, PoolType poolType)
         {
             CollectableObject.transform.parent = transform.GetChild((int)poolType);
-            await Task.Delay(500);
+            await Task.Delay(1500);
+            CollectableObject.transform.position = Vector3.zero;
             CollectableObject.GetComponentInChildren<Collider>().enabled = true;
             CollectableObject.SetActive(false);
           

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Commands;
 using Controllers;
@@ -73,7 +74,7 @@ namespace Managers
             Init();
         }
 
-        private void GetReferences()
+        private void GetReferences()    
         {
             switch (AreaType)
             {
@@ -173,6 +174,7 @@ namespace Managers
                 colorCheckAreaManagers[i].ChangeJobsColorArea(checkAreaType);
             }
         }
+      
 
         private void OnPlay()
         {

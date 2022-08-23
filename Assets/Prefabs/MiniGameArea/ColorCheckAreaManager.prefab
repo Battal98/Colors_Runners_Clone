@@ -81,7 +81,7 @@ MonoBehaviour:
   ColorCheckAreaStackList: []
   Datas: []
   colorCheckAreaMeshController: {fileID: 2247622276263380468}
-  colorCheckAreaPhysicController: {fileID: 4865361519959807099}
+  miniGameAreaManager: {fileID: 0}
 --- !u!1 &5526568140296939081
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 5526568140296939081}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 3}
+  m_LocalScale: {x: 1, y: 0.5, z: 4}
   m_Children: []
   m_Father: {fileID: 5526568139411412534}
   m_RootOrder: 1
@@ -169,7 +169,7 @@ Transform:
   m_GameObject: {fileID: 5526568140435815220}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 3}
+  m_LocalScale: {x: 1, y: 0.5, z: 4}
   m_Children: []
   m_Father: {fileID: 5526568139411412534}
   m_RootOrder: 0
@@ -237,4 +237,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colHolder: {fileID: 1498588698117348132}
   colorCheckAreaManager: {fileID: 9009479499935576460}
-  miniGameAreaManager: {fileID: 0}

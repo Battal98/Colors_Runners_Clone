@@ -34,9 +34,9 @@ namespace Commands
         public void Execute(GameObject collectableGameObject)
         {
             int index = _stackList.IndexOf(collectableGameObject);
-            collectableGameObject.SetActive(false);
+            collectableGameObject.GetComponent<CollectableManager>().SetAnim(CollectableAnimationStates.Dead);
             PoolSignals.Instance.onSendPool?.Invoke(collectableGameObject,PoolType.Collectable);
-            collectableGameObject.transform.localPosition = Vector3.zero;
+            
             _stackList.RemoveAt(index);
             _stackList.TrimExcess();
             if (_stackList.Count >= _stackData.StackLimit)

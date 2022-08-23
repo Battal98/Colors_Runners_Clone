@@ -40,7 +40,7 @@ namespace Controller
             other.gameObject.GetComponent<Collider>().enabled = false;
             colorCheckAreaManager.MoveCollectablesToArea(other.transform.parent.gameObject, colHolder);
         }
-
+    
 
         private void OnTriggerEnter(Collider other)
         {
@@ -56,11 +56,12 @@ namespace Controller
             {
                 if (colorCheckAreaManager.AreaType == ColorCheckAreaType.Turret)
                 {
+                  
                     TurretAreaJobs();
                 }
             }
         }
 
-     
+       
     }
 }

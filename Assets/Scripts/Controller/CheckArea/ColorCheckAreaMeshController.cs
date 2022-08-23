@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Enums;
 using Managers;
@@ -26,6 +27,7 @@ namespace Controllers
 
         private int _count;
         private MeshRenderer _meshRenderer;
+        private bool Cık=true;
         #endregion
         #endregion
 
@@ -85,13 +87,17 @@ namespace Controllers
             if (colorCheckAreaManager.ColorType != StackSignals.Instance.onGetColorType())
             {
                 colorCheckAreaManager.SetTurretActive(true);
+              
             }
             else
             {
                 colorCheckAreaManager.SetTurretActive(false);
+              
+
             }
         }
 
      
+
     }
 }

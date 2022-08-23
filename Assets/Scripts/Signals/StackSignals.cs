@@ -16,5 +16,6 @@ namespace Signals
         public UnityAction<ColorType> onChangeCollectableColor = delegate { };
         public UnityAction onStackTransferComplete = delegate { };
         public Func<ColorType> onGetColorType = delegate { return 0; };
+        public UnityAction onKillRandomInStack=delegate {  };
     }
 }

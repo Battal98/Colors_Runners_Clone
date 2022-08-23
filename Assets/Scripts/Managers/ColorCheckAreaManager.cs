@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Commands;
 using Controller;
@@ -87,6 +88,8 @@ namespace Managers
                     break;
             }
         }
+
+      
         public void MoveCollectablesToArea(GameObject other, Transform _colHolder)
         {
             _collectablePositionSetCommand.Execute(other, _colHolder);

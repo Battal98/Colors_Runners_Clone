@@ -1,56 +1,65 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using RootMotion;
 using RootMotion.FinalIK;
 using DG.Tweening;
+using Enums;
+using Managers;
+using Signals;
+using UnityEditor.PackageManager;
 using Random = UnityEngine.Random;
 
 namespace Controllers
 {
     public class TurretController : MonoBehaviour
     {
-            #region self Variables
+        #region self Variables
 
-            #region Serialized Variables
+        #region Public Variables
 
-            [SerializeField] private Transform targetPlayer;
-            [SerializeField] private Transform targetRandom;
+        public bool isTargetPlayer;
 
-            #endregion
+        #endregion
 
-            #region Public Variables
+        #region Serialized Variables
+        
+       
+        [SerializeField] private Part[] parts;
+        [SerializeField] private Transform targetPlayer;
+        [SerializeField] private Transform targetRandom;
+        [SerializeField] private List<ParticleSystem> _particlepart;
 
-            public Part[] parts;
-            public bool isTargetPlayer;
-            public GameObject Bullet;
-            public GameObject BulletSpawnPoint;
-            public float ShootTimer = 1f;
-            
-            #endregion
+        #endregion
 
-            #region Private Variables
-            private bool shootReady = true;
-            
+        #region Private Variables
 
-            #endregion
-            #endregion
-      
+        private bool shootReady = true;
+        
+
+        #endregion
+
+        #endregion
+
 
         private void Start()
         {
-            StartCoroutine(SetTarget());
+            InvokeRepeating("SetTarget", 0.75f, 1);
         }
 
-        private IEnumerator SetTarget()
+        private void SetTarget()
         {
-            while (true)
+            if (isTargetPlayer)
             {
-                float xValue = Random.Range(-1f, 1f);
-                float yValue = Random.Range(0.5f, 1f);
-                float zValue = Random.Range(-1f, 1f);
+                Shoot();
+            }
+            else
+            {
+                float xValue = Random.Range(-1.5f, 1.5f);
+                float yValue = Random.Range(-0.5f, 0.5f);
+                float zValue = Random.Range(0f, 2f);
                 targetRandom.DOLocalMove(new Vector3(xValue, yValue, zValue), 1f);
-                yield return new WaitForSeconds(1.1f);
             }
         }
 
@@ -58,37 +67,26 @@ namespace Controllers
         {
             targetPlayer = target;
         }
-        
-        void Update()
+
+        private void Update()
         {
             if (isTargetPlayer)
             {
                 foreach (Part part in parts) part.AimAt(targetPlayer);
-                
-                if (shootReady)
-                {
-                    Shoot();
-                }
                 return;
             }
+
             foreach (Part part in parts) part.AimAt(targetRandom);
-        }
+        }   
 
-        public void Shoot()
+        private void Shoot()
         {
-           Transform _bullet = Instantiate(Bullet.transform,BulletSpawnPoint.transform.position, Quaternion.identity);
-           _bullet.transform.rotation = BulletSpawnPoint.transform.rotation;
-           shootReady = false;
-           StartCoroutine(ShootRate());
-          
-        }
+            //partical koy
+            StackSignals.Instance.onKillRandomInStack?.Invoke();
+            _particlepart[0].Play();
+            _particlepart[1].Play();
 
-        private IEnumerator ShootRate()
-        {
-            yield return new WaitForSeconds(ShootTimer);
-            shootReady = true;
         }
-        
     }
 
     #region Part
@@ -118,5 +116,4 @@ namespace Controllers
     }
 
     #endregion
-
 }
