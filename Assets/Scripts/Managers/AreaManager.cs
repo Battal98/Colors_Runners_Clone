@@ -1,6 +1,8 @@
+using Data.UnityObject;
 using Datas.ValueObject;
 using Enums;
 using Signals;
+using TMPro;
 using UnityEngine;
 
 namespace Managers
@@ -9,24 +11,48 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
+        [Header("Data")]
 
-        [Header("Data")] public BuildData BuildData;
+        #region Public Variables
 
         #endregion
 
         #region Serialized Variables
 
+        [SerializeField]
+        private BuildType buildType;
+
+        [SerializeField] private TextMeshPro buildCost;
+        [SerializeField] private TextMeshPro gardenCost;
+
         #endregion
 
         #region Private Variables
 
-        private BuildType _buildType;
+        private BuildData _buildData;
         private AreaStageType _areaStageType;
 
         #endregion
 
         #endregion
+
+
+        private void Awake()
+        {
+            GetReferences();
+        }
+
+        private void GetReferences()
+        {
+            _buildData = GetData();
+            buildCost.text = _buildData.BuildCost.ToString();
+            gardenCost.text = _buildData.GardenCost.ToString();
+        }
+
+        private BuildData GetData()
+        {
+            return Resources.Load<CD_BuildData>("Data/CD_BuildData").BuildData[(int)buildType];
+        }
 
 
         #region Event Subscription
@@ -44,13 +70,13 @@ namespace Managers
         private void SubscribeEvents()
         {
             LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
-            IdleGameSignals.Instance.onAreaComplete += OnAreaComplete;
+           
         }
 
         private void UnSubscribeEvents()
         {
             LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
-            IdleGameSignals.Instance.onAreaComplete -= OnAreaComplete;
+         
         }
 
         #endregion
@@ -58,11 +84,7 @@ namespace Managers
         private void OnLevelSuccessful()
         {
         }
-
-        private void OnAreaComplete(int i)
-        {
-        }
-
+        
         private void GetStageCost()
         {
         }

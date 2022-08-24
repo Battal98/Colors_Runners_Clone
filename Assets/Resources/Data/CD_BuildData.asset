@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1580dcedea0b42c1b0e90744aa18ae62, type: 3}
+  m_Name: CD_BuildData
+  m_EditorClassIdentifier: 
+  BuildData:
+  - BuildName: Apartman
+    BuildCost: 100
+    GardenCost: 75
+    BuildMaterial: {fileID: 0}
+    GardenMaterial: {fileID: 0}
+  - BuildName: Shop
+    BuildCost: 100
+    GardenCost: 25
+    BuildMaterial: {fileID: 0}
+    GardenMaterial: {fileID: 0}
+  - BuildName: School
+    BuildCost: 500
+    GardenCost: 250
+    BuildMaterial: {fileID: 0}
+    GardenMaterial: {fileID: 0}

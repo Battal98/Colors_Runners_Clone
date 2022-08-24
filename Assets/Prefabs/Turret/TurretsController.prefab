@@ -6137,7 +6137,7 @@ MonoBehaviour:
   - transform: {fileID: 3482177905457366132}
   targetPlayer: {fileID: 0}
   targetRandom: {fileID: 0}
-  _particlepart:
+  particlepart:
   - {fileID: 5894624981355300568}
   - {fileID: 4501969994258450657}
 --- !u!1 &3482177906824713765
