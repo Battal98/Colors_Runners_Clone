@@ -12,16 +12,18 @@ namespace Commands
 
         private Rigidbody _rigidbody;
         private PlayerMovementData _playerMovementData;
+        
 
         #endregion
 
         #endregion
 
         public MoveSwerveCommand(ref Rigidbody rigidbody,
-            ref PlayerMovementData playerMovementData, ref float colorAreaSpeed)
+            ref PlayerMovementData playerMovementData)
         {
             _rigidbody = rigidbody;
             _playerMovementData = playerMovementData;
+           
         }
 
         public void Execute(InputParams _inputParams, float _colorAreaSpeed)

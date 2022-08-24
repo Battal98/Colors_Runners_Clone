@@ -1,13 +1,10 @@
-using Commands;
 using Data.UnityObject;
 using Data.ValueObject;
-using DG.Tweening;
-using Keys;
-using UnityEngine;
 using Enums;
+using Keys;
 using Managers;
 using Sirenix.OdinInspector;
-
+using UnityEngine;
 
 namespace Controllers
 {
@@ -35,6 +32,7 @@ namespace Controllers
         private Vector3 _inputValue;
         private Vector2 _clampValues;
         private GameStates _states;
+
         private InputParams _inputParams;
         // private MoveSwerveCommand _moveSwerveCommand;
         // private StopSideWaysCommand _stopSideWaysCommand;
@@ -85,7 +83,7 @@ namespace Controllers
         {
             _isReadyToPlay = state;
         }
-        
+
         public void PlayerChangeForwardSpeed(ColorCheckAreaType value)
         {
             Stop();
@@ -101,6 +99,7 @@ namespace Controllers
                     break;
             }
         }
+
         public void ExitColorCheckArea(ColorCheckAreaType areaType)
         {
             switch (areaType)
@@ -112,22 +111,17 @@ namespace Controllers
                     _colorAreaSpeed = 1;
                     break;
             }
-
-        
         }
-        
+
         private void FixedUpdate()
         {
             if (_isReadyToPlay)
-            {
                 cdMovementList.MovementTypeList[(int)_states].DoMovement(ref _colorAreaSpeed, ref _isReadyToMove,
                     ref rigidbody,
                     ref _inputParams, ref _playerMovementData);
-                // ChangeMoveType();
-            }
+            // ChangeMoveType();
             else
                 Stop();
-
         }
 
         #region PlayerMovementCommands

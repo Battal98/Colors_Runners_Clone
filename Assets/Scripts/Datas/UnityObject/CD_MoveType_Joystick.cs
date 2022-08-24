@@ -14,7 +14,6 @@ namespace Data.UnityObject
             JoystickMove(ref _rigidbody, ref _moveData, ref inputParams);
         }
 
-
         private void JoystickMove(ref Rigidbody _rigidbody, ref PlayerMovementData _playerMovementData,
             ref InputParams _inputParams)
         {

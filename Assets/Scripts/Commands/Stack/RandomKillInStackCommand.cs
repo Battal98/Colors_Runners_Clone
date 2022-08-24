@@ -6,24 +6,20 @@ using UnityEngine;
 
 namespace Commands
 {
-    public class RandomKillInStackCommand 
+    public class RandomKillInStackCommand
     {
         #region Self Variables
 
         #region Public Variables
 
-        
-
         #endregion
 
         #region Serialized Variables
 
-        
-
         #endregion
 
         #region Private Variables
-      
+
         private List<GameObject> _stackList;
         private StackData _stackData;
         private StackManager _manager;
@@ -32,40 +28,37 @@ namespace Commands
 
         #endregion
 
-        
+
         public RandomKillInStackCommand(ref StackManager stackManager, ref List<GameObject> stackList,
             ref StackData stackData)
         {
-            _stackList= stackList;
+            _stackList = stackList;
             _manager = stackManager;
             _stackData = stackData;
-            
-            
-         
         }
+
         public void Execute()
         {
-
-            if (_stackList.Count==0)
+            if (_stackList.Count == 0)
             {
                 LevelSignals.Instance.onLevelFailed?.Invoke();
                 return;
             }
+
             if (_stackList.Count >= _stackData.StackLimit)
             {
                 _stackList[_stackData.StackLimit - 1].SetActive(true);
                 _manager.CollectableAnimSet(_stackList[_stackData.StackLimit - 1]);
             }
-            if (_stackList.Count>4)
+
+            if (_stackList.Count > 4)
             {
-                StackSignals.Instance.onRemoveInStack?.Invoke(_stackList[Random.Range(0,5)]);
+                StackSignals.Instance.onRemoveInStack?.Invoke(_stackList[Random.Range(0, 5)]);
             }
             else
             {
                 StackSignals.Instance.onRemoveInStack?.Invoke(_stackList[0]);
             }
-          
-           
         }
     }
 }

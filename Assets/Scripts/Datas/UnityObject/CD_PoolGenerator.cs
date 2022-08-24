@@ -8,6 +8,5 @@ namespace Data.UnityObject
     public class CD_PoolGenerator : ScriptableObject
     {
         public List<PoolData> PoolObjectList;
-
     }
 }

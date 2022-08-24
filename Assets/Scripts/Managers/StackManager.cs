@@ -182,11 +182,7 @@ namespace Managers
 
             }
         }
-
-        private void OnKillRandomInStack()
-        {
-            
-        }
+        
         private void OnPlay()
         {
             FindPlayer();
@@ -204,7 +200,7 @@ namespace Managers
                 obj.SetActive(true);
                 OnAddInStack(obj);  
             }
-            
+            RefreshStackCount();
         }
      
     }

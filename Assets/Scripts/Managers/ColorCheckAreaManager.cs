@@ -1,14 +1,10 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Commands;
-using Controller;
 using Controllers;
-using Enums;
-using Signals;
-using UnityEngine;
 using Data.UnityObject;
 using Data.ValueObject;
+using Enums;
+using UnityEngine;
 
 namespace Managers
 {
@@ -22,7 +18,7 @@ namespace Managers
         public ColorType ColorType = ColorType.Blue;
         public List<GameObject> ColorCheckAreaStackList;
         public List<ColorData> Datas;
-        
+
         #endregion
 
         #region Serialized Variables
@@ -40,7 +36,7 @@ namespace Managers
         #endregion
 
         #endregion
-        
+
 
         private void Awake()
         {
@@ -50,7 +46,7 @@ namespace Managers
 
         private void Start()
         {
-            AreaType=miniGameAreaManager.AreaType;
+            AreaType = miniGameAreaManager.AreaType;
         }
 
         private List<ColorData> GetColorData()
@@ -63,17 +59,16 @@ namespace Managers
             _outLineChangeCommand = new OutLineChangeCommand(ref ColorCheckAreaStackList);
             _collectablePositionSetCommand = new CollectablePositionSetCommand();
         }
-        
+
 
         public void SetCollectableOutline(float value)
         {
             _outLineChangeCommand.Execute(value);
         }
+
         public void SetTurretActive(bool IsActive)
         {
-            
             miniGameAreaManager.TurretIsActive(IsActive);
-            
         }
 
         public void ChangeJobsColorArea(ColorCheckAreaType areaType)
@@ -89,7 +84,7 @@ namespace Managers
             }
         }
 
-      
+
         public void MoveCollectablesToArea(GameObject other, Transform _colHolder)
         {
             _collectablePositionSetCommand.Execute(other, _colHolder);

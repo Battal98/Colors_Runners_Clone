@@ -31,9 +31,6 @@ namespace Commands
         {
             _obj.transform.parent = _stackManager.transform;
             _stackList.Add(_obj);
-            
-
-            //bunun olmamasi gerekiyor. Color Check kisminda arkadaki gorunmez olanlar stackte kaliyor.
             if (_stackList.Count > _stackData.StackLimit)
             {
                 _obj.SetActive(false);

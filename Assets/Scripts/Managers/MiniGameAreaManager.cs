@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Commands;
 using Controllers;
@@ -74,7 +73,7 @@ namespace Managers
             Init();
         }
 
-        private void GetReferences()    
+        private void GetReferences()
         {
             switch (AreaType)
             {
@@ -122,10 +121,7 @@ namespace Managers
 
         private void OnOnEnterInDroneArea()
         {
-            if (transform.gameObject == _platformCheck)
-            {
-                StartCoroutine(_droneSquencePlayCommand.Execute());
-            }
+            if (transform.gameObject == _platformCheck) StartCoroutine(_droneSquencePlayCommand.Execute());
         }
 
         #endregion
@@ -135,21 +131,14 @@ namespace Managers
         private void SetTarget()
         {
             var _target = FindObjectOfType<PlayerManager>().transform;
-            for (int i = 0; i < turretController.Count; i++)
-            {
-                turretController[i].SetTarget(_target);
-            }
+            for (var i = 0; i < turretController.Count; i++) turretController[i].SetTarget(_target);
         }
 
         public void TurretIsActive(bool isCheck)
         {
             if (_platformCheck = gameObject)
-            {
-                for (int i = 0; i < turretController.Count; i++)
-                {
+                for (var i = 0; i < turretController.Count; i++)
                     turretController[i].isTargetPlayer = isCheck;
-                }
-            }
         }
 
         #endregion
@@ -161,20 +150,16 @@ namespace Managers
 
         public void SetCollectableOutline(float Value)
         {
-            for (int i = 0; i < colorCheckAreaManagers.Count; i++)
-            {
+            for (var i = 0; i < colorCheckAreaManagers.Count; i++)
                 colorCheckAreaManagers[i].SetCollectableOutline(Value);
-            }
         }
 
         public void ChangeJobType(ColorCheckAreaType checkAreaType)
         {
-            for (int i = 0; i < colorCheckAreaManagers.Count; i++)
-            {
+            for (var i = 0; i < colorCheckAreaManagers.Count; i++)
                 colorCheckAreaManagers[i].ChangeJobsColorArea(checkAreaType);
-            }
         }
-      
+
 
         private void OnPlay()
         {

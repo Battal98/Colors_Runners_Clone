@@ -21,7 +21,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private GameObject levelHolder;
-        [SerializeField] private Transform PoolManagerG;
+        [SerializeField] private Transform poolManagerG;
 
         #endregion
 
@@ -41,6 +41,18 @@ namespace Managers
         {
             GetReferences();
             Init();
+        }
+
+        private void GetReferences()
+        {
+            _cdPoolGenerator = GetPoolData();
+        }
+
+        private void Init()
+        {
+            _poolGenerateCommand =
+                new PoolGenerateCommand(ref _cdPoolGenerator, ref poolManagerG, ref _emptyGameObject);
+            _restartPoolCommand = new RestartPoolCommand(ref _cdPoolGenerator, ref poolManagerG, ref levelHolder);
         }
 
         #region EventSubscription
@@ -71,18 +83,6 @@ namespace Managers
 
         #endregion
 
-        private void GetReferences()
-        {
-            _cdPoolGenerator = GetPoolData();
-        }
-
-        private void Init()
-        {
-            _poolGenerateCommand =
-                new PoolGenerateCommand(ref _cdPoolGenerator, ref PoolManagerG, ref _emptyGameObject);
-            _restartPoolCommand = new RestartPoolCommand(ref _cdPoolGenerator, ref PoolManagerG, ref levelHolder);
-        }
-
         private void Start()
         {
             StartPool();
@@ -108,14 +108,12 @@ namespace Managers
                 : Instantiate(_cdPoolGenerator.PoolObjectList[(int)poolType].Pref, parent);
         }
 
-        private async void OnSendPool(GameObject CollectableObject, PoolType poolType)
+        private void OnSendPool(GameObject CollectableObject, PoolType poolType)
         {
             CollectableObject.transform.parent = transform.GetChild((int)poolType);
-            await Task.Delay(1500);
-            CollectableObject.transform.position = Vector3.zero;
             CollectableObject.GetComponentInChildren<Collider>().enabled = true;
+            CollectableObject.transform.position = Vector3.zero;
             CollectableObject.SetActive(false);
-          
         }
 
         private void OnRestartLevel()

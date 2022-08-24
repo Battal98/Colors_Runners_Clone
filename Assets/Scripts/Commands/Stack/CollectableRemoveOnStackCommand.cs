@@ -27,7 +27,6 @@ namespace Commands
         {
             _stackList = stackList;
             _manager = manager;
-           
             _stackData = stackData;
         }
 

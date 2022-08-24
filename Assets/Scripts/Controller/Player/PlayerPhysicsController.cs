@@ -1,9 +1,7 @@
-using System;
 using Enums;
+using Managers;
 using Signals;
 using UnityEngine;
-using Managers;
-
 
 namespace Controllers
 {
@@ -28,10 +26,7 @@ namespace Controllers
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Finish"))
-            {
-                CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
-            }
+            if (other.CompareTag("Finish")) CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
 
             if (other.CompareTag("CheckArea"))
             {

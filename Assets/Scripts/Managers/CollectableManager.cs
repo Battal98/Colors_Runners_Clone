@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using Commands;
 using Controller;
 using Data.UnityObject;
+using Data.ValueObject;
 using Enums;
 using UnityEngine;
-using Data.ValueObject;
-using System.Collections.Generic;
 
 namespace Managers
 {
@@ -66,12 +66,6 @@ namespace Managers
         {
             _collectableColorCheckCommand.Exucute(other);
         }
-
-        // private Material GetCollectableData()
-        // {
-        //     return Resources.Load<CD_Collectable>("Data/CD_Collectable").CollectableData
-        //         .CollectableMaterialList[(int)CollectableColorType];
-        // }
 
         public void CollectableColorChange(ColorType colorType)
         {

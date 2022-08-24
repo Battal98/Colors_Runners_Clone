@@ -32,7 +32,7 @@ namespace Commands
 
         public void Execute()
         {
-            Vector3 mouseDeltaPos = (Vector3)Input.mousePosition - _manager.MousePosition.Value;
+            Vector3 mouseDeltaPos = Input.mousePosition - _manager.MousePosition.Value;
             if (mouseDeltaPos.x > _inputData.PlayerInputSpeed)
                 _moveVector.x = _inputData.PlayerInputSpeed / 10f * mouseDeltaPos.x;
             else if (mouseDeltaPos.x < -_inputData.PlayerInputSpeed)

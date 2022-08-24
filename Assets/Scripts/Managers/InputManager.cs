@@ -21,7 +21,7 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private bool isJoystick = false;
+        [SerializeField] private bool isJoystick;
         [SerializeField] private Joystick joystick;
         [SerializeField] private InputManager inputManager;
         [SerializeField] private bool isReadyForTouch, isFirstTimeTouchTaken;
@@ -61,7 +61,10 @@ namespace Managers
                 new DuringOnDraggingJoystickCommand(ref _joystickPos, ref _moveVector, ref joystick);
         }
 
-        private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
+        private InputData GetInputData()
+        {
+            return Resources.Load<CD_Input>("Data/CD_Input").InputData;
+        }
 
         #region EventSubscription
 
@@ -114,7 +117,6 @@ namespace Managers
             }
 
             if (Input.GetMouseButton(0))
-            {
                 if (_isTouching)
                 {
                     if (isJoystick)
@@ -123,13 +125,9 @@ namespace Managers
                     }
                     else
                     {
-                        if (MousePosition != null)
-                        {
-                            _duringOnDraggingCommand.Execute();
-                        }
+                        if (MousePosition != null) _duringOnDraggingCommand.Execute();
                     }
                 }
-            }
         }
 
 

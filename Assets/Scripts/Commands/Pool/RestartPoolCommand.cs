@@ -18,7 +18,6 @@ namespace Commands.Pool
         #region Private Variables
 
         private CD_PoolGenerator _cdPoolGenerator;
-    
         private Transform _managerTranform;
         private GameObject _levelHolder;
 
@@ -29,10 +28,9 @@ namespace Commands.Pool
         public RestartPoolCommand(ref CD_PoolGenerator cdPoolGenerator, ref Transform managertransform,
             ref GameObject levelHolder)
         {
-            _cdPoolGenerator=cdPoolGenerator;
-           
-            _managerTranform=managertransform;
-            _levelHolder=levelHolder;
+            _cdPoolGenerator = cdPoolGenerator;
+            _managerTranform = managertransform;
+            _levelHolder = levelHolder;
         }
 
         public void Execute()

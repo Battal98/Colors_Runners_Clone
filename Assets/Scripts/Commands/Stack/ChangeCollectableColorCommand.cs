@@ -19,7 +19,7 @@ namespace Commands
 
         #region Private Variables
 
-        private List<GameObject> _stackList = new List<GameObject>();
+        private List<GameObject> _stackList;
 
         #endregion
 

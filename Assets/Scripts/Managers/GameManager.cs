@@ -14,8 +14,6 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private GameStates gameStates = GameStates.Runner;
-
         #endregion
 
         #region Private Variables
@@ -49,7 +47,6 @@ namespace Managers
         {
             CoreGameSignals.Instance.onSetGameState -= OnSetGameState;
             CoreGameSignals.Instance.onReset -= OnReset;
-
         }
 
         private void OnDisable()
@@ -62,7 +59,6 @@ namespace Managers
         private void OnSetGameState(GameStates gameStates)
         {
             CoreGameSignals.Instance.onGetGameState?.Invoke(gameStates);
-           
         }
 
         private void OnReset()

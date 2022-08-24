@@ -1,5 +1,3 @@
-using System;
-using Enums;
 using Managers;
 using UnityEngine;
 
@@ -28,13 +26,7 @@ namespace Controllers
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player"))
-            {
-               
-                    miniGameAreaManager.TurretIsActive(false);
-                
-              
-            }
+            if (other.CompareTag("Player")) miniGameAreaManager.TurretIsActive(false);
         }
     }
 }

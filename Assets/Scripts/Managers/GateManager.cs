@@ -1,12 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Enums;
-using Managers;
 using Controllers;
-using Data.ValueObject;
 using Data.UnityObject;
-using System;
+using Data.ValueObject;
+using Enums;
+using UnityEngine;
 
 namespace Managers
 {
@@ -17,17 +14,15 @@ namespace Managers
         #region Public Variables
 
         public ColorType ColorType;
-        [HideInInspector]
-        public List<ColorData> ColorDatas;
+        [HideInInspector] public List<ColorData> ColorDatas;
 
         #endregion
 
         #region Serializable Variables
 
-        [SerializeField]
-        private GateMeshController gateMeshController;
+        [SerializeField] private GateMeshController gateMeshController;
 
-        #endregion 
+        #endregion
 
         #endregion
 
@@ -45,6 +40,6 @@ namespace Managers
         private void SetGateColor()
         {
             gateMeshController.ChangeGateColor();
-        }          
-    } 
+        }
+    }
 }

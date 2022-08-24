@@ -24,6 +24,16 @@ namespace Managers
 
         #endregion
 
+        private void Awake()
+        {
+            GetReferences();
+        }
+
+        private void GetReferences()
+        {
+            _obstacleAnimation = this.GetComponent<DOTweenAnimation>();
+        }
+
         #region Event Subscription
 
         private void OnEnable()
@@ -33,12 +43,12 @@ namespace Managers
 
         private void Subscribe()
         {
-            CoreGameSignals.Instance.onPlay += OnObstacleAnimationStart;
+            CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
         private void Unsubscribe()
         {
-            CoreGameSignals.Instance.onPlay -= OnObstacleAnimationStart;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
         }
 
         private void OnDisable()
@@ -48,12 +58,8 @@ namespace Managers
 
         #endregion
 
-        private void Awake()
-        {
-            _obstacleAnimation = this.GetComponent<DOTweenAnimation>();
-        }
 
-        private void OnObstacleAnimationStart()
+        private void OnPlay()
         {
             _obstacleAnimation.DOPlay();
         }

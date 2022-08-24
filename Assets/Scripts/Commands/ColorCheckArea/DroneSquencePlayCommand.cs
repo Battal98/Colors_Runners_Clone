@@ -23,6 +23,7 @@ namespace Commands
             _manager = manager;
         }
 
+        
         public IEnumerator Execute()
         {
             CoreGameSignals.Instance.onSetCameraTarget?.Invoke(null);

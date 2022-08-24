@@ -1,4 +1,3 @@
-using System;
 using Signals;
 using UnityEngine;
 
@@ -9,7 +8,6 @@ namespace Managers
         #region Self Variables
 
         #region Private Variables
-
 
         private int _playerCount;
 
@@ -22,12 +20,12 @@ namespace Managers
 
         private void OnEnable()
         {
-           Subscribe();
+            Subscribe();
         }
 
         private void Subscribe()
         {
-            ScoreSignals.Instance.onGetScore +=OnGetStackScore ;
+            ScoreSignals.Instance.onGetScore += OnGetStackScore;
         }
 
         private void UnSubscribe()
@@ -48,6 +46,5 @@ namespace Managers
         {
             ScoreSignals.Instance.onSetScore?.Invoke(Value);
         }
-        
     }
 }

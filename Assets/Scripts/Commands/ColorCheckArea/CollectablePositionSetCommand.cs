@@ -10,7 +10,7 @@ namespace Commands
         public void Execute(GameObject other, Transform _colHolder)
         {
             var collectableManager = other.GetComponent<CollectableManager>();
-            var randomValue = Random.Range(-1f, 1f);
+            var randomValue = Random.Range(-1.2f, 1.2f);
             other.transform.DOMove(new Vector3(_colHolder.transform.position.x,
                 other.transform.position.y,
                 _colHolder.transform.position.z + randomValue), 1f).OnComplete(() =>

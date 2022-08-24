@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Enums;
 using Managers;
 using Signals;
@@ -40,28 +38,17 @@ namespace Controller
             other.gameObject.GetComponent<Collider>().enabled = false;
             colorCheckAreaManager.MoveCollectablesToArea(other.transform.parent.gameObject, colHolder);
         }
-    
+
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Collectable"))
-            {
                 if (colorCheckAreaManager.AreaType == ColorCheckAreaType.Drone)
-                {
                     DroneAreaJobs(other);
-                }
-            }
 
             if (other.CompareTag("Player"))
-            {
                 if (colorCheckAreaManager.AreaType == ColorCheckAreaType.Turret)
-                {
-                  
                     TurretAreaJobs();
-                }
-            }
         }
-
-       
     }
 }

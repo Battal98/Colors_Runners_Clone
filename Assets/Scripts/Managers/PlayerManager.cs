@@ -1,5 +1,3 @@
-using System;
-using Cinemachine;
 using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -87,7 +85,10 @@ namespace Managers
         #endregion
 
 
-        private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
+        private PlayerData GetPlayerData()
+        {
+            return Resources.Load<CD_Player>("Data/CD_Player").Data;
+        }
 
         private void Update()
         {

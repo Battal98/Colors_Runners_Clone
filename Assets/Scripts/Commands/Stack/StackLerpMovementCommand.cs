@@ -34,7 +34,6 @@ namespace Commands
                 float directZ = Mathf.Lerp(_stackList[0].transform.localPosition.z,
                     _playerTransform.position.z - _stackData.StackOffset, _stackData.StackLerpZDelay);
                 _stackList[0].transform.localPosition = new Vector3(directX, directY, directZ);
-                // _stackList[0].transform.rotation = Quaternion.Slerp(_stackList[0].transform.rotation, _playerTransform.rotation, _stackData.StackLerpXDelay);
                 _stackList[0].transform.LookAt(_playerTransform);
 
 
@@ -47,7 +46,6 @@ namespace Commands
                         _stackData.StackLerpZDelay);
                     _stackList[i].transform.localPosition = new Vector3(directX, directY, directZ);
                     _stackList[i].transform.LookAt(_stackList[i - 1].transform);
-                    // _stackList[i].transform.rotation = Quaternion.Slerp(_stackList[i].transform.rotation, _stackList[i - 1].transform.rotation, _stackData.StackLerpXDelay);
                 }
             }
         }

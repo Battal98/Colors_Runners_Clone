@@ -31,6 +31,7 @@ namespace Managers
         #endregion
 
         #endregion
+
         private void Awake()
         {
             _levelID = GetActiveLevel();
@@ -53,7 +54,6 @@ namespace Managers
             LevelSignals.Instance.onNextLevel += OnNextLevel;
             LevelSignals.Instance.onRestartLevel += OnRestartLevel;
             LevelSignals.Instance.onGetLevel += OnGetLevel;
-       
         }
 
         private void UnsubscribeEvents()
@@ -73,7 +73,7 @@ namespace Managers
         #endregion
 
         private int OnGetLevel() => _levelID;
-        
+
 
         private int GetActiveLevel()
         {
