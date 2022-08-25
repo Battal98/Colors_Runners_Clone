@@ -34,7 +34,7 @@ namespace Commands
         {
             for (int i = 0; i < _stackList.Count; i++)
             {
-                _stackList[i].GetComponent<CollectableManager>().CollectableColorChange(colorType); //command olustur
+                _stackList[i].GetComponent<CollectableManager>().CollectableColorChange(colorType); 
             }
         }
     }

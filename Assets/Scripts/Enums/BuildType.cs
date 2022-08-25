@@ -2,9 +2,12 @@ namespace Enums
 {
     public enum BuildType
     {
-        Apartment,
+        GuitarShop,
         Shop,
-        School,
-        Hotel
+        Hospital,
+        PoliceStation,
+        TacoShop
+        
+        
     }
 }

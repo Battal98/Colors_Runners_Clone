@@ -1,12 +1,8 @@
-using System;
-using System.ComponentModel;
-using System.Threading.Tasks;
 using Commands.Pool;
 using Data.UnityObject;
 using Enums;
 using Signals;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Managers
 {
@@ -41,6 +37,7 @@ namespace Managers
         {
             GetReferences();
             Init();
+            StartPool();
         }
 
         private void GetReferences()
@@ -83,17 +80,16 @@ namespace Managers
 
         #endregion
 
-        private void Start()
-        {
-            StartPool();
-        }
 
         private void StartPool()
         {
             _poolGenerateCommand.Execute();
         }
 
-        private CD_PoolGenerator GetPoolData() => Resources.Load<CD_PoolGenerator>("Data/CD_PoolGenerator");
+        private CD_PoolGenerator GetPoolData()
+        {
+            return Resources.Load<CD_PoolGenerator>("Data/CD_PoolGenerator");
+        }
 
         private void RestartPool()
         {

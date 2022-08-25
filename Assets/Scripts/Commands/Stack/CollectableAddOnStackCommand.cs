@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Datas.ValueObject;
+using Enums;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Commands
@@ -31,10 +33,13 @@ namespace Commands
         {
             _obj.transform.parent = _stackManager.transform;
             _stackList.Add(_obj);
+            _stackManager.CollectableAnimSet(_obj,CollectableAnimationStates.Run);
             if (_stackList.Count > _stackData.StackLimit)
             {
                 _obj.SetActive(false);
             }
+            ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
+
         }
     }
 }

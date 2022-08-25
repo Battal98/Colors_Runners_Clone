@@ -1,3 +1,4 @@
+using System;
 using Enums;
 using Managers;
 using Signals;
@@ -18,6 +19,7 @@ namespace Controllers
         #region Private Variables
 
         private ColorCheckAreaType _checkAreaType;
+        private int _timer;
 
         #endregion
 
@@ -38,6 +40,26 @@ namespace Controllers
             }
         }
 
+        private void OnTriggerStay(Collider other)
+        {
+            
+            if (other.CompareTag("BuildArea"))
+            {
+                if (_timer>=60)
+                {
+                   //Stackten Collectableları Binay fırlat
+                   //Sayıları 0 olduğunda hata vermemesinne dikkat et
+                   StackSignals.Instance.onCollectablesThrow?.Invoke();
+                   _timer = 0;
+                }
+
+                else
+                {
+                    _timer++;
+                }
+             
+            }
+        }
 
         private void OnTriggerExit(Collider other)
         {
@@ -45,6 +67,13 @@ namespace Controllers
             {
                 playerManager.ExitColorCheckArea(_checkAreaType);
                 playerManager.ChangeScoreAreaVisible(_checkAreaType);
+            }
+
+              
+            if (other.CompareTag("BuildArea"))
+            {
+                _timer = 0;
+
             }
         }
     }

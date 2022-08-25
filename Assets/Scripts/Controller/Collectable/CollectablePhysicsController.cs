@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Signals;
 using Managers;
@@ -25,6 +26,7 @@ namespace Controllers
         #region Private Variables
 
         private ColorCheckAreaType _areaType;
+        private int _timer;
 
         #endregion
 
@@ -78,6 +80,9 @@ namespace Controllers
                 StackSignals.Instance.onRemoveInStack?.Invoke(transform.parent.gameObject);
             }
         }
+
+       
+        
 
         private void OnTriggerExit(Collider other)
         {

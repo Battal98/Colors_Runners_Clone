@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CD_BuildData
   m_EditorClassIdentifier: 
   BuildData:
-  - BuildName: Apartman
+  - BuildName: GuitarShop
     BuildCost: 100
     GardenCost: 75
     BuildMaterial: {fileID: 0}
@@ -23,8 +23,18 @@ MonoBehaviour:
     GardenCost: 25
     BuildMaterial: {fileID: 0}
     GardenMaterial: {fileID: 0}
-  - BuildName: School
+  - BuildName: Hospital
     BuildCost: 500
     GardenCost: 250
+    BuildMaterial: {fileID: 0}
+    GardenMaterial: {fileID: 0}
+  - BuildName: PoliceStation
+    BuildCost: 350
+    GardenCost: 175
+    BuildMaterial: {fileID: 0}
+    GardenMaterial: {fileID: 0}
+  - BuildName: TacoShop
+    BuildCost: 120
+    GardenCost: 70
     BuildMaterial: {fileID: 0}
     GardenMaterial: {fileID: 0}
