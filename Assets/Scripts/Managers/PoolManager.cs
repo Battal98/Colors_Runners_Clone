@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Commands.Pool;
 using Data.UnityObject;
 using Enums;
@@ -104,16 +105,16 @@ namespace Managers
                 : Instantiate(_cdPoolGenerator.PoolObjectList[(int)poolType].Pref, parent);
         }
 
-        private void OnSendPool(GameObject CollectableObject, PoolType poolType)
+        private  void OnSendPool(GameObject CollectableObject, PoolType poolType)
         {
             CollectableObject.transform.parent = transform.GetChild((int)poolType);
             CollectableObject.GetComponentInChildren<Collider>().enabled = true;
-            CollectableObject.transform.position = Vector3.zero;
             CollectableObject.SetActive(false);
         }
 
         private void OnRestartLevel()
         {
+            
             RestartPool();
         }
     }

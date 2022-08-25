@@ -23,7 +23,6 @@ namespace Managers
 
         #region Serilazible Variables
 
-        [SerializeField] private List<GameObject> stackList = new List<GameObject>();
         [SerializeField] private StackManager stackManager;
 
         #endregion
@@ -39,8 +38,11 @@ namespace Managers
         private ChangeCollectableColorCommand _changeCollectableColorCommand;
         private RandomKillInStackCommand _randomKillInStackCommand;
         private CollectablesThrowCommand _collectablesThrowCommand;
+        private StackItemsCombineCommand _stackItemsCombineCommand;
         private Transform _playerManager;
         [ShowInInspector] private ColorType _type;
+        [ShowInInspector] private List<GameObject> _stackList = new List<GameObject>();
+        [ShowInInspector] private List<GameObject> _tempHolder = new List<GameObject>();
 
         #endregion
 
@@ -66,6 +68,7 @@ namespace Managers
             CoreGameSignals.Instance.onExitColorCheckArea += OnExitColorCheckArea;
             StackSignals.Instance.onKillRandomInStack += _randomKillInStackCommand.Execute;
             StackSignals.Instance.onCollectablesThrow += _collectablesThrowCommand.Execute;
+            StackSignals.Instance.onEnterFinish += OnEnterFinish;
         }
 
 
@@ -82,7 +85,9 @@ namespace Managers
             CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
             StackSignals.Instance.onKillRandomInStack -= _randomKillInStackCommand.Execute;
             StackSignals.Instance.onCollectablesThrow -= _collectablesThrowCommand.Execute;
+            StackSignals.Instance.onEnterFinish += OnEnterFinish;
         }
+
 
         private void OnDisable()
         {
@@ -110,17 +115,18 @@ namespace Managers
         private void Init()
         {
             _collectableAddOnStackCommand =
-                new CollectableAddOnStackCommand(ref stackManager, ref stackList, ref StackData);
-            _stackLerpMovementCommand = new StackLerpMovementCommand(ref stackList, ref StackData);
-            _stackScaleCommand = new StackScaleCommand(ref stackList, ref StackData);
-            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref stackList, ref stackManager,
+                new CollectableAddOnStackCommand(ref stackManager, ref _stackList, ref StackData);
+            _stackLerpMovementCommand = new StackLerpMovementCommand(ref _stackList, ref StackData);
+            _stackScaleCommand = new StackScaleCommand(ref _stackList, ref StackData);
+            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref _stackList, ref stackManager,
                 ref StackData);
-            _transportInStack = new TransportInStack(ref stackList, ref stackManager, ref StackData);
+            _transportInStack = new TransportInStack(ref _stackList, ref stackManager, ref StackData);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
-            _changeCollectableColorCommand = new ChangeCollectableColorCommand(ref stackList);
-            _randomKillInStackCommand = new RandomKillInStackCommand(ref stackManager, ref stackList,
+            _changeCollectableColorCommand = new ChangeCollectableColorCommand(ref _stackList);
+            _randomKillInStackCommand = new RandomKillInStackCommand(ref stackManager, ref _stackList,
                 ref StackData);
-            _collectablesThrowCommand = new CollectablesThrowCommand(ref stackList);
+            _collectablesThrowCommand = new CollectablesThrowCommand(ref _tempHolder);
+            _stackItemsCombineCommand = new StackItemsCombineCommand(ref _stackList, ref StackData, ref stackManager,ref _tempHolder);
         }
 
         private void Update()
@@ -136,6 +142,11 @@ namespace Managers
             {
                 _playerManager = FindObjectOfType<PlayerManager>().transform;
             }
+        }
+
+        private void OnEnterFinish()
+        {
+            StartCoroutine(_stackItemsCombineCommand.Execute());
         }
 
         private ColorType OnGetColorType() => _type;
@@ -170,7 +181,7 @@ namespace Managers
                 obj.transform.localPosition = Vector3.zero;
                 obj.SetActive(true);
                 OnAddInStack(obj);
-                CollectableAnimSet(stackList[i], CollectableAnimationStates.Crouch);
+                CollectableAnimSet(_stackList[i], CollectableAnimationStates.Crouch);
             }
         }
 
@@ -183,13 +194,13 @@ namespace Managers
         {
             _stackListObj.transform.parent = transform;
             _collectableAnimSetCommand.Execute(_stackListObj, CollectableAnimationStates.Run);
-            stackList.Add(_stackListObj);
-            ScoreSignals.Instance.onGetScore?.Invoke(stackList.Count);
+            _stackList.Add(_stackListObj);
+            ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
         }
 
         private void OnExitColorCheckArea(ColorCheckAreaType areaType)
         {
-            if (areaType == ColorCheckAreaType.Drone && stackList.Count == 0)
+            if (areaType == ColorCheckAreaType.Drone && _stackList.Count == 0)
             {
                 LevelSignals.Instance.onLevelFailed?.Invoke();
             }
@@ -197,9 +208,9 @@ namespace Managers
 
         private void SetCollectablesAnim()
         {
-            for (int i = 0; i < stackList.Count; i++)
+            for (int i = 0; i < _stackList.Count; i++)
             {
-                CollectableAnimSet(stackList[i], CollectableAnimationStates.Run);
+                CollectableAnimSet(_stackList[i], CollectableAnimationStates.Run);
             }
         }
 
@@ -207,16 +218,16 @@ namespace Managers
         {
             FindPlayer();
             SetCollectablesAnim();
-            ScoreSignals.Instance.onGetScore?.Invoke(stackList.Count);
+            ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
         }
 
 
         private void OnReset()
         {
-            stackList.Clear();
-            stackList.TrimExcess();
+            _stackList.Clear();
+            _stackList.TrimExcess();
             Initialized();
-            ScoreSignals.Instance.onGetScore?.Invoke(stackList.Count);
+            ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
         }
     }
 }

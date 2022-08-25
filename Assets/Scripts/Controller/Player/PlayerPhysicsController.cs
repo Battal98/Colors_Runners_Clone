@@ -28,7 +28,11 @@ namespace Controllers
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Finish")) CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
+            if (other.CompareTag("Finish"))
+            {
+                CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
+                StackSignals.Instance.onEnterFinish?.Invoke();
+            }
 
             if (other.CompareTag("CheckArea"))
             {
@@ -45,12 +49,10 @@ namespace Controllers
             
             if (other.CompareTag("BuildArea"))
             {
-                if (_timer>=60)
+                if (_timer>=20)
                 {
-                   //Stackten Collectableları Binay fırlat
-                   //Sayıları 0 olduğunda hata vermemesinne dikkat et
-                   StackSignals.Instance.onCollectablesThrow?.Invoke();
-                   _timer = 0;
+                    StackSignals.Instance.onCollectablesThrow?.Invoke(transform.parent);
+                   _timer =_timer *60/100;
                 }
 
                 else

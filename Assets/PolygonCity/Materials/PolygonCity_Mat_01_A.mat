@@ -10,9 +10,9 @@ Material:
   m_Name: PolygonCity_Mat_01_A
   m_Shader: {fileID: 4800000, guid: 6c046203321edf34fb092959a05e5b4a, type: 3}
   m_ShaderKeywords: _METALLICSPECGLOSSMAP _MK_ALBEDO_MAP _MK_ARTISTIC_PROJECTION_SCREEN_SPACE
-    _MK_EMISSION_MAP _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_LIGHT_CEL _MK_NORMAL_MAP
-    _MK_OUTLINE_NOISE _MK_RECEIVE_SHADOWS _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE
-    _NORMALMAP _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+    _MK_COLOR_GRADING_ALBEDO _MK_EMISSION_MAP _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
+    _MK_LIGHT_CEL _MK_NORMAL_MAP _MK_OUTLINE_NOISE _MK_RECEIVE_SHADOWS _MK_SPECULAR_ISOTROPIC
+    _MK_WRAPPED_DIFFUSE _NORMALMAP _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -167,13 +167,13 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorGrading: 0
+    - _ColorGrading: 1
     - _Contrast: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DiffuseSmoothness: 0
+    - _DiffuseSmoothness: 1
     - _DiffuseThresholdOffset: 0.25
     - _Dissolve: 0
     - _DissolveAmount: 0.5
@@ -210,8 +210,8 @@ Material:
     - _OutlineData: 0
     - _OutlineFadeMax: 2
     - _OutlineFadeMin: 0.25
-    - _OutlineNoise: 1
-    - _OutlineSize: 97.88
+    - _OutlineNoise: 0.11
+    - _OutlineSize: 25
     - _OutlineTab: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
