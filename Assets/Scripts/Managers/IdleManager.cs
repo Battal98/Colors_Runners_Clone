@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using Data.UnityObject;
+using Datas.ValueObject;
+using Signals;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Managers
@@ -7,8 +13,6 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
-
-        
 
         #endregion
 
@@ -20,15 +24,26 @@ namespace Managers
 
         #region Private Variables
 
+        [ShowInInspector] private Dictionary<AreaData, int> _areaDictionary = new Dictionary<AreaData, int>(7);
         private int _cityLevel;
+        private CD_IdleData _cdIdleData;
+
         #endregion
 
         #endregion
 
         private void Awake()
         {
-            
+            GetReferences();
         }
+
+        private void GetReferences()
+        {
+            _cdIdleData = GetIdleData();
+            //_areaDictionary = LoadAreaData();
+        }
+
+        private CD_IdleData GetIdleData() => Resources.Load<CD_IdleData>("Data/CD_IdleData");
 
         #region EventSubscription
 
@@ -39,13 +54,14 @@ namespace Managers
 
         private void SubscribeEvent()
         {
-        
+            IdleGameSignals.Instance.onAreaComplete += OnAreaComplete;
         }
 
         private void UnSubscribeEvent()
         {
-
+            IdleGameSignals.Instance.onAreaComplete += OnAreaComplete;
         }
+
         private void OnDisable()
         {
             UnSubscribeEvent();
@@ -56,6 +72,10 @@ namespace Managers
         private void Start()
         {
             OnInitializeLevel();
+        }
+
+        private void OnAreaComplete()
+        {
         }
 
         private void OnInitializeLevel()

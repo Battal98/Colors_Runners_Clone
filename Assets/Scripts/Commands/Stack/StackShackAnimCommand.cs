@@ -7,7 +7,7 @@ using DG.Tweening;
 
 namespace Commands
 {
-    public class StackScaleCommand
+    public class StackShackAnimCommand
     {
         #region Self Variables
 
@@ -20,7 +20,7 @@ namespace Commands
 
         #endregion
 
-        public StackScaleCommand(ref List<GameObject> stackList, ref StackData stackData)
+        public StackShackAnimCommand(ref List<GameObject> stackList, ref StackData stackData)
         {
             _stacklist = stackList;
             _stackData = stackData;
@@ -35,8 +35,8 @@ namespace Commands
                     .DOScale(new Vector3(1, _stackData.StackMaxScaleValue, 1), _stackData.StackScaleDelay)
                     .SetEase(Ease.Flash); 
                 _stacklist[index].transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), _stackData.StackScaleDelay)
-                    .SetDelay(_stackData.StackTaskDelay).SetEase(Ease.Flash);
-                yield return new WaitForSeconds(_stackData.StackTaskDelay / 2);
+                    .SetDelay(_stackData.StackShackAnimDuration).SetEase(Ease.Flash);
+                yield return new WaitForSeconds(_stackData.StackShackAnimDuration / 3);
             }
         }
     }

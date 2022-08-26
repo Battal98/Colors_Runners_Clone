@@ -31,7 +31,7 @@ namespace Managers
 
         private CollectableAddOnStackCommand _collectableAddOnStackCommand;
         private StackLerpMovementCommand _stackLerpMovementCommand;
-        private StackScaleCommand _stackScaleCommand;
+        private StackShackAnimCommand _stackShackAnimCommand;
         private CollectableRemoveOnStackCommand _collectableRemoveOnStackCommand;
         private TransportInStack _transportInStack;
         private CollectableAnimSetCommand _collectableAnimSetCommand;
@@ -117,7 +117,7 @@ namespace Managers
             _collectableAddOnStackCommand =
                 new CollectableAddOnStackCommand(ref stackManager, ref _stackList, ref StackData);
             _stackLerpMovementCommand = new StackLerpMovementCommand(ref _stackList, ref StackData);
-            _stackScaleCommand = new StackScaleCommand(ref _stackList, ref StackData);
+            _stackShackAnimCommand = new StackShackAnimCommand(ref _stackList, ref StackData);
             _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref _stackList, ref stackManager,
                 ref StackData);
             _transportInStack = new TransportInStack(ref _stackList, ref stackManager, ref StackData);
@@ -153,7 +153,7 @@ namespace Managers
 
         private void OnAddInStack(GameObject obj)
         {
-            StartCoroutine(_stackScaleCommand.Execute());
+            StartCoroutine(_stackShackAnimCommand.Execute());
             _collectableAddOnStackCommand.Execute(obj);
         }
 
@@ -175,7 +175,7 @@ namespace Managers
 
         private void Initialized()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i <50; i++)
             {
                 var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Collectable);
                 obj.transform.localPosition = Vector3.zero;

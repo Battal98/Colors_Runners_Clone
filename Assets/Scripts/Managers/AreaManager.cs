@@ -1,9 +1,12 @@
+using System;
 using Data.UnityObject;
 using Datas.ValueObject;
+using DG.Tweening;
 using Enums;
 using Signals;
 using TMPro;
 using UnityEngine;
+using MK.Toon;
 
 namespace Managers
 {
@@ -24,13 +27,17 @@ namespace Managers
 
         [SerializeField] private TextMeshPro buildCost;
         [SerializeField] private TextMeshPro gardenCost;
+        [SerializeField] private GameObject buildCostArea;
+        [SerializeField] private GameObject gardenCostArea;
 
         #endregion
 
         #region Private Variables
 
         private BuildData _buildData;
-        private AreaStageType _areaStageType;
+        private AreaStageType _areaStageType = AreaStageType.House;
+        private GameObject _areaCheck;
+        private AreaData _areaData;
 
         #endregion
 
@@ -62,43 +69,120 @@ namespace Managers
             SubscribeEvents();
         }
 
+
+        private void SubscribeEvents()
+        {
+            IdleGameSignals.Instance.onCheckArea += OnCheckArea;
+            IdleGameSignals.Instance.onCostDown += OnCostDown;
+        }
+
+        private void UnSubscribeEvents()
+        {
+            IdleGameSignals.Instance.onCheckArea -= OnCheckArea;
+            IdleGameSignals.Instance.onCostDown -= OnCostDown;
+        }
+
         private void OnDisable()
         {
             UnSubscribeEvents();
         }
 
-        private void SubscribeEvents()
-        {
-            LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
-           
-        }
-
-        private void UnSubscribeEvents()
-        {
-            LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
-         
-        }
-
         #endregion
 
-        private void OnLevelSuccessful()
+        private void Start()
         {
-        }
-        
-        private void GetStageCost()
-        {
+            CostAreaVisible();
         }
 
-        private void SetStageCost()
+        public void OnCostDown()
         {
+            if (_areaCheck == gameObject)
+            {
+                switch (_areaStageType)
+                {
+                    case AreaStageType.House:
+                        _areaData.BuildMaterialValue++;
+                        SetMaterialColor();
+                        SetAreaTexts();
+                        if (_buildData.BuildCost == _areaData.BuildMaterialValue) ChangeStage();
+                        break;
+                    case AreaStageType.Garden:
+                        _areaData.GardenMaterialValue++;
+                        SetMaterialColor();
+                        SetAreaTexts();
+                        if (_buildData.GardenCost == _areaData.GardenMaterialValue) ChangeStage();
+                        break;
+                }
+            }
         }
 
-        private void AreaBuildController()
+        private void SetMaterialColor()
         {
+            switch (_areaStageType)
+            {
+                case AreaStageType.House:
+
+                    _buildData.BuildMaterial.DOFloat(3 / (_buildData.BuildCost / _areaData.BuildMaterialValue), "_Saturation", 1);
+                    break;
+                case AreaStageType.Garden:
+
+                    _buildData.GardenMaterial.DOFloat(3 / (_buildData.GardenCost / _areaData.GardenMaterialValue), "_Saturation",
+                        1);
+                    break;
+            }
         }
 
-        private void GetBuildData()
+        private void SetAreaTexts()
         {
+            switch (_areaStageType)
+            {
+                case AreaStageType.House:
+                    buildCost.text = (_buildData.BuildCost - _areaData.BuildMaterialValue).ToString();
+                    break;
+                case AreaStageType.Garden:
+                    gardenCost.text = (_buildData.GardenCost - _areaData.GardenMaterialValue).ToString();
+                    break;
+            }
+        }
+
+        private void ChangeStage()
+        {
+            if (_areaStageType == AreaStageType.House)
+            {
+                _areaStageType = AreaStageType.Garden;
+                CostAreaVisible();
+            }
+            else
+            {
+                _areaStageType = AreaStageType.Complete;
+                CostAreaVisible();
+                IdleGameSignals.Instance.onAreaComplete?.Invoke();
+            }
+        }
+
+
+        private void CostAreaVisible()
+        {
+            switch (_areaStageType)
+            {
+                case AreaStageType.House:
+                    buildCostArea.SetActive(true);
+                    gardenCostArea.SetActive(false);
+                    break;
+                case AreaStageType.Garden:
+                    buildCostArea.SetActive(false);
+                    gardenCostArea.SetActive(true);
+                    break;
+                case AreaStageType.Complete:
+                    buildCostArea.SetActive(false);
+                    gardenCostArea.SetActive(false);
+                    break;
+            }
+        }
+
+        private void OnCheckArea(GameObject Check)
+        {
+            _areaCheck = Check;
         }
     }
 }

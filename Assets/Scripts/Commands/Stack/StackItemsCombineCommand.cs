@@ -52,20 +52,26 @@ namespace Commands
             int count=_stackList.Count;
             for (int i = 0; i < count; i++)
             {
-               
-                _stackList[0].transform.DOScale(Vector3.zero, 0.10f);
-                yield return new WaitForSeconds(0.15f);
-                _stackList[0].SetActive(false);
-                  _tempList.Add(_stackList[0]);
-                _stackList.RemoveAt(0); 
-                _stackList.TrimExcess(); 
-               
-                if (_stackList.Count >= _stackData.StackLimit)
-                {
-                    _stackList[_stackData.StackLimit - 1].SetActive(true);
-                  
-                }
 
+                if (i<_stackData.StackLimit)
+                {
+                    _stackList[0].transform.DOScale(Vector3.zero, 0.7f);
+                    yield return new WaitForSeconds(0.10f);
+                    _stackList[0].SetActive(false);
+                    _tempList.Add(_stackList[0]);
+                    _stackList.RemoveAt(0); 
+                    _stackList.TrimExcess(); 
+                    
+                }
+                else
+                {
+                    _stackList[0].SetActive(false);
+                    _tempList.Add(_stackList[0]);
+                    _stackList.RemoveAt(0); 
+                    _stackList.TrimExcess();
+                    yield return new WaitForSeconds(0);
+
+                }
             }
 
          

@@ -11,6 +11,9 @@ TagManager:
   - Gate
   - JumpArea
   - Obstacle
+  - CollectableParent
+  - BuildArea
+  - Building
   layers:
   - Default
   - TransparentFX

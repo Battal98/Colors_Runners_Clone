@@ -10,7 +10,7 @@ namespace Datas.ValueObject
         public int StackLimit = 10;
         
         [Header("Animation Value"), Space(10)]
-        public float StackTaskDelay = 0.05f;
+        public float StackShackAnimDuration = 0.05f;
         public float StackMaxScaleValue = 1.5f;
         
         [Header("Lerp Value"), Space(10)]

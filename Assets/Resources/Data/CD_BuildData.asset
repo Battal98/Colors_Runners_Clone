@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildData:
   - BuildName: GuitarShop
-    BuildCost: 100
+    BuildCost: 10
     GardenCost: 75
     BuildMaterial: {fileID: 0}
     GardenMaterial: {fileID: 0}
   - BuildName: Shop
-    BuildCost: 100
+    BuildCost: 20
     GardenCost: 25
     BuildMaterial: {fileID: 0}
     GardenMaterial: {fileID: 0}
   - BuildName: Hospital
-    BuildCost: 500
+    BuildCost: 30
     GardenCost: 250
     BuildMaterial: {fileID: 0}
     GardenMaterial: {fileID: 0}

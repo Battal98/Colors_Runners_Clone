@@ -79,10 +79,13 @@ namespace Controllers
                 other.gameObject.SetActive(false);
                 StackSignals.Instance.onRemoveInStack?.Invoke(transform.parent.gameObject);
             }
-        }
+          
 
-       
-        
+           
+        }
+         
+               
+
 
         private void OnTriggerExit(Collider other)
         {

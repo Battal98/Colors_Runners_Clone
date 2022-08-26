@@ -42,6 +42,10 @@ namespace Controllers
                 playerManager.ChangeSpeed(_checkAreaType);
                 playerManager.ChangeScoreAreaVisible(_checkAreaType);
             }
+            if (other.CompareTag("BuildArea"))
+            {
+              IdleGameSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
+            }
         }
 
         private void OnTriggerStay(Collider other)
@@ -52,6 +56,7 @@ namespace Controllers
                 if (_timer>=20)
                 {
                     StackSignals.Instance.onCollectablesThrow?.Invoke(transform.parent);
+                    playerManager.DownCost();
                    _timer =_timer *60/100;
                 }
 
