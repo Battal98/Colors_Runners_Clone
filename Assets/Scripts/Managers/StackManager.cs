@@ -180,7 +180,7 @@ namespace Managers
                 var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Collectable);
                 obj.transform.localPosition = Vector3.zero;
                 obj.SetActive(true);
-                OnAddInStack(obj);
+                _collectableAddOnStackCommand.Execute(obj);
                 CollectableAnimSet(_stackList[i], CollectableAnimationStates.Crouch);
             }
         }
@@ -224,10 +224,22 @@ namespace Managers
 
         private void OnReset()
         {
+            ClearStackManager();
             _stackList.Clear();
             _stackList.TrimExcess();
             Initialized();
             ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
+        }
+
+        private void ClearStackManager()
+        {
+            int _items=stackManager.transform.childCount;
+            for (int i = 0; i < _items; i++)
+            {
+               
+                    PoolSignals.Instance.onSendPool?.Invoke(stackManager.transform.GetChild(0).gameObject, PoolType.Collectable);
+               
+            }
         }
     }
 }

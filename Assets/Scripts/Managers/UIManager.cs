@@ -43,6 +43,7 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
 
+            CoreGameSignals.Instance.onGetGameState += OnGetGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
 
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
@@ -54,6 +55,7 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
 
+            CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
 
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
@@ -73,6 +75,10 @@ namespace Managers
             InitPanels();
         }
 
+        private void Start()
+        {
+            OnSetLevelText();
+        }
 
         private void OnOpenPanel(UIPanels panelParam)
         {
@@ -91,7 +97,6 @@ namespace Managers
             uiPanelController.ClosePanel(UIPanels.IdlePanel);
         }
 
-        #region Set Text Jobs
 
         private void OnSetLevelText()
         {
@@ -103,7 +108,6 @@ namespace Managers
             idlePanelController.SetScoreText(value);
         }
 
-        #endregion
 
         private void OnPlay()
         {
@@ -132,7 +136,6 @@ namespace Managers
         public void NextLevel()
         {
             LevelSignals.Instance.onNextLevel?.Invoke();
-
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
         }
@@ -140,21 +143,25 @@ namespace Managers
         public void Restart()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             LevelSignals.Instance.onRestartLevel?.Invoke();
         }
 
-        public void RetryButton()
-        {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            CoreGameSignals.Instance.onReset?.Invoke();
-        }
 
-        public void OnClickCloseButton(GameObject _closeButtonObj)
+        private void OnGetGameState(GameStates states)
         {
-            UISignals.Instance.onOpenPanel.Invoke(UIPanels.StartPanel);
-            _closeButtonObj.transform.parent.gameObject.SetActive(false);
+            switch (states)
+            {
+                case GameStates.Idle:
+                    UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
+                    UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
+                    break;
+                case GameStates.Runner:
+                    UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
+                    UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
+                    break;
+            }
         }
     }
 }

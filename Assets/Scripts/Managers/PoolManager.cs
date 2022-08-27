@@ -62,14 +62,14 @@ namespace Managers
 
         private void SubscribeEvent()
         {
-            LevelSignals.Instance.onRestartLevel += OnRestartLevel;
+            CoreGameSignals.Instance.onReset += OnRestart;
             PoolSignals.Instance.onGetPoolObject += OnGetPoolObject;
             PoolSignals.Instance.onSendPool += OnSendPool;
         }
 
         private void UnSubscribeEvent()
         {
-            LevelSignals.Instance.onRestartLevel -= OnRestartLevel;
+            CoreGameSignals.Instance.onReset -= OnRestart;
             PoolSignals.Instance.onGetPoolObject -= OnGetPoolObject;
             PoolSignals.Instance.onSendPool -= OnSendPool;
         }
@@ -110,9 +110,10 @@ namespace Managers
             CollectableObject.transform.parent = transform.GetChild((int)poolType);
             CollectableObject.GetComponentInChildren<Collider>().enabled = true;
             CollectableObject.SetActive(false);
+            CollectableObject.transform.position=Vector3.zero;
         }
 
-        private void OnRestartLevel()
+        private void OnRestart()
         {
             
             RestartPool();

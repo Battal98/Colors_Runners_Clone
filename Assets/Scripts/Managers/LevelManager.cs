@@ -1,5 +1,6 @@
 using Commands;
 using Data.UnityObject;
+using Keys;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -34,10 +35,19 @@ namespace Managers
 
         private void Awake()
         {
-            _levelID = GetActiveLevel();
+            GetReferences();
+            Init();
+        }
+
+        private void GetReferences()
+        {
+            Data = GetLevelCount();
+        }
+
+        private void Init()
+        {
             _clearActiveLevel = new ClearActiveLevelCommand(ref levelHolder);
             _levelLoader = new LevelLoaderCommand(ref levelHolder);
-            Data = GetLevelCount();
         }
 
         #region Event Subscription
@@ -54,6 +64,9 @@ namespace Managers
             LevelSignals.Instance.onNextLevel += OnNextLevel;
             LevelSignals.Instance.onRestartLevel += OnRestartLevel;
             LevelSignals.Instance.onGetLevel += OnGetLevel;
+
+            SaveSignals.Instance.onGetRunnerDatas += OnGetRunnerDatas;
+            SaveSignals.Instance.onLoadRunnerData += OnLoadRunnerData;
         }
 
         private void UnsubscribeEvents()
@@ -63,7 +76,13 @@ namespace Managers
             LevelSignals.Instance.onNextLevel -= OnNextLevel;
             LevelSignals.Instance.onRestartLevel -= OnRestartLevel;
             LevelSignals.Instance.onGetLevel -= OnGetLevel;
+
+            SaveSignals.Instance.onGetRunnerDatas -= OnGetRunnerDatas;
+            SaveSignals.Instance.onLoadRunnerData -= OnLoadRunnerData;
+
         }
+
+       
 
         private void OnDisable()
         {
@@ -71,14 +90,27 @@ namespace Managers
         }
 
         #endregion
-
+        
+        private void Start()
+        {
+            OnInitializeLevel();
+        }
+        
         private int OnGetLevel() => _levelID;
 
-
-        private int GetActiveLevel()
+        private RunnerDataParams OnGetRunnerDatas()
         {
-            if (!ES3.FileExists()) return 0;
-            return ES3.KeyExists("Level") ? ES3.Load<int>("Level") : 0;
+            return new RunnerDataParams()
+            {
+                Level = _levelID
+            };
+        }
+
+
+        private void OnLoadRunnerData(RunnerDataParams runnerDataParams)
+        {
+            _levelID = runnerDataParams.Level;
+
         }
 
         private int GetLevelCount()
@@ -86,10 +118,6 @@ namespace Managers
             return _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
         }
 
-        private void Start()
-        {
-            OnInitializeLevel();
-        }
 
         private void OnInitializeLevel()
         {
@@ -107,7 +135,6 @@ namespace Managers
             _levelID++;
             LevelSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
-            //SaveSignals.Instance.onSaveGameData?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
         }
 
@@ -115,8 +142,8 @@ namespace Managers
         {
             LevelSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
-            //SaveSignals.Instance.onSaveGameData?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
+            //SaveSignals.Instance.onSaveGameData?.Invoke();
         }
     }
 }

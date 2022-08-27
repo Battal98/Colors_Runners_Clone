@@ -90,10 +90,10 @@ namespace Managers
             return Resources.Load<CD_Player>("Data/CD_Player").Data;
         }
 
-        private void Update()
-        {
-            scoreArea.transform.rotation = Quaternion.LookRotation(transform.position - _camera.transform.position);
-        }
+        // private void Update()
+        // {
+        //     scoreArea.transform.rotation = Quaternion.LookRotation(transform.position - _camera.transform.position);
+        // }
 
         private void SendPlayerDataToControllers()
         {

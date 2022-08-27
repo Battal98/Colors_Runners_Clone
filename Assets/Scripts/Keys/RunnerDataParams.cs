@@ -1,6 +1,6 @@
 namespace Keys
 {
-    public struct SaveRunnerDataParams
+    public struct RunnerDataParams
     {
         public int Level;
     }

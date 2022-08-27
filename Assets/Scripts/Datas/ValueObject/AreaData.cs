@@ -1,4 +1,5 @@
 using System;
+using Enums;
 
 namespace Datas.ValueObject
 {
@@ -7,5 +8,6 @@ namespace Datas.ValueObject
     {
         public float GardenMaterialValue;
         public float BuildMaterialValue;
+        public AreaStageType Type;
     }
 }

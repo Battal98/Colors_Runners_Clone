@@ -24,7 +24,7 @@ namespace Data.UnityObject
             if (_movement != Vector3.zero)
             {
                 Quaternion _newDirect = Quaternion.LookRotation(_movement);
-                _rigidbody.transform.rotation = _newDirect;
+                _rigidbody.transform.GetChild(0).rotation = _newDirect;
             }
         }
     }

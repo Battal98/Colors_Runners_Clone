@@ -29,13 +29,13 @@ namespace Managers
         [SerializeField] private TextMeshPro gardenCost;
         [SerializeField] private GameObject buildCostArea;
         [SerializeField] private GameObject gardenCostArea;
+        [SerializeField] private int areaId;
 
         #endregion
 
         #region Private Variables
 
         private BuildData _buildData;
-        private AreaStageType _areaStageType = AreaStageType.House;
         private GameObject _areaCheck;
         private AreaData _areaData;
 
@@ -74,12 +74,22 @@ namespace Managers
         {
             IdleGameSignals.Instance.onCheckArea += OnCheckArea;
             IdleGameSignals.Instance.onCostDown += OnCostDown;
+            IdleGameSignals.Instance.onRefresthAreaData +=OnRefresthAreaData;
+            IdleGameSignals.Instance.onPrepareAreaWithSave += OnPrepareAreaWithSave;
+            
+            CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
         private void UnSubscribeEvents()
         {
             IdleGameSignals.Instance.onCheckArea -= OnCheckArea;
             IdleGameSignals.Instance.onCostDown -= OnCostDown;
+            IdleGameSignals.Instance.onRefresthAreaData -=OnRefresthAreaData;
+            IdleGameSignals.Instance.onPrepareAreaWithSave -= OnPrepareAreaWithSave;
+            
+            CoreGameSignals.Instance.onPlay -= OnPlay;
+
+
         }
 
         private void OnDisable()
@@ -89,8 +99,11 @@ namespace Managers
 
         #endregion
 
-        private void Start()
+        private void OnRefresthAreaData()
         {
+            _areaData =(AreaData)IdleGameSignals.Instance.onGetAreaData?.Invoke(areaId);
+            OnCostDown();
+            SetAreaTexts();
             CostAreaVisible();
         }
 
@@ -98,7 +111,7 @@ namespace Managers
         {
             if (_areaCheck == gameObject)
             {
-                switch (_areaStageType)
+                switch (_areaData.Type)
                 {
                     case AreaStageType.House:
                         _areaData.BuildMaterialValue++;
@@ -118,23 +131,25 @@ namespace Managers
 
         private void SetMaterialColor()
         {
-            switch (_areaStageType)
+            switch (_areaData.Type)
             {
                 case AreaStageType.House:
 
-                    _buildData.BuildMaterial.DOFloat(3 / (_buildData.BuildCost / _areaData.BuildMaterialValue), "_Saturation", 1);
+                    _buildData.BuildMaterial.DOFloat(2 / (_buildData.BuildCost / _areaData.BuildMaterialValue),
+                        "_Saturation", 0.5f);
                     break;
                 case AreaStageType.Garden:
 
-                    _buildData.GardenMaterial.DOFloat(3 / (_buildData.GardenCost / _areaData.GardenMaterialValue), "_Saturation",
-                        1);
+                    _buildData.GardenMaterial.DOFloat(2 / (_buildData.GardenCost / _areaData.GardenMaterialValue),
+                        "_Saturation",
+                        0.5f);
                     break;
             }
         }
 
         private void SetAreaTexts()
         {
-            switch (_areaStageType)
+            switch (_areaData.Type)
             {
                 case AreaStageType.House:
                     buildCost.text = (_buildData.BuildCost - _areaData.BuildMaterialValue).ToString();
@@ -147,23 +162,28 @@ namespace Managers
 
         private void ChangeStage()
         {
-            if (_areaStageType == AreaStageType.House)
+            if (_areaData.Type == AreaStageType.House)
             {
-                _areaStageType = AreaStageType.Garden;
+              
+                _areaData.Type = AreaStageType.Garden;
                 CostAreaVisible();
             }
-            else
+            else if (_areaData.Type == AreaStageType.Garden)
             {
-                _areaStageType = AreaStageType.Complete;
+              
+                _areaData.Type = AreaStageType.Complete;
                 CostAreaVisible();
                 IdleGameSignals.Instance.onAreaComplete?.Invoke();
             }
+            else
+            {
+                CostAreaVisible();
+            }
         }
-
 
         private void CostAreaVisible()
         {
-            switch (_areaStageType)
+            switch (_areaData.Type)
             {
                 case AreaStageType.House:
                     buildCostArea.SetActive(true);
@@ -184,5 +204,19 @@ namespace Managers
         {
             _areaCheck = Check;
         }
+        private void OnPrepareAreaWithSave()
+        {
+            IdleGameSignals.Instance.onSetAreaData?.Invoke(areaId,_areaData);
+        }
+      
+        private void OnPlay()
+        {
+            SetAreaTexts();
+            CostAreaVisible();
+            SetMaterialColor();
+          
+        }
+
+      
     }
 }
