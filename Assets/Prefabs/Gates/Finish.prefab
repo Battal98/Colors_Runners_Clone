@@ -67,9 +67,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759181277800576028}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.49999997, z: 144.995}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2.35, z: 1}
   m_Children:
   - {fileID: 1759181278952939289}
   - {fileID: 1759181277163852768}
@@ -135,7 +135,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5435902ea14a8cc42b7caf4d834e74f1, type: 2}
+  - {fileID: 2100000, guid: b8791d1c28da908498e70a72d02855b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -166,7 +166,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1759181278952939289}
-  - component: {fileID: 1759181278952939290}
   m_Layer: 0
   m_Name: GateMesh
   m_TagString: Untagged
@@ -189,17 +188,3 @@ Transform:
   m_Father: {fileID: 1759181277800576029}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1759181278952939290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759181278952939288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10c868a5771b8ea47903840dbb4a9098, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gateMeshRenderer: {fileID: 1759181278494926731}
-  manager: {fileID: 0}

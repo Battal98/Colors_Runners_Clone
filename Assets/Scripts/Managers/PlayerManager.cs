@@ -166,7 +166,7 @@ namespace Managers
             if ((InputParam.Values.x != 0 || InputParam.Values.y != 0) && _animationState == PlayerAnimationStates.Idle)
             {
                 _animationState = PlayerAnimationStates.Run;
-                Debug.Log(_animationState);
+             
                 PlayAnim(PlayerAnimationStates.Run);
                 return;
             }
@@ -174,7 +174,7 @@ namespace Managers
                 _animationState == PlayerAnimationStates.Run)
             {
                 _animationState = PlayerAnimationStates.Idle;
-                Debug.Log(_animationState);
+           
                 PlayAnim(PlayerAnimationStates.Idle);
             }
         }

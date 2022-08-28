@@ -743,11 +743,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1759181277800576029, guid: b66a076d3599bde49b244c7ec09b24a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1.116
       objectReference: {fileID: 0}
     - target: {fileID: 1759181277800576029, guid: b66a076d3599bde49b244c7ec09b24a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 95
+      value: 94.77
       objectReference: {fileID: 0}
     - target: {fileID: 1759181277800576029, guid: b66a076d3599bde49b244c7ec09b24a4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1083,6 +1083,10 @@ PrefabInstance:
       propertyPath: ColorType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1329183341505169233, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1539420660308345273, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_Name
       value: MiniGameArea (1)
@@ -1139,6 +1143,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1539420661413054471, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2578447793151561194, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: AreaType
       value: 0
@@ -1154,6 +1162,10 @@ PrefabInstance:
     - target: {fileID: 2659190040899617468, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: ColorType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556386330639750227, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
@@ -2709,6 +2721,10 @@ PrefabInstance:
       propertyPath: defaultLocalRotation.x
       value: -0.7071069
       objectReference: {fileID: 0}
+    - target: {fileID: 1329183341505169233, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1539420660308345273, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_Name
       value: MiniGameArea
@@ -2765,9 +2781,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1539420661413054471, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2578447793151561194, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: ColorType
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556386330639750227, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
@@ -3197,6 +3221,10 @@ PrefabInstance:
       propertyPath: ColorType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1329183341505169233, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1539420660308345273, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_Name
       value: MiniGameArea
@@ -3253,9 +3281,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1539420661413054471, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2659190040899617468, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: ColorType
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556386330639750227, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
