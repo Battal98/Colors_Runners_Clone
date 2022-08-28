@@ -1,5 +1,7 @@
 using System;
+using Enums;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controller
@@ -31,7 +33,7 @@ namespace Controller
         {
             if (other.CompareTag("Collectable"))
             {
-                other.transform.parent.gameObject.SetActive(false);
+               PoolSignals.Instance.onSendPool?.Invoke(other.transform.parent.gameObject,PoolType.Collectable);
             }
         }
     }

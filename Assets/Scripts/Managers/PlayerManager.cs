@@ -166,6 +166,7 @@ namespace Managers
 
         private void OnPlay()
         {
+            scoreArea.SetActive(true);
             playerMovementController.IsReadyToPlay(true);
         }
 

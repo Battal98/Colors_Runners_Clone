@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Datas.ValueObject;
 using DG.Tweening;
 using Enums;
@@ -47,7 +48,7 @@ namespace Commands
             _tempList = tempList;
         }
 
-        public IEnumerator Execute()
+        public async  void Execute()
         {
             int count=_stackList.Count;
             for (int i = 0; i < count; i++)
@@ -56,7 +57,7 @@ namespace Commands
                 if (i<_stackData.StackLimit)
                 {
                     _stackList[0].transform.DOScale(Vector3.zero, 0.7f);
-                    yield return new WaitForSeconds(0.10f);
+                    await Task.Delay(100);
                     _stackList[0].SetActive(false);
                     _tempList.Add(_stackList[0]);
                     _stackList.RemoveAt(0); 
@@ -69,7 +70,6 @@ namespace Commands
                     _tempList.Add(_stackList[0]);
                     _stackList.RemoveAt(0); 
                     _stackList.TrimExcess();
-                    yield return new WaitForSeconds(0);
 
                 }
             }

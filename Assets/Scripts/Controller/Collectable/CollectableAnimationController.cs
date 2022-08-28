@@ -14,27 +14,18 @@ namespace Controller
         #endregion
 
         #region Private Variables
-
-        [SerializeField] private CollectableAnimationStates _states = CollectableAnimationStates.Idle;
-
-        #endregion
+        
 
         #endregion
 
+        #endregion
 
-        private void Start()
-        {
-            Playanim(_states);
-        }
-
+        
         public void Playanim(CollectableAnimationStates animationStates)
         {
             animatorController.SetTrigger(animationStates.ToString());
         }
 
-        public void OnReset()
-        {
-            animatorController.SetTrigger(PlayerAnimationStates.Idle.ToString());
-        }
+      
     }
 }

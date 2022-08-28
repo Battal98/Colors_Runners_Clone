@@ -33,13 +33,14 @@ namespace Commands
         {
             _obj.transform.parent = _stackManager.transform;
             _stackList.Add(_obj);
-            _stackManager.CollectableAnimSet(_obj,CollectableAnimationStates.Run);
+            Vector3 pivot = _stackList[_stackList.Count - 1].transform.position;
+            _obj.transform.localPosition = new Vector3(pivot.x,pivot.y,pivot.z- ((_stackData.StackOffset)*_stackList.Count*2));
             if (_stackList.Count > _stackData.StackLimit)
             {
-                _obj.SetActive(false);
+               _obj.SetActive(false);
             }
-            ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
 
+            ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
         }
     }
 }

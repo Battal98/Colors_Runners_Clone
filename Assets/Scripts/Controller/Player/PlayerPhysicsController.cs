@@ -46,6 +46,12 @@ namespace Controllers
             {
               IdleGameSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
             }
+
+            if (other.CompareTag("Multiplier"))
+            {
+           
+                StackSignals.Instance.onEnterMultiplier?.Invoke();
+            }
         }
 
         private void OnTriggerStay(Collider other)

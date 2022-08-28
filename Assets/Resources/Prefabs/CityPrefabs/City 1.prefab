@@ -4736,7 +4736,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7420951117453078238}
   m_Layer: 0
-  m_Name: City 0
+  m_Name: City 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8501,6 +8501,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6420191896655097075}
     m_Modifications:
+    - target: {fileID: 4934683293246957042, guid: 6bc3ebbb4b8826d40a456763941fd1c3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4934683293246957042, guid: 6bc3ebbb4b8826d40a456763941fd1c3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 7616168666397375628, guid: 6bc3ebbb4b8826d40a456763941fd1c3, type: 3}
       propertyPath: m_RootOrder
       value: 0

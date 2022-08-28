@@ -110,7 +110,8 @@ namespace Managers
             CollectableObject.transform.parent = transform.GetChild((int)poolType);
             CollectableObject.GetComponentInChildren<Collider>().enabled = true;
             CollectableObject.SetActive(false);
-            CollectableObject.transform.position=Vector3.zero;
+            CollectableObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            CollectableObject.transform.localPosition=new Vector3(0f,0f,0);
         }
 
         private void OnRestart()

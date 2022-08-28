@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildData:
   - BuildName: GuitarShop
-    BuildCost: 1
-    GardenCost: 1
+    BuildCost: 70
+    GardenCost: 50
     BuildMaterial: {fileID: 2100000, guid: b4a65fdec74ea4d48b1553c2d9f0a102, type: 2}
     GardenMaterial: {fileID: 2100000, guid: fbe4cf03802d17a40b274f63be312c39, type: 2}
   - BuildName: Shop
-    BuildCost: 1
-    GardenCost: 1
+    BuildCost: 80
+    GardenCost: 75
     BuildMaterial: {fileID: 2100000, guid: b478aee0d4d75d1429653f6855477088, type: 2}
     GardenMaterial: {fileID: 2100000, guid: 80f83926eb366674aaa413ed62ebde6b, type: 2}
   - BuildName: Hospital
-    BuildCost: 1
-    GardenCost: 1
+    BuildCost: 300
+    GardenCost: 250
     BuildMaterial: {fileID: 2100000, guid: 315cbeb8ebf526d4b8b32eaf11ec4f8a, type: 2}
     GardenMaterial: {fileID: 2100000, guid: f3349bfaa76afb443b174ad4f36f7a09, type: 2}
   - BuildName: PoliceStation
-    BuildCost: 350
-    GardenCost: 175
+    BuildCost: 125
+    GardenCost: 100
     BuildMaterial: {fileID: 2100000, guid: 4c65f9c5bffe6d2498c488cf3cf5c3cf, type: 2}
     GardenMaterial: {fileID: 2100000, guid: d3b4ba518e34ec747ac38146663b4b35, type: 2}
   - BuildName: TacoShop

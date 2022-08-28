@@ -19,5 +19,6 @@ namespace Signals
         public UnityAction onKillRandomInStack=delegate {  };
         public UnityAction<Transform> onCollectablesThrow=delegate {  };
         public UnityAction onEnterFinish=delegate {  };
+        public UnityAction onEnterMultiplier=delegate {  };
     }
 }
