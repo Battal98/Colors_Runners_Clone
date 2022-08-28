@@ -1,5 +1,6 @@
 using Commands;
 using Data.UnityObject;
+using Enums;
 using Keys;
 using Signals;
 using Sirenix.OdinInspector;
@@ -133,6 +134,7 @@ namespace Managers
             LevelSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
+            
         }
 
         private void OnRestartLevel()

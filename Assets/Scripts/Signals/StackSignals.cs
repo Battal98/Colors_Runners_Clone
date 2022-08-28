@@ -15,10 +15,12 @@ namespace Signals
         public UnityAction<GameObject> onGetStackList = delegate { };
         public UnityAction<ColorType> onChangeCollectableColor = delegate { };
         public UnityAction onStackTransferComplete = delegate { };
-        public Func<ColorType> onGetColorType = delegate { return 0; };
         public UnityAction onKillRandomInStack = delegate { };
         public UnityAction<Transform> onCollectablesThrow = delegate { };
         public UnityAction onEnterFinish = delegate { };
         public UnityAction onEnterMultiplier = delegate { };
+        public UnityAction<float> onScaleSet=delegate {  };
+
+        public Func<ColorType> onGetColorType = delegate { return 0; };
     }
 }

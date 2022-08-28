@@ -96,9 +96,12 @@ namespace Managers
         private GameObject OnGetPoolObject(PoolType poolType)
         {
             var parent = transform.GetChild((int)poolType);
-            return parent.childCount != 0
+            var obj = parent.childCount != 0
                 ? parent.transform.GetChild(0).gameObject
                 : Instantiate(_cdPoolGenerator.PoolObjectList[(int)poolType].Pref, parent);
+
+            obj.GetComponent<CollectableManager>().CollectableColorChange(StackSignals.Instance.onGetColorType());
+            return obj;
         }
 
         private void OnSendPool(GameObject CollectableObject, PoolType poolType)

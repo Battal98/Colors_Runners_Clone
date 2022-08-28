@@ -10,7 +10,7 @@ namespace Controllers
 
         public void ChangeGateColor()
         {
-            gateMeshRenderer.material.color = manager.ColorDatas[(int)manager.ColorType].Color;
+            gateMeshRenderer.material.color = manager.ColorDatas[(int)manager.ColorType].Color.color;
         }
     }
 }

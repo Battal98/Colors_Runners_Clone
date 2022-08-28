@@ -18,11 +18,10 @@ namespace Controllers
         public void PlayAnim(PlayerAnimationStates animationStates)
         {
             animatorController.SetTrigger(animationStates.ToString());
+            
         }
 
-        public void OnReset()
-        {
-            animatorController.SetTrigger(PlayerAnimationStates.Idle.ToString());
-        }
+       
+     
     }
 }

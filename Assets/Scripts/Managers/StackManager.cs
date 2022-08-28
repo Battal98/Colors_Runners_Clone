@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Controller;
 using Enums;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 namespace Managers
 {
@@ -72,7 +73,7 @@ namespace Managers
             StackSignals.Instance.onKillRandomInStack += _randomKillInStackCommand.Execute;
             StackSignals.Instance.onCollectablesThrow += _collectablesThrowCommand.Execute;
             StackSignals.Instance.onGetColorType += OnGetColorType;
-            StackSignals.Instance.onEnterFinish += _stackItemsCombineCommand.Execute;
+            StackSignals.Instance.onEnterFinish += OnEnterFinish;
             StackSignals.Instance.onEnterMultiplier += _stackMultiplierCommand.Execute;
 
             CoreGameSignals.Instance.onReset += OnReset;
@@ -90,7 +91,7 @@ namespace Managers
             StackSignals.Instance.onChangeCollectableColor -= OnChangeCollectableColor;
             StackSignals.Instance.onKillRandomInStack -= _randomKillInStackCommand.Execute;
             StackSignals.Instance.onCollectablesThrow -= _collectablesThrowCommand.Execute;
-            StackSignals.Instance.onEnterFinish += _stackItemsCombineCommand.Execute;
+            StackSignals.Instance.onEnterFinish -= OnEnterFinish;
             StackSignals.Instance.onGetColorType -= OnGetColorType;
             StackSignals.Instance.onEnterMultiplier += _stackMultiplierCommand.Execute;
 
@@ -98,6 +99,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
         }
+
 
         private void OnDisable()
         {
@@ -154,6 +156,13 @@ namespace Managers
         {
             _collectableAnimSetCommand.Execute(obj, AnimationStates);
         }
+
+        private void OnEnterFinish()
+        {
+            OnChangeCollectableColor(ColorType.RainBow);
+            _stackItemsCombineCommand.Execute();
+        }
+
 
         private void SetAllCollectableAnim(CollectableAnimationStates states)
         {

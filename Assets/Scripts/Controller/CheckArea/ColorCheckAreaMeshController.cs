@@ -34,7 +34,7 @@ namespace Controllers
         private void GetReferences()
         {
             _meshRenderer = transform.parent.GetComponentInChildren<MeshRenderer>();
-            _meshRenderer.material.color = colorCheckAreaManager.Datas[(int)colorCheckAreaManager.ColorType].Color;
+            _meshRenderer.material = colorCheckAreaManager.Datas[(int)colorCheckAreaManager.ColorType].Color;
         }
 
         public void CheckColorsForDrone()

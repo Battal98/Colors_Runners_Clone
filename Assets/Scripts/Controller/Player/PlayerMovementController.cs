@@ -42,17 +42,6 @@ namespace Controllers
 
         #endregion
 
-        private void Awake()
-        {
-            Init();
-        }
-
-        private void Init()
-        {
-            // _moveSwerveCommand = new MoveSwerveCommand(ref rigidbody, ref _playerMovementData,ref _colorAreaSpeed);
-            // _stopSideWaysCommand = new StopSideWaysCommand(ref rigidbody, ref _playerMovementData);
-            // _joyStickMoveCommand = new JoyStickMoveCommand(ref rigidbody, ref _playerMovementData);
-        }
 
         public void SetMovementData(PlayerMovementData dataMovementData)
         {
@@ -77,7 +66,10 @@ namespace Controllers
         public void UpdateInputValue(InputParams inputParam)
         {
             _inputParams = inputParam;
+          
         }
+
+      
 
         public void IsReadyToPlay(bool state)
         {
@@ -116,55 +108,26 @@ namespace Controllers
         private void FixedUpdate()
         {
             if (_isReadyToPlay)
+            {
                 cdMovementList.MovementTypeList[(int)_states].DoMovement(ref _colorAreaSpeed, ref _isReadyToMove,
                     ref rigidbody,
                     ref _inputParams, ref _playerMovementData);
-            // ChangeMoveType();
+              
+                
+                
+            }
+
             else
+            {
+                
                 Stop();
+            }
         }
 
         #region PlayerMovementCommands
 
-        // private void ChangeMoveType()
-        // {
-        //     switch (_states)
-        //     {
-        //         case GameStates.Runner:
-        //             MoveSwerve();
-        //             break;
-        //         case GameStates.Idle:
-        //             Moveidle();
-        //             break;
-        //     }
-        // }
-        //
-        // private void Moveidle()
-        // {
-        //     if (_isReadyToMove)
-        //     {
-        //         _joyStickMoveCommand.Execute(_inputParams,_colorAreaSpeed);
-        //     }
-        //     else
-        //     {
-        //         rigidbody.velocity = Vector3.zero;
-        //     }
-        // }
-        //
-        // private void MoveSwerve()
-        // {
-        //     if (_isReadyToMove)
-        //     {
-        //         _moveSwerveCommand.Execute(_inputParams,_colorAreaSpeed);
-        //     }
-        //     else
-        //     {
-        //         _stopSideWaysCommand.Execute();
-        //     }
-        // }
-
+      
         #endregion
-
 
         public void Stop()
         {

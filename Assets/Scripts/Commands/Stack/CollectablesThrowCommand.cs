@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Data.ValueObject;
 using DG.Tweening;
+using Enums;
 using Signals;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ namespace Commands
 
         #region Private Variables
 
-        private List<GameObject> _temlList;
+        private readonly List<GameObject> _temlList;
 
         #endregion
 
@@ -30,10 +30,14 @@ namespace Commands
                 _temlList[0].SetActive(true);
                 _temlList[0].transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 0);
                 _temlList[0].transform.position = PlayerTranform.position;
-                _temlList[0].transform
-                    .DOJump(
-                        new Vector3(PlayerTranform.position.x + Random.Range(-1f, 1f), PlayerTranform.position.y,
-                            PlayerTranform.transform.position.z + 2f), 2, 1, 1.5f);
+                // _temlList[0].transform
+                //     .DOJump(
+                //         new Vector3(PlayerTranform.position.x + Random.Range(-1f, 1f), PlayerTranform.position.y,
+                //             PlayerTranform.transform.position.z + 2f), 2, 1, 1.5f).OnComplete(() =>
+                //     {
+                //         
+                //     });
+                PoolSignals.Instance.onSendPool?.Invoke(_temlList[0].gameObject, PoolType.Collectable);
                 _temlList.RemoveAt(0);
                 _temlList.TrimExcess();
             }

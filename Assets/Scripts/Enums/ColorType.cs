@@ -8,5 +8,6 @@ namespace Enums
         Purple = 3,
         Red = 4,
         Yellow = 5,
+        RainBow=6
     }
 }

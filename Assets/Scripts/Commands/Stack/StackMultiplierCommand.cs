@@ -14,6 +14,7 @@ namespace Commands
 
         private List<GameObject> _stackList;
         private StackManager _manager;
+     
 
         #endregion
 
@@ -24,6 +25,7 @@ namespace Commands
         {
             _stackList = stackList;
             _manager = manager;
+        
         }
 
         public void Execute()
@@ -31,7 +33,10 @@ namespace Commands
             int listCount = _stackList.Count;
             for (int i = 0; i < listCount; i++)
             {
-                _manager.AddInStack(PoolSignals.Instance.onGetPoolObject(PoolType.Collectable));
+           
+                var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Collectable);
+                obj.SetActive(true);
+                _manager.AddInStack(obj);
             }
         }
     }

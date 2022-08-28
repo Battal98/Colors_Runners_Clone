@@ -19,10 +19,10 @@ namespace Controller
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Collectable"))
-            {
-                PoolSignals.Instance.onSendPool?.Invoke(other.transform.parent.gameObject, PoolType.Collectable);
-            }
+            // if (other.CompareTag("Collectable"))
+            // {
+            //     PoolSignals.Instance.onSendPool?.Invoke(other.transform.parent.gameObject, PoolType.Collectable);
+            // }
         }
     }
 }

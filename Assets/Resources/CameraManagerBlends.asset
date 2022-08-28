@@ -28,7 +28,7 @@ MonoBehaviour:
     m_To: RuunerCamera
     m_Blend:
       m_Style: 0
-      m_Time: 0
+      m_Time: 2
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []

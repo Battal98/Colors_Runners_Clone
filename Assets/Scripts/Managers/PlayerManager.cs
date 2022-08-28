@@ -2,6 +2,7 @@ using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
+using Keys;
 using Signals;
 using TMPro;
 using UnityEngine;
@@ -29,8 +30,11 @@ namespace Managers
 
         #region Private Variables
 
-        private Transform _camera;
+    
         private bool _scoreAreaVisible = true;
+        private GameStates _states;
+        private int _score;
+        private PlayerAnimationStates _animationState;
 
         #endregion
 
@@ -38,8 +42,13 @@ namespace Managers
 
         private void Awake()
         {
-            Data = GetPlayerData();
+            GetReferences();
             SendPlayerDataToControllers();
+        }
+
+        private void GetReferences()
+        {
+            Data = GetPlayerData();
         }
 
         #region Event Subscription
@@ -53,28 +62,31 @@ namespace Managers
         {
             InputSignals.Instance.onInputTaken += playerMovementController.EnableMovement;
             InputSignals.Instance.onInputReleased += playerMovementController.DeactiveMovement;
-            InputSignals.Instance.onInputDragged += playerMovementController.UpdateInputValue;
+            InputSignals.Instance.onInputDragged += OnInputDragged;
             CoreGameSignals.Instance.onGetGameState += OnGetGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
-            LevelSignals.Instance.onLevelSuccessful += OnLevelSuccesful;
             CoreGameSignals.Instance.onExitColorCheckArea += OnExitColorCheckArea;
             ScoreSignals.Instance.onSetScore += OnSetScore;
+
+            StackSignals.Instance.onScaleSet += OnScaleSet;
         }
+
 
         private void Unsubscribe()
         {
             InputSignals.Instance.onInputTaken -= playerMovementController.EnableMovement;
             InputSignals.Instance.onInputReleased -= playerMovementController.DeactiveMovement;
-            InputSignals.Instance.onInputDragged -= playerMovementController.UpdateInputValue;
+            InputSignals.Instance.onInputDragged -= OnInputDragged;
             CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
-            LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccesful;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
             ScoreSignals.Instance.onSetScore -= OnSetScore;
+
+            StackSignals.Instance.onScaleSet -= OnScaleSet;
         }
 
         private void OnDisable()
@@ -84,16 +96,24 @@ namespace Managers
 
         #endregion
 
+        private void OnScaleSet(float Value)
+        {
+            transform.localScale = new Vector3(
+                Mathf.Clamp((transform.localScale.x + Value),0.8f,2f),
+                Mathf.Clamp((transform.localScale.y + Value),0.8f,2f),
+                Mathf.Clamp((transform.localScale.z + Value),0.8f,2f));
+        }
 
         private PlayerData GetPlayerData()
         {
             return Resources.Load<CD_Player>("Data/CD_Player").Data;
         }
 
-        // private void Update()
-        // {
-        //     scoreArea.transform.rotation = Quaternion.LookRotation(transform.position - _camera.transform.position);
-        // }
+        private void Start()
+        {
+
+            _states = GameStates.Runner;
+        }
 
         private void SendPlayerDataToControllers()
         {
@@ -102,11 +122,18 @@ namespace Managers
 
         private void OnGetGameState(GameStates states)
         {
+            _states = states;
             playerAnimationController.gameObject.SetActive(true);
             playerMovementController.ChangeStates(states);
         }
 
         private void OnSetScore(int Values)
+        {
+            _score = int.Parse(scoreText.text);
+            SetScoreText(Values);
+        }
+
+        private void SetScoreText(int Values)
         {
             scoreText.text = Values.ToString();
         }
@@ -127,15 +154,36 @@ namespace Managers
             playerMovementController.PlayerChangeForwardSpeed(colorAreaType);
         }
 
+        private void OnInputDragged(InputParams InputParam)
+        {
+            playerMovementController.UpdateInputValue(InputParam);
+            SetAnim(InputParam);
+        }
+
+        private void SetAnim(InputParams InputParam)
+        {
+            if (_states != GameStates.Idle) return;
+            if ((InputParam.Values.x != 0 || InputParam.Values.y != 0) && _animationState == PlayerAnimationStates.Idle)
+            {
+                _animationState = PlayerAnimationStates.Run;
+                Debug.Log(_animationState);
+                PlayAnim(PlayerAnimationStates.Run);
+                return;
+            }
+            if ((InputParam.Values.x == 0 && InputParam.Values.y == 0) &&
+                _animationState == PlayerAnimationStates.Run)
+            {
+                _animationState = PlayerAnimationStates.Idle;
+                Debug.Log(_animationState);
+                PlayAnim(PlayerAnimationStates.Idle);
+            }
+        }
+
         public void PlayAnim(PlayerAnimationStates animationStates)
         {
             playerAnimationController.PlayAnim(animationStates);
         }
 
-        private void Start()
-        {
-            _camera = Camera.main.transform;
-        }
 
         public void ChangeScoreAreaVisible(ColorCheckAreaType areaType)
         {
@@ -148,21 +196,22 @@ namespace Managers
 
         public void DownCost()
         {
-            if (int.Parse(scoreText.text) > 0)
+            if (_score > 0)
             {
                 IdleGameSignals.Instance.onCostDown?.Invoke();
+                OnScaleSet(-0.10f);
+                _score--;
             }
+
+            SetScoreText(_score);
         }
+
 
         private void OnLevelFailed()
         {
             playerMovementController.IsReadyToPlay(false);
         }
 
-        private void OnLevelSuccesful()
-        {
-            playerMovementController.IsReadyToPlay(false);
-        }
 
         private void OnPlay()
         {
@@ -173,7 +222,6 @@ namespace Managers
         private void OnReset()
         {
             playerMovementController.OnReset();
-            playerAnimationController.OnReset();
         }
     }
 }

@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Datas.ValueObject;
 using DG.Tweening;
+using Enums;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Commands
@@ -41,14 +43,17 @@ namespace Commands
                     _stackList[0].transform.DOScale(Vector3.zero, 0.7f);
                     await Task.Delay(100);
                     _stackList[0].SetActive(false);
-                    _tempList.Add(_stackList[0]);
+                    PoolSignals.Instance.onSendPool?.Invoke(_stackList[0],PoolType.Collectable);
+                    // _tempList.Add(_stackList[0]);
+                    StackSignals.Instance.onScaleSet?.Invoke( 0.10f);
                     _stackList.RemoveAt(0);
                     _stackList.TrimExcess();
                 }
                 else
                 {
                     _stackList[0].SetActive(false);
-                    _tempList.Add(_stackList[0]);
+                    // _tempList.Add(_stackList[0]);
+                    PoolSignals.Instance.onSendPool?.Invoke(_stackList[0],PoolType.Collectable);
                     _stackList.RemoveAt(0);
                     _stackList.TrimExcess();
                 }
