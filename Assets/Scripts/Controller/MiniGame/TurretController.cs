@@ -10,11 +10,11 @@ namespace Controllers
 {
     public class TurretController : MonoBehaviour
     {
-        #region self Variables
+        #region Self Variables
 
         #region Public Variables
 
-        public bool isTargetPlayer;
+        public bool IsTargetPlayer;
 
         #endregion
 
@@ -29,7 +29,7 @@ namespace Controllers
 
         #region Private Variables
 
-        private bool shootReady = true;
+        private bool _shootReady = true;
 
         #endregion
 
@@ -43,7 +43,7 @@ namespace Controllers
 
         private void SetTarget()
         {
-            if (isTargetPlayer)
+            if (IsTargetPlayer)
             {
                 Shoot();
             }
@@ -63,7 +63,7 @@ namespace Controllers
 
         private void Update()
         {
-            if (isTargetPlayer)
+            if (IsTargetPlayer)
             {
                 foreach (var part in parts) part.AimAt(targetPlayer);
                 return;
@@ -79,7 +79,6 @@ namespace Controllers
             for (int i = 0; i < particlepart.Count; i++)
             {
                 particlepart[i].Play();
-              
             }
         }
     }

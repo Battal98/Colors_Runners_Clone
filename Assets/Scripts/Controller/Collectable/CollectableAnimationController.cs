@@ -13,19 +13,12 @@ namespace Controller
 
         #endregion
 
-        #region Private Variables
-        
-
         #endregion
 
-        #endregion
 
-        
         public void Playanim(CollectableAnimationStates animationStates)
         {
             animatorController.SetTrigger(animationStates.ToString());
         }
-
-      
     }
 }

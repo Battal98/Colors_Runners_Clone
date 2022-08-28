@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Signals;
 using Managers;
@@ -79,12 +78,7 @@ namespace Controllers
                 other.gameObject.SetActive(false);
                 StackSignals.Instance.onRemoveInStack?.Invoke(transform.parent.gameObject);
             }
-          
-
-           
         }
-         
-               
 
 
         private void OnTriggerExit(Collider other)

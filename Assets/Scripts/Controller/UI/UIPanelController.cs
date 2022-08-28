@@ -8,17 +8,9 @@ namespace Controllers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private List<GameObject> panels;
-        
-        #endregion
-
-        #region Private Variables
 
         #endregion
 
@@ -27,7 +19,6 @@ namespace Controllers
         public void OpenPanel(UIPanels panelParam)
         {
             panels[(int)panelParam].SetActive(true);
-            
         }
 
         public void ClosePanel(UIPanels panelParam)

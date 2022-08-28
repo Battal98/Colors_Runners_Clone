@@ -4,6 +4,5 @@ namespace Enums
     {
         Collectable,
         Bullet
-        
     }
 }

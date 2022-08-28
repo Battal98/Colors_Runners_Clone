@@ -79,10 +79,8 @@ namespace Managers
 
             SaveSignals.Instance.onGetRunnerDatas -= OnGetRunnerDatas;
             SaveSignals.Instance.onLoadRunnerData -= OnLoadRunnerData;
-
         }
 
-       
 
         private void OnDisable()
         {
@@ -90,12 +88,12 @@ namespace Managers
         }
 
         #endregion
-        
+
         private void Start()
         {
             OnInitializeLevel();
         }
-        
+
         private int OnGetLevel() => _levelID;
 
         private RunnerDataParams OnGetRunnerDatas()
@@ -110,7 +108,6 @@ namespace Managers
         private void OnLoadRunnerData(RunnerDataParams runnerDataParams)
         {
             _levelID = runnerDataParams.Level;
-
         }
 
         private int GetLevelCount()

@@ -7,5 +7,5 @@ namespace Data.ValueObject
     public class ColorData
     {
         public Color Color;
-    } 
+    }
 }

@@ -36,9 +36,7 @@ namespace Managers
         private void OnSaveData()
         {
             SaveGame(
-               
-                     SaveSignals.Instance.onGetRunnerDatas(),
-                
+                SaveSignals.Instance.onGetRunnerDatas(),
                 SaveSignals.Instance.onGetIdleDatas()
             );
         }

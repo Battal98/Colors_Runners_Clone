@@ -7,7 +7,5 @@ namespace Enums
         Hospital,
         PoliceStation,
         TacoShop
-        
-        
     }
 }

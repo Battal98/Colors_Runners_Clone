@@ -7,17 +7,9 @@ namespace Controllers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private MiniGameAreaManager miniGameAreaManager;
-
-        #endregion
-
-        #region Private Variables
 
         #endregion
 

@@ -5,6 +5,5 @@ namespace Enums
         House,
         Garden,
         Complete
-        
     }
 }

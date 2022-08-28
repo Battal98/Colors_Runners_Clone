@@ -10,7 +10,7 @@ namespace Keys
     {
         public int Score;
         public int CityLevel;
-        public Dictionary<int,AreaData> AreaDatas;
+        public Dictionary<int, AreaData> AreaDatas;
         public int CompletedArea;
     }
 }

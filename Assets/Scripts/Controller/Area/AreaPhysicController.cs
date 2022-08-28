@@ -1,4 +1,3 @@
-using System;
 using Enums;
 using Managers;
 using Signals;
@@ -10,20 +9,9 @@ namespace Controller
     {
         #region Self Variables
 
-        #region Public Variables
-
-        
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private AreaManager _manager;
-
-        #endregion
-
-        #region Private Variables
-        
 
         #endregion
 
@@ -33,7 +21,7 @@ namespace Controller
         {
             if (other.CompareTag("Collectable"))
             {
-               PoolSignals.Instance.onSendPool?.Invoke(other.transform.parent.gameObject,PoolType.Collectable);
+                PoolSignals.Instance.onSendPool?.Invoke(other.transform.parent.gameObject, PoolType.Collectable);
             }
         }
     }

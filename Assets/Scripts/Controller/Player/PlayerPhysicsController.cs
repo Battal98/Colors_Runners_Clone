@@ -42,35 +42,33 @@ namespace Controllers
                 playerManager.ChangeSpeed(_checkAreaType);
                 playerManager.ChangeScoreAreaVisible(_checkAreaType);
             }
+
             if (other.CompareTag("BuildArea"))
             {
-              IdleGameSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
+                IdleGameSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
             }
 
             if (other.CompareTag("Multiplier"))
             {
-           
                 StackSignals.Instance.onEnterMultiplier?.Invoke();
             }
         }
 
         private void OnTriggerStay(Collider other)
         {
-            
             if (other.CompareTag("BuildArea"))
             {
-                if (_timer>=20)
+                if (_timer >= 20)
                 {
                     StackSignals.Instance.onCollectablesThrow?.Invoke(transform.parent);
                     playerManager.DownCost();
-                   _timer =_timer *60/100;
+                    _timer = _timer * 60 / 100;
                 }
 
                 else
                 {
                     _timer++;
                 }
-             
             }
         }
 
@@ -82,11 +80,10 @@ namespace Controllers
                 playerManager.ChangeScoreAreaVisible(_checkAreaType);
             }
 
-              
+
             if (other.CompareTag("BuildArea"))
             {
                 _timer = 0;
-
             }
         }
     }

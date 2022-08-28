@@ -148,7 +148,7 @@ namespace Managers
 
         public void DownCost()
         {
-            if (int.Parse(scoreText.text)>0)
+            if (int.Parse(scoreText.text) > 0)
             {
                 IdleGameSignals.Instance.onCostDown?.Invoke();
             }

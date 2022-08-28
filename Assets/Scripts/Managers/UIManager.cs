@@ -10,10 +10,6 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private UIPanelController uiPanelController;

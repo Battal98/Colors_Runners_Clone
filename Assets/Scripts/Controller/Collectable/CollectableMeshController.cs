@@ -8,14 +8,6 @@ namespace Controller
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
-        #region Serialized Variables
-
-        #endregion
-
         #region Private Variables
 
         [SerializeField] private SkinnedMeshRenderer collectableSkinMeshRenderer;

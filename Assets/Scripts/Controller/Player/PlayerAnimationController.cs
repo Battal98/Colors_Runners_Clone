@@ -7,17 +7,9 @@ namespace Controllers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private Animator animatorController;
-
-        #endregion
-
-        #region Private Variables
 
         #endregion
 
@@ -27,6 +19,7 @@ namespace Controllers
         {
             animatorController.SetTrigger(animationStates.ToString());
         }
+
         public void OnReset()
         {
             animatorController.SetTrigger(PlayerAnimationStates.Idle.ToString());

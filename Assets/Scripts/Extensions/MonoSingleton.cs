@@ -5,6 +5,7 @@ namespace Extentions
     public class MonoSingleton<T> : MonoBehaviour where T : Component
     {
         private static T _instance;
+
         public static T Instance
         {
             get
@@ -20,6 +21,7 @@ namespace Extentions
                         DontDestroyOnLoad(newGo);
                     }
                 }
+
                 return _instance;
             }
         }
@@ -28,7 +30,5 @@ namespace Extentions
         {
             _instance = this as T;
         }
-
-
     }
 }

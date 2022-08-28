@@ -133,7 +133,7 @@ namespace Managers
             _collectablesThrowCommand = new CollectablesThrowCommand(ref _tempHolder);
             _stackItemsCombineCommand =
                 new StackItemsCombineCommand(ref _stackList, ref StackData, ref stackManager, ref _tempHolder);
-            _stackMultiplierCommand = new StackMultiplierCommand(ref _stackList,ref stackManager);
+            _stackMultiplierCommand = new StackMultiplierCommand(ref _stackList, ref stackManager);
         }
 
         private ColorType OnGetColorType() => _type;
@@ -170,12 +170,12 @@ namespace Managers
                 _playerManager = FindObjectOfType<PlayerManager>().transform;
             }
         }
-        
+
 
         private void OnAddInStack(GameObject obj)
         {
             StartCoroutine(_stackShackAnimCommand.Execute());
-            CollectableAnimSet(obj,CollectableAnimationStates.Run);
+            CollectableAnimSet(obj, CollectableAnimationStates.Run);
             AddInStack(obj);
         }
 
@@ -198,7 +198,6 @@ namespace Managers
                 var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Collectable);
                 obj.SetActive(true);
                 _collectableAddOnStackCommand.Execute(obj);
-             
             }
 
             SetAllCollectableAnim(CollectableAnimationStates.Crouch);
@@ -237,7 +236,6 @@ namespace Managers
             FindPlayer();
             SetAllCollectableAnim(CollectableAnimationStates.Run);
             ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
-
         }
 
 

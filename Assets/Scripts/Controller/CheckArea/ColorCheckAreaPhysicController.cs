@@ -9,18 +9,10 @@ namespace Controller
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private ColorCheckAreaManager colorCheckAreaManager;
         [SerializeField] private Transform colHolder;
-
-        #endregion
-
-        #region Private Variables
 
         #endregion
 

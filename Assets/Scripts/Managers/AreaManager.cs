@@ -74,9 +74,9 @@ namespace Managers
         {
             IdleGameSignals.Instance.onCheckArea += OnCheckArea;
             IdleGameSignals.Instance.onCostDown += OnCostDown;
-            IdleGameSignals.Instance.onRefresthAreaData +=OnRefresthAreaData;
+            IdleGameSignals.Instance.onRefresthAreaData += OnRefresthAreaData;
             IdleGameSignals.Instance.onPrepareAreaWithSave += OnPrepareAreaWithSave;
-            
+
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
@@ -84,12 +84,10 @@ namespace Managers
         {
             IdleGameSignals.Instance.onCheckArea -= OnCheckArea;
             IdleGameSignals.Instance.onCostDown -= OnCostDown;
-            IdleGameSignals.Instance.onRefresthAreaData -=OnRefresthAreaData;
+            IdleGameSignals.Instance.onRefresthAreaData -= OnRefresthAreaData;
             IdleGameSignals.Instance.onPrepareAreaWithSave -= OnPrepareAreaWithSave;
-            
+
             CoreGameSignals.Instance.onPlay -= OnPlay;
-
-
         }
 
         private void OnDisable()
@@ -101,7 +99,7 @@ namespace Managers
 
         private void OnRefresthAreaData()
         {
-            _areaData =(AreaData)IdleGameSignals.Instance.onGetAreaData?.Invoke(areaId);
+            _areaData = (AreaData)IdleGameSignals.Instance.onGetAreaData?.Invoke(areaId);
             OnCostDown();
             SetAreaTexts();
             CostAreaVisible();
@@ -164,13 +162,11 @@ namespace Managers
         {
             if (_areaData.Type == AreaStageType.House)
             {
-              
                 _areaData.Type = AreaStageType.Garden;
                 CostAreaVisible();
             }
             else if (_areaData.Type == AreaStageType.Garden)
             {
-              
                 _areaData.Type = AreaStageType.Complete;
                 CostAreaVisible();
                 IdleGameSignals.Instance.onAreaComplete?.Invoke();
@@ -204,19 +200,17 @@ namespace Managers
         {
             _areaCheck = Check;
         }
+
         private void OnPrepareAreaWithSave()
         {
-            IdleGameSignals.Instance.onSetAreaData?.Invoke(areaId,_areaData);
+            IdleGameSignals.Instance.onSetAreaData?.Invoke(areaId, _areaData);
         }
-      
+
         private void OnPlay()
         {
             SetAreaTexts();
             CostAreaVisible();
             SetMaterialColor();
-          
         }
-
-      
     }
 }

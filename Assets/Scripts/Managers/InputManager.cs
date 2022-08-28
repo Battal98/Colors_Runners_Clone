@@ -109,7 +109,7 @@ namespace Managers
             }
 
 
-            if (Input.GetMouseButtonDown(0) )
+            if (Input.GetMouseButtonDown(0))
             {
                 _isTouching = true;
 

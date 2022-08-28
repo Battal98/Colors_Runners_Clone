@@ -8,17 +8,9 @@ namespace Controllers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private TextMeshProUGUI levelText;
-
-        #endregion
-
-        #region Private Variables
 
         #endregion
 

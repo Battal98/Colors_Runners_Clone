@@ -7,7 +7,6 @@ namespace Signals
 {
     public class ColorCheckAreaSignals : MonoSingleton<ColorCheckAreaSignals>
     {
-    
         public UnityAction<GameObject> onCheckAreaControl = delegate { };
     }
 }

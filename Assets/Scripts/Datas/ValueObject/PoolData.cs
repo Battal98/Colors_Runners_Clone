@@ -10,6 +10,5 @@ namespace Datas.ValueObject
         public string ObjName;
         public GameObject Pref;
         public int ObjectCount;
-       
     }
 }

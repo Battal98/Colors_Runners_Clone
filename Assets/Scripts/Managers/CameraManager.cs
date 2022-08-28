@@ -16,9 +16,6 @@ namespace Managers
 
         #endregion
 
-        #region Serialized Variables
-
-        #endregion
 
         #region Private Variables
 

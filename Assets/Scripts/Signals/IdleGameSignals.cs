@@ -15,6 +15,6 @@ namespace Signals
         public UnityAction onRefresthAreaData = delegate { };
         public UnityAction<int, AreaData> onSetAreaData = delegate { };
         public Func<int, AreaData> onGetAreaData = delegate { return default; };
-        public UnityAction onPrepareAreaWithSave=delegate {  };
+        public UnityAction onPrepareAreaWithSave = delegate { };
     }
 }

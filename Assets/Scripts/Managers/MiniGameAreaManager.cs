@@ -18,7 +18,7 @@ namespace Managers
 
         #endregion
 
-        #region Seriazible Variables
+        #region Serialized Variables
 
         [SerializeField] private GameObject turret;
         [SerializeField] private GameObject drone;
@@ -138,7 +138,7 @@ namespace Managers
         {
             if (_platformCheck = gameObject)
                 for (var i = 0; i < turretController.Count; i++)
-                    turretController[i].isTargetPlayer = isCheck;
+                    turretController[i].IsTargetPlayer = isCheck;
         }
 
         #endregion

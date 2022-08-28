@@ -11,10 +11,6 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private GameObject levelHolder;
@@ -105,18 +101,17 @@ namespace Managers
                 : Instantiate(_cdPoolGenerator.PoolObjectList[(int)poolType].Pref, parent);
         }
 
-        private  void OnSendPool(GameObject CollectableObject, PoolType poolType)
+        private void OnSendPool(GameObject CollectableObject, PoolType poolType)
         {
             CollectableObject.transform.parent = transform.GetChild((int)poolType);
             CollectableObject.GetComponentInChildren<Collider>().enabled = true;
             CollectableObject.SetActive(false);
             CollectableObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-            CollectableObject.transform.localPosition=new Vector3(0f,0f,0);
+            CollectableObject.transform.localPosition = new Vector3(0f, 0f, 0);
         }
 
         private void OnRestart()
         {
-            
             RestartPool();
         }
     }
