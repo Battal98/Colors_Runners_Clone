@@ -36,7 +36,7 @@ namespace Commands
             if (_stackList.Count >= _stackData.StackLimit)
             {
                 _stackList[_stackData.StackLimit - 1].SetActive(true);
-                _manager.CollectableAnimSet(_stackList[_stackData.StackLimit - 1],CollectableAnimationStates.Run);
+                _manager.CollectableAnimSet(_stackList[_stackData.StackLimit - 1], CollectableAnimationStates.Run);
             }
 
             if (_stackList.Count == 0)

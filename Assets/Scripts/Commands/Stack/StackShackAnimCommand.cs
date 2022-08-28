@@ -33,7 +33,7 @@ namespace Commands
                 int index = i;
                 _stacklist[index].transform
                     .DOScale(new Vector3(1, _stackData.StackMaxScaleValue, 1), _stackData.StackScaleDelay)
-                    .SetEase(Ease.Flash); 
+                    .SetEase(Ease.Flash);
                 _stacklist[index].transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), _stackData.StackScaleDelay)
                     .SetDelay(_stackData.StackShackAnimDuration).SetEase(Ease.Flash);
                 yield return new WaitForSeconds(_stackData.StackShackAnimDuration / 3);

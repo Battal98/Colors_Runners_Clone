@@ -12,7 +12,6 @@ namespace Commands
 
         private Rigidbody _rigidbody;
         private PlayerMovementData _playerMovementData;
-        
 
         #endregion
 
@@ -23,7 +22,6 @@ namespace Commands
         {
             _rigidbody = rigidbody;
             _playerMovementData = playerMovementData;
-           
         }
 
         public void Execute(InputParams _inputParams, float _colorAreaSpeed)

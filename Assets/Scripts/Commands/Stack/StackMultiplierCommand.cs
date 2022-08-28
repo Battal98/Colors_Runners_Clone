@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Datas.ValueObject;
 using Enums;
 using Managers;
 using Signals;
@@ -10,14 +9,6 @@ namespace Commands
     public class StackMultiplierCommand
     {
         #region Self Variables
-
-        #region Public Variables
-
-        #endregion
-
-        #region Serialized Variables
-
-        #endregion
 
         #region Private Variables
 

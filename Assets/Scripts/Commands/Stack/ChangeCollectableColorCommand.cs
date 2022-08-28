@@ -9,14 +9,6 @@ namespace Commands
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
-        #region Serialized Variables
-
-        #endregion
-
         #region Private Variables
 
         private List<GameObject> _stackList;
@@ -34,7 +26,7 @@ namespace Commands
         {
             for (int i = 0; i < _stackList.Count; i++)
             {
-                _stackList[i].GetComponent<CollectableManager>().CollectableColorChange(colorType); 
+                _stackList[i].GetComponent<CollectableManager>().CollectableColorChange(colorType);
             }
         }
     }

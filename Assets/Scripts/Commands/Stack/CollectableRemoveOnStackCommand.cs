@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Datas.ValueObject;
 using Enums;
 using Managers;
@@ -31,7 +30,7 @@ namespace Commands
             _stackData = stackData;
         }
 
-        public  void Execute(GameObject collectableGameObject)
+        public void Execute(GameObject collectableGameObject)
         {
             _stackList.Remove(collectableGameObject);
             _stackList.TrimExcess();

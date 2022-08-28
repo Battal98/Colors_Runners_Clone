@@ -7,14 +7,6 @@ namespace Commands.Pool
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
-        #region Serialized Variables
-
-        #endregion
-
         #region Private Variables
 
         private CD_PoolGenerator _cdPoolGenerator;
