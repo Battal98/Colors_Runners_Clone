@@ -280,19 +280,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6299503281235563100, guid: 746b3850ce585d94cbb11cba617a9401, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6299503281235563100, guid: 746b3850ce585d94cbb11cba617a9401, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6299503281235563100, guid: 746b3850ce585d94cbb11cba617a9401, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6299503281235563100, guid: 746b3850ce585d94cbb11cba617a9401, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6299503281235563100, guid: 746b3850ce585d94cbb11cba617a9401, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -300,7 +300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6299503281235563100, guid: 746b3850ce585d94cbb11cba617a9401, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6299503281235563100, guid: 746b3850ce585d94cbb11cba617a9401, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -400,6 +400,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.033333343
       objectReference: {fileID: 0}
+    - target: {fileID: 5526568140435815223, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9009479499935576460, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
       propertyPath: miniGameAreaManager
       value: 
@@ -488,6 +492,10 @@ PrefabInstance:
     - target: {fileID: 5526568140296939083, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
       propertyPath: m_Center.z
       value: -0.033333343
+      objectReference: {fileID: 0}
+    - target: {fileID: 5526568140435815223, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9009479499935576460, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
       propertyPath: AreaType
@@ -663,6 +671,10 @@ PrefabInstance:
     - target: {fileID: 5526568140296939083, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
       propertyPath: m_Center.z
       value: -0.033333343
+      objectReference: {fileID: 0}
+    - target: {fileID: 5526568140435815223, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9009479499935576460, guid: 557fc11a33a6fca44bae23938f0f4e66, type: 3}
       propertyPath: AreaType

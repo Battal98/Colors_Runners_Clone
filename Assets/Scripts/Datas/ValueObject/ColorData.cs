@@ -6,6 +6,6 @@ namespace Data.ValueObject
     [Serializable]
     public class ColorData
     {
-        public Material Color;
+        public Material Material;
     }
 }

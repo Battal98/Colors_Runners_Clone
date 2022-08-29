@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Data.UnityObject;
 using Datas.ValueObject;
 using Keys;
@@ -26,7 +24,7 @@ namespace Managers
         private int _cityLevel;
         private CD_IdleData _cdIdleData;
         private int _completedArea;
-        private bool _levelIsPlayable = false;
+        private bool _levelIsPlayable;
         private int _score;
 
         #endregion
@@ -41,10 +39,12 @@ namespace Managers
         private void GetReferences()
         {
             _cdIdleData = GetIdleData();
-            //_areaDictionary = LoadAreaData();
         }
 
-        private CD_IdleData GetIdleData() => Resources.Load<CD_IdleData>("Data/CD_IdleData");
+        private CD_IdleData GetIdleData()
+        {
+            return Resources.Load<CD_IdleData>("Data/CD_IdleData");
+        }
 
         #region EventSubscription
 
@@ -92,12 +92,11 @@ namespace Managers
         private void Start()
         {
             OnInitializeLevel();
-            LoadAreaData();
         }
 
         private IdleDataParams OnGetIdleDatas()
         {
-            return new IdleDataParams()
+            return new IdleDataParams
             {
                 AreaDatas = _areaDictionary,
                 CityLevel = _cityLevel,
@@ -118,25 +117,19 @@ namespace Managers
                 Resources.Load<GameObject>($"Prefabs/CityPrefabs/City {_cityLevel % _cdIdleData.DataList.Count}"),
                 cityHolder.transform);
         }
+        private AreaData OnGetAreaData(int id)=>_areaDictionary.ContainsKey(id) ? _areaDictionary[id] : new AreaData();
 
         private void OnSetAreaData(int id, AreaData AraeData)
         {
             if (_areaDictionary.ContainsKey(id))
-            {
                 _areaDictionary[id] = AraeData;
-            }
             else
-            {
                 _areaDictionary.Add(id, AraeData);
-            }
 
             SaveSignals.Instance.onSaveData?.Invoke();
         }
 
-        private AreaData OnGetAreaData(int id)
-        {
-            return _areaDictionary.ContainsKey(id) ? _areaDictionary[id] : new AreaData();
-        }
+        
 
         private void CityCompleteCheck()
         {
@@ -144,17 +137,11 @@ namespace Managers
             {
                 _cityLevel++;
                 _levelIsPlayable = true;
-                Debug.Log("Level UP" + _cityLevel);
                 _completedArea = 0;
             }
         }
 
-        private void LoadAreaData()
-        {
-            // IdleGameSignals.Instance.onRefresthAreaData?.Invoke();
-        }
-
-        private async void OnNextLevel()
+        private void OnNextLevel()
         {
             if (_levelIsPlayable)
             {
@@ -168,7 +155,7 @@ namespace Managers
                 IdleGameSignals.Instance.onPrepareAreaWithSave?.Invoke();
             }
 
-            await Task.Delay(200);
+
             SaveSignals.Instance.onSaveData?.Invoke();
         }
 

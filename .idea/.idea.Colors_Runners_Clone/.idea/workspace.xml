@@ -3,8 +3,36 @@
   <component name="ChangeListManager">
     <list default="true" id="aa2c9a7e-c748-4b4b-863c-d73ecd0eafb8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Colors_Runners_Clone/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Colors_Runners_Clone/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gates/Finish.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gates/Finish.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Animators/PlayerController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animators/PlayerController.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Character/Character.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/Character/Character.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Constructions/Hospital/Hospital.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/Constructions/Hospital/Hospital.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Constructions/Police/Station.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/Constructions/Police/Station.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Constructions/Shop/GrassMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/Constructions/Shop/GrassMaterial.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Turret/Turret.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/Turret/Turret.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Turret/Turret2 1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/Turret/Turret2 1.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Turret/Turret2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/Turret/Turret2.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Turret/TurretBody.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/Turret/TurretBody.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonCity/Materials/PolygonCity_Mat_01_A.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonCity/Materials/PolygonCity_Mat_01_A.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Easy performant outline/Demo/Models for Demo scene/CartoonLowPolyCityLite/CartoonLowPolyCityLite_HDRP_2018.3.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Easy performant outline/Demo/Models for Demo scene/CartoonLowPolyCityLite/CartoonLowPolyCityLite_LWRP_2018.3.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Easy performant outline/Demo/Models for Demo scene/CartoonLowPolyCityLite/CartoonLowPolyCityLite_URP_2019.3.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Drone/DroneController.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Drone/DroneController.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGameArea/MiniGameArea.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGameArea/MiniGameArea.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/CameraManagerBlends.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CameraManagerBlends.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_Color.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_Color.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_Stack.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_Stack.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/CityPrefabs/City 0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/CityPrefabs/City 0.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/LevelPrefabs/level 0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/LevelPrefabs/level 0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Commands/Stack/StackLerpMovementCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Commands/Stack/StackLerpMovementCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/CheckArea/ColorCheckAreaMeshController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/CheckArea/ColorCheckAreaMeshController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Collectable/CollectableMeshController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Collectable/CollectableMeshController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Gate/GateMeshController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Gate/GateMeshController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/MiniGame/DroneController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/MiniGame/DroneController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerAnimationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/ColorData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/ColorData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/AreaManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/AreaManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/IdleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/IdleManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -159,7 +187,8 @@
       <workItem from="1661535959752" duration="11282000" />
       <workItem from="1661585407250" duration="37521000" />
       <workItem from="1661681485962" duration="22570000" />
-      <workItem from="1661711404917" duration="9002000" />
+      <workItem from="1661711404917" duration="9854000" />
+      <workItem from="1661760641014" duration="13344000" />
     </task>
     <servers />
   </component>

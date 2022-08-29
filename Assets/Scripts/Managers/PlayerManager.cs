@@ -157,31 +157,13 @@ namespace Managers
         private void OnInputDragged(InputParams InputParam)
         {
             playerMovementController.UpdateInputValue(InputParam);
-            SetAnim(InputParam);
+            PlayAnim(Mathf.Abs(InputParam.Values.x+InputParam.Values.y));
         }
-
-        private void SetAnim(InputParams InputParam)
-        {
+        
+        private void PlayAnim(float Value)
+        { 
             if (_states != GameStates.Idle) return;
-            if ((InputParam.Values.x != 0 || InputParam.Values.y != 0) && _animationState == PlayerAnimationStates.Idle)
-            {
-                _animationState = PlayerAnimationStates.Run;
-             
-                PlayAnim(PlayerAnimationStates.Run);
-                return;
-            }
-            if ((InputParam.Values.x == 0 && InputParam.Values.y == 0) &&
-                _animationState == PlayerAnimationStates.Run)
-            {
-                _animationState = PlayerAnimationStates.Idle;
-           
-                PlayAnim(PlayerAnimationStates.Idle);
-            }
-        }
-
-        public void PlayAnim(PlayerAnimationStates animationStates)
-        {
-            playerAnimationController.PlayAnim(animationStates);
+            playerAnimationController.PlayAnim(Value);
         }
 
 

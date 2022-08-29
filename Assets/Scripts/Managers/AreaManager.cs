@@ -100,12 +100,12 @@ namespace Managers
         private void OnRefresthAreaData()
         {
             _areaData = (AreaData)IdleGameSignals.Instance.onGetAreaData?.Invoke(areaId);
-            OnCostDown();
+            SetMaterialColor();
             SetAreaTexts();
             CostAreaVisible();
         }
 
-        public void OnCostDown()
+        public void OnCostDown()    
         {
             if (_areaCheck == gameObject)
             {
@@ -113,14 +113,14 @@ namespace Managers
                 {
                     case AreaStageType.House:
                         _areaData.BuildMaterialValue++;
-                        SetMaterialColor();
                         SetAreaTexts();
+                        SetMaterialColor();
                         if (_buildData.BuildCost == _areaData.BuildMaterialValue) ChangeStage();
                         break;
                     case AreaStageType.Garden:
                         _areaData.GardenMaterialValue++;
-                        SetMaterialColor();
                         SetAreaTexts();
+                        SetMaterialColor();
                         if (_buildData.GardenCost == _areaData.GardenMaterialValue) ChangeStage();
                         break;
                 }
@@ -138,6 +138,13 @@ namespace Managers
                     break;
                 case AreaStageType.Garden:
 
+                    _buildData.GardenMaterial.DOFloat(2 / (_buildData.GardenCost / _areaData.GardenMaterialValue),
+                        "_Saturation",
+                        0.5f);
+                    break;
+                case AreaStageType.Complete:
+                    _buildData.BuildMaterial.DOFloat(2 / (_buildData.BuildCost / _areaData.BuildMaterialValue),
+                        "_Saturation", 0.5f);
                     _buildData.GardenMaterial.DOFloat(2 / (_buildData.GardenCost / _areaData.GardenMaterialValue),
                         "_Saturation",
                         0.5f);

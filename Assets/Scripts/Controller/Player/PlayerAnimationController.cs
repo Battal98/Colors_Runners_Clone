@@ -15,9 +15,9 @@ namespace Controllers
 
         #endregion
 
-        public void PlayAnim(PlayerAnimationStates animationStates)
+        public void PlayAnim(float Value)
         {
-            animatorController.SetTrigger(animationStates.ToString());
+            animatorController.SetFloat("Speed",Value);
             
         }
 

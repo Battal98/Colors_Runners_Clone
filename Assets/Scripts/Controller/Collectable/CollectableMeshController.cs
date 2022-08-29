@@ -19,7 +19,7 @@ namespace Controller
 
         public void ChangeCollectableColor(ColorType colorType)
         {
-            collectableSkinMeshRenderer.material = manager.Datas[(int)colorType].Color;
+            collectableSkinMeshRenderer.material = manager.Datas[(int)colorType].Material;
             manager.CollectableColorType = colorType;
         }
     }

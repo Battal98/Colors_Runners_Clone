@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CameraManagerBlends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: RuunerCamera
+  - m_From: RunerCamera
     m_To: IdleCamera
     m_Blend:
       m_Style: 1
@@ -25,7 +25,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: IdleCamera
-    m_To: RuunerCamera
+    m_To: RunerCamera
     m_Blend:
       m_Style: 0
       m_Time: 2

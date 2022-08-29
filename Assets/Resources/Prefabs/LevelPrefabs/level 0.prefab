@@ -1076,12 +1076,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 3220658216173430150}
     m_Modifications:
     - target: {fileID: 63220998680239848, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
-      propertyPath: AreaType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 63220998680239848, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: ColorType
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1329183341505169233, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1090,10 +1086,6 @@ PrefabInstance:
     - target: {fileID: 1539420660308345273, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_Name
       value: MiniGameArea (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1539420660308345273, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1539420660308345274, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: AreaType
@@ -1148,20 +1140,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2578447793151561194, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
-      propertyPath: AreaType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2578447793151561194, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
-      propertyPath: ColorType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2659190040899617468, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
-      propertyPath: AreaType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2659190040899617468, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: ColorType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2659190040899617468, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+      propertyPath: ColorType
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3556386330639750227, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3219,7 +3203,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 63220998680239848, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: ColorType
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1329183341505169233, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3228,14 +3212,6 @@ PrefabInstance:
     - target: {fileID: 1539420660308345273, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_Name
       value: MiniGameArea
-      objectReference: {fileID: 0}
-    - target: {fileID: 1539420660308345273, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1539420660308345274, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
-      propertyPath: AreaType
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1539420660308345275, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_RootOrder
@@ -3285,7 +3261,7 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 2659190040899617468, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
+    - target: {fileID: 2578447793151561194, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: ColorType
       value: 4
       objectReference: {fileID: 0}
