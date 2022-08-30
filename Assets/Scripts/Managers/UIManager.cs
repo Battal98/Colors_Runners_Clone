@@ -149,6 +149,11 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             LevelSignals.Instance.onRestartLevel?.Invoke();
         }
+        public void WinPanelClose()
+        {
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.WinPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
+        }
 
 
         private void OnGetGameState(GameStates states)
@@ -157,12 +162,15 @@ namespace Managers
             {
                 case GameStates.Idle:
                     UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-                    UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
+                    UISignals.Instance.onOpenPanel?.Invoke(UIPanels.WinPanel);
+                    
                     break;
                 case GameStates.Runner:
                     UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
                     UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
+                    UISignals.Instance.onClosePanel?.Invoke(UIPanels.WinPanel);
                     break;
+                
             }
         }
     }
