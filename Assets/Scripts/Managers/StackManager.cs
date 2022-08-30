@@ -1,14 +1,11 @@
-using System;
-using UnityEngine;
-using Signals;
-using Data.UnityObject;
-using Commands;
-using Datas.ValueObject;
 using System.Collections.Generic;
-using Controller;
+using Commands;
+using Data.UnityObject;
+using Datas.ValueObject;
 using Enums;
+using Signals;
 using Sirenix.OdinInspector;
-using UnityEngine.Events;
+using UnityEngine;
 
 namespace Managers
 {
@@ -138,7 +135,10 @@ namespace Managers
             _stackMultiplierCommand = new StackMultiplierCommand(ref _stackList, ref stackManager);
         }
 
-        private ColorType OnGetColorType() => _type;
+        private ColorType OnGetColorType()
+        {
+            return _type;
+        }
 
         private void Update()
         {
@@ -166,18 +166,12 @@ namespace Managers
 
         private void SetAllCollectableAnim(CollectableAnimationStates states)
         {
-            for (int i = 0; i < _stackList.Count; i++)
-            {
-                CollectableAnimSet(_stackList[i], states);
-            }
+            for (var i = 0; i < _stackList.Count; i++) CollectableAnimSet(_stackList[i], states);
         }
 
         private void FindPlayer()
         {
-            if (!_playerManager)
-            {
-                _playerManager = FindObjectOfType<PlayerManager>().transform;
-            }
+            if (!_playerManager) _playerManager = FindObjectOfType<PlayerManager>().transform;
         }
 
 
@@ -202,7 +196,7 @@ namespace Managers
 
         private void Initialized()
         {
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Collectable);
                 obj.SetActive(true);
@@ -224,20 +218,16 @@ namespace Managers
         private void OnExitColorCheckArea(ColorCheckAreaType areaType)
         {
             if (areaType == ColorCheckAreaType.Drone && _stackList.Count == 0)
-            {
                 LevelSignals.Instance.onLevelFailed?.Invoke();
-            }
         }
 
 
         private void ClearStackManager()
         {
-            int _items = stackManager.transform.childCount;
-            for (int i = 0; i < _items; i++)
-            {
+            var _items = stackManager.transform.childCount;
+            for (var i = 0; i < _items; i++)
                 PoolSignals.Instance.onSendPool?.Invoke(stackManager.transform.GetChild(0).gameObject,
                     PoolType.Collectable);
-            }
         }
 
         private void OnPlay()

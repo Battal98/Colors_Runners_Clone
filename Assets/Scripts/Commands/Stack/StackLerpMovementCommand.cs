@@ -46,7 +46,6 @@ namespace Commands
                     directZ = Mathf.Lerp(_stackList[i].transform.localPosition.z, pos.z - _stackData.StackOffset,
                         _stackData.StackLerpZDelay);
                     _stackList[i].transform.localPosition = new Vector3(directX, directY, directZ);
-                    _stackList[i].transform.LookAt(_stackList[i - 1].transform);
                     _stackList[i].transform.LookAt(new Vector3(pos.x, _stackList[i].transform.position.y, pos.z));
                 }
             }

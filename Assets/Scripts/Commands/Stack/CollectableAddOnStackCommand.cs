@@ -31,13 +31,15 @@ namespace Commands
         public void Execute(GameObject _obj)
         {
             _obj.transform.parent = _stackManager.transform;
+            _obj.transform.position = Vector3.zero;
+
             if (_stackList.Count > _stackData.StackLimit) _obj.SetActive(false);
 
             _stackList.Add(_obj);
             var pivot = _stackList[_stackList.Count - 1].transform.position;
-            _obj.transform.localPosition = new Vector3(pivot.x, pivot.y,
-                pivot.z - _stackData.StackOffset * _stackList.Count * 2);
 
+            _obj.transform.localPosition =
+                new Vector3(pivot.x, pivot.y, pivot.z - _stackData.StackOffset * _stackList.Count * 2);
 
             ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }
