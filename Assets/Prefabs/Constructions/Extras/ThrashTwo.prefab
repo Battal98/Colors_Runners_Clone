@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6518585076237990863}
   - component: {fileID: 6518585076239238753}
   - component: {fileID: 6518585076239942479}
-  - component: {fileID: 6526732659872918901}
   m_Layer: 0
   m_Name: ThrashTwo
   m_TagString: Untagged
@@ -82,17 +81,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6526732659872918901
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6518585076238014245}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43374307463234346, guid: 6fbd47cf8e399734581354496444362e, type: 2}

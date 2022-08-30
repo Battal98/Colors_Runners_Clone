@@ -1,5 +1,6 @@
 using Signals;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Managers
 {
@@ -9,7 +10,7 @@ namespace Managers
 
         #region Private Variables
 
-        private int _playerCount;
+        private int _playerScore;
 
         #endregion
 
@@ -26,12 +27,16 @@ namespace Managers
         private void Subscribe()
         {
             ScoreSignals.Instance.onGetPlayerScore += OnGetStackScore;
+
+            CoreGameSignals.Instance.onEnterFinish += OnEnterFinish;
         }
 
         private void UnSubscribe()
         {
             ScoreSignals.Instance.onGetPlayerScore -= OnGetStackScore;
-            
+
+
+            CoreGameSignals.Instance.onEnterFinish -= OnEnterFinish;
         }
 
 
@@ -45,7 +50,16 @@ namespace Managers
 
         private void OnGetStackScore(int Value)
         {
+            _playerScore = Value;
             ScoreSignals.Instance.onSetPlayerScore?.Invoke(Value);
+        }
+
+        private void OnEnterFinish()
+        {
+            _playerScore = ScoreSignals.Instance.onGetIdleScore() + _playerScore;
+            ScoreSignals.Instance.onSetIdleScore?.Invoke(_playerScore);
+            ScoreSignals.Instance.onSetPlayerScore?.Invoke(_playerScore);
+
         }
     }
 }

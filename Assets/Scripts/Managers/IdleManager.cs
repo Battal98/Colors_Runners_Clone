@@ -65,6 +65,10 @@ namespace Managers
             SaveSignals.Instance.onLoadIdleData += OnLoadIdleData;
 
             CoreGameSignals.Instance.onPlay += OnPlay;
+
+            ScoreSignals.Instance.onGetIdleScore += OnGetIdleScore;
+            ScoreSignals.Instance.onSetIdleScore += OnSetIdleScore;
+
         }
 
         private void UnSubscribeEvent()
@@ -79,6 +83,10 @@ namespace Managers
             SaveSignals.Instance.onLoadIdleData -= OnLoadIdleData;
 
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            
+            ScoreSignals.Instance.onGetIdleScore -= OnGetIdleScore;
+            ScoreSignals.Instance.onSetIdleScore -= OnSetIdleScore;
+
         }
 
 
@@ -101,8 +109,19 @@ namespace Managers
             Score = _score,
             CompletedArea = _completedArea
         };
+
+        private int OnGetIdleScore() => _score;
+
+        private void OnSetIdleScore(int score)
+        {
+            _score = score;
+            UISignals.Instance.onSetScoreText?.Invoke(_score);
+
+        }
       
 
+        
+        
         private void OnAreaComplete()
         {
             _completedArea++;

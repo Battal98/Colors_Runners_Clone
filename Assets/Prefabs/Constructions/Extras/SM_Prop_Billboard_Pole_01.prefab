@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5756594059053844218}
   - component: {fileID: 5756594059056727740}
   - component: {fileID: 5756594059055647846}
-  - component: {fileID: 5694411711322349458}
   m_Layer: 0
   m_Name: SM_Prop_Billboard_02
   m_TagString: Untagged
@@ -83,20 +82,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5694411711322349458
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5756594059053582322}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43821057981625824, guid: 3d7cad8f008896d4184f590aff04d0e8, type: 2}
 --- !u!1 &5756594059597592663
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +93,6 @@ GameObject:
   - component: {fileID: 5756594059597855071}
   - component: {fileID: 5756594059594447129}
   - component: {fileID: 5756594059595592643}
-  - component: {fileID: 5694411710786576439}
   m_Layer: 0
   m_Name: SM_Prop_Billboard_01
   m_TagString: Untagged
@@ -180,20 +164,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5694411710786576439
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5756594059597592663}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43821057981625824, guid: 3d7cad8f008896d4184f590aff04d0e8, type: 2}
 --- !u!1 &5756594059772666939
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +175,6 @@ GameObject:
   - component: {fileID: 5756594059772362399}
   - component: {fileID: 5756594059773684181}
   - component: {fileID: 5756594059774686039}
-  - component: {fileID: 5693700381977894125}
   m_Layer: 0
   m_Name: SM_Prop_Billboard_Sign_02
   m_TagString: Untagged
@@ -276,19 +245,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5693700381977894125
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5756594059772666939}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.1927032, y: 2.0277233, z: 0.11808795}
-  m_Center: {x: -0.0000009536743, y: 1.8370981, z: 0.24381849}
 --- !u!1 &5756594060002458646
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +354,6 @@ GameObject:
   - component: {fileID: 5756594060671328681}
   - component: {fileID: 5756594060668439625}
   - component: {fileID: 5756594060669551883}
-  - component: {fileID: 5695612154036916075}
   m_Layer: 0
   m_Name: SM_Prop_Billboard_Sign_07
   m_TagString: Untagged
@@ -469,16 +424,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5695612154036916075
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5756594060671794487}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.192703, y: 2.0277252, z: 0.11808795}
-  m_Center: {x: -0.00000023841858, y: 1.8370953, z: 0.24381849}

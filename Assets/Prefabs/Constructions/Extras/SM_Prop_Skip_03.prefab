@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7414232919997080922}
   - component: {fileID: 7414232919995744766}
   - component: {fileID: 7414232919994846446}
-  - component: {fileID: 7350645974614244046}
   m_Layer: 0
   m_Name: SM_Prop_Skip_03
   m_TagString: Untagged
@@ -82,17 +81,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7350645974614244046
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7414232919996814596}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43416572630035160, guid: 9d91de2d64a580143a212bed10b6acaf, type: 2}

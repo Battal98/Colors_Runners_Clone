@@ -38,6 +38,7 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
+            UISignals.Instance.onSetScoreText += onSetScoreText;
 
             CoreGameSignals.Instance.onGetGameState += OnGetGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
@@ -45,20 +46,21 @@ namespace Managers
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
             LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
 
-           
+            
         }
 
         private void UnsubscribeEvents()
         {
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
-
+            UISignals.Instance.onSetScoreText -= onSetScoreText;
+            
             CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
 
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
             LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
-            
+
         
         }
 
@@ -103,7 +105,7 @@ namespace Managers
             levelPanelController.SetLevelText();
         }
 
-        private void onSetScore(int value)
+        private void onSetScoreText(int value)
         {
             idlePanelController.SetScoreText(value);
         }
@@ -138,7 +140,6 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             OnSetLevelText();
-
         }
 
         public void Restart()

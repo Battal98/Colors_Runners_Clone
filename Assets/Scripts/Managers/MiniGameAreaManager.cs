@@ -14,12 +14,12 @@ namespace Managers
         #region Public Variables
 
         public ColorCheckAreaType AreaType;
-        public List<TurretController> turretController;
 
         #endregion
 
         #region Serialized Variables
 
+        [SerializeField] private TurretController turretController;
         [SerializeField] private GameObject turret;
         [SerializeField] private GameObject drone;
         [SerializeField] private MiniGameAreaManager miniGameAreaManager;
@@ -100,17 +100,13 @@ namespace Managers
 
         private void TurretActive()
         {
-            if (!turret.activeInHierarchy)
-                turret.SetActive(true);
-
+            turret.SetActive(true);
             drone.SetActive(false);
         }
 
         private void DroneActive()
         {
-            if (!drone.activeInHierarchy)
-                drone.SetActive(true);
-
+            drone.SetActive(true);
             turret.SetActive(false);
         }
 
@@ -131,14 +127,13 @@ namespace Managers
         private void SetTarget()
         {
             var _target = FindObjectOfType<PlayerManager>().transform;
-            for (var i = 0; i < turretController.Count; i++) turretController[i].SetTarget(_target);
+            turretController.SetTarget(_target);
         }
 
         public void TurretIsActive(bool isCheck)
         {
             if (_platformCheck = gameObject)
-                for (var i = 0; i < turretController.Count; i++)
-                    turretController[i].IsTargetPlayer = isCheck;
+                turretController.IsTargetPlayer = isCheck;
         }
 
         #endregion

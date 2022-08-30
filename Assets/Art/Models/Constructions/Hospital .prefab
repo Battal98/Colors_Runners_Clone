@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1854365349054515620}
   - component: {fileID: 1854365349053505970}
   - component: {fileID: 1828289650704710844}
-  - component: {fileID: 1826558558198514822}
   m_Layer: 0
   m_Name: SM_Bld_Station_13
   m_TagString: Untagged
@@ -97,20 +96,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43969272782082908, guid: 3c972dd5e611cbc439aa8d1e3f78443a, type: 2}
---- !u!64 &1826558558198514822
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854365349051456816}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43221444370255492, guid: 3c972dd5e611cbc439aa8d1e3f78443a, type: 2}
 --- !u!1 &2738745432936620978
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +204,6 @@ GameObject:
   - component: {fileID: 4877337124686708860}
   - component: {fileID: 4877337124687372100}
   - component: {fileID: 4849236311726722008}
-  - component: {fileID: 4848485047488521156}
   m_Layer: 0
   m_Name: SM_Bld_Station_11
   m_TagString: Untagged
@@ -304,20 +288,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43799665377622702, guid: f7428479f5c6ecf429382d316112ba44, type: 2}
---- !u!64 &4848485047488521156
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4877337124689807770}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43644224995753864, guid: f7428479f5c6ecf429382d316112ba44, type: 2}
 --- !u!1 &6320210634201914574
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +300,6 @@ GameObject:
   - component: {fileID: 6320210634205104218}
   - component: {fileID: 6320210634204094540}
   - component: {fileID: 6293361153532230978}
-  - component: {fileID: 6291770799386674552}
   m_Layer: 0
   m_Name: SM_Bld_Station_12
   m_TagString: Untagged
@@ -415,20 +384,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43969272782082908, guid: 3c972dd5e611cbc439aa8d1e3f78443a, type: 2}
---- !u!64 &6291770799386674552
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6320210634201914574}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43221444370255492, guid: 3c972dd5e611cbc439aa8d1e3f78443a, type: 2}
 --- !u!1 &8279692498709354155
 GameObject:
   m_ObjectHideFlags: 0

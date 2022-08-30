@@ -38,7 +38,7 @@ namespace Controllers
 
         private void Start()
         {
-            InvokeRepeating("SetTarget", 0.75f, 1);
+            InvokeRepeating("SetTarget", 0.50f, 1);
         }
 
         private void SetTarget()

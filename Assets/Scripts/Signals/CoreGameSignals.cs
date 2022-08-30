@@ -13,6 +13,7 @@ namespace Signals
         public UnityAction<GameStates> onSetGameState = delegate { };
         public UnityAction<GameStates> onGetGameState = delegate { };
         public UnityAction<GameObject> onCheckAreaControl = delegate { };
+        public UnityAction onEnterFinish = delegate { };
 
         public UnityAction<Transform> onSetCameraTarget = delegate { };
     }

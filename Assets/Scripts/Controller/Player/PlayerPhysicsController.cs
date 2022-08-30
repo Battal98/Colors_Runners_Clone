@@ -31,7 +31,7 @@ namespace Controllers
             if (other.CompareTag("Finish"))
             {
                 CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
-                StackSignals.Instance.onEnterFinish?.Invoke();
+                CoreGameSignals.Instance.onEnterFinish?.Invoke();
             }
 
             if (other.CompareTag("CheckArea"))
@@ -58,6 +58,7 @@ namespace Controllers
         {
             if (other.CompareTag("BuildArea"))
             {
+                
                 if (_timer >= 20)
                 {
                     StackSignals.Instance.onCollectablesThrow?.Invoke(transform.parent);
@@ -84,6 +85,8 @@ namespace Controllers
             if (other.CompareTag("BuildArea"))
             {
                 _timer = 0;
+                playerManager.FullIK.enabled = false;
+
             }
         }
     }

@@ -73,9 +73,9 @@ namespace Managers
             StackSignals.Instance.onKillRandomInStack += _randomKillInStackCommand.Execute;
             StackSignals.Instance.onCollectablesThrow += _collectablesThrowCommand.Execute;
             StackSignals.Instance.onGetColorType += OnGetColorType;
-            StackSignals.Instance.onEnterFinish += OnEnterFinish;
             StackSignals.Instance.onEnterMultiplier += _stackMultiplierCommand.Execute;
 
+            CoreGameSignals.Instance.onEnterFinish += OnEnterFinish;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onExitColorCheckArea += OnExitColorCheckArea;
@@ -91,10 +91,10 @@ namespace Managers
             StackSignals.Instance.onChangeCollectableColor -= OnChangeCollectableColor;
             StackSignals.Instance.onKillRandomInStack -= _randomKillInStackCommand.Execute;
             StackSignals.Instance.onCollectablesThrow -= _collectablesThrowCommand.Execute;
-            StackSignals.Instance.onEnterFinish -= OnEnterFinish;
             StackSignals.Instance.onGetColorType -= OnGetColorType;
             StackSignals.Instance.onEnterMultiplier += _stackMultiplierCommand.Execute;
 
+            CoreGameSignals.Instance.onEnterFinish -= OnEnterFinish;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
