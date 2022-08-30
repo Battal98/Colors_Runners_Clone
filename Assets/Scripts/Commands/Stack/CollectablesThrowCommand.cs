@@ -34,7 +34,7 @@ namespace Commands
                 //     .DOJump(
                 //         new Vector3(PlayerTranform.position.x + Random.Range(-1f, 1f), PlayerTranform.position.y,
                 //             PlayerTranform.transform.position.z + 2f), 2, 1, 1.5f).OnComplete(() =>
-                //     {
+                //     {    
                 //         
                 //     });
                 PoolSignals.Instance.onSendPool?.Invoke(_temlList[0].gameObject, PoolType.Collectable);
