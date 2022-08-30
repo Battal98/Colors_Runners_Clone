@@ -19,7 +19,7 @@ namespace Controllers
 
         #region Private Variables
 
-        private int _count;
+        private int _stackListCount;
         private MeshRenderer _meshRenderer;
 
         #endregion
@@ -39,64 +39,61 @@ namespace Controllers
 
         public void CheckColorsForDrone()
         {
-            _count = colorCheckAreaManager.ColorCheckAreaStackList.Count;
-            Debug.Log(_count);
-            
+            _stackListCount = colorCheckAreaManager.ColorCheckAreaStackList.Count;
+            Debug.Log(_stackListCount);
+
             colorCheckAreaManager.transform.GetChild(1).gameObject.SetActive(false);
-            // var colManager = colHolder.GetChild(0).GetComponent<CollectableManager>();
-            //
-            // if (colorCheckAreaManager.ColorType==colManager.CollectableColorType)
-            // {
-            //     for (int i = 0; i < _count; i++)
-            //     {
-            //         var collectable = colHolder.GetChild(0);
-            //         collectable.GetComponentInChildren<Collider>().enabled = true;
-            //         colorCheckAreaManager.ColorCheckAreaStackList.Remove(collectable.gameObject);
-            //         StackSignals.Instance.onGetStackList?.Invoke(collectable.gameObject);
-            //         colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
-            //     }
-            // }
-            // else
-            // {
-            //     for (int i = 0; i < _count; i++)
-            //     {
-            //         var collectable = colHolder.GetChild(0);
-            //         collectable.GetComponent<CollectableManager>().SetAnim(CollectableAnimationStates.Dead);
-            //         colorCheckAreaManager.ColorCheckAreaStackList.Remove(collectable.gameObject);
-            //         colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
-            //     }
-            //     transform.DOScaleZ(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
-            // }
-            //
-            // if (_count == 0) transform.DOScaleZ(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
-            //
-            //
-            //
-            //
-            
-            
-            
-            for (var i = 0; i < _count; i++)
+
+            if (_stackListCount == 0)
+            {
+                transform.DOScaleZ(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
+                return;
+            }
+
+            for (int i = 0; i < _stackListCount; i++)
             {
                 var colManager = colHolder.GetChild(0).GetComponent<CollectableManager>();
                 if (colorCheckAreaManager.ColorType == colManager.CollectableColorType)
                 {
-                    colHolder.GetChild(0).GetComponentInChildren<Collider>().enabled = true;
-                    colorCheckAreaManager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
-                    StackSignals.Instance.onGetStackList?.Invoke(colHolder.GetChild(0).gameObject);
+                    colManager.gameObject.GetComponentInChildren<Collider>().enabled = true;
+                    colorCheckAreaManager.ColorCheckAreaStackList.Remove(colManager.gameObject);
+                    StackSignals.Instance.onGetStackList?.Invoke(colManager.gameObject);
                     colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
+
                 }
                 else
                 {
-                    if (gameObject.activeInHierarchy)
-                        transform.DOScaleZ(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
-            
                     colManager.SetAnim(CollectableAnimationStates.Dead);
-                    colorCheckAreaManager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
-                
+                    colorCheckAreaManager.ColorCheckAreaStackList.Remove(colManager.gameObject);
                     colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
+                    colHolder.GetChild(0).gameObject.transform.parent = null;
                 }
             }
+            transform.DOScaleZ(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
+
+
+
+            //for (var i = 0; i < _count; i++)
+            //{
+            //    var colManager = colHolder.GetChild(0).GetComponent<CollectableManager>();
+            //    if (colorCheckAreaManager.ColorType == colManager.CollectableColorType)
+            //    {
+            //        colHolder.GetChild(0).GetComponentInChildren<Collider>().enabled = true;
+            //        colorCheckAreaManager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
+            //        StackSignals.Instance.onGetStackList?.Invoke(colHolder.GetChild(0).gameObject);
+            //        colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
+            //    }
+            //    else
+            //    {
+            //        if (gameObject.activeInHierarchy)
+            //            transform.DOScaleZ(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
+
+            //        colManager.SetAnim(CollectableAnimationStates.Dead);
+            //        colorCheckAreaManager.ColorCheckAreaStackList.Remove(colHolder.GetChild(0).gameObject);
+
+            //        colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
+            //    }
+            //}
 
         }
 
