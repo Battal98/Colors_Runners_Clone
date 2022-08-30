@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="aa2c9a7e-c748-4b4b-863c-d73ecd0eafb8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Colors_Runners_Clone/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Colors_Runners_Clone/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/CityPrefabs/City 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/CityPrefabs/City 1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Commands/Stack/CollectablesThrowCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Commands/Stack/CollectablesThrowCommand.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/CheckArea/ColorCheckAreaMeshController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/CheckArea/ColorCheckAreaMeshController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/AreaManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/AreaManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/IdleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/IdleManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/LevelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/LevelManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/UIManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +164,7 @@
       <workItem from="1661711404917" duration="9854000" />
       <workItem from="1661760641014" duration="13344000" />
       <workItem from="1661809151323" duration="169000" />
-      <workItem from="1661854496953" duration="1852000" />
+      <workItem from="1661854496953" duration="5351000" />
     </task>
     <servers />
   </component>

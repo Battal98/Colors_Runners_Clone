@@ -94,16 +94,14 @@ namespace Managers
             OnInitializeLevel();
         }
 
-        private IdleDataParams OnGetIdleDatas()
+        private IdleDataParams OnGetIdleDatas()=> new IdleDataParams
         {
-            return new IdleDataParams
-            {
-                AreaDatas = _areaDictionary,
-                CityLevel = _cityLevel,
-                Score = _score,
-                CompletedArea = _completedArea
-            };
-        }
+            AreaDatas = _areaDictionary,
+            CityLevel = _cityLevel,
+            Score = _score,
+            CompletedArea = _completedArea
+        };
+      
 
         private void OnAreaComplete()
         {
@@ -154,9 +152,7 @@ namespace Managers
             {
                 IdleGameSignals.Instance.onPrepareAreaWithSave?.Invoke();
             }
-
-
-            SaveSignals.Instance.onSaveData?.Invoke();
+            
         }
 
         private void OnLoadIdleData(IdleDataParams idleDataParams)

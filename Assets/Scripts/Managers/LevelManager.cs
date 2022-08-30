@@ -134,6 +134,7 @@ namespace Managers
             LevelSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
+            SaveSignals.Instance.onSaveData?.Invoke();
             
         }
 
@@ -142,7 +143,7 @@ namespace Managers
             LevelSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
-            //SaveSignals.Instance.onSaveGameData?.Invoke();
+         
         }
     }
 }

@@ -126,7 +126,6 @@ namespace Managers
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke();
-            OnSetLevelText();
         }
 
         public void NextLevel()
@@ -134,6 +133,8 @@ namespace Managers
             LevelSignals.Instance.onNextLevel?.Invoke();
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
+            OnSetLevelText();
+
         }
 
         public void Restart()

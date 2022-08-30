@@ -215,9 +215,7 @@ namespace Managers
 
         private void OnPlay()
         {
-            SetAreaTexts();
-            CostAreaVisible();
-            SetMaterialColor();
+        
         }
     }
 }
