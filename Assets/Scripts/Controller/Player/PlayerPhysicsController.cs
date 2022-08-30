@@ -38,7 +38,7 @@ namespace Controllers
             {
                 _checkAreaType = other.GetComponentInParent<MiniGameAreaManager>().AreaType;
 
-                ColorCheckAreaSignals.Instance.onCheckAreaControl?.Invoke(other.transform.parent.gameObject);
+                CoreGameSignals.Instance.onCheckAreaControl?.Invoke(other.transform.parent.gameObject);
                 playerManager.ChangeSpeed(_checkAreaType);
                 playerManager.ChangeScoreAreaVisible(_checkAreaType);
             }

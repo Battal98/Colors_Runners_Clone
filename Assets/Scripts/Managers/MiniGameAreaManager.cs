@@ -47,14 +47,14 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            ColorCheckAreaSignals.Instance.onCheckAreaControl += OnCheckAreaControl;
+            CoreGameSignals.Instance.onCheckAreaControl += OnCheckAreaControl;
             StackSignals.Instance.onStackTransferComplete += OnOnEnterInDroneArea;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
         private void UnsubscribeEvents()
         {
-            ColorCheckAreaSignals.Instance.onCheckAreaControl -= OnCheckAreaControl;
+            CoreGameSignals.Instance.onCheckAreaControl -= OnCheckAreaControl;
             StackSignals.Instance.onStackTransferComplete -= OnOnEnterInDroneArea;
             CoreGameSignals.Instance.onPlay -= OnPlay;
         }

@@ -12,6 +12,8 @@ namespace Signals
         public UnityAction<ColorCheckAreaType> onExitColorCheckArea = delegate { };
         public UnityAction<GameStates> onSetGameState = delegate { };
         public UnityAction<GameStates> onGetGameState = delegate { };
+        public UnityAction<GameObject> onCheckAreaControl = delegate { };
+
         public UnityAction<Transform> onSetCameraTarget = delegate { };
     }
 }
