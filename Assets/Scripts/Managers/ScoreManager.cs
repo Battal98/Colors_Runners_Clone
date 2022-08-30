@@ -25,12 +25,13 @@ namespace Managers
 
         private void Subscribe()
         {
-            ScoreSignals.Instance.onGetScore += OnGetStackScore;
+            ScoreSignals.Instance.onGetPlayerScore += OnGetStackScore;
         }
 
         private void UnSubscribe()
         {
-            ScoreSignals.Instance.onGetScore -= OnGetStackScore;
+            ScoreSignals.Instance.onGetPlayerScore -= OnGetStackScore;
+            
         }
 
 
@@ -44,7 +45,7 @@ namespace Managers
 
         private void OnGetStackScore(int Value)
         {
-            ScoreSignals.Instance.onSetScore?.Invoke(Value);
+            ScoreSignals.Instance.onSetPlayerScore?.Invoke(Value);
         }
     }
 }

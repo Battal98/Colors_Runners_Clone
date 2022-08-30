@@ -218,7 +218,7 @@ namespace Managers
             _stackListObj.transform.parent = transform;
             _collectableAnimSetCommand.Execute(_stackListObj, CollectableAnimationStates.Run);
             _stackList.Add(_stackListObj);
-            ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
+            ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }
 
         private void OnExitColorCheckArea(ColorCheckAreaType areaType)
@@ -244,7 +244,7 @@ namespace Managers
         {
             FindPlayer();
             SetAllCollectableAnim(CollectableAnimationStates.Run);
-            ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
+            ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }
 
 
@@ -254,7 +254,7 @@ namespace Managers
             _stackList.Clear();
             _stackList.TrimExcess();
             Initialized();
-            ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
+            ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }
     }
 }

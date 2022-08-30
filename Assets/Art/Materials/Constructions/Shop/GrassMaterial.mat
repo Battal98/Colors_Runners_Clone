@@ -226,7 +226,7 @@ Material:
     - _RimSize: 1
     - _RimSmoothness: 0
     - _RimThresholdOffset: 0.25
-    - _Saturation: 2
+    - _Saturation: 1.7333333
     - _SketchMapScale: 1
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0

@@ -42,7 +42,7 @@ namespace Commands
             _stackList.TrimExcess();
             if (_stackList.Count == 0) LevelSignals.Instance.onLevelFailed?.Invoke();
 
-            ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
+            ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
             PoolSignals.Instance.onSendPool?.Invoke(collectableGameObject, PoolType.Collectable);
         }
     }

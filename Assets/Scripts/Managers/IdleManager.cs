@@ -162,7 +162,7 @@ namespace Managers
             _score = idleDataParams.Score;
             _completedArea = idleDataParams.CompletedArea;
         }
-
+    
         private void OnPlay()
         {
             IdleGameSignals.Instance.onRefresthAreaData?.Invoke();

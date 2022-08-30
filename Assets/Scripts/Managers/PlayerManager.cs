@@ -68,7 +68,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
             CoreGameSignals.Instance.onExitColorCheckArea += OnExitColorCheckArea;
-            ScoreSignals.Instance.onSetScore += OnSetScore;
+            ScoreSignals.Instance.onSetPlayerScore += OnSetScore;
 
             StackSignals.Instance.onScaleSet += OnScaleSet;
         }
@@ -84,7 +84,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
-            ScoreSignals.Instance.onSetScore -= OnSetScore;
+            ScoreSignals.Instance.onSetPlayerScore -= OnSetScore;
 
             StackSignals.Instance.onScaleSet -= OnScaleSet;
         }

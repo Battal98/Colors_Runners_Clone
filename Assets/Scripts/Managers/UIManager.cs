@@ -44,6 +44,8 @@ namespace Managers
 
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
             LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+
+           
         }
 
         private void UnsubscribeEvents()
@@ -56,6 +58,8 @@ namespace Managers
 
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
             LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+            
+        
         }
 
         private void OnDisable()
@@ -99,7 +103,7 @@ namespace Managers
             levelPanelController.SetLevelText();
         }
 
-        private void SetStackText(int value)
+        private void onSetScore(int value)
         {
             idlePanelController.SetScoreText(value);
         }

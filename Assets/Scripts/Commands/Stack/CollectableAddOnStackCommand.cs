@@ -39,7 +39,7 @@ namespace Commands
                 pivot.z - _stackData.StackOffset * _stackList.Count * 2);
 
 
-            ScoreSignals.Instance.onGetScore?.Invoke(_stackList.Count);
+            ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }
     }
 }

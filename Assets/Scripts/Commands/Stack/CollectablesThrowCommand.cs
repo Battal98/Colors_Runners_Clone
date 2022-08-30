@@ -42,7 +42,7 @@ namespace Commands
                 _temlList.TrimExcess();
             }
 
-            ScoreSignals.Instance.onGetScore?.Invoke(_temlList.Count);
+            ScoreSignals.Instance.onGetPlayerScore?.Invoke(_temlList.Count);
         }
     }
 }
