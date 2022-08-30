@@ -26,8 +26,8 @@ MonoBehaviour:
   m_Name: ForwardRenderer
   m_EditorClassIdentifier: 
   m_RendererFeatures:
-  - {fileID: 617098906720397449}
-  m_RendererFeatureMap: 89e859a62f609008
+  - {fileID: -6545453444416708232}
+  m_RendererFeatureMap: 7861af87c5e029a5
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
