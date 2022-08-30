@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/BattalY.unity
-    guid: 0a765adc0d379a34b95fec18f8132dd3
+    path: Assets/Scenes/MainScene.unity
+    guid: 12ef7b28d32da6147a05efb8ce5524fc
   m_configObjects: {}
