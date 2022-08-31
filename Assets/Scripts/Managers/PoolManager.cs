@@ -98,7 +98,7 @@ namespace Managers
             var parent = transform.GetChild((int)poolType);
             var obj = parent.childCount != 0
                 ? parent.transform.GetChild(0).gameObject
-                : Instantiate(_cdPoolGenerator.PoolObjectList[(int)poolType].Pref, parent);
+                : Instantiate(_cdPoolGenerator.PoolObjectList[(int)poolType].Pref,Vector3.zero, Quaternion.identity, parent);
 
             if (StackSignals.Instance.onGetColorType() == ColorType.RainBow)
                 StackSignals.Instance.OnSetColorType?.Invoke(ColorType.Blue);

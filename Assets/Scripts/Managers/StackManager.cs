@@ -199,7 +199,7 @@ namespace Managers
 
         private void Initialized()
         {
-            for (var i = 0; i < 60; i++)
+            for (var i = 0; i < 6; i++)
             {
                 var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Collectable);
                 obj.SetActive(true);
@@ -228,9 +228,12 @@ namespace Managers
         private void ClearStackManager()
         {
             var _items = stackManager.transform.childCount;
-            for (var i = 0; i < _items; i++)
+            for (var i = 0; i < _stackList.Count; i++)
+            {
                 PoolSignals.Instance.onSendPool?.Invoke(stackManager.transform.GetChild(0).gameObject,
                     PoolType.Collectable);
+            }
+
         }
 
         private void OnPlay()
@@ -241,11 +244,12 @@ namespace Managers
         }
 
 
-        private void OnReset()
+        private async void OnReset()
         {
             ClearStackManager();
             _stackList.Clear();
             _stackList.TrimExcess();
+            await System.Threading.Tasks.Task.Delay(100);
             Initialized();
             ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }
