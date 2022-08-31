@@ -1224,7 +1224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2659190040899617468, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: ColorType
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3556386330639750227, guid: 52961a6784eba2e4097b12e9511a53c6, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3476,7 +3476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3321128927124613000, guid: fdb5a03f33cd7d2419371a2e31dc7d33, type: 3}
       propertyPath: ColorType
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3321128927124613002, guid: fdb5a03f33cd7d2419371a2e31dc7d33, type: 3}
       propertyPath: m_Name

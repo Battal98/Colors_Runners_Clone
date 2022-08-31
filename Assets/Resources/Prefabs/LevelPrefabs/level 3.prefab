@@ -1943,7 +1943,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f6faf52bfe8b6064189dd4b2ce73e02c, type: 2}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: CollectableColorType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: collectableColorType
@@ -2017,7 +2017,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f6faf52bfe8b6064189dd4b2ce73e02c, type: 2}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: CollectableColorType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: collectableColorType
@@ -3097,7 +3097,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f6faf52bfe8b6064189dd4b2ce73e02c, type: 2}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: CollectableColorType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: collectableColorType
@@ -3389,7 +3389,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f6faf52bfe8b6064189dd4b2ce73e02c, type: 2}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: CollectableColorType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: collectableColorType
@@ -3537,7 +3537,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f6faf52bfe8b6064189dd4b2ce73e02c, type: 2}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: CollectableColorType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: collectableColorType
@@ -4211,7 +4211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3321128927124613000, guid: fdb5a03f33cd7d2419371a2e31dc7d33, type: 3}
       propertyPath: ColorType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3321128927124613002, guid: fdb5a03f33cd7d2419371a2e31dc7d33, type: 3}
       propertyPath: m_Name
@@ -7009,7 +7009,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f6faf52bfe8b6064189dd4b2ce73e02c, type: 2}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: CollectableColorType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1760233938649184601, guid: c2439e8db3864bc42a6cb55a04024af7, type: 3}
       propertyPath: collectableColorType
