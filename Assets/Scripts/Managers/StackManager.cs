@@ -70,6 +70,7 @@ namespace Managers
             StackSignals.Instance.onKillRandomInStack += _randomKillInStackCommand.Execute;
             StackSignals.Instance.onCollectablesThrow += _collectablesThrowCommand.Execute;
             StackSignals.Instance.onGetColorType += OnGetColorType;
+            StackSignals.Instance.OnSetColorType += OnSetColorType;
             StackSignals.Instance.onEnterMultiplier += _stackMultiplierCommand.Execute;
 
             CoreGameSignals.Instance.onEnterFinish += OnEnterFinish;
@@ -89,6 +90,7 @@ namespace Managers
             StackSignals.Instance.onKillRandomInStack -= _randomKillInStackCommand.Execute;
             StackSignals.Instance.onCollectablesThrow -= _collectablesThrowCommand.Execute;
             StackSignals.Instance.onGetColorType -= OnGetColorType;
+            StackSignals.Instance.OnSetColorType -= OnSetColorType;
             StackSignals.Instance.onEnterMultiplier += _stackMultiplierCommand.Execute;
 
             CoreGameSignals.Instance.onEnterFinish -= OnEnterFinish;
@@ -138,6 +140,11 @@ namespace Managers
         private ColorType OnGetColorType()
         {
             return _type;
+        }
+
+        private void OnSetColorType(ColorType colorType)
+        {
+            _type = colorType;
         }
 
         private void Update()
@@ -196,7 +203,7 @@ namespace Managers
 
         private void Initialized()
         {
-            for (var i = 0; i < 10; i++)
+            for (var i = 0; i < 60; i++)
             {
                 var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Collectable);
                 obj.SetActive(true);

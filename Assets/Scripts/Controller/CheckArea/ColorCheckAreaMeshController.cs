@@ -65,9 +65,9 @@ namespace Controllers
                     colorCheckAreaManager.ColorCheckAreaStackList.Remove(colManager.gameObject);
                     colorCheckAreaManager.ColorCheckAreaStackList.TrimExcess();
                     colHolder.GetChild(0).gameObject.transform.parent = transform.parent;
+                    transform.DOScaleZ(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
                 }
             }
-            transform.DOScaleZ(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
 
         }
 

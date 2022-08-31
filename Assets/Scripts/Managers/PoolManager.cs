@@ -100,6 +100,9 @@ namespace Managers
                 ? parent.transform.GetChild(0).gameObject
                 : Instantiate(_cdPoolGenerator.PoolObjectList[(int)poolType].Pref, parent);
 
+            if (StackSignals.Instance.onGetColorType() == ColorType.RainBow)
+                StackSignals.Instance.OnSetColorType?.Invoke(ColorType.Blue);
+
             obj.GetComponent<CollectableManager>().CollectableColorChange(StackSignals.Instance.onGetColorType());
             return obj;
         }
