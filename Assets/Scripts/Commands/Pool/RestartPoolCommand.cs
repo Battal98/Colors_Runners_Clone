@@ -9,9 +9,9 @@ namespace Commands.Pool
 
         #region Private Variables
 
-        private CD_PoolGenerator _cdPoolGenerator;
-        private Transform _managerTranform;
-        private GameObject _levelHolder;
+        private readonly CD_PoolGenerator _cdPoolGenerator;
+        private readonly Transform _managerTranform;
+        private readonly GameObject _levelHolder;
 
         #endregion
 
@@ -28,16 +28,14 @@ namespace Commands.Pool
         public void Execute()
         {
             var pooldata = _cdPoolGenerator.PoolObjectList;
-            for (int i = 0; i < pooldata.Count; i++)
+            for (var i = 0; i < pooldata.Count; i++)
             {
                 var _child = _managerTranform.GetChild(i);
                 if (_child.transform.childCount > pooldata[i].ObjectCount)
                 {
-                    int count = _child.transform.childCount;
-                    for (int j = pooldata[i].ObjectCount; j < count; j++)
-                    {
+                    var count = _child.transform.childCount;
+                    for (var j = pooldata[i].ObjectCount; j < count; j++)
                         _child.GetChild(pooldata[i].ObjectCount).SetParent(_levelHolder.transform.GetChild(0));
-                    }
                 }
             }
         }

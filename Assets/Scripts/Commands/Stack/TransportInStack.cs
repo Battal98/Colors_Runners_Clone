@@ -13,9 +13,9 @@ namespace Commands
 
         #region Private Variables
 
-        private StackManager _manager;
-        private List<GameObject> _stackList;
-        private StackData _stackData;
+        private readonly StackManager _manager;
+        private readonly List<GameObject> _stackList;
+        private readonly StackData _stackData;
 
         #endregion
 
@@ -39,10 +39,7 @@ namespace Commands
                 _manager.CollectableAnimSet(_stackList[_stackData.StackLimit - 1], CollectableAnimationStates.Run);
             }
 
-            if (_stackList.Count == 0)
-            {
-                StackSignals.Instance.onStackTransferComplete?.Invoke();
-            }
+            if (_stackList.Count == 0) StackSignals.Instance.onStackTransferComplete?.Invoke();
 
             _stackList.TrimExcess();
         }

@@ -1,4 +1,3 @@
-using Controller;
 using Enums;
 using Managers;
 using Signals;
@@ -37,7 +36,6 @@ namespace Controllers
 
             if (other.CompareTag("BuildArea"))
                 IdleGameSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
-
             if (other.CompareTag("Multiplier")) StackSignals.Instance.onEnterMultiplier?.Invoke();
         }
 

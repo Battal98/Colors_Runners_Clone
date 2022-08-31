@@ -13,9 +13,9 @@ namespace Commands
 
         #region Private Variables
 
-        private List<GameObject> _stackList;
-        private StackManager _manager;
-        private StackData _stackData;
+        private readonly List<GameObject> _stackList;
+        private readonly StackManager _manager;
+        private readonly StackData _stackData;
 
         #endregion
 
@@ -41,7 +41,6 @@ namespace Commands
             _stackList.Remove(collectableGameObject);
             _stackList.TrimExcess();
             if (_stackList.Count == 0) LevelSignals.Instance.onLevelFailed?.Invoke();
-
             ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
             PoolSignals.Instance.onSendPool?.Invoke(collectableGameObject, PoolType.Collectable);
         }

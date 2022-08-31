@@ -10,8 +10,8 @@ namespace Commands
 
         #region Private Variables
 
-        private List<GameObject> _stackList;
-        private StackData _stackData;
+        private readonly List<GameObject> _stackList;
+        private readonly StackData _stackData;
 
         #endregion
 
@@ -27,20 +27,22 @@ namespace Commands
         {
             if (_stackList.Count > 0)
             {
-                float directX = Mathf.Lerp(_stackList[0].transform.localPosition.x, _playerTransform.position.x,
+                var directX = Mathf.Lerp(_stackList[0].transform.localPosition.x, _playerTransform.position.x,
                     _stackData.StackLerpXDelay);
-                float directY = Mathf.Lerp(_stackList[0].transform.localPosition.y, _playerTransform.position.y,
-                    1);
-                float directZ = Mathf.Lerp(_stackList[0].transform.localPosition.z,
+                var directY = Mathf.Lerp(_stackList[0].transform.localPosition.y, _playerTransform.position.y, 1);
+                var directZ = Mathf.Lerp(_stackList[0].transform.localPosition.z,
                     _playerTransform.position.z - _stackData.StackOffset, _stackData.StackLerpZDelay);
                 _stackList[0].transform.localPosition = new Vector3(directX, directY, directZ);
-                _stackList[0].transform.LookAt(new Vector3(_playerTransform.transform.position.x,
-                    _stackList[0].transform.position.y, _playerTransform.transform.position.z));
-
-
-                for (int i = 1; i < _stackList.Count; i++)
+                
+                _stackList[0]
+                    .transform.LookAt(new Vector3(_playerTransform.transform.position.x,
+                        _stackList[0]
+                            .transform.position.y,
+                        _playerTransform.transform.position.z));
+                
+                for (var i = 1; i < _stackList.Count; i++)
                 {
-                    Vector3 pos = _stackList[i - 1].transform.localPosition;
+                    var pos = _stackList[i - 1].transform.localPosition;
                     directX = Mathf.Lerp(_stackList[i].transform.localPosition.x, pos.x, _stackData.StackLerpXDelay);
                     directY = Mathf.Lerp(_stackList[i].transform.localPosition.y, pos.y, _stackData.StackLerpYDelay);
                     directZ = Mathf.Lerp(_stackList[i].transform.localPosition.z, pos.z - _stackData.StackOffset,

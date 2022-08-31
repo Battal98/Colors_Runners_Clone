@@ -20,7 +20,6 @@ namespace Controllers
 
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private CD_MovementList cdMovementList;
-        [SerializeField] private PlayerManager playerManager;
 
         #endregion
 
@@ -32,16 +31,11 @@ namespace Controllers
         private Vector3 _inputValue;
         private Vector2 _clampValues;
         private GameStates _states;
-
         private InputParams _inputParams;
-        // private MoveSwerveCommand _moveSwerveCommand;
-        // private StopSideWaysCommand _stopSideWaysCommand;
-        // private JoyStickMoveCommand _joyStickMoveCommand;
 
         #endregion
 
         #endregion
-
 
         public void SetMovementData(PlayerMovementData dataMovementData)
         {
@@ -66,10 +60,7 @@ namespace Controllers
         public void UpdateInputValue(InputParams inputParam)
         {
             _inputParams = inputParam;
-          
         }
-
-      
 
         public void IsReadyToPlay(bool state)
         {
@@ -83,9 +74,7 @@ namespace Controllers
             {
                 case ColorCheckAreaType.Drone:
                     _colorAreaSpeed = 0;
-
                     break;
-
                 case ColorCheckAreaType.Turret:
                     _colorAreaSpeed = 0.5f;
                     break;
@@ -110,24 +99,13 @@ namespace Controllers
             if (_isReadyToPlay)
             {
                 cdMovementList.MovementTypeList[(int)_states].DoMovement(ref _colorAreaSpeed, ref _isReadyToMove,
-                    ref rigidbody,
-                    ref _inputParams, ref _playerMovementData);
-              
-                
-                
+                    ref rigidbody, ref _inputParams, ref _playerMovementData);
             }
-
             else
             {
-                
                 Stop();
             }
         }
-
-        #region PlayerMovementCommands
-
-      
-        #endregion
 
         public void Stop()
         {

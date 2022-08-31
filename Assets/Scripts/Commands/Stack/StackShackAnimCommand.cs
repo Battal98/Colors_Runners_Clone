@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Datas.ValueObject;
-using UnityEngine;
 using DG.Tweening;
-
+using UnityEngine;
 
 namespace Commands
 {
@@ -13,8 +12,8 @@ namespace Commands
 
         #region Private Variables
 
-        private List<GameObject> _stacklist;
-        private StackData _stackData;
+        private readonly List<GameObject> _stacklist;
+        private readonly StackData _stackData;
 
         #endregion
 
@@ -28,9 +27,9 @@ namespace Commands
 
         public IEnumerator Execute()
         {
-            for (int i = 0; i <= _stacklist.Count - 1; i++)
+            for (var i = 0; i <= _stacklist.Count - 1; i++)
             {
-                int index = i;
+                var index = i;
                 _stacklist[index].transform
                     .DOScale(new Vector3(1, _stackData.StackMaxScaleValue, 1), _stackData.StackScaleDelay)
                     .SetEase(Ease.Flash);

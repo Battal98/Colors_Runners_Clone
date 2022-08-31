@@ -12,7 +12,7 @@ namespace Commands
 
         private Vector3 _joystickPos;
         private Vector3 _moveVector;
-        private Joystick _joystick;
+        private readonly Joystick _joystick;
 
         #endregion
 

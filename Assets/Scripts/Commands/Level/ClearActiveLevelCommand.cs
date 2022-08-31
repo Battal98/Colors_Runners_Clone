@@ -22,8 +22,6 @@ namespace Commands
         public void Execute()
         {
             Object.Destroy(_levelholder.transform.GetChild(0).gameObject);
-            
-            
         }
     }
 }

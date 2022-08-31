@@ -1,5 +1,5 @@
-using Signals;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Commands
@@ -12,8 +12,8 @@ namespace Commands
 
         private Vector3 _joystickPos;
         private bool _isFirstTimeTouchTaken;
-        private InputManager _manager;
-        private Joystick _joystick;
+        private readonly InputManager _manager;
+        private readonly Joystick _joystick;
 
         #endregion
 

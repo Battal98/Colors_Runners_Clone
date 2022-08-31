@@ -1,7 +1,7 @@
 using Data.ValueObject;
-using Signals;
 using Keys;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Commands
@@ -12,10 +12,10 @@ namespace Commands
 
         #region Private Variables
 
-        private InputData _inputData;
+        private readonly InputData _inputData;
         private Vector3 _moveVector;
         private float _currentVelocity;
-        private InputManager _manager;
+        private readonly InputManager _manager;
 
         #endregion
 
@@ -32,7 +32,7 @@ namespace Commands
 
         public void Execute()
         {
-            Vector3 mouseDeltaPos = Input.mousePosition - _manager.MousePosition.Value;
+            var mouseDeltaPos = Input.mousePosition - _manager.MousePosition.Value;
             if (mouseDeltaPos.x > _inputData.PlayerInputSpeed)
                 _moveVector.x = _inputData.PlayerInputSpeed / 10f * mouseDeltaPos.x;
             else if (mouseDeltaPos.x < -_inputData.PlayerInputSpeed)
@@ -43,7 +43,7 @@ namespace Commands
 
             _manager.MousePosition = Input.mousePosition;
 
-            InputSignals.Instance.onInputDragged?.Invoke(new InputParams()
+            InputSignals.Instance.onInputDragged?.Invoke(new InputParams
             {
                 Values = _moveVector,
                 ClampValues = new Vector2(_inputData.ClampSides.x, _inputData.ClampSides.y)

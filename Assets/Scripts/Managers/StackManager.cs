@@ -35,7 +35,6 @@ namespace Managers
         private CollectableAnimSetCommand _collectableAnimSetCommand;
         private ChangeCollectableColorCommand _changeCollectableColorCommand;
         private RandomKillInStackCommand _randomKillInStackCommand;
-        private CollectablesThrowCommand _collectablesThrowCommand;
         private StackItemsCombineCommand _stackItemsCombineCommand;
         private StackMultiplierCommand _stackMultiplierCommand;
         private Transform _playerManager;
@@ -68,7 +67,6 @@ namespace Managers
             StackSignals.Instance.onGetStackList += OnGetStackList;
             StackSignals.Instance.onChangeCollectableColor += OnChangeCollectableColor;
             StackSignals.Instance.onKillRandomInStack += _randomKillInStackCommand.Execute;
-            StackSignals.Instance.onCollectablesThrow += _collectablesThrowCommand.Execute;
             StackSignals.Instance.onGetColorType += OnGetColorType;
             StackSignals.Instance.OnSetColorType += OnSetColorType;
             StackSignals.Instance.onEnterMultiplier += _stackMultiplierCommand.Execute;
@@ -88,7 +86,6 @@ namespace Managers
             StackSignals.Instance.onGetStackList -= OnGetStackList;
             StackSignals.Instance.onChangeCollectableColor -= OnChangeCollectableColor;
             StackSignals.Instance.onKillRandomInStack -= _randomKillInStackCommand.Execute;
-            StackSignals.Instance.onCollectablesThrow -= _collectablesThrowCommand.Execute;
             StackSignals.Instance.onGetColorType -= OnGetColorType;
             StackSignals.Instance.OnSetColorType -= OnSetColorType;
             StackSignals.Instance.onEnterMultiplier += _stackMultiplierCommand.Execute;
@@ -131,7 +128,6 @@ namespace Managers
             _changeCollectableColorCommand = new ChangeCollectableColorCommand(ref _stackList);
             _randomKillInStackCommand = new RandomKillInStackCommand(ref stackManager, ref _stackList,
                 ref StackData);
-            _collectablesThrowCommand = new CollectablesThrowCommand(ref _tempHolder);
             _stackItemsCombineCommand =
                 new StackItemsCombineCommand(ref _stackList, ref StackData, ref stackManager, ref _tempHolder);
             _stackMultiplierCommand = new StackMultiplierCommand(ref _stackList, ref stackManager);

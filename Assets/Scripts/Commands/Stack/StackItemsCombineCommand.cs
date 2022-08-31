@@ -15,9 +15,9 @@ namespace Commands
 
         #region Private Variables
 
-        private List<GameObject> _stackList;
+        private readonly List<GameObject> _stackList;
         private List<GameObject> _tempList;
-        private StackData _stackData;
+        private readonly StackData _stackData;
         private StackManager _manager;
 
         #endregion
@@ -35,29 +35,25 @@ namespace Commands
 
         public async void Execute()
         {
-            int count = _stackList.Count;
-            for (int i = 0; i < count; i++)
-            {
+            var count = _stackList.Count;
+            for (var i = 0; i < count; i++)
                 if (i < _stackData.StackLimit)
                 {
                     _stackList[0].transform.DOScale(Vector3.zero, 0.7f);
                     await Task.Delay(100);
                     _stackList[0].SetActive(false);
-                    PoolSignals.Instance.onSendPool?.Invoke(_stackList[0],PoolType.Collectable);
-                    // _tempList.Add(_stackList[0]);
-                    StackSignals.Instance.onScaleSet?.Invoke( 0.10f);
+                    PoolSignals.Instance.onSendPool?.Invoke(_stackList[0], PoolType.Collectable);
+                    StackSignals.Instance.onScaleSet?.Invoke(0.10f);
                     _stackList.RemoveAt(0);
                     _stackList.TrimExcess();
                 }
                 else
                 {
                     _stackList[0].SetActive(false);
-                    // _tempList.Add(_stackList[0]);
-                    PoolSignals.Instance.onSendPool?.Invoke(_stackList[0],PoolType.Collectable);
+                    PoolSignals.Instance.onSendPool?.Invoke(_stackList[0], PoolType.Collectable);
                     _stackList.RemoveAt(0);
                     _stackList.TrimExcess();
                 }
-            }
         }
     }
 }

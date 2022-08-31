@@ -1,5 +1,5 @@
-using Signals;
 using Keys;
+using Signals;
 using UnityEngine;
 
 namespace Commands
@@ -28,9 +28,9 @@ namespace Commands
             InputSignals.Instance.onInputReleased?.Invoke();
             _joystickPos = Vector3.zero;
             _moveVector = Vector3.zero;
-            InputSignals.Instance.onInputDragged?.Invoke(new InputParams()
+            InputSignals.Instance.onInputDragged?.Invoke(new InputParams
             {
-                Values = _moveVector,
+                Values = _moveVector
             });
         }
     }

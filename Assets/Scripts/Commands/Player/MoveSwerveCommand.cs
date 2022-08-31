@@ -33,7 +33,6 @@ namespace Commands
 
 
             _rigidbody.position = new Vector3(
-                // Mathf.Clamp(_rigidbody.position.x, -_inputParams.ClampValues.x, _inputParams.ClampValues.x),
                 _rigidbody.position.x,
                 _rigidbody.position.y,
                 _rigidbody.position.z);

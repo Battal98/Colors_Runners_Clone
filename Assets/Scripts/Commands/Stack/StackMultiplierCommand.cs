@@ -12,28 +12,24 @@ namespace Commands
 
         #region Private Variables
 
-        private List<GameObject> _stackList;
-        private StackManager _manager;
-     
+        private readonly List<GameObject> _stackList;
+        private readonly StackManager _manager;
 
         #endregion
 
         #endregion
-
 
         public StackMultiplierCommand(ref List<GameObject> stackList, ref StackManager manager)
         {
             _stackList = stackList;
             _manager = manager;
-        
         }
 
         public void Execute()
         {
-            int listCount = _stackList.Count;
-            for (int i = 0; i < listCount; i++)
+            var listCount = _stackList.Count;
+            for (var i = 0; i < listCount; i++)
             {
-           
                 var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Collectable);
                 obj.SetActive(true);
                 _manager.AddInStack(obj);
