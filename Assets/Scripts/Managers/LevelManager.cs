@@ -1,6 +1,5 @@
 using Commands;
 using Data.UnityObject;
-using Enums;
 using Keys;
 using Signals;
 using Sirenix.OdinInspector;
@@ -14,7 +13,7 @@ namespace Managers
 
         #region Public Variables
 
-        [Header("Data")] public int Data;
+        [Header("Data")] public int LevelData;
 
         #endregion
 
@@ -42,7 +41,7 @@ namespace Managers
 
         private void GetReferences()
         {
-            Data = GetLevelCount();
+            LevelData = GetLevelCount();
         }
 
         private void Init()
@@ -65,8 +64,7 @@ namespace Managers
             LevelSignals.Instance.onNextLevel += OnNextLevel;
             LevelSignals.Instance.onRestartLevel += OnRestartLevel;
             LevelSignals.Instance.onGetLevel += OnGetLevel;
-
-            SaveSignals.Instance.onGetRunnerDatas += OnGetRunnerDatas;
+            SaveSignals.Instance.onGetRunnerDatas += OnGetRunnerData;
             SaveSignals.Instance.onLoadRunnerData += OnLoadRunnerData;
         }
 
@@ -77,11 +75,9 @@ namespace Managers
             LevelSignals.Instance.onNextLevel -= OnNextLevel;
             LevelSignals.Instance.onRestartLevel -= OnRestartLevel;
             LevelSignals.Instance.onGetLevel -= OnGetLevel;
-
-            SaveSignals.Instance.onGetRunnerDatas -= OnGetRunnerDatas;
+            SaveSignals.Instance.onGetRunnerDatas -= OnGetRunnerData;
             SaveSignals.Instance.onLoadRunnerData -= OnLoadRunnerData;
         }
-
 
         private void OnDisable()
         {
@@ -95,16 +91,15 @@ namespace Managers
             OnInitializeLevel();
         }
 
-        private int OnGetLevel() => _levelID;
-
-        private RunnerDataParams OnGetRunnerDatas()
+        private int OnGetLevel()
         {
-            return new RunnerDataParams()
-            {
-                Level = _levelID
-            };
+            return _levelID;
         }
 
+        private RunnerDataParams OnGetRunnerData()
+        {
+            return new RunnerDataParams { Level = _levelID };
+        }
 
         private void OnLoadRunnerData(RunnerDataParams runnerDataParams)
         {
@@ -116,10 +111,9 @@ namespace Managers
             return _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
         }
 
-
         private void OnInitializeLevel()
         {
-            int newLevelData = GetLevelCount();
+            var newLevelData = GetLevelCount();
             _levelLoader.Execute(newLevelData);
         }
 
@@ -135,7 +129,6 @@ namespace Managers
             CoreGameSignals.Instance.onReset?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
             SaveSignals.Instance.onSaveData?.Invoke();
-            
         }
 
         private void OnRestartLevel()
@@ -143,7 +136,6 @@ namespace Managers
             LevelSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
-         
         }
     }
 }

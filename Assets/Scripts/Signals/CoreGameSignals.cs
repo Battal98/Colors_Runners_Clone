@@ -1,7 +1,7 @@
-using Extentions;
-using UnityEngine.Events;
 using Enums;
+using Extentions;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Signals
 {

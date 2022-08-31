@@ -20,12 +20,11 @@ namespace Managers
 
         #region Private Variables
 
-        private int _levelCount;
+  
 
         #endregion
 
         #endregion
-
 
         #region Event Subscriptions
 
@@ -39,14 +38,10 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onSetScoreText += onSetScoreText;
-
             CoreGameSignals.Instance.onGetGameState += OnGetGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
-
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
             LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
-
-            
         }
 
         private void UnsubscribeEvents()
@@ -54,14 +49,10 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onSetScoreText -= onSetScoreText;
-            
             CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
-
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
             LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
-
-        
         }
 
         private void OnDisable()
@@ -70,7 +61,6 @@ namespace Managers
         }
 
         #endregion
-
 
         private void Awake()
         {
@@ -99,7 +89,6 @@ namespace Managers
             uiPanelController.ClosePanel(UIPanels.IdlePanel);
         }
 
-
         private void OnSetLevelText()
         {
             levelPanelController.SetLevelText();
@@ -109,7 +98,6 @@ namespace Managers
         {
             idlePanelController.SetScoreText(value);
         }
-
 
         private void OnPlay()
         {
@@ -149,12 +137,12 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             LevelSignals.Instance.onRestartLevel?.Invoke();
         }
+
         public void WinPanelClose()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.WinPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
         }
-
 
         private void OnGetGameState(GameStates states)
         {
@@ -163,14 +151,12 @@ namespace Managers
                 case GameStates.Idle:
                     UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
                     UISignals.Instance.onOpenPanel?.Invoke(UIPanels.WinPanel);
-                    
                     break;
                 case GameStates.Runner:
                     UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
                     UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
                     UISignals.Instance.onClosePanel?.Invoke(UIPanels.WinPanel);
                     break;
-                
             }
         }
     }

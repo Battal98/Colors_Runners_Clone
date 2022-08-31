@@ -58,17 +58,12 @@ namespace Managers
             IdleGameSignals.Instance.onAreaComplete += OnAreaComplete;
             IdleGameSignals.Instance.onSetAreaData += OnSetAreaData;
             IdleGameSignals.Instance.onGetAreaData += OnGetAreaData;
-
             LevelSignals.Instance.onNextLevel += OnNextLevel;
-
             SaveSignals.Instance.onGetIdleDatas += OnGetIdleDatas;
             SaveSignals.Instance.onLoadIdleData += OnLoadIdleData;
-
             CoreGameSignals.Instance.onPlay += OnPlay;
-
             ScoreSignals.Instance.onGetIdleScore += OnGetIdleScore;
             ScoreSignals.Instance.onSetIdleScore += OnSetIdleScore;
-
         }
 
         private void UnSubscribeEvent()
@@ -76,19 +71,13 @@ namespace Managers
             IdleGameSignals.Instance.onAreaComplete -= OnAreaComplete;
             IdleGameSignals.Instance.onSetAreaData -= OnSetAreaData;
             IdleGameSignals.Instance.onGetAreaData -= OnGetAreaData;
-
             LevelSignals.Instance.onNextLevel -= OnNextLevel;
-
             SaveSignals.Instance.onGetIdleDatas -= OnGetIdleDatas;
             SaveSignals.Instance.onLoadIdleData -= OnLoadIdleData;
-
             CoreGameSignals.Instance.onPlay -= OnPlay;
-            
             ScoreSignals.Instance.onGetIdleScore -= OnGetIdleScore;
             ScoreSignals.Instance.onSetIdleScore -= OnSetIdleScore;
-
         }
-
 
         private void OnDisable()
         {
@@ -102,26 +91,28 @@ namespace Managers
             OnInitializeLevel();
         }
 
-        private IdleDataParams OnGetIdleDatas()=> new IdleDataParams
+        private IdleDataParams OnGetIdleDatas()
         {
-            AreaDatas = _areaDictionary,
-            CityLevel = _cityLevel,
-            Score = _score,
-            CompletedArea = _completedArea
-        };
+            return new IdleDataParams
+            {
+                AreaDatas = _areaDictionary,
+                CityLevel = _cityLevel,
+                Score = _score,
+                CompletedArea = _completedArea
+            };
+        }
 
-        private int OnGetIdleScore() => _score;
+        private int OnGetIdleScore()
+        {
+            return _score;
+        }
 
         private void OnSetIdleScore(int score)
         {
             _score = score;
             UISignals.Instance.onSetScoreText?.Invoke(_score);
-
         }
-      
 
-        
-        
         private void OnAreaComplete()
         {
             _completedArea++;
@@ -134,23 +125,29 @@ namespace Managers
                 Resources.Load<GameObject>($"Prefabs/CityPrefabs/City {_cityLevel % _cdIdleData.DataList.Count}"),
                 cityHolder.transform);
         }
-        private AreaData OnGetAreaData(int id)=>_areaDictionary.ContainsKey(id) ? _areaDictionary[id] : new AreaData();
 
-        private void OnSetAreaData(int id, AreaData AraeData)
+        private AreaData OnGetAreaData(int id)
+        {
+            return _areaDictionary.ContainsKey(id)
+                ? _areaDictionary[id]
+                : new AreaData();
+        }
+
+        private void OnSetAreaData(int id, AreaData araeData)
         {
             if (_areaDictionary.ContainsKey(id))
-                _areaDictionary[id] = AraeData;
+                _areaDictionary[id] = araeData;
             else
-                _areaDictionary.Add(id, AraeData);
-
+                _areaDictionary.Add(id,
+                    araeData);
             SaveSignals.Instance.onSaveData?.Invoke();
         }
 
-        
-
         private void CityCompleteCheck()
         {
-            if (_completedArea == _cdIdleData.DataList[_cityLevel].BuildCount)
+            if (_completedArea ==
+                _cdIdleData.DataList[_cityLevel]
+                    .BuildCount)
             {
                 _cityLevel++;
                 _levelIsPlayable = true;
@@ -163,28 +160,29 @@ namespace Managers
             if (_levelIsPlayable)
             {
                 _areaDictionary.Clear();
-                Destroy(cityHolder.transform.GetChild(0).gameObject);
+                Destroy(cityHolder.transform.GetChild(0)
+                    .gameObject);
                 OnInitializeLevel();
+                IdleGameSignals.Instance.onCityComplete?.Invoke();
                 _levelIsPlayable = false;
             }
             else
             {
                 IdleGameSignals.Instance.onPrepareAreaWithSave?.Invoke();
             }
-            
         }
 
-        private void OnLoadIdleData(IdleDataParams idleDataParams)
+        private void OnLoadIdleData(IdleDataParams dataParams)
         {
-            _areaDictionary = idleDataParams.AreaDatas;
-            _cityLevel = idleDataParams.CityLevel;
-            _score = idleDataParams.Score;
-            _completedArea = idleDataParams.CompletedArea;
+            _areaDictionary = dataParams.AreaDatas;
+            _cityLevel = dataParams.CityLevel;
+            _score = dataParams.Score;
+            _completedArea = dataParams.CompletedArea;
         }
-    
+
         private void OnPlay()
         {
-            IdleGameSignals.Instance.onRefresthAreaData?.Invoke();
+            IdleGameSignals.Instance.onRefreshAreaData?.Invoke();
         }
     }
 }

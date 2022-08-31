@@ -23,7 +23,7 @@ namespace Managers
 
         private void GetReferences()
         {
-            _obstacleAnimation = this.GetComponent<DOTweenAnimation>();
+            _obstacleAnimation = GetComponent<DOTweenAnimation>();
         }
 
         #region Event Subscription
@@ -49,7 +49,6 @@ namespace Managers
         }
 
         #endregion
-
 
         private void OnPlay()
         {

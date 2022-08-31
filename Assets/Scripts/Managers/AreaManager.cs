@@ -6,7 +6,6 @@ using Enums;
 using Signals;
 using TMPro;
 using UnityEngine;
-using MK.Toon;
 
 namespace Managers
 {
@@ -43,10 +42,10 @@ namespace Managers
 
         #endregion
 
-
         private void Awake()
         {
             GetReferences();
+            Init();
         }
 
         private void GetReferences()
@@ -56,11 +55,14 @@ namespace Managers
             gardenCost.text = _buildData.GardenCost.ToString();
         }
 
+        private void Init()
+        {
+        }
+
         private BuildData GetData()
         {
             return Resources.Load<CD_BuildData>("Data/CD_BuildData").BuildData[(int)buildType];
         }
-
 
         #region Event Subscription
 
@@ -69,25 +71,22 @@ namespace Managers
             SubscribeEvents();
         }
 
-
         private void SubscribeEvents()
         {
             IdleGameSignals.Instance.onCheckArea += OnCheckArea;
             IdleGameSignals.Instance.onCostDown += OnCostDown;
-            IdleGameSignals.Instance.onRefresthAreaData += OnRefresthAreaData;
+            IdleGameSignals.Instance.onRefreshAreaData += OnRefreshAreaData;
             IdleGameSignals.Instance.onPrepareAreaWithSave += OnPrepareAreaWithSave;
-
-            CoreGameSignals.Instance.onPlay += OnPlay;
+            IdleGameSignals.Instance.onCityComplete += OnCityComplete;
         }
 
         private void UnSubscribeEvents()
         {
             IdleGameSignals.Instance.onCheckArea -= OnCheckArea;
             IdleGameSignals.Instance.onCostDown -= OnCostDown;
-            IdleGameSignals.Instance.onRefresthAreaData -= OnRefresthAreaData;
+            IdleGameSignals.Instance.onRefreshAreaData -= OnRefreshAreaData;
             IdleGameSignals.Instance.onPrepareAreaWithSave -= OnPrepareAreaWithSave;
-
-            CoreGameSignals.Instance.onPlay -= OnPlay;
+            IdleGameSignals.Instance.onCityComplete -= OnCityComplete;
         }
 
         private void OnDisable()
@@ -97,7 +96,7 @@ namespace Managers
 
         #endregion
 
-        private void OnRefresthAreaData()
+        private void OnRefreshAreaData()
         {
             _areaData = (AreaData)IdleGameSignals.Instance.onGetAreaData?.Invoke(areaId);
             SetMaterialColor();
@@ -105,25 +104,27 @@ namespace Managers
             CostAreaVisible();
         }
 
-        public void OnCostDown()    
+        private void OnCostDown()
         {
-            if (_areaCheck == gameObject)
+            if (_areaCheck != gameObject) return;
+            switch (_areaData.Type)
             {
-                switch (_areaData.Type)
-                {
-                    case AreaStageType.House:
-                        _areaData.BuildMaterialValue++;
-                        SetAreaTexts();
-                        SetMaterialColor();
-                        if (_buildData.BuildCost == _areaData.BuildMaterialValue) ChangeStage();
-                        break;
-                    case AreaStageType.Garden:
-                        _areaData.GardenMaterialValue++;
-                        SetAreaTexts();
-                        SetMaterialColor();
-                        if (_buildData.GardenCost == _areaData.GardenMaterialValue) ChangeStage();
-                        break;
-                }
+                case AreaStageType.House:
+                    _areaData.BuildMaterialValue++;
+                    SetAreaTexts();
+                    SetMaterialColor();
+                    if (_buildData.BuildCost == _areaData.BuildMaterialValue) ChangeStage();
+                    break;
+                case AreaStageType.Garden:
+                    _areaData.GardenMaterialValue++;
+                    SetAreaTexts();
+                    SetMaterialColor();
+                    if (_buildData.GardenCost == _areaData.GardenMaterialValue) ChangeStage();
+                    break;
+                case AreaStageType.Complete:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -132,22 +133,18 @@ namespace Managers
             switch (_areaData.Type)
             {
                 case AreaStageType.House:
-
                     _buildData.BuildMaterial.DOFloat(2 / (_buildData.BuildCost / _areaData.BuildMaterialValue),
                         "_Saturation", 0.5f);
                     break;
                 case AreaStageType.Garden:
-
                     _buildData.GardenMaterial.DOFloat(2 / (_buildData.GardenCost / _areaData.GardenMaterialValue),
-                        "_Saturation",
-                        0.5f);
+                        "_Saturation", 0.5f);
                     break;
                 case AreaStageType.Complete:
                     _buildData.BuildMaterial.DOFloat(2 / (_buildData.BuildCost / _areaData.BuildMaterialValue),
                         "_Saturation", 0.5f);
                     _buildData.GardenMaterial.DOFloat(2 / (_buildData.GardenCost / _areaData.GardenMaterialValue),
-                        "_Saturation",
-                        0.5f);
+                        "_Saturation", 0.5f);
                     break;
             }
         }
@@ -213,9 +210,10 @@ namespace Managers
             IdleGameSignals.Instance.onSetAreaData?.Invoke(areaId, _areaData);
         }
 
-        private void OnPlay()
+        private void OnCityComplete()
         {
-        
+            _buildData.BuildMaterial.DOFloat(0, "_Saturation", 0);
+            _buildData.GardenMaterial.DOFloat(0, "_Saturation", 0);
         }
     }
 }

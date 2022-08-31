@@ -1,4 +1,4 @@
-using System;
+using Controller;
 using Enums;
 using Managers;
 using Signals;
@@ -25,47 +25,32 @@ namespace Controllers
 
         #endregion
 
-
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Finish"))
-            {
-                CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
-                CoreGameSignals.Instance.onEnterFinish?.Invoke();
-            }
-
             if (other.CompareTag("CheckArea"))
             {
                 _checkAreaType = other.GetComponentInParent<MiniGameAreaManager>().AreaType;
-
                 CoreGameSignals.Instance.onCheckAreaControl?.Invoke(other.transform.parent.gameObject);
                 playerManager.ChangeSpeed(_checkAreaType);
                 playerManager.ChangeScoreAreaVisible(_checkAreaType);
             }
 
             if (other.CompareTag("BuildArea"))
-            {
                 IdleGameSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
-            }
 
-            if (other.CompareTag("Multiplier"))
-            {
-                StackSignals.Instance.onEnterMultiplier?.Invoke();
-            }
+            if (other.CompareTag("Multiplier")) StackSignals.Instance.onEnterMultiplier?.Invoke();
         }
 
         private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag("BuildArea"))
             {
-                
                 if (_timer >= 20)
                 {
                     StackSignals.Instance.onCollectablesThrow?.Invoke(transform.parent);
                     playerManager.DownCost();
                     _timer = _timer * 60 / 100;
                 }
-
                 else
                 {
                     _timer++;
@@ -81,12 +66,17 @@ namespace Controllers
                 playerManager.ChangeScoreAreaVisible(_checkAreaType);
             }
 
-
             if (other.CompareTag("BuildArea"))
             {
                 _timer = 0;
                 playerManager.FullIK.enabled = false;
+            }
 
+            if (other.CompareTag("Finish"))
+            {
+                CoreGameSignals.Instance.onSetGameState?.Invoke(GameStates.Idle);
+                CoreGameSignals.Instance.onEnterFinish?.Invoke();
+                other.GetComponent<Collider>().isTrigger = false;
             }
         }
     }
