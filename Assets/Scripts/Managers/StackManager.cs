@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Commands;
 using Data.UnityObject;
 using Datas.ValueObject;
@@ -68,7 +69,6 @@ namespace Managers
             StackSignals.Instance.onChangeCollectableColor += OnChangeCollectableColor;
             StackSignals.Instance.onKillRandomInStack += _randomKillInStackCommand.Execute;
             StackSignals.Instance.onGetColorType += OnGetColorType;
-            StackSignals.Instance.OnSetColorType += OnSetColorType;
             StackSignals.Instance.onEnterMultiplier += _stackMultiplierCommand.Execute;
 
             CoreGameSignals.Instance.onEnterFinish += OnEnterFinish;
@@ -87,7 +87,6 @@ namespace Managers
             StackSignals.Instance.onChangeCollectableColor -= OnChangeCollectableColor;
             StackSignals.Instance.onKillRandomInStack -= _randomKillInStackCommand.Execute;
             StackSignals.Instance.onGetColorType -= OnGetColorType;
-            StackSignals.Instance.OnSetColorType -= OnSetColorType;
             StackSignals.Instance.onEnterMultiplier += _stackMultiplierCommand.Execute;
 
             CoreGameSignals.Instance.onEnterFinish -= OnEnterFinish;
@@ -155,9 +154,9 @@ namespace Managers
             _collectableAddOnStackCommand.Execute(obj);
         }
 
-        public void CollectableAnimSet(GameObject obj, CollectableAnimationStates AnimationStates)
+        public void CollectableAnimSet(GameObject obj, CollectableAnimationStates animationStates)
         {
-            _collectableAnimSetCommand.Execute(obj, AnimationStates);
+            _collectableAnimSetCommand.Execute(obj, animationStates);
         }
 
         private void OnEnterFinish()
@@ -169,7 +168,8 @@ namespace Managers
 
         private void SetAllCollectableAnim(CollectableAnimationStates states)
         {
-            for (var i = 0; i < _stackList.Count; i++) CollectableAnimSet(_stackList[i], states);
+            foreach (var t in _stackList)
+                CollectableAnimSet(t, states);
         }
 
         private void FindPlayer()
@@ -199,6 +199,7 @@ namespace Managers
 
         private void Initialized()
         {
+            _type =ColorType.Blue;
             for (var i = 0; i < 6; i++)
             {
                 var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Collectable);
@@ -206,6 +207,7 @@ namespace Managers
                 _collectableAddOnStackCommand.Execute(obj);
             }
 
+            OnChangeCollectableColor(_type);
             SetAllCollectableAnim(CollectableAnimationStates.Crouch);
         }
 
@@ -249,7 +251,7 @@ namespace Managers
             ClearStackManager();
             _stackList.Clear();
             _stackList.TrimExcess();
-            await System.Threading.Tasks.Task.Delay(100);
+            await Task.Delay(100);
             Initialized();
             ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }

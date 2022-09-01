@@ -88,8 +88,9 @@ namespace Managers
             return Resources.Load<CD_PoolGenerator>("Data/CD_PoolGenerator");
         }
 
-        private void RestartPool()
+        private async void RestartPool()
         {
+            await Task.Delay(500);
             _restartPoolCommand.Execute();
         }
 
@@ -99,9 +100,7 @@ namespace Managers
             var obj = parent.childCount != 0
                 ? parent.transform.GetChild(0).gameObject
                 : Instantiate(_cdPoolGenerator.PoolObjectList[(int)poolType].Pref,Vector3.zero, Quaternion.identity, parent);
-
-            if (StackSignals.Instance.onGetColorType() == ColorType.RainBow)
-                StackSignals.Instance.OnSetColorType?.Invoke(ColorType.Blue);
+            
 
             obj.GetComponent<CollectableManager>().CollectableColorChange(StackSignals.Instance.onGetColorType());
             return obj;

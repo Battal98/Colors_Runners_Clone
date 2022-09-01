@@ -19,8 +19,6 @@ namespace Signals
         public UnityAction<Transform> onCollectablesThrow = delegate { };
         public UnityAction onEnterMultiplier = delegate { };
         public UnityAction<float> onScaleSet=delegate {  };
-        public UnityAction<ColorType> OnSetColorType = delegate { };
-
         public Func<ColorType> onGetColorType = delegate { return 0; };
     }
 }
