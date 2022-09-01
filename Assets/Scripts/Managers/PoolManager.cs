@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Commands.Pool;
 using Data.UnityObject;
+using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -100,7 +101,6 @@ namespace Managers
             var obj = parent.childCount != 0
                 ? parent.transform.GetChild(0).gameObject
                 : Instantiate(_cdPoolGenerator.PoolObjectList[(int)poolType].Pref,Vector3.zero, Quaternion.identity, parent);
-            
 
             obj.GetComponent<CollectableManager>().CollectableColorChange(StackSignals.Instance.onGetColorType());
             return obj;
@@ -108,10 +108,10 @@ namespace Managers
 
         private void OnSendPool(GameObject CollectableObject, PoolType poolType)
         {
+            CollectableObject.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f),0) ;
             CollectableObject.transform.parent = transform.GetChild((int)poolType);
             CollectableObject.GetComponentInChildren<Collider>().enabled = true;
             CollectableObject.SetActive(false);
-            CollectableObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             CollectableObject.transform.localPosition = new Vector3(0f, 0f, 0);
         }
 

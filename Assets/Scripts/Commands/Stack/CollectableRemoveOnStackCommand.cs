@@ -31,15 +31,15 @@ namespace Commands
 
         public void Execute(GameObject collectableGameObject)
         {
+
+         
+            _stackList.Remove(collectableGameObject);
+            _stackList.TrimExcess();
             if (_stackList.Count >= _stackData.StackLimit)
             {
                 _stackList[_stackData.StackLimit - 1].SetActive(true);
                 _manager.CollectableAnimSet(_stackList[_stackData.StackLimit - 1], CollectableAnimationStates.Run);
             }
-
-         
-            _stackList.Remove(collectableGameObject);
-            _stackList.TrimExcess();
             if (_stackList.Count == 0) LevelSignals.Instance.onLevelFailed?.Invoke();
             ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
             PoolSignals.Instance.onSendPool?.Invoke(collectableGameObject, PoolType.Collectable);

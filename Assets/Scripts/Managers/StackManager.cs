@@ -41,7 +41,6 @@ namespace Managers
         private Transform _playerManager;
         [ShowInInspector] private ColorType _type;
         [ShowInInspector] private List<GameObject> _stackList = new List<GameObject>();
-        [ShowInInspector] private List<GameObject> _tempHolder = new List<GameObject>();
 
         #endregion
 
@@ -128,7 +127,7 @@ namespace Managers
             _randomKillInStackCommand = new RandomKillInStackCommand(ref stackManager, ref _stackList,
                 ref StackData);
             _stackItemsCombineCommand =
-                new StackItemsCombineCommand(ref _stackList, ref StackData, ref stackManager, ref _tempHolder);
+                new StackItemsCombineCommand(ref _stackList, ref StackData, ref stackManager);
             _stackMultiplierCommand = new StackMultiplierCommand(ref _stackList, ref stackManager);
         }
 
@@ -137,10 +136,6 @@ namespace Managers
             return _type;
         }
 
-        private void OnSetColorType(ColorType colorType)
-        {
-            _type = colorType;
-        }
 
         private void Update()
         {
@@ -199,7 +194,7 @@ namespace Managers
 
         private void Initialized()
         {
-            _type =ColorType.Blue;
+            _type = ColorType.Blue;
             for (var i = 0; i < 6; i++)
             {
                 var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Collectable);
@@ -214,10 +209,8 @@ namespace Managers
 
         private void OnGetStackList(GameObject _stackListObj)
         {
-            _stackListObj.transform.parent = transform;
-            _collectableAnimSetCommand.Execute(_stackListObj, CollectableAnimationStates.Run);
-            _stackList.Add(_stackListObj);
-            ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
+            CollectableAnimSet(_stackListObj, CollectableAnimationStates.Run);
+            AddInStack(_stackListObj);
         }
 
         private void OnExitColorCheckArea(ColorCheckAreaType areaType)
@@ -235,7 +228,6 @@ namespace Managers
                 PoolSignals.Instance.onSendPool?.Invoke(stackManager.transform.GetChild(0).gameObject,
                     PoolType.Collectable);
             }
-
         }
 
         private void OnPlay()
@@ -246,12 +238,11 @@ namespace Managers
         }
 
 
-        private async void OnReset()
+        private void OnReset()
         {
             ClearStackManager();
             _stackList.Clear();
             _stackList.TrimExcess();
-            await Task.Delay(100);
             Initialized();
             ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }
