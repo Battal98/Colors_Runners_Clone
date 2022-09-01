@@ -67,7 +67,8 @@ namespace Controllers
             if (other.CompareTag("BuildArea"))
             {
                 _timer = 0;
-                playerManager.FullIK.enabled = false;
+                playerManager.OnStageChanged();
+                
             }
 
             if (other.CompareTag("Finish"))

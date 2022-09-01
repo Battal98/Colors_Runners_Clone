@@ -17,7 +17,7 @@ namespace Managers
         #region Public Variables
 
         [Header("Data")] public PlayerData Data;
-        public FullBodyBipedIK FullIK ;
+        public FullBodyBipedIK FullIK;
 
         #endregion
 
@@ -37,7 +37,6 @@ namespace Managers
         private GameStates _states;
         private int _score;
         private PlayerAnimationStates _animationState;
-        
 
         #endregion
 
@@ -74,6 +73,8 @@ namespace Managers
             ScoreSignals.Instance.onSetPlayerScore += OnSetScore;
 
             StackSignals.Instance.onScaleSet += OnScaleSet;
+
+            IdleGameSignals.Instance.onStageChanged += OnStageChanged;
         }
 
 
@@ -90,7 +91,10 @@ namespace Managers
             ScoreSignals.Instance.onSetPlayerScore -= OnSetScore;
 
             StackSignals.Instance.onScaleSet -= OnScaleSet;
+
+            IdleGameSignals.Instance.onStageChanged -= OnStageChanged;
         }
+
 
         private void OnDisable()
         {
@@ -99,13 +103,15 @@ namespace Managers
 
         #endregion
 
-        private void OnScaleSet(float Value)
+        private void OnScaleSet(float value)
         {
-            transform.localScale = new Vector3(
-                Mathf.Clamp((transform.localScale.x + Value), 0.8f, 2f),
-                Mathf.Clamp((transform.localScale.y + Value), 0.8f, 2f),
-                Mathf.Clamp((transform.localScale.z + Value), 0.8f, 2f)
+            var localScale = transform.localScale;
+            localScale = new Vector3(
+                Mathf.Clamp((localScale.x + value), 0.8f, 2f),
+                Mathf.Clamp((localScale.y + value), 0.8f, 2f),
+                Mathf.Clamp((localScale.z + value), 0.8f, 2f)
             );
+            transform.localScale = localScale;
         }
 
         private PlayerData GetPlayerData()
@@ -130,15 +136,15 @@ namespace Managers
             playerMovementController.ChangeStates(states);
         }
 
-        private void OnSetScore(int Values)
+        private void OnSetScore(int values)
         {
-            _score = Values;
-            SetScoreText(Values);
+            _score = values;
+            SetScoreText(values);
         }
 
-        private void SetScoreText(int Values)
+        private void SetScoreText(int values)
         {
-            scoreText.text = Values.ToString();
+            scoreText.text = values.ToString();
         }
 
         private void OnExitColorCheckArea(ColorCheckAreaType colorAreaType)
@@ -163,20 +169,18 @@ namespace Managers
             PlayAnim(Mathf.Abs(InputParam.Values.x + InputParam.Values.y));
         }
 
-        private void PlayAnim(float Value)
+        private void PlayAnim(float value)
         {
             if (_states != GameStates.Idle) return;
-            playerAnimationController.PlayAnim(Value);
+            playerAnimationController.PlayAnim(value);
         }
 
 
         public void ChangeScoreAreaVisible(ColorCheckAreaType areaType)
         {
-            if (areaType == ColorCheckAreaType.Drone)
-            {
-                scoreArea.SetActive(!_scoreAreaVisible);
-                _scoreAreaVisible = !_scoreAreaVisible;
-            }
+            if (areaType != ColorCheckAreaType.Drone) return;
+            scoreArea.SetActive(!_scoreAreaVisible);
+            _scoreAreaVisible = !_scoreAreaVisible;
         }
 
         public void DownCost()
@@ -192,6 +196,12 @@ namespace Managers
             }
 
             SetScoreText(_score);
+        }
+
+        public void OnStageChanged()
+        {
+            colorParticle.Stop();
+            FullIK.enabled = false;
         }
 
 

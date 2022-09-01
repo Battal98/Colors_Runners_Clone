@@ -166,11 +166,13 @@ namespace Managers
         {
             if (_areaData.Type == AreaStageType.House)
             {
+                IdleGameSignals.Instance.onStageChanged?.Invoke();
                 _areaData.Type = AreaStageType.Garden;
                 CostAreaVisible();
             }
             else if (_areaData.Type == AreaStageType.Garden)
-            {
+            {             
+                IdleGameSignals.Instance.onStageChanged?.Invoke();
                 _areaData.Type = AreaStageType.Complete;
                 CostAreaVisible();
                 IdleGameSignals.Instance.onAreaComplete?.Invoke();
