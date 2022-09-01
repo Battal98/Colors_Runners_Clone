@@ -74,6 +74,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onExitColorCheckArea += OnExitColorCheckArea;
+
         }
 
 
@@ -92,8 +93,8 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onExitColorCheckArea -= OnExitColorCheckArea;
-        }
 
+        }
 
         private void OnDisable()
         {
@@ -111,6 +112,11 @@ namespace Managers
         private void GetReferences()
         {
             StackData = GetStackData();
+        }
+
+        private void Start()
+        {
+            Initialized();
         }
 
         private void Init()
@@ -180,16 +186,10 @@ namespace Managers
             AddInStack(obj);
         }
 
-
         private void OnChangeCollectableColor(ColorType colorType)
         {
             _type = colorType;
             _changeCollectableColorCommand.Execute(colorType);
-        }
-
-        private void Start()
-        {
-            Initialized();
         }
 
         private void Initialized()
@@ -220,7 +220,7 @@ namespace Managers
         }
 
 
-        private void ClearStackManager()
+        private async void ClearStackManager()
         {
             var _items = stackManager.transform.childCount;
             for (var i = 0; i < _stackList.Count; i++)
@@ -228,6 +228,10 @@ namespace Managers
                 PoolSignals.Instance.onSendPool?.Invoke(stackManager.transform.GetChild(0).gameObject,
                     PoolType.Collectable);
             }
+            _stackList.Clear();
+            _stackList.TrimExcess();
+            await Task.Delay(100);
+            Initialized();
         }
 
         private void OnPlay()
@@ -241,9 +245,6 @@ namespace Managers
         private void OnReset()
         {
             ClearStackManager();
-            _stackList.Clear();
-            _stackList.TrimExcess();
-            Initialized();
             ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }
     }

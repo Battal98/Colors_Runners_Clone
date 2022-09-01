@@ -33,7 +33,9 @@ namespace Data.UnityObject
         {
             _rigidbody.velocity = new Vector3(
                 _inputParams.Values.x * _playerMovementData.SidewaysSpeed,
-                _rigidbody.velocity.y,
+                Mathf.Clamp(_rigidbody.velocity.y,
+                    -_inputParams.ClampValues.y,
+                    _inputParams.ClampValues.y),
                 _playerMovementData.ForwardSpeed * _colorAreaSpeed);
 
 
