@@ -41,5 +41,5 @@ Level-Up Akademi süreci boyunca 2 ekip arkadaşımla birlikte yapmış olduğum
 
 ## Gameplay
 
-https://user-images.githubusercontent.com/68375602/187946456-fbf11c28-cc2d-4559-a77d-8dda0fad5109.mp4
+https://user-images.githubusercontent.com/68375602/187953555-e719d163-2984-4f46-808f-4475462fbdfe.mp4
 
