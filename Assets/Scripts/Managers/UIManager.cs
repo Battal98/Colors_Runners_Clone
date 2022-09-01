@@ -42,6 +42,8 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
             LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+
+            StackSignals.Instance.onEnterMultiplier += OnEnterMultiplier;
         }
 
         private void UnsubscribeEvents()
@@ -53,6 +55,8 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
             LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+            StackSignals.Instance.onEnterMultiplier -= OnEnterMultiplier;
+
         }
 
         private void OnDisable()
@@ -97,6 +101,11 @@ namespace Managers
         private void onSetScoreText(int value)
         {
             idlePanelController.SetScoreText(value);
+        }
+
+        private void OnEnterMultiplier()
+        {
+            levelPanelController.SetMultipler();
         }
 
         private void OnPlay()

@@ -6,6 +6,9 @@ namespace Enums
         Shop,
         Hospital,
         PoliceStation,
-        TacoShop
+        TacoShop,
+        Pub
+        
+        
     }
 }

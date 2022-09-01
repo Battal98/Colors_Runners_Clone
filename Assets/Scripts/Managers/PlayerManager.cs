@@ -132,7 +132,7 @@ namespace Managers
 
         private void OnSetScore(int Values)
         {
-            _score = int.Parse(scoreText.text);
+            _score = Values;
             SetScoreText(Values);
         }
 
@@ -184,7 +184,6 @@ namespace Managers
             if (_score > 0)
             {
                 FullIK.enabled = true;
-                
                 IdleGameSignals.Instance.onCostDown?.Invoke();
                 OnScaleSet(-0.10f);
                 _score--;

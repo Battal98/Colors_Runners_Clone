@@ -31,13 +31,15 @@ namespace Commands
 
         public void Execute(GameObject _obj, Transform target)
         {
-            _stackList.Remove(_obj);
-            _obj.transform.parent = target;
             if (_stackList.Count >= _stackData.StackLimit)
             {
                 _stackList[_stackData.StackLimit - 1].SetActive(true);
                 _manager.CollectableAnimSet(_stackList[_stackData.StackLimit - 1], CollectableAnimationStates.Run);
             }
+
+            _stackList.Remove(_obj);
+            _obj.transform.parent = target;
+
 
             if (_stackList.Count == 0) StackSignals.Instance.onStackTransferComplete?.Invoke();
 

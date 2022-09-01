@@ -212,7 +212,7 @@ Material:
     - _OutlineFadeMin: 0.25
     - _OutlineNoise: 0
     - _OutlineSize: 10
-    - _OutlineTab: 1
+    - _OutlineTab: 0
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -226,7 +226,7 @@ Material:
     - _RimSize: 1
     - _RimSmoothness: 0
     - _RimThresholdOffset: 0.25
-    - _Saturation: 0
+    - _Saturation: 1.0857143
     - _SketchMapScale: 1
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0

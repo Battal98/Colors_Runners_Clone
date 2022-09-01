@@ -38,3 +38,8 @@ MonoBehaviour:
     GardenCost: 70
     BuildMaterial: {fileID: 2100000, guid: 09903c78f17b8d242ab1f9dd7fd8d667, type: 2}
     GardenMaterial: {fileID: 2100000, guid: e57f614d99e17b746a08c1aea98e1d86, type: 2}
+  - BuildName: Pub
+    BuildCost: 90
+    GardenCost: 120
+    BuildMaterial: {fileID: 2100000, guid: 1dbd553ea0484a14797abae6e851a093, type: 2}
+    GardenMaterial: {fileID: 2100000, guid: 6ac2261a0c7cfa44db4d595e8e989ab4, type: 2}

@@ -37,7 +37,7 @@ namespace Commands
                 _manager.CollectableAnimSet(_stackList[_stackData.StackLimit - 1], CollectableAnimationStates.Run);
             }
 
-            collectableGameObject.GetComponent<CollectableManager>().SetAnim(CollectableAnimationStates.Dead);
+         
             _stackList.Remove(collectableGameObject);
             _stackList.TrimExcess();
             if (_stackList.Count == 0) LevelSignals.Instance.onLevelFailed?.Invoke();

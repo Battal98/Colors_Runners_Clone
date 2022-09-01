@@ -47,7 +47,7 @@ namespace Controllers
                 {
                     StackSignals.Instance.onCollectablesThrow?.Invoke(transform.parent);
                     playerManager.DownCost();
-                    _timer = _timer * 60 / 100;
+                    _timer = _timer * 70 / 100;
                 }
                 else
                 {
